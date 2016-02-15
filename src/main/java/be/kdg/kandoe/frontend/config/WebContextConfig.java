@@ -22,7 +22,7 @@ import java.util.List;
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @ComponentScan(basePackages = "be.kdg.kandoe.frontend",
         excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Configuration.class),
-                @ComponentScan.Filter(type = FilterType.REGEX, pattern = "be.kdg.repaircafe.frontend.config.security.rest.*")}
+                @ComponentScan.Filter(type = FilterType.REGEX, pattern = "be.kdg.kandoe.frontend.config.security.rest.*")}
 )
 @Import(RestConfig.class)
 public class WebContextConfig extends WebMvcConfigurerAdapter
