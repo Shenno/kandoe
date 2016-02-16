@@ -1,6 +1,6 @@
 package be.kdg.kandoe.frontend.controllers.web;
 
-import be.kdg.kandoe.backend.dom.users.User;
+import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
 import be.kdg.kandoe.frontend.controllers.resources.users.UserResource;

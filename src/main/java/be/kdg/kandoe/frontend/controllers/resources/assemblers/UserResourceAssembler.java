@@ -1,6 +1,6 @@
 package be.kdg.kandoe.frontend.controllers.resources.assemblers;
 
-import be.kdg.kandoe.backend.dom.users.User;
+import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.frontend.controllers.resources.users.UserResource;
 import be.kdg.kandoe.frontend.controllers.rest.UserRestController;
 import ma.glasnost.orika.MapperFacade;
@@ -10,7 +10,6 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @Component
 public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserResource>

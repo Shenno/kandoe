@@ -5,7 +5,7 @@
  */
 package be.kdg.kandoe.backend.services.impl;
 
-import be.kdg.kandoe.backend.dom.users.User;
+import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.persistence.api.UserRepository;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**

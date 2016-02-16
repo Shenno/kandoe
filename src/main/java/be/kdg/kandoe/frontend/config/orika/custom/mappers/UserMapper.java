@@ -1,12 +1,10 @@
 package be.kdg.kandoe.frontend.config.orika.custom.mappers;
 
-import be.kdg.kandoe.backend.dom.users.User;
+import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.frontend.controllers.resources.users.UserResource;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Collectors;
 
 @Component
 public class UserMapper extends CustomMapper<User, UserResource>

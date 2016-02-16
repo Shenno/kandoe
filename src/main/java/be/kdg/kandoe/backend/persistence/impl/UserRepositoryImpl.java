@@ -5,7 +5,7 @@
  */
 package be.kdg.kandoe.backend.persistence.impl;
 
-import be.kdg.kandoe.backend.dom.users.User;
+import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.persistence.api.UserRepositoryCustom;
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
 import org.hibernate.Session;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.List;
 
 /**
  * @author wouter

@@ -1,4 +1,4 @@
-package be.kdg.kandoe.backend.dom.users;
+package be.kdg.kandoe.backend.dom.user;
 
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
 import org.springframework.hateoas.Identifiable;
