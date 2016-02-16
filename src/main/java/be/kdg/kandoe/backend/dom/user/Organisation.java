@@ -1,4 +1,4 @@
-package Users;
+package be.kdg.kandoe.backend.dom.user;
 
 /**
  * Created by Len on 10-2-2016.

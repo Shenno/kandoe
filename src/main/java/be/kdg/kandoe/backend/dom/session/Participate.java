@@ -1,4 +1,4 @@
-package Sesion;
+package be.kdg.kandoe.backend.dom.session;
 
 /**
  * Created by Len on 10-2-2016.

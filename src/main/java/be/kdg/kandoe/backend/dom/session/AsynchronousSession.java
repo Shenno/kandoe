@@ -1,4 +1,4 @@
-package Sesion;
+package be.kdg.kandoe.backend.dom.session;
 
 import java.util.Date;
 
