@@ -15,7 +15,7 @@ import java.util.Collection;
  * with a Person. Every user has to have a unique username. This username takes
  * the form of an email address.
  *
- * Shennowwww.willaert
+ * Shenno.willaert ok
  *
  * @author wouter
  */
