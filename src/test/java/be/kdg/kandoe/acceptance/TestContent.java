@@ -3,6 +3,7 @@ package be.kdg.kandoe.acceptance;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.UserService;
+import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class TestContent {
         assertTrue("Tag must be correct", theme.getTags().contains(tag1));
     }*/
 
-    @Test
+    @Test(expected = ContentServiceException.class)
     public void testAddThemeIncorrectUser() {
         String emailAdress = "incorrectEmail";
         String name = "theme name";
@@ -68,9 +69,37 @@ public class TestContent {
         tags.add(tag1);
 
         contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
+    }
 
-        Theme theme = contentService.getTheme(name);
+    @Test(expected = ContentServiceException.class)
+    public void testAddThemeEmptyName() {
+        String emailAdress = "firstname.lastname@kandoe.be";
+        String name = "";
+        String description = "description of theme";
+        boolean isCommentaryAllowed = true;
+        boolean isAddingAdmited = true;
+        String organisation = "Organisation";
 
-        assertNull(theme);
+        List<String> tags = new ArrayList<>();
+        String tag1 = "tag1";
+        tags.add(tag1);
+
+        contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
+    }
+
+    @Test(expected = ContentServiceException.class)
+    public void testAddThemeEmptyOrganisation() {
+        String emailAdress = "firstname.lastname@kandoe.be";
+        String name = "theme name";
+        String description = "description of theme";
+        boolean isCommentaryAllowed = true;
+        boolean isAddingAdmited = true;
+        String organisation = "";
+
+        List<String> tags = new ArrayList<>();
+        String tag1 = "tag1";
+        tags.add(tag1);
+
+        contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
     }
 }
