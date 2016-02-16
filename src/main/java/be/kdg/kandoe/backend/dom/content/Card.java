@@ -1,5 +1,5 @@
 package be.kdg.kandoe.backend.dom.content;
-//Ja mooii
+//Ja leuke git
 
 public class Card {
     private String text;
