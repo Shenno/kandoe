@@ -39,7 +39,7 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
 
     public User()
     {
-
+        //Deze constructor doet niet veel
     }
 
     public User(String username, String encryptedPassword)
