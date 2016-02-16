@@ -5,6 +5,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"../../../../../../main/resources/be/kdg/kandoe/backend/testcontext.xml"})
+@ContextConfiguration(locations = {"../../../../../resources/be.kdg.kandoe.acceptance/testcontext.xml"})
 public class TestUsers {
 }
