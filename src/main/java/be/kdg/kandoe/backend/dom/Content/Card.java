@@ -1,4 +1,5 @@
-package Content;
+package be.kdg.kandoe.backend.dom.content;
+//Ja mooi
 
 public class Card {
     private String text;
