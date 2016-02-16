@@ -1,5 +1,5 @@
-package be.kdg.kandoe.backend.dom.content;
-//Ja mooi
+package be.kdg.kandoe.backend.dom.lel;
+//Ja mooii
 
 public class Card {
     private String text;

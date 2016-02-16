@@ -1,4 +1,4 @@
-package be.kdg.kandoe.backend.dom.content;
+package be.kdg.kandoe.backend.dom.lel;
 
 import java.util.Date;
 

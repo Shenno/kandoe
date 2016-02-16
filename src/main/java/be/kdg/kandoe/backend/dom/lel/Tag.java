@@ -1,4 +1,4 @@
-package be.kdg.kandoe.backend.dom.content;
+package be.kdg.kandoe.backend.dom.lel;
 
 /**
  * Created by Len on 10-2-2016.
