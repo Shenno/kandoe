@@ -1,5 +1,6 @@
 package be.kdg.kandoe.acceptance;
 
+import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.UserService;
@@ -102,4 +103,34 @@ public class TestContent {
 
         contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
     }
+    /*@Test
+    public void testAddTag() {
+        String name = "tag name";
+        String theme = "Theme";
+
+        contentService.addTag(name, theme);
+
+        Tag tag = contentService.getTag(name);
+
+        assertNotNull(tag);
+        assertEquals("Theme must be correct", tag.getTheme(), theme);
+    }
+    @Test(expected = ContentServiceException.class)
+    public void testAddTagEmptyName() {
+        String name = "";
+        String theme = "Theme";
+
+        contentService.addTag(name, theme);
+
+        Tag tag = contentService.getTag(name);
+    }
+    @Test(expected = ContentServiceException.class)
+    public void testAddTagEmptyTheme() {
+        String name = "tag name";
+        String theme = "";
+
+        contentService.addTag(name, theme);
+
+        Tag tag = contentService.getTag(name);
+    }*/
 }
