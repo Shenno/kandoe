@@ -65,7 +65,7 @@ public class MultiHttpSecurityConfig
             // curl -i --user scott.tiger@live.com:scott http://localhost:8080/repaircafe/api/
 
                 http
-                    .antMatcher("/api*//**")
+                    .antMatcher("/appi*//**") //Verwijder de dubbele p later TODO
          .authorizeRequests()
          .anyRequest().authenticated()
          .and()
