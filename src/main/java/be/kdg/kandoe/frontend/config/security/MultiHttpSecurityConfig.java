@@ -118,7 +118,7 @@ public class MultiHttpSecurityConfig
                     .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                     .antMatchers("/repairer/**").access("hasRole('ROLE_REPAIRER')")
                     .antMatchers("/client/**").access("hasRole('ROLE_CLIENT')")
-                    .anyRequest().authenticated()      // remaining URL's require authentication
+             //       .anyRequest().authenticated()      // remaining URL's require authentication
                     .and()
                     .formLogin()
                     .and()
