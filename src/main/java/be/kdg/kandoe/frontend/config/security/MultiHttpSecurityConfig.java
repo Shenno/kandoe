@@ -86,7 +86,7 @@ public class MultiHttpSecurityConfig
             http.authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/api/login").permitAll()
                     .antMatchers(HttpMethod.GET, "/api/logout").authenticated()
-                    .anyRequest().authenticated()
+             //       .anyRequest().authenticated()
                     .and()
                     .formLogin()
                     .successHandler(restAuthenticationSuccesHandler).loginProcessingUrl("/api/login")
