@@ -1,21 +1,44 @@
 package be.kdg.kandoe.backend.dom.user;
 
-/**
- * Created by Len on 10-2-2016.
- */
-public class Organisation {
-    private String Name;
+import be.kdg.kandoe.backend.dom.content.Theme;
+import org.springframework.hateoas.Identifiable;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+
+@Entity
+@Table(name = "Organisation")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+
+public class Organisation implements Serializable, Identifiable<Integer> {
+
+    @Column(name = "OrganisationId", nullable = false)
+    @Id
+    @GeneratedValue
+    private Integer organisationId;
+
+    @Column(name = "OrganisationName", nullable = false)
+    private String organisationName;
+
+    @OneToMany(targetEntity = Theme.class, mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Theme> themes;
 
     public Organisation(String name) {
-        Name = name;
+        organisationName = name;
     }
 
 
     public String getName() {
-        return Name;
+        return organisationName;
     }
 
     public void setName(String name) {
-        Name = name;
+        organisationName = name;
+    }
+
+    @Override
+    public Integer getId() {
+        return organisationId;
     }
 }

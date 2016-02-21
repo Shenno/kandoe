@@ -1,24 +1,35 @@
 package be.kdg.kandoe.backend.dom.session;
 
+import org.springframework.cglib.core.Local;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
-/**
- * Created by Len on 10-2-2016.
- */
-public class SynchronousSession extends Session {
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorValue("SynchronousSession")
+public class SynchronousSession extends Session implements Serializable{
 
-    private Date StartingTime;
+    @Column(name = "StartingTime", nullable = false)
+    private LocalDateTime startingTime;
 
-    public SynchronousSession(boolean isEnded, int currentRound, int minCards, int maxCards, int snapshotID) {
-        super(isEnded, currentRound, minCards, maxCards, snapshotID);
+    public SynchronousSession(LocalDateTime startingTime) {
+        super();
+        this.startingTime = startingTime;
     }
 
-
-    public Date getStartingTime() {
-        return StartingTime;
+    public SynchronousSession(int minCards, int maxCards, LocalDateTime startingTime) {
+        super(minCards, maxCards);
+        this.startingTime = startingTime;
     }
 
-    public void setStartingTime(Date startingTime) {
-        StartingTime = startingTime;
+    public LocalDateTime getStartingTime() {
+        return startingTime;
+    }
+
+    public void setStartingTime(LocalDateTime startingTime) {
+        this.startingTime = startingTime;
     }
 }

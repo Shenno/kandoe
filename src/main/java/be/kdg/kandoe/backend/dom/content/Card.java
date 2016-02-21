@@ -1,19 +1,57 @@
 package be.kdg.kandoe.backend.dom.content;
-//Ja leuke git
 
-public class Card {
+import be.kdg.kandoe.backend.dom.session.Participation;
+import be.kdg.kandoe.backend.dom.session.Session;
+import org.springframework.hateoas.Identifiable;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+
+@Entity
+@Table(name = "Card")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Card implements Serializable, Identifiable<Integer> {
+
+    @Column(name = "CardId", nullable = false)
+    @Id
+    @GeneratedValue
+    private Integer cardId;
+
+    @Column(name = "Text", nullable = false)
     private String text;
-    private String imageURL;
-    private boolean isPicked;
-    private int priority;
-    private String snapShotID;
 
-    public Card(String text, String imageURL, boolean isPicked, int priority, String snapShotID) {
+    @Column(name = "ImageURL", nullable = true)
+    private String imageURL;
+
+    @Column(name = "IsPicked", nullable = false)
+    private boolean isPicked;
+
+    @Column(name = "Priority", nullable = false)
+    private int priority;
+
+    @Column(name = "SnapshotID", nullable = false)
+    private int snapShotID;
+
+    @ManyToOne(targetEntity = Participation.class, fetch = FetchType.EAGER, optional = false)
+    private Participation participation;  //deelnemer die kaartje heeft toegevoegd
+
+    @OneToMany(targetEntity = Remark.class, mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    List<Remark> remarks;
+
+    @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = false)
+    private Session session;
+
+    public Card(String text) {
+        this(text, "");
+    }
+
+    public Card(String text, String imageURL) {
         this.text = text;
         this.imageURL = imageURL;
-        this.isPicked = isPicked;
-        this.priority = priority;
-        this.snapShotID = snapShotID;
+        this.isPicked = false;
+        this.priority = 0;
+        this.snapShotID = 1;
     }
 
     public String getText() {
@@ -48,11 +86,16 @@ public class Card {
         this.priority = priority;
     }
 
-    public String getSnapShotID() {
+    public int getSnapShotID() {
         return snapShotID;
     }
 
-    public void setSnapShotID(String snapShotID) {
+    public void setSnapShotID(int snapShotID) {
         this.snapShotID = snapShotID;
+    }
+
+    @Override
+    public Integer getId() {
+        return cardId;
     }
 }

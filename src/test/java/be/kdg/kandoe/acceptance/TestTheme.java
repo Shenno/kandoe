@@ -5,6 +5,7 @@ import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:**/testcontext.xml"})
-public class TestContent {
+public class TestTheme {
     @Autowired
     private ContentService contentService;
 
@@ -69,7 +70,7 @@ public class TestContent {
         String tag1 = "tag1";
         tags.add(tag1);
 
-        contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
+        //contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
     }
 
     @Test(expected = ContentServiceException.class)
@@ -85,7 +86,7 @@ public class TestContent {
         String tag1 = "tag1";
         tags.add(tag1);
 
-        contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
+        //contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
     }
 
     @Test(expected = ContentServiceException.class)
@@ -101,36 +102,28 @@ public class TestContent {
         String tag1 = "tag1";
         tags.add(tag1);
 
-        contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
+       // contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
     }
-    /*@Test
-    public void testAddTag() {
-        String name = "tag name";
-        String theme = "Theme";
 
-        contentService.addTag(name, theme);
-
-        Tag tag = contentService.getTag(name);
-
-        assertNotNull(tag);
-        assertEquals("Theme must be correct", tag.getTheme(), theme);
-    }
     @Test(expected = ContentServiceException.class)
-    public void testAddTagEmptyName() {
-        String name = "";
-        String theme = "Theme";
+    public void testAddExistingTheme() {
+        String emailAdress = "firstname.lastname@kandoe.be";
+        String name = "theme name";
+        String description = "description of theme";
+        boolean isCommentaryAllowed = true;
+        boolean isAddingAdmited = true;
+        String organisation = "Organisation";
 
-        contentService.addTag(name, theme);
+        List<String> tags = new ArrayList<>();
+        String tag1 = "tag1";
+        tags.add(tag1);
 
-        Tag tag = contentService.getTag(name);
+    //    contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
+
+        Theme theme = contentService.getTheme(name);
+
+        assertNotNull(theme);
+
+     //   contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
     }
-    @Test(expected = ContentServiceException.class)
-    public void testAddTagEmptyTheme() {
-        String name = "tag name";
-        String theme = "";
-
-        contentService.addTag(name, theme);
-
-        Tag tag = contentService.getTag(name);
-    }*/
 }
