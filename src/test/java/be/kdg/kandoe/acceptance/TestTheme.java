@@ -125,6 +125,6 @@ public class TestTheme {
         assertNotNull(theme);
 
      //   contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
-     //
+
     }*/
 }
