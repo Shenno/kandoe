@@ -1,5 +1,6 @@
 package be.kdg.kandoe.backend.dom.content;
 
+import be.kdg.kandoe.backend.dom.session.Session;
 import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
@@ -17,6 +18,9 @@ public class Tag implements Serializable, Identifiable<Integer>{
 
     @Column(name = "TagName", nullable = false)
     private String tagName;
+
+    @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = false)
+    private Theme theme;
 
     public Tag(String name) {
         this.tagName = name;

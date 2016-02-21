@@ -1,6 +1,7 @@
 package be.kdg.kandoe.backend.dom.session;
 
 import be.kdg.kandoe.backend.dom.content.Card;
+import be.kdg.kandoe.backend.dom.content.Remark;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import org.springframework.hateoas.Identifiable;
 
@@ -18,8 +19,11 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @GeneratedValue
     private Integer sessionId;
 
+    @Column(name="isProblem",nullable= false)
+    private boolean isProblem;
+
     @Column(name = "IsEnded", nullable = false)
-    private boolean isEnded=false;
+    private boolean isEnded;
 
     @Column(name = "MinCards", nullable = false)
     private int minCards;
@@ -42,11 +46,15 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = Participation.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Participation> participations;
 
-    public Session() {
-        this(1,20);
+    @OneToMany(targetEntity = Remark.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Remark> remarks;
+
+    public Session(boolean isProblem) {
+        this(isProblem,1,20);
     }
 
-    public Session(int minCards, int maxCards) {
+    public Session(boolean isProblem, int minCards, int maxCards) {
+        this.isProblem=isProblem;
         this.isEnded = false;
         this.currentRound = 1;
         this.minCards = minCards;

@@ -15,13 +15,13 @@ public class SynchronousSession extends Session implements Serializable{
     @Column(name = "StartingTime", nullable = false)
     private LocalDateTime startingTime;
 
-    public SynchronousSession(LocalDateTime startingTime) {
-        super();
+    public SynchronousSession(boolean isProblem,LocalDateTime startingTime) {
+        super(isProblem);
         this.startingTime = startingTime;
     }
 
-    public SynchronousSession(int minCards, int maxCards, LocalDateTime startingTime) {
-        super(minCards, maxCards);
+    public SynchronousSession(boolean isProblem, int minCards, int maxCards, LocalDateTime startingTime) {
+        super(isProblem,minCards, maxCards);
         this.startingTime = startingTime;
     }
 

@@ -23,19 +23,26 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public void addTheme(Integer userId, Theme theme) throws ContentServiceException{
-
-        throw new ContentServiceException("Wrong arguments for theme");
+    public Theme addTheme(Integer userId, Theme theme) throws ContentServiceException{
+        if(userId == null) {
+            throw new ContentServiceException("UserId may not be empty");
+        }
+        else if(theme == null) {
+            throw new ContentServiceException("Theme may not be empty");
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
-    public Theme getTheme(String name) {
+    public Theme getTheme(int themeId) {
         return null;
     }
 
     @Override
-    public Tag addTag(String name, int themeId) throws ContentServiceException{
-        if(name.isEmpty()) {
+    public Tag addTag(int themeId,Tag tag) throws ContentServiceException{
+        if(tag.getName().isEmpty()) {
             throw new ContentServiceException("Empty name for tag");
         } else if (themeId == 0) {
             throw new ContentServiceException("Empty theme");
@@ -44,7 +51,7 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public Tag getTag(int tagId, int themeId) {
+    public Tag getTag(int tagId) {
         return null;
         //return tagRepository.;
     }

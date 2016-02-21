@@ -2,6 +2,7 @@ package be.kdg.kandoe.acceptance;
 
 import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
@@ -104,7 +105,7 @@ public class TestTheme {
 
        // contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
     }
-
+/*
     @Test(expected = ContentServiceException.class)
     public void testAddExistingTheme() {
         String emailAdress = "firstname.lastname@kandoe.be";
@@ -113,11 +114,10 @@ public class TestTheme {
         boolean isCommentaryAllowed = true;
         boolean isAddingAdmited = true;
         String organisation = "Organisation";
-
         List<String> tags = new ArrayList<>();
         String tag1 = "tag1";
         tags.add(tag1);
-
+        Theme theme = new Theme(name,description,)
     //    contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
 
         Theme theme = contentService.getTheme(name);
@@ -125,5 +125,5 @@ public class TestTheme {
         assertNotNull(theme);
 
      //   contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
-    }
+    }*/
 }

@@ -26,8 +26,14 @@ public class Remark implements Serializable, Identifiable<Integer> {
     @Column(name = "TimeStamp", nullable = false)
     private LocalDateTime timeStamp;
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER, optional = true)
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER, optional = false)
     private User user;
+
+    @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = true)
+    private Session session;
+
+    @ManyToOne(targetEntity = Card.class, fetch = FetchType.EAGER, optional = true)
+    private Card card;
 
     public Remark(String text) {
         this.text = text;

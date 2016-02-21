@@ -1,10 +1,10 @@
 package be.kdg.kandoe.backend.dom.session;
 
+import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.user.User;
 import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
-import javax.smartcardio.Card;
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,8 +29,11 @@ public class Participation implements Serializable, Identifiable<Integer> {
     @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = false)
     private Session session;
 
-    @OneToMany(targetEntity = Card.class, mappedBy = "participation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Card> chosenCards;
+    /*@OneToMany(targetEntity = Card.class, mappedBy = "participation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Card> chosenCards;*/
+
+    /*@OneToMany(targetEntity = Card.class, mappedBy = "participation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Card> addedCards;*/
 
     public Participation() {
         this.isRegistered = false;

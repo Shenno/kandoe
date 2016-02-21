@@ -6,11 +6,11 @@ import be.kdg.kandoe.backend.dom.content.Theme;
 import java.util.List;
 
 public interface ContentService {
-    void addTheme(Integer userId, Theme theme);
+    Theme addTheme(Integer userId, Theme theme);
 
-    Theme getTheme(String name);
+    Theme getTheme(int themeId);
 
-    Tag addTag(String name, int themeId);
+    Tag addTag(int themeId,Tag tag);
 
-    Tag getTag(int tagId, int themeId);
+    Tag getTag(int tagId);
 }

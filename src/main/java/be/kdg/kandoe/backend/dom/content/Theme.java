@@ -51,8 +51,8 @@ public class Theme implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = Session.class, mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Session> sessions;
 
-    @OneToMany(targetEntity = Theme.class, mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Theme> subthemes;
+   /* @OneToMany(targetEntity = Theme.class, mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Theme> subthemes;*/
 
     public Theme(String name, String description, User organisator, Organisation organisation, List<Tag> tags) {
         this(name, description, true, true, organisator, organisation, tags);
@@ -67,7 +67,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
         organisators.add(organisator);
         this.cards = new ArrayList<>();
         this.sessions = new ArrayList<>();
-        this.subthemes = new ArrayList<>();
+        /*this.subthemes = new ArrayList<>();*/
         this.organisation = organisation;
         this.tags = tags;
 
