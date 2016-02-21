@@ -1,7 +1,12 @@
 import {Component} from 'angular2/core';
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {CirkelsessieComponent} from "./components/cirkelsessie.component";
 
 @Component({
     selector: 'my-app',
-    template: '<h1>My First Angular 2 App</h1>'
+    templateUrl: 'app/partials_html/app.component.html',
+    styleUrls: ['app/partials_css/app.component.css']
 })
-export class AppComponent { }
+
+export class AppComponent {
+}
