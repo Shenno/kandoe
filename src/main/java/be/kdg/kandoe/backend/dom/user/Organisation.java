@@ -5,11 +5,17 @@ import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "Organisation")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@NamedQueries(
+        {
+                @NamedQuery(name = "Organisation.findOrganisationByName", query = "SELECT o FROM Organisation o WHERE o.organisationName = :name")
+        }
+)
 
 public class Organisation implements Serializable, Identifiable<Integer> {
 
@@ -24,8 +30,13 @@ public class Organisation implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = Theme.class, mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Theme> themes;
 
+    public Organisation() {
+
+    }
+
     public Organisation(String name) {
         organisationName = name;
+        this.themes =  new ArrayList<>();
     }
 
 
