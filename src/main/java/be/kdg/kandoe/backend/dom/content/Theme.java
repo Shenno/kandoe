@@ -51,8 +51,12 @@ public class Theme implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = Session.class, mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Session> sessions;
 
-   /* @OneToMany(targetEntity = Theme.class, mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Theme> subthemes;*/
+    @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name="ThemeId",insertable=false, updatable=false)
+    private Theme mainTheme;
+
+    @OneToMany(targetEntity = Theme.class, mappedBy = "mainTheme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Theme> subthemes;
 
     public Theme(String name, String description, User organisator, Organisation organisation, List<Tag> tags) {
         this(name, description, true, true, organisator, organisation, tags);

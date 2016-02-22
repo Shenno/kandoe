@@ -29,11 +29,11 @@ public class Participation implements Serializable, Identifiable<Integer> {
     @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = false)
     private Session session;
 
-    /*@OneToMany(targetEntity = Card.class, mappedBy = "participation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Card> chosenCards;*/
+    @OneToMany(targetEntity = Card.class, mappedBy = "participationChoosen", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Card> chosenCards;
 
-    /*@OneToMany(targetEntity = Card.class, mappedBy = "participation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Card> addedCards;*/
+    @OneToMany(targetEntity = Card.class, mappedBy = "participationAdded", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Card> addedCards;
 
     public Participation() {
         this.isRegistered = false;
