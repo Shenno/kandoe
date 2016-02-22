@@ -57,7 +57,7 @@ public class TestTheme {
         assertEquals("There must be one tag", theme.getTags().size(), tags.size());
         assertTrue("Tag must be correct", theme.getTags().contains(tag1));
     }*/
-
+/*
     @Test(expected = ContentServiceException.class)
     public void testAddThemeIncorrectUser() {
         String emailAdress = "incorrectEmail";
@@ -73,7 +73,7 @@ public class TestTheme {
 
         //contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
     }
-
+*//*
     @Test(expected = ContentServiceException.class)
     public void testAddThemeEmptyName() {
         String emailAdress = "firstname.lastname@kandoe.be";
@@ -88,8 +88,8 @@ public class TestTheme {
         tags.add(tag1);
 
         //contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
-    }
-
+    }*/
+/*
     @Test(expected = ContentServiceException.class)
     public void testAddThemeEmptyOrganisation() {
         String emailAdress = "firstname.lastname@kandoe.be";
@@ -104,7 +104,7 @@ public class TestTheme {
         tags.add(tag1);
 
        // contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
-    }
+    }*/
 /*
     @Test(expected = ContentServiceException.class)
     public void testAddExistingTheme() {

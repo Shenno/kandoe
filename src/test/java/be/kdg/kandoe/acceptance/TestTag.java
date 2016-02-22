@@ -34,23 +34,23 @@ public class TestTag {
     public void setup() {
         User user = new User("firstname.lastname@kandoe.be", "password");
         user = userService.addUser(user);
+        int userId = user.getUserId();
 
         Organisation organisation= new Organisation("organisation");
+        //organisation = userService.addOrganisation(organisation,userId);
 
-        int userId = user.getUserId();
         String name = "theme name";
         String description = "description of theme";
         boolean isCommentaryAllowed = true;
         boolean isAddingAdmited = true;
-       // int organisationId = organisation.getId();
-        int organisationId = 1;
         List<Tag> tags = new ArrayList<>();
+
         Theme theme =  new Theme(name, description, isCommentaryAllowed, isAddingAdmited, user, organisation, tags);
         contentService.addTheme(userId, theme);
 
     }
 
-    /*@Test
+    @Test
     public void testAddTag() {
         String name = "tag name";
         Tag tag = new Tag(name);
@@ -60,7 +60,7 @@ public class TestTag {
         assertEquals("Tag name must be correct", name, tag.getName());
         //controleren dat tag in lijst van tags van thema zit.
         // assertEquals("Theme must be correct", tag.getTheme().getId().intValue(), 1);
-    }*/
+    }
 
     @Test(expected = ContentServiceException.class)
     public void testAddTagEmptyName() {
@@ -70,11 +70,16 @@ public class TestTag {
     }
 
     @Test(expected = ContentServiceException.class)
-    public void testAddTagEmptyTheme() {
+    public void testAddTagNull() {
+        String name = "";
+        Tag tag = null;
+        contentService.addTag(1,tag);
+    }
+    @Test(expected = ContentServiceException.class)
+    public void testAddTagEmptyTheme() { //TODO verdere uitwerking
         String name = "tag name";
         Tag tag = new Tag(name);
         contentService.addTag(0,tag);
-
     }
 
     /*@Test(expected = ContentServiceException.class)

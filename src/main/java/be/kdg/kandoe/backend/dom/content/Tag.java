@@ -6,6 +6,9 @@ import org.springframework.hateoas.Identifiable;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * A category of a {@link Theme}
+ */
 @Entity
 @Table(name = "Tag")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -19,11 +22,12 @@ public class Tag implements Serializable, Identifiable<Integer>{
     @Column(name = "TagName", nullable = false)
     private String tagName;
 
-    @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = true) //TODO optional -> false
     private Theme theme;
 
-    public Tag(String name) {
+    public Tag(String name) { //TODO Theme meegeven constructor
         this.tagName = name;
+        //this.theme = theme;
     }
 
     public String getName() {
