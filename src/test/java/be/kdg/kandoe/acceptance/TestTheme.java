@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,16 +40,16 @@ public class TestTheme {
         user = new User("firstname.lastname@kandoe.be", "password");
         user = userService.addUser(user);
 
-        organisation = new Organisation("organisation4");
+        organisation = new Organisation("organisation");
         organisation = userService.addOrganisation(organisation);
 
     }
 
-   /* @After
+    @After
     public void tearDown(){
         userService.deleteUser(user.getId());
         userService.deleteOrganisation(organisation.getId());
-    }*/
+    }
 
     @Test
     public void testAddTheme() {
@@ -59,48 +60,64 @@ public class TestTheme {
 
         List<Tag> tags = new ArrayList<>();
 
-        Theme theme = new Theme(name,description,user,organisation,tags);
-//        theme = contentService.addTheme(theme);
+        Theme theme = new Theme(name,description,isCommentaryAllowed,isAddingAdmited,user,organisation,tags);
+        theme = contentService.addTheme(theme);
 
-        /*assertNotNull(theme);
+        assertNotNull(theme);
         assertTrue("User must be correct", theme.getOrganisators().contains(user));
         assertEquals("Description must be correct", theme.getDescription(), description);
         assertEquals("Commentary must be allowed", theme.isCommentaryAllowed(), isCommentaryAllowed);
         assertEquals("Adding must be admitted", theme.isAddingAdmited(), isAddingAdmited);
         assertEquals("Organisation must be correct", theme.getOrganisation(), organisation);
         assertEquals("There must be one tag", theme.getTags().size(), tags.size());
-        assertEquals("Tag must be correct", theme.getTags().size(),tags.size());*/
+        assertEquals("Tag must be correct", theme.getTags().size(),tags.size());
     }
 
-   /* @Test(expected = ContentServiceException.class)
-    public void testAddThemeIncorrectUser() {
-        String emailAdress = "incorrectEmail";
-        String name = "theme name";
+    @Test(expected = ContentServiceException.class)
+    public void testAddEmptyTheme(){
+       Theme theme = null;
+        theme = contentService.addTheme(theme);
+    }
+    @Test(expected = ContentServiceException.class)
+    public void testAddThemeEmptyName() {
+        String name = "";
         String description = "description of theme";
-        boolean isCommentaryAllowed = true;
-        boolean isAddingAdmited = true;
+        Boolean isCommentaryAllowed = true;
+        Boolean isAddingAdmited = true;
 
         List<Tag> tags = new ArrayList<>();
 
         Theme theme = new Theme(name,description,user,organisation,tags);
-        //contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
-    }*//*
+        theme = contentService.addTheme(theme);
+    }
+
     @Test(expected = ContentServiceException.class)
-    public void testAddThemeEmptyName() {
-        String emailAdress = "firstname.lastname@kandoe.be";
-        String name = "";
+    public void testAddExistingTheme() {
+        String name = "theme name";
         String description = "description of theme";
-        boolean isCommentaryAllowed = true;
-        boolean isAddingAdmited = true;
-        String organisation = "Organisation";
 
-        List<String> tags = new ArrayList<>();
-        String tag1 = "tag1";
-        tags.add(tag1);
+        List<Tag> tags = new ArrayList<>();
 
-        //contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
-    }*/
-/*
+        Theme theme = new Theme(name,description,user,organisation,tags);
+        theme = contentService.addTheme(theme);
+        assertNotNull(theme);
+        theme = contentService.addTheme(theme);
+    }
+    @Test
+    public void testDeleteTheme(){
+        String name = "theme name";
+        String description = "description of theme";
+
+        List<Tag> tags = new ArrayList<>();
+
+        Theme theme = new Theme(name,description,user,organisation,tags);
+        theme = contentService.addTheme(theme);
+        assertNotNull(theme);
+        contentService.deleteTheme(theme.getId());
+        theme = contentService.getTheme(theme.getId());
+        assertNull(theme);
+    }
+    /*
     @Test(expected = ContentServiceException.class)
     public void testAddThemeEmptyOrganisation() {
         String emailAdress = "firstname.lastname@kandoe.be";
@@ -116,9 +133,9 @@ public class TestTheme {
 
        // contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
     }*/
-/*
-    @Test(expected = ContentServiceException.class)
-    public void testAddExistingTheme() {
+        /*
+   @Test(expected = ContentServiceException.class)
+    public void testAddThemeIncorrectUser() {
         String name = "theme name";
         String description = "description of theme";
         Boolean isCommentaryAllowed = true;
@@ -127,8 +144,5 @@ public class TestTheme {
         List<Tag> tags = new ArrayList<>();
 
         Theme theme = new Theme(name,description,user,organisation,tags);
-        theme = contentService.addTheme(theme);
-        assertNotNull(theme);
-        theme = contentService.addTheme(theme);
-    }*/
+        theme = contentService.addTheme(theme);   }*/
 }

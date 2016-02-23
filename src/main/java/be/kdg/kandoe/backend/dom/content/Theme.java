@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A subject for a {@link Session}
+ */
 @Entity
 @Table(name = "Theme")
 @NamedQueries(
@@ -41,7 +44,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
             name="Org_Theme",
             joinColumns=@JoinColumn(name="ThemeId", referencedColumnName="ThemeId"),
             inverseJoinColumns=@JoinColumn(name="UserId", referencedColumnName="UserId"))
-    private List<User> organisators;
+    private List<User> organisators=new ArrayList<>();
 
     @ManyToOne(targetEntity = Organisation.class, fetch = FetchType.EAGER, optional = false)
     private Organisation organisation;
@@ -76,11 +79,11 @@ public class Theme implements Serializable, Identifiable<Integer> {
         this.isAddingAdmited = isAddingAdmited;
         this.organisators = new ArrayList<>();
         organisators.add(organisator);
+        this.organisation = organisation;
+        this.tags = tags;
         this.cards = new ArrayList<>();
         this.sessions = new ArrayList<>();
         this.subthemes = new ArrayList<>();
-        this.organisation = organisation;
-        this.tags = tags;
 
     }
 
@@ -88,48 +91,32 @@ public class Theme implements Serializable, Identifiable<Integer> {
         return themeName;
     }
 
-    public void setThemeName(String name) {
-        this.themeName = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public boolean isCommentaryAllowed() {
-        return isCommentaryAllowed;
-    }
-
-    public void setIsCommentaryAllowed(boolean isCommentaryAllowed) {
-        this.isCommentaryAllowed = isCommentaryAllowed;
-    }
-
-    public boolean isAddingAdmited() {
-        return isAddingAdmited;
-    }
-
-    public void setIsAddingAdmited(boolean isAddingAdmited) {
-        this.isAddingAdmited = isAddingAdmited;
+    @Override
+    public Integer getId() {
+        return themeId;
     }
 
     public List<User> getOrganisators() {
         return organisators;
     }
 
-    public Organisation getOrganisation() {
-        return organisation;
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isCommentaryAllowed() {
+        return isCommentaryAllowed;
+    }
+
+    public boolean isAddingAdmited() {
+        return isAddingAdmited;
     }
 
     public List<Tag> getTags() {
         return tags;
     }
 
-    @Override
-    public Integer getId() {
-        return themeId;
+    public Organisation getOrganisation() {
+        return organisation;
     }
 }

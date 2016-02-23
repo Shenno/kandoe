@@ -1,5 +1,6 @@
 package be.kdg.kandoe.backend.dom.user;
 
+import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
 import org.springframework.hateoas.Identifiable;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,7 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 
 /**
@@ -38,6 +41,13 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
 
     @Column(name = "Password", nullable = true, length = 255)
     private String encryptedPassword;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="Org_Theme",
+            inverseJoinColumns=@JoinColumn(name="ThemeId", referencedColumnName="ThemeId"),
+            joinColumns=@JoinColumn(name="UserId", referencedColumnName="UserId"))
+    private List<Theme> themes=new ArrayList<>();
 
     public User()
     {

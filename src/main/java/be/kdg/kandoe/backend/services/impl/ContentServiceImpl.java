@@ -34,13 +34,15 @@ public class ContentServiceImpl implements ContentService {
     public Theme addTheme(Theme theme) throws ContentServiceException {
         /*if (userId == null) {
             throw new ContentServiceException("UserId may not be empty");
-        } if (theme == null) {
-            throw new ContentServiceException("Theme may not be empty");
-        } else {
-            return null;
-        }*/
-        //return  themeRepository.addTheme(theme);
-        return themeRepository.save(theme);
+            }*/
+
+        if (theme == null) {
+            throw new ContentServiceException("Theme can not be empty");
+        } else if (theme.getThemeName().isEmpty()) {
+            throw new ContentServiceException("Empty name for theme");
+
+        }
+        return themeRepository.addTheme(theme);
     }
 
     @Override
@@ -90,6 +92,11 @@ public class ContentServiceImpl implements ContentService {
 
 
         return cardRepository.save(card);
+    }
+
+    @Override
+    public void deleteTheme(int themeId) {
+        themeRepository.delete(themeId);
     }
 
 }

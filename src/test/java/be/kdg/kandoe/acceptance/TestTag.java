@@ -7,6 +7,7 @@ import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,8 @@ import static org.junit.Assert.assertNotNull;
 @ContextConfiguration(locations = {"classpath:**/testcontext.xml"})
 public class TestTag {
     Theme theme;
-
+    User user;
+    Organisation organisation;
     @Autowired
     private ContentService contentService;
 
@@ -33,30 +35,33 @@ public class TestTag {
 
     @Before
     public void setup() {
-        User user = new User("firstname.lastname@kandoe.be", "password");
+        user = new User("firstname.lastname@kandoe.be", "password");
         user = userService.addUser(user);
-        int userId = user.getUserId();
 
-        Organisation organisation= new Organisation("organisation");
-        //organisation = userService.(organisation,userId);
+        organisation = new Organisation("organisation");
+        organisation = userService.addOrganisation(organisation);
 
         String name = "theme name";
         String description = "description of theme";
-        boolean isCommentaryAllowed = true;
-        boolean isAddingAdmited = true;
+
         List<Tag> tags = new ArrayList<>();
 
-        theme =  new Theme(name, description, isCommentaryAllowed, isAddingAdmited, user, organisation, tags);
-//        contentService.addTheme(theme);
+        theme = new Theme(name, description, user, organisation, tags);
+        theme = contentService.addTheme(theme);
 
+    }
+
+    @After
+    public void tearDown() {
+        userService.deleteUser(user.getId());
+        userService.deleteOrganisation(organisation.getId());
     }
 
     @Test
     public void testAddTag() {
         String name = "tag name 2";
         Tag tag = new Tag(name);
-        //tag = contentService.addTag(theme.getId(),tag);
-        tag = contentService.addTag(1,tag);
+        tag = contentService.addTag(theme.getId(), tag);
 
         assertNotNull(tag);
         assertEquals("Tag name must be correct", name, tag.getTagName());
@@ -69,7 +74,7 @@ public class TestTag {
         String name = "";
         Tag tag = new Tag(name);
         //tag = contentService.addTag(theme.getId(),tag);
-        tag = contentService.addTag(1,tag);
+        tag = contentService.addTag(theme.getId(), tag);
     }
 
     @Test(expected = ContentServiceException.class)
@@ -77,22 +82,22 @@ public class TestTag {
         String name = "";
         Tag tag = null;
         //tag = contentService.addTag(theme.getId(),tag);
-        tag = contentService.addTag(1,tag);
+        tag = contentService.addTag(theme.getId(), tag);
     }
+
     @Test(expected = ContentServiceException.class)
     public void testAddTagEmptyTheme() { //TODO verdere uitwerking
         String name = "tag name";
         Tag tag = new Tag(name);
-        contentService.addTag(0,tag);
+        contentService.addTag(0, tag);
     }
 
     @Test(expected = ContentServiceException.class)
     public void testAddExistingTag() {
         String name = "tag name";
         Tag tag = new Tag(name);
-        //tag = contentService.addTag(theme.getId(),tag);
-        tag = contentService.addTag(1,tag);
+        tag = contentService.addTag(theme.getId(), tag);
         assertNotNull(tag);
-        //tag = contentService.addTag(theme.getId(),tag);
-        tag = contentService.addTag(1,tag);    }
+        tag = contentService.addTag(theme.getId(), tag);
+    }
 }
