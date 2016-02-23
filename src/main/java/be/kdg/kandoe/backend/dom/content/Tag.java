@@ -11,6 +11,10 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "Tag")
+@NamedQueries(
+        {
+                @NamedQuery(name = "Tag.findByTagName", query = "SELECT t FROM Tag t WHERE t.tagName = :tagname"),
+        })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Tag implements Serializable, Identifiable<Integer>{
 
@@ -25,16 +29,20 @@ public class Tag implements Serializable, Identifiable<Integer>{
     @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = true) //TODO optional -> false
     private Theme theme;
 
+    public Tag(){
+
+    }
+
     public Tag(String name) { //TODO Theme meegeven constructor
         this.tagName = name;
         //this.theme = theme;
     }
 
-    public String getName() {
+    public String getTagName() {
         return tagName;
     }
 
-    public void setName(String name) {
+    public void setTagName(String name) {
         this.tagName = name;
     }
 

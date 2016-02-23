@@ -25,10 +25,11 @@ public class TestTheme {
 
     @Autowired
     private UserService userService;
-    /*
+/*
     @Before
     public void setup() {
-        userService.addUser("firstname.lastname@kandoe.be", "password");
+        User user = new User("firstname.lastname@kandoe.be", "password");
+        user = userService.addUser(user);
     }
 
     @Test

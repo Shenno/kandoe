@@ -52,12 +52,12 @@ public class TestTag {
 
     @Test
     public void testAddTag() {
-        String name = "tag name";
+        String name = "tag name 2";
         Tag tag = new Tag(name);
         tag = contentService.addTag(1,tag);
 
         assertNotNull(tag);
-        assertEquals("Tag name must be correct", name, tag.getName());
+        assertEquals("Tag name must be correct", name, tag.getTagName());
         //controleren dat tag in lijst van tags van thema zit.
         // assertEquals("Theme must be correct", tag.getTheme().getId().intValue(), 1);
     }
@@ -82,12 +82,12 @@ public class TestTag {
         contentService.addTag(0,tag);
     }
 
-    /*@Test(expected = ContentServiceException.class)
+    @Test(expected = ContentServiceException.class)
     public void testAddExistingTag() {
         String name = "tag name";
         Tag tag = new Tag(name);
         tag =contentService.addTag(1,tag);
         assertNotNull(tag);
         contentService.addTag(1,tag);
-    }*/
+    }
 }

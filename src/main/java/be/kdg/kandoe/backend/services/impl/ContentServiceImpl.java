@@ -44,18 +44,19 @@ public class ContentServiceImpl implements ContentService {
     public Tag addTag(int themeId,Tag tag) throws ContentServiceException{
         if (tag == null){
             throw new ContentServiceException("Tag can not be empty");
-        } else if(tag.getName().isEmpty()) {
+        } else if(tag.getTagName().isEmpty()) {
             throw new ContentServiceException("Empty name for tag");
         } else if (themeId == 0) {
             throw new ContentServiceException("Empty theme");
         }
 
-        return tagRepository.save(tag);
+        return tagRepository.addTag(tag);
     }
 
     @Override
     public Tag getTag(int tagId) {
-        return null;
-        //return tagRepository.;
+        return tagRepository.findOne(tagId);
     }
+
+
 }
