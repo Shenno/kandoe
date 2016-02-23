@@ -41,10 +41,10 @@ public class Theme implements Serializable, Identifiable<Integer> {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name="Org_Theme",
-            joinColumns=@JoinColumn(name="ThemeId", referencedColumnName="ThemeId"),
-            inverseJoinColumns=@JoinColumn(name="UserId", referencedColumnName="UserId"))
-    private List<User> organisators=new ArrayList<>();
+            name = "Org_Theme",
+            joinColumns = @JoinColumn(name = "ThemeId", referencedColumnName = "ThemeId"),
+            inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
+    private List<User> organisators = new ArrayList<>();
 
     @ManyToOne(targetEntity = Organisation.class, fetch = FetchType.EAGER, optional = false)
     private Organisation organisation;
@@ -59,7 +59,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
     private List<Session> sessions;
 
     @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name="ThemeId",insertable=false, updatable=false)
+    @JoinColumn(name = "ThemeId", insertable = false, updatable = false)
     private Theme mainTheme;
 
     @OneToMany(targetEntity = Theme.class, mappedBy = "mainTheme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -78,7 +78,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
         this.isCommentaryAllowed = isCommentaryAllowed;
         this.isAddingAdmited = isAddingAdmited;
         this.organisators = new ArrayList<>();
-        organisators.add(organisator);
+        addOrganisator(organisator);
         this.organisation = organisation;
         this.tags = tags;
         this.cards = new ArrayList<>();
@@ -118,5 +118,11 @@ public class Theme implements Serializable, Identifiable<Integer> {
 
     public Organisation getOrganisation() {
         return organisation;
+    }
+
+    public void addOrganisator(User user) {
+        if (user != null) {
+            organisators.add(user);
+        }
     }
 }

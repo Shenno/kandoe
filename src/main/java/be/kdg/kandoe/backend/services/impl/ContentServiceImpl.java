@@ -32,15 +32,14 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public Theme addTheme(Theme theme) throws ContentServiceException {
-        /*if (userId == null) {
-            throw new ContentServiceException("UserId may not be empty");
-            }*/
-
         if (theme == null) {
             throw new ContentServiceException("Theme can not be empty");
         } else if (theme.getThemeName().isEmpty()) {
             throw new ContentServiceException("Empty name for theme");
-
+        } else if (theme.getOrganisation() == null) {
+            throw new ContentServiceException("Organisation can not be empty");
+        } else if (theme.getOrganisators().size() == 0) {
+            throw new ContentServiceException("There must be at least one organisator");
         }
         return themeRepository.addTheme(theme);
     }

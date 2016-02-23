@@ -42,7 +42,6 @@ public class TestTheme {
 
         organisation = new Organisation("organisation");
         organisation = userService.addOrganisation(organisation);
-
     }
 
     @After
@@ -55,8 +54,8 @@ public class TestTheme {
     public void testAddTheme() {
         String name = "theme name";
         String description = "description of theme";
-        Boolean isCommentaryAllowed = true;
-        Boolean isAddingAdmited = true;
+        boolean isCommentaryAllowed = true;
+        boolean isAddingAdmited = true;
 
         List<Tag> tags = new ArrayList<>();
 
@@ -76,19 +75,19 @@ public class TestTheme {
     @Test(expected = ContentServiceException.class)
     public void testAddEmptyTheme(){
        Theme theme = null;
-        theme = contentService.addTheme(theme);
+        contentService.addTheme(theme);
     }
     @Test(expected = ContentServiceException.class)
     public void testAddThemeEmptyName() {
         String name = "";
         String description = "description of theme";
-        Boolean isCommentaryAllowed = true;
-        Boolean isAddingAdmited = true;
+        boolean isCommentaryAllowed = true;
+        boolean isAddingAdmited = true;
 
-        List<Tag> tags = new ArrayList<>();
+        List<Tag> tags= new ArrayList<>();
 
-        Theme theme = new Theme(name,description,user,organisation,tags);
-        theme = contentService.addTheme(theme);
+        Theme theme = new Theme(name,description,isCommentaryAllowed,isAddingAdmited,user,organisation,tags);
+        contentService.addTheme(theme);
     }
 
     @Test(expected = ContentServiceException.class)
@@ -99,10 +98,36 @@ public class TestTheme {
         List<Tag> tags = new ArrayList<>();
 
         Theme theme = new Theme(name,description,user,organisation,tags);
+        Theme duplicattheme = new Theme(name,description,user,organisation,tags);
         theme = contentService.addTheme(theme);
         assertNotNull(theme);
-        theme = contentService.addTheme(theme);
+        contentService.addTheme(duplicattheme);
     }
+   @Test(expected = ContentServiceException.class)
+    public void testAddThemeEmptyOrganisation() {
+        String name = "theme name";
+        String description = "description of theme";
+        boolean isCommentaryAllowed = true;
+        boolean isAddingAdmited = true;
+        List<Tag> tags = new ArrayList<>();
+
+        Theme theme = new Theme(name,description,isCommentaryAllowed,isAddingAdmited,user,null,tags);
+        contentService.addTheme(theme);
+
+    }
+
+    @Test(expected = ContentServiceException.class)
+    public void testAddThemeEmptyUser() {
+        String name = "theme name";
+        String description = "description of theme";
+        boolean isCommentaryAllowed = true;
+        boolean isAddingAdmited = true;
+        List<Tag> tags = new ArrayList<>();
+
+        Theme theme = new Theme(name,description,isCommentaryAllowed,isAddingAdmited,null,organisation,tags);
+        contentService.addTheme(theme);
+    }
+
     @Test
     public void testDeleteTheme(){
         String name = "theme name";
@@ -117,32 +142,4 @@ public class TestTheme {
         theme = contentService.getTheme(theme.getId());
         assertNull(theme);
     }
-    /*
-    @Test(expected = ContentServiceException.class)
-    public void testAddThemeEmptyOrganisation() {
-        String emailAdress = "firstname.lastname@kandoe.be";
-        String name = "theme name";
-        String description = "description of theme";
-        boolean isCommentaryAllowed = true;
-        boolean isAddingAdmited = true;
-        String organisation = "";
-
-        List<String> tags = new ArrayList<>();
-        String tag1 = "tag1";
-        tags.add(tag1);
-
-       // contentService.addTheme(emailAdress, name, description, isCommentaryAllowed, isAddingAdmited, organisation, tags);
-    }*/
-        /*
-   @Test(expected = ContentServiceException.class)
-    public void testAddThemeIncorrectUser() {
-        String name = "theme name";
-        String description = "description of theme";
-        Boolean isCommentaryAllowed = true;
-        Boolean isAddingAdmited = true;
-
-        List<Tag> tags = new ArrayList<>();
-
-        Theme theme = new Theme(name,description,user,organisation,tags);
-        theme = contentService.addTheme(theme);   }*/
 }
