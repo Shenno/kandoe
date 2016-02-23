@@ -36,16 +36,16 @@ public class Card implements Serializable, Identifiable<Integer> {
     @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = true)
     private Theme theme;
 
-    @ManyToOne(targetEntity = Participation.class, fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(targetEntity = Participation.class, fetch = FetchType.EAGER, optional = true) //TODO optinial -> false
     private Participation participationChoosen;  //deelnemer die kaartje heeft gekozen
 
-    @ManyToOne(targetEntity = Participation.class, fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(targetEntity = Participation.class, fetch = FetchType.EAGER, optional = true) //TODO optinial -> false
     private Participation participationAdded;  //deelnemer die kaartje heeft toegevoegd
 
     @OneToMany(targetEntity = Remark.class, mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Remark> remarks;
 
-    @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = true) //TODO optinial -> false
     private Session session;
 
     public Card(String text) {

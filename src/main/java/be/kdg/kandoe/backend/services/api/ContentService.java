@@ -1,5 +1,6 @@
 package be.kdg.kandoe.backend.services.api;
 
+import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
 
@@ -13,4 +14,6 @@ public interface ContentService {
     Tag addTag(int themeId,Tag tag);
 
     Tag getTag(int tagId);
+
+    Card addCard (int themeId, Card card);
 }
