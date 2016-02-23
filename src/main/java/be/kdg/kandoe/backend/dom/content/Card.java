@@ -40,7 +40,7 @@ public class Card implements Serializable, Identifiable<Integer> {
     @Column(name = "SnapshotID", nullable = false)
     private int snapShotID;
 
-    @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = true)
+    @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = false)
     private Theme theme;
 
     @ManyToOne(targetEntity = Participation.class, fetch = FetchType.EAGER, optional = true) //TODO optinial -> false
@@ -55,18 +55,22 @@ public class Card implements Serializable, Identifiable<Integer> {
     @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = true) //TODO optinial -> false
     private Session session;
 
-    public Card(String text) {
-        this(text, "");
+    public Card(String text, Theme theme) {
+        this(text, "", theme);
+
     }
 
-    public Card(String text, String imageURL) {
+    public Card(String text, String imageURL, Theme theme) {
         this.text = text;
         this.imageURL = imageURL;
         this.isPicked = false;
         this.priority = 0;
         this.snapShotID = 1;
+        this.theme= theme;
     }
-
+    public Theme getTheme() {
+        return theme;
+    }
     public String getText() {
         return text;
     }

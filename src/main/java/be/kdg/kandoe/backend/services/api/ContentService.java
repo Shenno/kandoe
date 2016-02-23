@@ -15,7 +15,7 @@ public interface ContentService {
 
     Tag getTag(int tagId);
 
-    Card addCard (int themeId, Card card);
+    Card addCard (Card card);
 
     void deleteTheme(int themeId);
 }

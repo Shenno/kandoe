@@ -68,15 +68,16 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public Card addCard(int themeId, Card card) {
+    public Card addCard(Card card) {
 
         if (card == null) {
             throw new ContentServiceException("Card can not be empty");
         } else if (card.getText().isEmpty()) {
             throw new ContentServiceException("Empty Description");
-        } else if (themeId == 0) {
-            throw new ContentServiceException("Empty theme");
+        } else if (card.getTheme() == null) {
+            throw new ContentServiceException("Empty themeID");
         }
+
 
         // Create a Pattern object
         Pattern r = Pattern.compile("(@)?(href=')?(HREF=')?(HREF=\")?(href=\")?(http://)?[a-zA-Z_0-9\\-]+(\\.\\w[a-zA-Z_0-9\\-]+)+(/[#&\\n\\-=?\\+\\%/\\.\\w]+)?");
@@ -90,7 +91,7 @@ public class ContentServiceImpl implements ContentService {
         }
 
 
-        return cardRepository.save(card);
+        return cardRepository.addCard(card);
     }
 
     @Override
