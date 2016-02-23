@@ -5,7 +5,9 @@
  */
 package be.kdg.kandoe.backend.services.impl;
 
+import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.dom.user.User;
+import be.kdg.kandoe.backend.persistence.api.OrganisationRepository;
 import be.kdg.kandoe.backend.persistence.api.UserRepository;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
@@ -28,15 +30,43 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService
 {
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-backend/backend-service-layer/
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final OrganisationRepository organisationRepository;
+
+    //Organisation
+    @Override
+    public Organisation addOrganisation(Organisation organisation) throws UserServiceException {
+        if(organisation.getName().isEmpty()) {
+            throw new UserServiceException("Empty name");
+        }
+        if(getOrganisationByName(organisation.getName()) != null) {
+            throw new UserServiceException("Duplicate name");
+        }
+
+        return organisationRepository.save(organisation);
+    }
+
+    @Override
+    public Organisation getOrganisationById(int id) {
+        return organisationRepository.findOne(id);
+    }
+
+    @Override
+    public Organisation getOrganisationByName(String name) {
+        List<Organisation> organisation = organisationRepository.getOrganisationByName(name);
+        if(organisation.size() == 0) {
+            return null;
+        }
+        return organisationRepository.getOrganisationByName(name).get(0);
+    }
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder)
+    public UserServiceImpl(UserRepository userRepository, OrganisationRepository organisationRepository, PasswordEncoder passwordEncoder)
     {
         this.userRepository = userRepository;
+        this.organisationRepository = organisationRepository;
         this.passwordEncoder = passwordEncoder;
     }
 

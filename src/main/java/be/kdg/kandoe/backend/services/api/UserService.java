@@ -6,6 +6,7 @@
 
 package be.kdg.kandoe.backend.services.api;
 
+import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,8 +19,10 @@ import java.util.List;
  */
 public interface UserService extends UserDetailsService
 {
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-backend/backend-service-layer/
-    // https://programmeren3-repaircafe.rhcloud.com/spring-concepten/backend-spring-security/
+    // Organisation
+    Organisation addOrganisation(Organisation organisation);
+    Organisation getOrganisationById(int id);
+    Organisation getOrganisationByName(String name);
 
     User findUserById(int id) throws UserServiceException;
 
