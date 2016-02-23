@@ -76,9 +76,20 @@ public class TestCard {
         contentService.addCard(2,card);
     }
 
+    @Test(expected = ContentServiceException.class)
+    public void testNoRealUrl() {
+        String description="This is a Card";
+        String url="bafbzbzizro";
+        Card card = new Card(description,url);
+        contentService.addCard(2,card);
+    }
 
 
-    //todo:  url check
+
+
+
+
+
 
 
 
