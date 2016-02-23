@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {CirkelsessieComponent} from "./components/cirkelsessie.component";
+import {CreateThemeComponent} from "./components/createTheme.component";
 
 @Component({
     selector: 'my-app',
@@ -9,7 +10,8 @@ import {CirkelsessieComponent} from "./components/cirkelsessie.component";
     directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-    {path:'/test', name: 'Test', component: CirkelsessieComponent}
+    {path:'/test', name: 'Test', component: CirkelsessieComponent},
+    {path:'/createTheme',name:'CreateTheme',component: CreateThemeComponent}
 ])
 
 export class AppComponent {
