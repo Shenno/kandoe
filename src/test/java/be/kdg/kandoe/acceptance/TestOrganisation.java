@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by   Shenno Willaert
@@ -70,5 +71,17 @@ public class TestOrganisation {
         Organisation organisationDupl = new Organisation(name);
         userService.addOrganisation(organisation);
         userService.addOrganisation(organisationDupl);
+    }
+
+    @Test
+    public void testDeleteOrganisation(){
+        String name = "organisation name";
+        Organisation organisation = new Organisation(name);
+        organisation =userService.addOrganisation(organisation);
+        assertNotNull(organisation);
+        userService.deleteOrganisation(organisation.getId());
+        organisation = userService.getOrganisationById(organisation.getId());
+        assertNull(organisation);
+
     }
 }

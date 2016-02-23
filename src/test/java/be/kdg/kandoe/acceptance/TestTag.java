@@ -23,6 +23,7 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:**/testcontext.xml"})
 public class TestTag {
+    Theme theme;
 
     @Autowired
     private ContentService contentService;
@@ -37,7 +38,7 @@ public class TestTag {
         int userId = user.getUserId();
 
         Organisation organisation= new Organisation("organisation");
-        //organisation = userService.addOrganisation(organisation,userId);
+        //organisation = userService.(organisation,userId);
 
         String name = "theme name";
         String description = "description of theme";
@@ -45,8 +46,8 @@ public class TestTag {
         boolean isAddingAdmited = true;
         List<Tag> tags = new ArrayList<>();
 
-        Theme theme =  new Theme(name, description, isCommentaryAllowed, isAddingAdmited, user, organisation, tags);
-        contentService.addTheme(userId, theme);
+        theme =  new Theme(name, description, isCommentaryAllowed, isAddingAdmited, user, organisation, tags);
+//        contentService.addTheme(theme);
 
     }
 
@@ -54,6 +55,7 @@ public class TestTag {
     public void testAddTag() {
         String name = "tag name 2";
         Tag tag = new Tag(name);
+        //tag = contentService.addTag(theme.getId(),tag);
         tag = contentService.addTag(1,tag);
 
         assertNotNull(tag);
@@ -66,14 +68,16 @@ public class TestTag {
     public void testAddTagEmptyName() {
         String name = "";
         Tag tag = new Tag(name);
-        contentService.addTag(1,tag);
+        //tag = contentService.addTag(theme.getId(),tag);
+        tag = contentService.addTag(1,tag);
     }
 
     @Test(expected = ContentServiceException.class)
     public void testAddTagNull() {
         String name = "";
         Tag tag = null;
-        contentService.addTag(1,tag);
+        //tag = contentService.addTag(theme.getId(),tag);
+        tag = contentService.addTag(1,tag);
     }
     @Test(expected = ContentServiceException.class)
     public void testAddTagEmptyTheme() { //TODO verdere uitwerking
@@ -86,8 +90,9 @@ public class TestTag {
     public void testAddExistingTag() {
         String name = "tag name";
         Tag tag = new Tag(name);
-        tag =contentService.addTag(1,tag);
+        //tag = contentService.addTag(theme.getId(),tag);
+        tag = contentService.addTag(1,tag);
         assertNotNull(tag);
-        contentService.addTag(1,tag);
-    }
+        //tag = contentService.addTag(theme.getId(),tag);
+        tag = contentService.addTag(1,tag);    }
 }

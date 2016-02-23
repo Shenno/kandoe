@@ -5,6 +5,7 @@ import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.persistence.api.CardRepository;
 import be.kdg.kandoe.backend.persistence.api.TagRepository;
+import be.kdg.kandoe.backend.persistence.api.ThemeRepository;
 import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,22 +21,26 @@ public class ContentServiceImpl implements ContentService {
 
     private final TagRepository tagRepository;
     private final CardRepository cardRepository;
+    private final ThemeRepository themeRepository;
 
     @Autowired
-    public ContentServiceImpl(TagRepository tagRepository, CardRepository cardRepository) {
+    public ContentServiceImpl(TagRepository tagRepository, CardRepository cardRepository, ThemeRepository themeRepository) {
         this.tagRepository = tagRepository;
         this.cardRepository = cardRepository;
+        this.themeRepository = themeRepository;
     }
 
     @Override
-    public Theme addTheme(Integer userId, Theme theme) throws ContentServiceException {
-        if (userId == null) {
+    public Theme addTheme(Theme theme) throws ContentServiceException {
+        /*if (userId == null) {
             throw new ContentServiceException("UserId may not be empty");
-        } else if (theme == null) {
+        } if (theme == null) {
             throw new ContentServiceException("Theme may not be empty");
         } else {
             return null;
-        }
+        }*/
+        //return  themeRepository.addTheme(theme);
+        return themeRepository.save(theme);
     }
 
     @Override

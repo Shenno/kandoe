@@ -47,7 +47,7 @@ public class TestCard {
         List<Tag> tags = new ArrayList<>();
 
         Theme theme =  new Theme(name, description, isCommentaryAllowed, isAddingAdmited, user, organisation, tags);
-        contentService.addTheme(userId, theme);
+       // contentService.addTheme(theme);
     }
 
     @Test

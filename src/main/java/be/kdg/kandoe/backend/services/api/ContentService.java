@@ -7,7 +7,7 @@ import be.kdg.kandoe.backend.dom.content.Theme;
 import java.util.List;
 
 public interface ContentService {
-    Theme addTheme(Integer userId, Theme theme);
+    Theme addTheme(Theme theme);
 
     Theme getTheme(int themeId);
 

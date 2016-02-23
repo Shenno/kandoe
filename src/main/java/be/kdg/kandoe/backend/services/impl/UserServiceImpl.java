@@ -197,6 +197,11 @@ public class UserServiceImpl implements UserService
         userRepository.save(u);
     }
 
+    @Override
+    public void deleteOrganisation(Integer organisationId) {
+        organisationRepository.delete(organisationId);
+    }
+
     /**
      * Implemtation of Spring Security UserDetailsService method
      *

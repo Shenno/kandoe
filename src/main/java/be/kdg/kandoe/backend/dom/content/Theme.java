@@ -12,6 +12,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "Theme")
+@NamedQueries(
+        {
+                @NamedQuery(name = "Theme.findByThemeName", query = "SELECT t FROM Theme t WHERE t.themeName = :themename"),
+        })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Theme implements Serializable, Identifiable<Integer> {
 
@@ -32,7 +36,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
     @Column(name = "IsAddingAdmited", nullable = false)
     private boolean isAddingAdmited;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="Org_Theme",
             joinColumns=@JoinColumn(name="ThemeId", referencedColumnName="ThemeId"),
@@ -58,6 +62,9 @@ public class Theme implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = Theme.class, mappedBy = "mainTheme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Theme> subthemes;
 
+    public Theme() {
+    }
+
     public Theme(String name, String description, User organisator, Organisation organisation, List<Tag> tags) {
         this(name, description, true, true, organisator, organisation, tags);
     }
@@ -71,17 +78,17 @@ public class Theme implements Serializable, Identifiable<Integer> {
         organisators.add(organisator);
         this.cards = new ArrayList<>();
         this.sessions = new ArrayList<>();
-        /*this.subthemes = new ArrayList<>();*/
+        this.subthemes = new ArrayList<>();
         this.organisation = organisation;
         this.tags = tags;
 
     }
 
-    public String getName() {
+    public String getThemeName() {
         return themeName;
     }
 
-    public void setName(String name) {
+    public void setThemeName(String name) {
         this.themeName = name;
     }
 
@@ -109,7 +116,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
         this.isAddingAdmited = isAddingAdmited;
     }
 
-    public List<User> getOrganisator() {
+    public List<User> getOrganisators() {
         return organisators;
     }
 
