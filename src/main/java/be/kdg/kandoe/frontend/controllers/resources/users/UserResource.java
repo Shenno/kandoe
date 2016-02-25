@@ -1,5 +1,6 @@
 package be.kdg.kandoe.frontend.controllers.resources.users;
 
+import be.kdg.kandoe.backend.dom.user.User;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.hateoas.ResourceSupport;
 
@@ -19,11 +20,10 @@ public class UserResource extends ResourceSupport implements Serializable
 
     private String password;
 
-    private String oldPassword;
-
-    public UserResource()
+    public UserResource(User user)
     {
-
+        this.userId = user.getUserId();
+        this.username = user.getUsername();
     }
 
     public Integer getUserId()
@@ -56,14 +56,5 @@ public class UserResource extends ResourceSupport implements Serializable
         this.password = password;
     }
 
-    public String getOldPassword()
-    {
-        return oldPassword;
-    }
-
-    public void setOldPassword(String oldPassword)
-    {
-        this.oldPassword = oldPassword;
-    }
 
 }
