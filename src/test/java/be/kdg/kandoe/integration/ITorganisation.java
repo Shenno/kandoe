@@ -17,14 +17,16 @@ import static org.junit.Assert.assertEquals;
  */
 public class ITorganisation {
     @Test
-    public void testAddTag() {
+    public void testAddOrganisation() {
+        String organisationName = "KdG Test";
         WebDriver driver = new HtmlUnitDriver();
         driver.get("http://127.0.0.1:9966/kandoe/#organisations");
+        //TODO Login stuff
         WebElement element = driver.findElement(By.name("ib_new_organisation"));
-        element.sendKeys("Organisation IT");
+        element.sendKeys(organisationName);
         element = driver.findElement(By.name("btn_add_organisation"));
         element.submit();
-        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.findElement(By.id("org")).equals("Organisation IT"));
+        (new WebDriverWait(driver, 5)).until((WebDriver d) -> d.findElement(By.id(organisationName)).equals("Organisation IT"));
         (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Organisation IT"));
         element = driver.findElement(By.id("tag1"));
         assertEquals("Tag content must be correct", "tag1", element.getText());
