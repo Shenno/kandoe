@@ -23,7 +23,7 @@ System.register(['angular2/core'], function(exports_1) {
                 }
                 EditThemeComponent = __decorate([
                     core_1.Component({
-                        selector: 'edit-theme',
+                        selector: 'edit-Theme',
                         templateUrl: 'app/partials_html/editTheme.component.html'
                     }), 
                     __metadata('design:paramtypes', [])
