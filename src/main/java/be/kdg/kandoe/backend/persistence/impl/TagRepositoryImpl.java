@@ -23,11 +23,12 @@ public class TagRepositoryImpl implements TagRepositoryCustom {
 
     @Override
     public Tag addTag(Tag tag) throws ContentServiceException {
-        final TypedQuery<Tag> q = em.createNamedQuery("Tag.findByTagName", Tag.class);
+        final TypedQuery<Tag> q = em.createNamedQuery("Tag.findByTagNamebyTheme", Tag.class);
         q.setParameter("tagname", tag.getTagName());
+        q.setParameter("theme",tag.getTheme());
         if (!q.getResultList().isEmpty())
         {
-            throw new ContentServiceException("Tag " + tag.getTagName() + " already exists");
+            throw new ContentServiceException("Tag " + tag.getTagName() + " already exists in Theme "+ tag.getTheme());
         }
         final Session session = em.unwrap(Session.class);
         session.saveOrUpdate(tag);

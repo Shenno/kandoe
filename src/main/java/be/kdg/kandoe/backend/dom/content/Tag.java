@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Table(name = "Tag")
 @NamedQueries(
         {
-                @NamedQuery(name = "Tag.findByTagName", query = "SELECT t FROM Tag t WHERE t.tagName = :tagname"),
+                @NamedQuery(name = "Tag.findByTagNamebyTheme", query = "SELECT t FROM Tag t WHERE t.tagName = :tagname and t.theme = :theme"),
         })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Tag implements Serializable, Identifiable<Integer>{
@@ -26,16 +26,16 @@ public class Tag implements Serializable, Identifiable<Integer>{
     @Column(name = "TagName", nullable = false)
     private String tagName;
 
-    @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = true) //TODO optional -> false
+    @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = false)
     private Theme theme;
 
     public Tag(){
 
     }
 
-    public Tag(String name) { //TODO Theme meegeven constructor
+    public Tag(String name, Theme theme) {
         this.tagName = name;
-        //this.theme = theme;
+        this.theme = theme;
     }
 
     public String getTagName() {
@@ -44,6 +44,14 @@ public class Tag implements Serializable, Identifiable<Integer>{
 
     public void setTagName(String name) {
         this.tagName = name;
+    }
+
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
     }
 
     @Override

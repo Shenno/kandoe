@@ -98,11 +98,14 @@ public class TestTheme {
         List<Tag> tags = new ArrayList<>();
 
         Theme theme = new Theme(name,description,user,organisation,tags);
-        Theme duplicattheme = new Theme(name,description,user,organisation,tags);
+        Theme duplicatetheme = new Theme(name,description,user,organisation,tags);
         theme = contentService.addTheme(theme);
         assertNotNull(theme);
-        contentService.addTheme(duplicattheme);
+        contentService.addTheme(duplicatetheme);
     }
+    //TODO addExistingThemeSameOrganisation
+    //TODO addExistingThemeDifferentOrganisation
+
    @Test(expected = ContentServiceException.class)
     public void testAddThemeEmptyOrganisation() {
         String name = "theme name";

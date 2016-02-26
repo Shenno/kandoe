@@ -24,9 +24,11 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:**/testcontext.xml"})
 public class TestTag {
+
     Theme theme;
     User user;
     Organisation organisation;
+
     @Autowired
     private ContentService contentService;
 
@@ -43,9 +45,7 @@ public class TestTag {
 
         String name = "theme name";
         String description = "description of theme";
-
         List<Tag> tags = new ArrayList<>();
-
         theme = new Theme(name, description, user, organisation, tags);
         theme = contentService.addTheme(theme);
 
@@ -59,45 +59,61 @@ public class TestTag {
 
     @Test
     public void testAddTag() {
-        String name = "tag name 2";
-        Tag tag = new Tag(name);
-        tag = contentService.addTag(theme.getId(), tag);
+        String name = "tag name";
+
+        Tag tag = new Tag(name,theme);
+        tag = contentService.addTag(tag);
 
         assertNotNull(tag);
         assertEquals("Tag name must be correct", name, tag.getTagName());
-        //controleren dat tag in lijst van tags van thema zit.
-        // assertEquals("Theme must be correct", tag.getTheme().getId().intValue(), 1);
+        assertEquals("Theme must be correct",theme,tag.getTheme());
+    }
+    @Test(expected = ContentServiceException.class)
+    public void testAddEmptyTag(){
+        Tag tag = null;
+        contentService.addTag(tag);
     }
 
     @Test(expected = ContentServiceException.class)
     public void testAddTagEmptyName() {
         String name = "";
-        Tag tag = new Tag(name);
-        //tag = contentService.addTag(theme.getId(),tag);
-        tag = contentService.addTag(theme.getId(), tag);
+        Tag tag = new Tag(name,theme);
+        contentService.addTag(tag);
     }
 
     @Test(expected = ContentServiceException.class)
-    public void testAddTagNull() {
-        String name = "";
-        Tag tag = null;
-        //tag = contentService.addTag(theme.getId(),tag);
-        tag = contentService.addTag(theme.getId(), tag);
-    }
-
-    @Test(expected = ContentServiceException.class)
-    public void testAddTagEmptyTheme() { //TODO verdere uitwerking
+    public void testAddExistingTagSameTheme() {
         String name = "tag name";
-        Tag tag = new Tag(name);
-        contentService.addTag(0, tag);
-    }
 
-    @Test(expected = ContentServiceException.class)
-    public void testAddExistingTag() {
-        String name = "tag name";
-        Tag tag = new Tag(name);
-        tag = contentService.addTag(theme.getId(), tag);
+        Tag tag = new Tag(name,theme);
+        Tag duplicateTag = new Tag(name,theme);
+        tag = contentService.addTag(tag);
         assertNotNull(tag);
-        tag = contentService.addTag(theme.getId(), tag);
+        contentService.addTag(duplicateTag);
     }
+    @Test
+    public void testAddExistingTagDifferentTheme() {
+        String themename = "theme name 2";
+        String description = "description of theme 2";
+        List<Tag> tags = new ArrayList<>();
+        Theme theme2 = new Theme(themename, description, user, organisation, tags);
+        theme2 = contentService.addTheme(theme2);
+
+        String name = "tag name";
+
+        Tag tag = new Tag(name,theme);
+        Tag duplicateTag = new Tag(name,theme2);
+        tag = contentService.addTag(tag);
+        assertNotNull(tag);
+        contentService.addTag(duplicateTag);
+    }
+
+    @Test(expected = ContentServiceException.class)
+    public void testAddTagEmptyTheme() {
+        String name = "tag name";
+        Tag tag = new Tag(name,null);
+        contentService.addTag(tag);
+    }
+
+
 }
