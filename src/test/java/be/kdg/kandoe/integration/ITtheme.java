@@ -20,9 +20,8 @@ public class ITtheme {
     public void testAddTheme(){
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
          WebDriver driver = new ChromeDriver();
-     //   WebDriver driver = new HtmlUnitDriver();
         driver.get("http://127.0.0.1:9966/kandoe/#/createTheme");
-        WebElement element = driver.findElement(By.id("a"));
+        WebElement element = driver.findElement(By.id("app"));
         element = element.findElement(By.tagName("create-theme"));
         element = element.findElement(By.name("ib_name"));
         assertEquals("input",element.getTagName());
