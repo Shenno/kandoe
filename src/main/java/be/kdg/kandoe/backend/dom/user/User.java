@@ -1,6 +1,7 @@
 package be.kdg.kandoe.backend.dom.user;
 
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.session.Participation;
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
 import org.springframework.hateoas.Identifiable;
 import org.springframework.security.core.GrantedAuthority;
@@ -49,6 +50,9 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
             joinColumns=@JoinColumn(name="UserId", referencedColumnName="UserId"))
     private List<Theme> themes=new ArrayList<>();
 
+    @OneToMany(targetEntity = Participation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Participation> participations;
+
     public User()
     {
         //Deze constructor doet niet veel
@@ -78,6 +82,14 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
     public void setUserId(Integer userId)
     {
         this.userId = userId;
+    }
+
+    public List<Participation> getParticipations() {
+        return participations;
+    }
+
+    public void addParticipation(Participation participation) {
+        participations.add(participation);
     }
 
     @Override

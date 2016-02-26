@@ -40,6 +40,10 @@ public class Participation implements Serializable, Identifiable<Integer> {
         this.isOnTurn = false;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public boolean isRegistered() {
         return isRegistered;
     }
