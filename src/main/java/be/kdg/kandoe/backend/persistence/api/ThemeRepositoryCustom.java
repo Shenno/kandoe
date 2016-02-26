@@ -9,5 +9,4 @@ import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
  */
 public interface ThemeRepositoryCustom {
     Theme addTheme(Theme theme) throws ContentServiceException;
-
 }

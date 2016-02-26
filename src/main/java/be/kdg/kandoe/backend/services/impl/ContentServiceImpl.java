@@ -37,16 +37,16 @@ public class ContentServiceImpl implements ContentService {
         } else if (theme.getThemeName().isEmpty()) {
             throw new ContentServiceException("Empty name for theme");
         } else if (theme.getOrganisation() == null) {
-            throw new ContentServiceException("Organisation can not be empty");
+            //throw new ContentServiceException("Organisation can not be empty");
         } else if (theme.getOrganisators().size() == 0) {
-            throw new ContentServiceException("There must be at least one organisator");
+            //throw new ContentServiceException("There must be at least one organisator");
         }
         return themeRepository.addTheme(theme);
     }
 
     @Override
     public Theme getTheme(int themeId) {
-        return null;
+        return themeRepository.findOne(themeId);
     }
 
     @Override

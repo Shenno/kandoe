@@ -46,7 +46,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
             inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
     private List<User> organisators = new ArrayList<>();
 
-    @ManyToOne(targetEntity = Organisation.class, fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(targetEntity = Organisation.class, fetch = FetchType.EAGER, optional = true)
     private Organisation organisation;
 
     @OneToMany(targetEntity = Tag.class, mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
