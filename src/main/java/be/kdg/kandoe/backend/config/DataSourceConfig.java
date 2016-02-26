@@ -40,8 +40,8 @@ public class DataSourceConfig
         // dataSource.setUrl("jdbc:h2:tcp://localhost/~RepairCafe;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
 
         // optional
-        //dataSource.setUsername("sa");
-        //dataSource.setPassword("sa");
+        // dataSource.setUsername("sa");
+        // dataSource.setPassword("saas");
         return dataSource;
     }
 

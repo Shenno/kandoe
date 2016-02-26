@@ -36,7 +36,7 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
     @Column(name = "UserId", nullable = false)
     private Integer userId;
 
-    @Column(name = "Username", nullable = true, length = 255)
+    @Column(name = "Username", nullable = true, length = 255, unique = true)
     private String username = null;
 
     @Column(name = "Password", nullable = true, length = 255)

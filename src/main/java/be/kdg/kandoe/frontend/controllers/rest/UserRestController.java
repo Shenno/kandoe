@@ -1,24 +1,33 @@
 package be.kdg.kandoe.frontend.controllers.rest;
 
+import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.frontend.controllers.resources.assemblers.UserResourceAssembler;
+import be.kdg.kandoe.frontend.controllers.resources.users.OrganisationResource;
 import be.kdg.kandoe.frontend.controllers.resources.users.UserResource;
+import be.kdg.kandoe.frontend.controllers.resources.users.UserResourcePost;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api")
 @ExposesResourceFor(UserResource.class)
 public class UserRestController
 {
+    @Autowired
+    PasswordEncoder encoder;
     private final Logger logger = Logger.getLogger(UserRestController.class);
     private final UserService userService;
     private final MapperFacade mapperFacade;
@@ -34,10 +43,10 @@ public class UserRestController
         this.userResourceAssembler = userResourceAssembler;
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/info", method = RequestMethod.GET)
     public String test()
     {
-        return "Cksjf";
+        return "This is the API to handle UserController";
     }
 
 
@@ -48,29 +57,51 @@ public class UserRestController
     }
     */
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<UserResource> createUser(@Valid @RequestBody User user)
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    public ResponseEntity<UserResource> createUser(@Valid @RequestBody UserResourcePost userResourcePost)
     {
-        User u = userService.addUser(user);
-        return new ResponseEntity<>(userResourceAssembler.toResource(user), HttpStatus.OK);
+        String pwd = encoder.encode(userResourcePost.getPassword());
+        User user = new User(userResourcePost.getUsername(), pwd);
+        User returnUser = userService.addUser(user);
+        return new ResponseEntity<>(new UserResource(returnUser), HttpStatus.OK);
     }
 
 /*    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<UserResource>> findUsers(
-            @RequestParam(value = "search", required = false) String criteria)
+    public ResponseEntity<List<UserResource>> findUsers()
     {
-        List<SearchCriterium> searchCriteria = parseCriteria(criteria);
-        List<User> users = userService.findUsersByCriteria(searchCriteria);
+        List<User> users = userService.findUsers();
+        List<UserResource> resources = new ArrayList<>();
+        for(User u : users) {
+            UserResource userResource = new UserResource(u);
+            resources.add(userResource);
+        }
+        return new ResponseEntity<>(resources, HttpStatus.OK);
+    }
+*/
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public ResponseEntity<List<User>> findUsers()
+    {
+        List<User> users = userService.findUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
 
-        List<UserResource> userResources = users.stream().map(u -> userResourceAssembler.toResource(u)).collect(Collectors.toList());
-        return new ResponseEntity<>(userResources, HttpStatus.OK);
-    }*/
-
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "users/{userId}", method = RequestMethod.GET)
     public ResponseEntity<UserResource> findUserById(@PathVariable int userId)
     {
         User user = userService.findUserById(userId);
         return new ResponseEntity<>(new UserResource(user), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/organisations", method = RequestMethod.GET)
+    public ResponseEntity<OrganisationResource> findorganisations()
+    {
+        OrganisationResource organisationResource = new OrganisationResource();
+        organisationResource.setOrganisationId(1);
+        organisationResource.setOrganisationName("ShennoOrga");
+        List<String> list = new ArrayList<>();
+        list.add("lol"); list.add("top");
+        organisationResource.setThemes(list);
+        return new ResponseEntity<>(organisationResource, HttpStatus.OK);
     }
 
     /*@RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
