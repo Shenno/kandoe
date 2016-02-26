@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,9 +18,13 @@ import static org.junit.Assert.assertEquals;
 public class ITtheme {
     @Test
     public void testAddTheme(){
-        WebDriver driver = new HtmlUnitDriver();
+        System.setProperty("webdriver.chrome.driver", "D:/KdG/IAO301A/Vakken/Integratieproject/KandoeFinal/kandoe/src/test/java/be/kdg/kandoe/integration/chromedriver.exe");
+         WebDriver driver = new ChromeDriver();
+     //   WebDriver driver = new HtmlUnitDriver();
         driver.get("http://127.0.0.1:9966/kandoe/#/createTheme");
-        WebElement element = driver.findElement(By.name("ib_name"));
+        WebElement element = driver.findElement(By.id("a"));
+        element = element.findElement(By.tagName("create-theme"));
+        element = element.findElement(By.name("ib_name"));
         assertEquals("input",element.getTagName());
         element.sendKeys("themename");
         element = driver.findElement(By.name("ib_description"));
