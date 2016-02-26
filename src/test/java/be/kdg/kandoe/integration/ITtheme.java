@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 public class ITtheme {
     @Test
     public void testAddTheme(){
-        System.setProperty("webdriver.chrome.driver", "D:/KdG/IAO301A/Vakken/Integratieproject/KandoeFinal/kandoe/src/test/java/be/kdg/kandoe/integration/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "./src/test/java/be/kdg/kandoe/integration/chromedriver.exe");
          WebDriver driver = new ChromeDriver();
      //   WebDriver driver = new HtmlUnitDriver();
         driver.get("http://127.0.0.1:9966/kandoe/#/createTheme");
