@@ -28,6 +28,8 @@ public interface UserService extends UserDetailsService
 
     List<User> findUsers();
 
+  //  List<User> findUsersByOrganisation(int orgId) throws UserServiceException;
+
     User findUserByUsername(String username) throws UserServiceException;
 
     User saveUser(User user) throws UserServiceException;
