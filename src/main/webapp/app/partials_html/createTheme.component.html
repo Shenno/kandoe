@@ -1,1 +1,11 @@
-<input name="ib_name">
+<form (submit)="onSubmit()">
+    <label for="ib_name">Naam:</label>
+    <input id="ib_name" name="ib_name" [(ngModel)]="theme.name">
+    <input name="ib_description" [(ngModel)]="theme.description">
+    <input type="checkbox" name="cb_commentaryAllowed" [(ngModel)]="theme.commentaryAllowed">
+    <input type="checkbox" name="cb_addingAdmitted" [(ngModel)]="theme.addingAdmitted">
+    <div id="tags"></div>
+    <input name="ib_newTag">
+    <button name="btn_addTag">Voeg tag toe</button>
+    <button name="btn_save">Opslaan</button>
+</form>

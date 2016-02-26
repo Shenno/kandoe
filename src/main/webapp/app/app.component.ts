@@ -2,6 +2,7 @@ import {Component, ViewEncapsulation} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {CirkelsessieComponent} from "./components/cirkelsessie.component";
 import {CreateThemeComponent} from "./components/createTheme.component";
+import {bootstrap} from "angular2/bootstrap";
 
 @Component({
     selector: 'my-app',
