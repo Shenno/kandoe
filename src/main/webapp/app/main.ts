@@ -4,6 +4,7 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
 import {provide}           from 'angular2/core';
 import {LocationStrategy,
     HashLocationStrategy} from 'angular2/router';
+import 'rxjs/add/operator/map';
 import {HTTP_PROVIDERS} from "angular2/http";
 
 

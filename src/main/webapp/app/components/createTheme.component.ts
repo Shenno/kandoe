@@ -23,9 +23,12 @@ export class CreateThemeComponent {
         var theme = JSON.stringify(this.theme);
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this.http.get("http://localhost:9966/kandoe/api/users").map((res:Response) => res.json()).subscribe((result:string) => alert(result));
-        /* this.http.post(url, theme, {headers: headers}).map((res:Response) => res.json()).subscribe(
-            data => alert(data)
-        );*/
+        headers.append('Accept', 'application/json');
+        //this.http.get("http://localhost:9966/kandoe/api/users").map((res:Response) => res.json()).subscribe((result:string) => alert(result));
+         this.http.post(url, theme, {headers: headers}).map((res:Response) => res.json()).subscribe(
+             (data) => alert('Data'),
+             ((err:Error) => alert('Error' + err.message)),
+             () => alert('OK')
+        );
     }
 }
