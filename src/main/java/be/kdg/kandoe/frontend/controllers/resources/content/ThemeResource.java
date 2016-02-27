@@ -12,8 +12,8 @@ public class ThemeResource extends ResourceSupport implements Serializable {
 
     private String description;
     private String name;
-    private boolean isCommentaryAllowed;
-    private boolean isAddingAdmitted;
+    private boolean commentaryAllowed;
+    private boolean addingAdmitted;
     private int themeId;
 
     public ThemeResource() {}
@@ -21,8 +21,8 @@ public class ThemeResource extends ResourceSupport implements Serializable {
     public ThemeResource(Theme theme) {
         this.description = theme.getDescription();
         this.name = theme.getThemeName();
-        this.isCommentaryAllowed = theme.isCommentaryAllowed();
-        this.isAddingAdmitted = theme.isAddingAdmited();
+        this.commentaryAllowed = theme.isCommentaryAllowed();
+        this.addingAdmitted = theme.isAddingAdmited();
         this.themeId = theme.getId();
     }
 
@@ -51,22 +51,22 @@ public class ThemeResource extends ResourceSupport implements Serializable {
     }
 
     public boolean isCommentaryAllowed() {
-        return isCommentaryAllowed;
+        return commentaryAllowed;
     }
 
     public void setIsCommentaryAllowed(boolean isCommentaryAllowed) {
-        this.isCommentaryAllowed = isCommentaryAllowed;
+        this.commentaryAllowed = isCommentaryAllowed;
     }
 
     public boolean isAddingAdmitted() {
-        return isAddingAdmitted;
+        return addingAdmitted;
     }
 
     public void setIsAddingAdmitted(boolean isAddingAdmitted) {
-        this.isAddingAdmitted = isAddingAdmitted;
+        this.addingAdmitted = isAddingAdmitted;
     }
 
     public Theme toDOM() {
-        return new Theme(name, description, isCommentaryAllowed, isAddingAdmitted, null, null, null);
+        return new Theme(name, description, commentaryAllowed, addingAdmitted, null, null, null);
     }
 }
