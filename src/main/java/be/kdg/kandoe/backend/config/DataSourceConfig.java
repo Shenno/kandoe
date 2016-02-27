@@ -26,6 +26,9 @@ public class DataSourceConfig
     @Value("classpath:/be/kdg/kandoe/backend/datasources/theme.sql")
     private Resource theme;
 
+    @Value("classpath:/be/kdg/kandoe/backend/datasources/organisation.sql")
+    private Resource organisation;
+
     // name of bean is superfluous in this case since method name is the same as bean name
     @Bean(name = "datasource")
     public DriverManagerDataSource datasource()
@@ -53,6 +56,7 @@ public class DataSourceConfig
     {
         final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         populator.addScript(user);
+        populator.addScript(organisation);
         populator.addScript(theme);
         final DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(dataSource);

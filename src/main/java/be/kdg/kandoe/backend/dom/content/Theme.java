@@ -46,7 +46,8 @@ public class Theme implements Serializable, Identifiable<Integer> {
             inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
     private List<User> organisators = new ArrayList<>();
 
-    @ManyToOne(targetEntity = Organisation.class, fetch = FetchType.EAGER, optional = true)
+    @ManyToOne
+    @JoinColumn(name = "organisation_id")
     private Organisation organisation;
 
     @OneToMany(targetEntity = Tag.class, mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -124,5 +125,11 @@ public class Theme implements Serializable, Identifiable<Integer> {
         if (user != null) {
             organisators.add(user);
         }
+    }
+
+    //todo delete
+
+    public void setThemeId(Integer themeId) {
+        this.themeId = themeId;
     }
 }

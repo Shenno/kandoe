@@ -52,4 +52,12 @@ public class Organisation implements Serializable, Identifiable<Integer> {
     public Integer getId() {
         return organisationId;
     }
+
+    public List<Theme> getThemes() {
+        return themes;
+    }
+
+    public void setThemes(List<Theme> themes) {
+        this.themes = themes;
+    }
 }

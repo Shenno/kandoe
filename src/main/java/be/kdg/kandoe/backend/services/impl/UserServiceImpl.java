@@ -93,6 +93,11 @@ public class UserServiceImpl implements UserService
         return userRepository.findAll();
     }
 
+    @Override
+    public List<Organisation> findOrganisations() {
+        return organisationRepository.findAll();
+    }
+
 
     /**
      * Returns user having username
