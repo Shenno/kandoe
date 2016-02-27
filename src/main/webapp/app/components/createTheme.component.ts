@@ -19,6 +19,7 @@ export class CreateThemeComponent {
 
     public constructor(contentService: ContentService) {
         this.contentService = contentService;
+        document.title = 'Maak thema aan';
     }
 
     public onSubmit(): void {

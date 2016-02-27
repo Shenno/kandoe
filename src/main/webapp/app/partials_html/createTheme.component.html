@@ -1,11 +1,34 @@
+<h1>Maak een thema aan</h1>
+
 <form (submit)="onSubmit()">
-    <label for="ib_name">Naam:</label>
-    <input id="ib_name" name="ib_name" [(ngModel)]="theme.name">
-    <input name="ib_description" [(ngModel)]="theme.description">
-    <input type="checkbox" name="cb_commentaryAllowed" [(ngModel)]="theme.commentaryAllowed">
-    <input type="checkbox" name="cb_addingAdmitted" [(ngModel)]="theme.addingAdmitted">
+    <div class="form-group">
+        <label for="ib_name">Naam</label>
+        <input id="ib_name" name="ib_name" [(ngModel)]="theme.name">
+    </div>
+
+    <div class="form-group">
+        <label for="ib_description">Beschrijving</label>
+        <textarea id="ib_description" name="ib_description" [(ngModel)]="theme.description"></textarea>
+    </div>
+
+    <div class="form-group">
+        <input type="checkbox" id="cb_commentaryAllowed" name="cb_commentaryAllowed"
+               [(ngModel)]="theme.commentaryAllowed">
+        <label for="cb_commentaryAllowed">Commentaar op kaartjes toegelaten</label>
+    </div>
+
+    <div class="form-group">
+        <input type="checkbox" id="cb_addingAdmitted" name="cb_addingAdmitted" [(ngModel)]="theme.addingAdmitted">
+        <label for="cb_addingAdmitted">Toevoegen van kaartjes toegelaten</label>
+    </div>
+
     <div id="tags"></div>
-    <input name="ib_newTag">
-    <button name="btn_addTag">Voeg tag toe</button>
+
+    <div class="form-group">
+        <input name="ib_newTag">
+        <button name="btn_addTag">Voeg tag toe</button>
+    </div>
+
     <button name="btn_save">Opslaan</button>
+
 </form>

@@ -27,6 +27,7 @@ System.register(['angular2/core', '../entity/theme', "../service/contentService"
                 function CreateThemeComponent(contentService) {
                     this.theme = theme_1.Theme.createEmptyTheme();
                     this.contentService = contentService;
+                    document.title = 'Maak thema aan';
                 }
                 CreateThemeComponent.prototype.onSubmit = function () {
                     this.contentService.addTheme(this.theme);
