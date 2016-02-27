@@ -16,12 +16,18 @@ public class ITtag {
     public void testAddTag() {
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
-        driver.get("http://127.0.0.1:9966/kandoe/#editTheme/1");
+        driver.get("http://127.0.0.1:9966/kandoe/#/editTheme/1");
+
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("create-tag"));
+        element = element.findElement(By.tagName("edit-theme"));
+
+        element = driver.findElement(By.id("tags"));
+        assertEquals("div",element.getTagName());
+
         element = driver.findElement(By.name("ib_new_tag"));
         assertEquals("input",element.getTagName());
         element.sendKeys("tag1");
+
         element = driver.findElement(By.name("btn_add_tag"));
         assertEquals("button",element.getTagName());
         element.submit();
