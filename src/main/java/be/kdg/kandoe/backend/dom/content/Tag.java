@@ -1,6 +1,7 @@
 package be.kdg.kandoe.backend.dom.content;
 
 import be.kdg.kandoe.backend.dom.session.Session;
+import org.hibernate.annotations.Cascade;
 import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;

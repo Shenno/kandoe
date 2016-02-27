@@ -115,5 +115,6 @@ public class TestTag {
         contentService.addTag(tag);
     }
 
+    //TODO: Testen op add tag to subtheme
 
 }

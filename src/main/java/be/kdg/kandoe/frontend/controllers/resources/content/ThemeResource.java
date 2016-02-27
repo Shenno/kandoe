@@ -65,4 +65,8 @@ public class ThemeResource extends ResourceSupport implements Serializable {
     public void setIsAddingAdmitted(boolean isAddingAdmitted) {
         this.isAddingAdmitted = isAddingAdmitted;
     }
+
+    public Theme toDOM() {
+        return new Theme(name, description, isCommentaryAllowed, isAddingAdmitted, null, null, null);
+    }
 }

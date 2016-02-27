@@ -1,8 +1,10 @@
 package be.kdg.kandoe.frontend.controllers.rest;
 
+import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.ContentService;
+import be.kdg.kandoe.frontend.controllers.resources.content.TagResource;
 import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
 import be.kdg.kandoe.frontend.controllers.resources.users.UserResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,25 @@ public class ContentRestController {
         Theme t = contentService.addTheme(themeToAdd);
         return new ResponseEntity<>(new ThemeResource(t), HttpStatus.OK);
     }
+
+    @RequestMapping(value="/{mainThemeId}/tags", method = RequestMethod.POST)
+    public ResponseEntity<TagResource> addTagToMainTheme(@PathVariable int mainThemeId, @RequestBody TagResource tagResource)
+    {
+        Tag t = tagResource.toDOM();
+        t.setTheme(contentService.getTheme(mainThemeId));
+        Tag tag = contentService.addTag(t);
+        return new ResponseEntity<>(new TagResource(tag), HttpStatus.OK);
+    }
+
+   /* @RequestMapping(value = "/{mainThemeId}/tags", method = RequestMethod.GET)
+    public ResponseEntity<TagResource> findAllTagsByMainThemeId(@PathVariable int mainThemeId)
+    {
+        Theme foundTheme = contentService.getTag(themeId);
+        return new ResponseEntity<>(new ThemeResource(foundTheme), HttpStatus.OK);
+    }*/
+
+
+
 
     /*@RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<UserResource> createUser(@Valid @RequestBody User user)
