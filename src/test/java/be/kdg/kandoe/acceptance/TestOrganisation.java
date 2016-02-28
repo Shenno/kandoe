@@ -40,10 +40,10 @@ public class TestOrganisation {
         String name = "theme name";
         String description = "description of theme";
         boolean isCommentaryAllowed = true;
-        boolean isAddingAdmited = true;
+        boolean isAddingAdmitted = true;
         List<Tag> tags = new ArrayList<>();
 
-        Theme theme = new Theme(name, description, isCommentaryAllowed, isAddingAdmited, user, organisation, tags);
+        Theme theme = new Theme(name, description, isCommentaryAllowed, isAddingAdmitted, user, organisation, tags);
         contentService.addTheme(userId, theme);*/
 
     }

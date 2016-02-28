@@ -38,7 +38,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
     private boolean isCommentaryAllowed;
 
     @Column(name = "IsAddingAdmited", nullable = false)
-    private boolean isAddingAdmited;
+    private boolean isAddingAdmitted;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -74,11 +74,11 @@ public class Theme implements Serializable, Identifiable<Integer> {
         this(name, description, true, true, organisator, organisation, tags);
     }
 
-    public Theme(String name, String description, boolean isCommentaryAllowed, boolean isAddingAdmited, User organisator, Organisation organisation, List<Tag> tags) {
+    public Theme(String name, String description, boolean isCommentaryAllowed, boolean isAddingAdmitted, User organisator, Organisation organisation, List<Tag> tags) {
         this.themeName = name;
         this.description = description;
         this.isCommentaryAllowed = isCommentaryAllowed;
-        this.isAddingAdmited = isAddingAdmited;
+        this.isAddingAdmitted = isAddingAdmitted;
         this.organisators = new ArrayList<>();
         addOrganisator(organisator);
         this.organisation = organisation;
@@ -110,8 +110,8 @@ public class Theme implements Serializable, Identifiable<Integer> {
         return isCommentaryAllowed;
     }
 
-    public boolean isAddingAdmited() {
-        return isAddingAdmited;
+    public boolean isAddingAdmitted() {
+        return isAddingAdmitted;
     }
 
     public List<Tag> getTags() {
@@ -132,5 +132,21 @@ public class Theme implements Serializable, Identifiable<Integer> {
 
     public void setThemeId(Integer themeId) {
         this.themeId = themeId;
+    }
+
+    public void setThemeName(String themeName) {
+        this.themeName = themeName;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCommentaryAllowed(boolean commentaryAllowed) {
+        isCommentaryAllowed = commentaryAllowed;
+    }
+
+    public void setAddingAdmitted(boolean addingAdmitted) {
+        isAddingAdmitted = addingAdmitted;
     }
 }

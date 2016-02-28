@@ -12,8 +12,8 @@ public class ThemeResource implements Serializable {
 
     private String description;
     private String themeName;
-    private boolean commentaryAllowed;
-    private boolean addingAdmitted;
+    private boolean isCommentaryAllowed;
+    private boolean isAddingAdmitted;
     private Integer id;
 
     public ThemeResource() {}
@@ -22,7 +22,7 @@ public class ThemeResource implements Serializable {
         this.description = theme.getDescription();
         this.name = theme.getThemeName();
         this.commentaryAllowed = theme.isCommentaryAllowed();
-        this.addingAdmitted = theme.isAddingAdmited();
+        this.addingAdmitted = theme.isAddingAdmitted();
         this.themeId = theme.getId();
     }*/
 
@@ -51,18 +51,18 @@ public class ThemeResource implements Serializable {
     }
 
     public boolean isCommentaryAllowed() {
-        return commentaryAllowed;
+        return isCommentaryAllowed;
     }
 
     public void setIsCommentaryAllowed(boolean isCommentaryAllowed) {
-        this.commentaryAllowed = isCommentaryAllowed;
+        this.isCommentaryAllowed = isCommentaryAllowed;
     }
 
     public boolean isAddingAdmitted() {
-        return addingAdmitted;
+        return isAddingAdmitted;
     }
 
     public void setIsAddingAdmitted(boolean isAddingAdmitted) {
-        this.addingAdmitted = isAddingAdmitted;
+        this.isAddingAdmitted = isAddingAdmitted;
     }
 }

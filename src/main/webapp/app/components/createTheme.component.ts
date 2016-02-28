@@ -12,17 +12,22 @@ import {ContentService} from "../service/contentService";
 })
 export class CreateThemeComponent {
 
+    private router: Router;
+
     private contentService: ContentService;
 
     private theme: Theme = Theme.createEmptyTheme();
         //new Promise<Theme[]>(resolve => setTimeout(() =>resolve(Theme), 2000));
 
-    public constructor(contentService: ContentService) {
+    public constructor(contentService: ContentService, router: Router) {
+        this.router = router;
         this.contentService = contentService;
         document.title = 'Maak thema aan';
     }
 
     public onSubmit(): void {
+        //TODO: id teruggeven en gebruiken om te navigeren
         this.contentService.addTheme(this.theme);
+      //  this.router.navigate(['/Theme', {id: 1}]);
     }
 }
