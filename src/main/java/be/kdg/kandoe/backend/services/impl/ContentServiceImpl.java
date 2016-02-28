@@ -3,6 +3,7 @@ package be.kdg.kandoe.backend.services.impl;
 import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.persistence.api.CardRepository;
 import be.kdg.kandoe.backend.persistence.api.TagRepository;
 import be.kdg.kandoe.backend.persistence.api.ThemeRepository;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +32,7 @@ public class ContentServiceImpl implements ContentService {
         this.themeRepository = themeRepository;
     }
 
+    /*Theme*/
     @Override
     public Theme addTheme(Theme theme) throws ContentServiceException {
         if (theme == null) {
@@ -37,9 +40,9 @@ public class ContentServiceImpl implements ContentService {
         } else if (theme.getThemeName().isEmpty()) {
             throw new ContentServiceException("Empty name for theme");
         } else if (theme.getOrganisation() == null) {
-            //throw new ContentServiceException("Organisation can not be empty");
+            throw new ContentServiceException("Organisation can not be empty");
         } else if (theme.getOrganisators().size() == 0) {
-            //throw new ContentServiceException("There must be at least one organisator");
+            throw new ContentServiceException("There must be at least one organisator");
         }
         return themeRepository.addTheme(theme);
     }
@@ -50,8 +53,21 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public Card getCard(int cardId) { return cardRepository.findOne(cardId); }
+    public List<Theme> findThemes() {
+        return themeRepository.findAll();
+    }
 
+    @Override
+    public List<Theme> findThemesByOrganisation(Organisation organisation) {
+        return themeRepository.getThemesByOrganisation(organisation);
+    }
+
+    @Override
+    public void deleteTheme(int themeId) {
+        themeRepository.delete(themeId);
+    }
+
+    /*Tag*/
     @Override
     public Tag addTag(Tag tag) throws ContentServiceException {
         if (tag == null) {
@@ -70,6 +86,7 @@ public class ContentServiceImpl implements ContentService {
         return tagRepository.findOne(tagId);
     }
 
+    /*Card*/
     @Override
     public Card addCard(Card card) {
 
@@ -98,8 +115,6 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public void deleteTheme(int themeId) {
-        themeRepository.delete(themeId);
-    }
+    public Card getCard(int cardId) { return cardRepository.findOne(cardId); }
 
 }

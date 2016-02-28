@@ -1,7 +1,10 @@
 package be.kdg.kandoe.backend.persistence.api;
 
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
+
+import java.util.List;
 
 /**
  * @author: Evelien
@@ -9,4 +12,6 @@ import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
  */
 public interface ThemeRepositoryCustom {
     Theme addTheme(Theme theme) throws ContentServiceException;
+
+    List<Theme> getThemesByOrganisation(Organisation organisation);
 }
