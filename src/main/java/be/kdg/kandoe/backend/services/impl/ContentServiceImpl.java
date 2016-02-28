@@ -50,6 +50,9 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
+    public Card getCard(int cardId) { return cardRepository.findOne(cardId); }
+
+    @Override
     public Tag addTag(Tag tag) throws ContentServiceException {
         if (tag == null) {
             throw new ContentServiceException("Tag can not be empty");

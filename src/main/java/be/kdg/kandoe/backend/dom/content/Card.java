@@ -25,22 +25,25 @@ public class Card implements Serializable, Identifiable<Integer> {
     @GeneratedValue
     private Integer cardId;
 
-    @Column(name = "Text", nullable = false)
+    //TODO nullables checken
+
+    @Column(name = "Text", nullable = true)
     private String text;
 
     @Column(name = "ImageURL", nullable = true)
     private String imageURL;
 
-    @Column(name = "IsPicked", nullable = false)
+    @Column(name = "IsPicked", nullable = true)
     private boolean isPicked;
 
-    @Column(name = "Priority", nullable = false)
+    @Column(name = "Priority", nullable = true)
     private int priority;
 
-    @Column(name = "SnapshotID", nullable = false)
+    @Column(name = "SnapshotID", nullable = true)
     private int snapShotID;
 
     @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "ThemeId")
     private Theme theme;
 
     @ManyToOne(targetEntity = Participation.class, fetch = FetchType.EAGER, optional = true) //TODO optinial -> false
@@ -52,7 +55,7 @@ public class Card implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = Remark.class, mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Remark> remarks;
 
-    @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = true) //TODO optinial -> false
+    @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = true) //TODO optionial -> false
     private Session session;
 
     public Card(String text, Theme theme) {

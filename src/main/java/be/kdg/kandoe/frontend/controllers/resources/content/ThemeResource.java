@@ -8,30 +8,30 @@ import java.io.Serializable;
 /**
  * Created by Kevin on 26/02/2016.
  */
-public class ThemeResource extends ResourceSupport implements Serializable {
+public class ThemeResource implements Serializable {
 
     private String description;
     private String name;
     private boolean commentaryAllowed;
     private boolean addingAdmitted;
-    private int themeId;
+    private Integer id;
 
     public ThemeResource() {}
 
-    public ThemeResource(Theme theme) {
+  /*  public ThemeResource(Theme theme) {
         this.description = theme.getDescription();
         this.name = theme.getThemeName();
         this.commentaryAllowed = theme.isCommentaryAllowed();
         this.addingAdmitted = theme.isAddingAdmited();
         this.themeId = theme.getId();
+    }*/
+
+    public Integer getId() {
+        return id;
     }
 
-    public int getThemeId() {
-        return themeId;
-    }
-
-    public void setThemeId(int themeId) {
-        this.themeId = themeId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDescription() {

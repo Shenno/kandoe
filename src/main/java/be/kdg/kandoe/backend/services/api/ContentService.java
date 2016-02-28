@@ -11,6 +11,8 @@ public interface ContentService {
 
     Theme getTheme(int themeId);
 
+    Card getCard(int cardId);
+
     Tag addTag(Tag tag);
 
     Tag getTag(int tagId);
