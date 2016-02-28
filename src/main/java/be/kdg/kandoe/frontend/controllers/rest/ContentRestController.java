@@ -36,7 +36,7 @@ public class ContentRestController {
 
     @RequestMapping(value = "/{themeId}", method = RequestMethod.GET)
     public ResponseEntity<ThemeResource> findMainThemeById(@PathVariable int themeId)
-    {
+    {     //
         Theme foundTheme = contentService.getTheme(themeId);
         ThemeResource themeResource = mapperFacade.map(foundTheme, ThemeResource.class);
         return new ResponseEntity<>(themeResource, HttpStatus.OK);
