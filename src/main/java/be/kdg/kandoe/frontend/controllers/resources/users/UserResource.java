@@ -12,27 +12,25 @@ import java.util.List;
 /**
  * UserResource is used to send User information over the wire.
  */
-public class UserResource extends ResourceSupport implements Serializable
+public class UserResource implements Serializable
 {
     // User properties
-    private Integer userId;
+    private Integer id;
 
     private String username;
 
-    public UserResource(User user)
+   /* public UserResource(User user)
     {
         this.userId = user.getUserId();
         this.username = user.getUsername();
+    }*/
+
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getUserId()
-    {
-        return userId;
-    }
-
-    public void setUserId(Integer userId)
-    {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername()

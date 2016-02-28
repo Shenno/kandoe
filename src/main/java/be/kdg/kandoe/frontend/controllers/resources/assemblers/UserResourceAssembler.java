@@ -1,4 +1,4 @@
-package be.kdg.kandoe.frontend.controllers.resources.assemblers;
+/*package be.kdg.kandoe.frontend.controllers.resources.assemblers;
 
 import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.frontend.controllers.resources.users.UserResource;
@@ -36,3 +36,4 @@ public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserRe
         return userResource;
     }
 }
+*/

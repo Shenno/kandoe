@@ -4,6 +4,7 @@ import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +14,14 @@ import java.util.List;
  * Project      kandoe
  * Package      be.kdg.kandoe.frontend.controllers.resources.users
  */
-public class OrganisationResource {
-    private int organisationId;
+public class OrganisationResource implements Serializable {
+    private Integer id;
     private String organisationName;
     private List<ThemeResource> themes;
     private UserResource organisator;
 
-    public OrganisationResource(Organisation organisation) {
+
+   /* public OrganisationResource(Organisation organisation) {
         this.organisationId = organisation.getId();
         this.organisationName = organisation.getName();
         List<ThemeResource> themeResources = new ArrayList<>();
@@ -28,18 +30,19 @@ public class OrganisationResource {
         }
         this.setThemes(themeResources);
         this.organisator = new UserResource(organisation.getOrganisator());
-    }
+    }*/
 
     public OrganisationResource() {
-        this.themes = new ArrayList<>();
+        this.themes = new ArrayList<ThemeResource>();
+        this.organisator = new UserResource();
     }
 
-    public int getOrganisationId() {
-        return organisationId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setOrganisationId(int organisationId) {
-        this.organisationId = organisationId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getOrganisationName() {

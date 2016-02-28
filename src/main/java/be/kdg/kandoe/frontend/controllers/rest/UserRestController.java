@@ -4,7 +4,6 @@ import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.UserService;
-import be.kdg.kandoe.frontend.controllers.resources.assemblers.UserResourceAssembler;
 import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
 import be.kdg.kandoe.frontend.controllers.resources.users.OrganisationResource;
 import be.kdg.kandoe.frontend.controllers.resources.users.UserResource;
@@ -33,16 +32,16 @@ public class UserRestController
     private final Logger logger = Logger.getLogger(UserRestController.class);
     private final UserService userService;
     private final MapperFacade mapperFacade;
-    private final UserResourceAssembler userResourceAssembler;
+    //private final UserResourceAssembler userResourceAssembler;
 
     @Autowired
     public UserRestController(UserService userService,
-                              MapperFacade mapperFacade, UserResourceAssembler userResourceAssembler
+                              MapperFacade mapperFacade/*, UserResourceAssembler userResourceAssembler*/
                               )
     {
         this.userService = userService;
         this.mapperFacade = mapperFacade;
-        this.userResourceAssembler = userResourceAssembler;
+       // this.userResourceAssembler = userResourceAssembler;
     }
 
     @RequestMapping(value = "/users/info", method = RequestMethod.GET)
@@ -65,7 +64,7 @@ public class UserRestController
         String pwd = encoder.encode(userResourcePost.getPassword());
         User user = new User(userResourcePost.getUsername(), pwd);
         User returnUser = userService.addUser(user);
-        return new ResponseEntity<>(new UserResource(returnUser), HttpStatus.OK);
+        return new ResponseEntity<>(mapperFacade.map(returnUser, UserResource.class), HttpStatus.OK);
     }
 
 /*    @RequestMapping(method = RequestMethod.GET)
@@ -91,10 +90,10 @@ public class UserRestController
     public ResponseEntity<UserResource> findUserById(@PathVariable int userId)
     {
         User user = userService.findUserById(userId);
-        return new ResponseEntity<>(new UserResource(user), HttpStatus.OK);
+        return new ResponseEntity<>(mapperFacade.map(user, UserResource.class), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/organisations", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/organisations", method = RequestMethod.GET)
     public ResponseEntity<List<OrganisationResource>> findorganisations()
     {
         List<Organisation> organisations = this.userService.findOrganisations();
@@ -103,14 +102,14 @@ public class UserRestController
             organisationResources.add(new OrganisationResource(o));
         }
         return new ResponseEntity<>(organisationResources, HttpStatus.OK);
-    }
+    }*/
 
     @RequestMapping(value = "/organisations", method = RequestMethod.POST)
     public ResponseEntity<OrganisationResource> createOrganisation(@Valid @RequestBody OrganisationResource organisationResource)
     {
-        Organisation organisation = new Organisation(organisationResource.getOrganisationName());
-        Organisation returnOrganisation = userService.addOrganisation(organisation);
-        return new ResponseEntity<>(new OrganisationResource(returnOrganisation), HttpStatus.OK);
+        //Organisation organisation = new Organisation(organisationResource.getOrganisationName());
+        Organisation returnOrganisation = userService.addOrganisation(mapperFacade.map(organisationResource, Organisation.class));
+        return new ResponseEntity<>(mapperFacade.map(returnOrganisation, OrganisationResource.class), HttpStatus.OK);
     }
 
     /*@RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
