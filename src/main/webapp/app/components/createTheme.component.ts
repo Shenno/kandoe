@@ -26,7 +26,7 @@ export class CreateThemeComponent {
     }
 
     public onSubmit(): void {
-        //TODO: id teruggeven en gebruiken om te navigeren
+        //TODO: id teruggeven en gebruiken om hier te navigeren
         this.contentService.addTheme(this.theme);
       //  this.router.navigate(['/Theme', {id: 1}]);
     }
