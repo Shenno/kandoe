@@ -30,6 +30,10 @@ public class Organisation implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = Theme.class, mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Theme> themes;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user; // Dit is de organisator maar moet user heten voor namingConvention hibernate TODO aanpassen!
+
     public Organisation() {
 
     }
@@ -59,5 +63,13 @@ public class Organisation implements Serializable, Identifiable<Integer> {
 
     public void setThemes(List<Theme> themes) {
         this.themes = themes;
+    }
+
+    public User getOrganisator() {
+        return user;
+    }
+
+    public void setOrganisator(User organisator) {
+        this.user = organisator;
     }
 }

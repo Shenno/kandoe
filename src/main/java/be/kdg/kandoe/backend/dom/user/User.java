@@ -53,6 +53,9 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
     @OneToMany(targetEntity = Participation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Participation> participations;
 
+    @OneToMany(targetEntity = Organisation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Organisation> organisations;
+
     public User()
     {
         //Deze constructor doet niet veel
@@ -62,6 +65,7 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
     {
         this.username = username;
         this.encryptedPassword = encryptedPassword;
+        this.organisations = new ArrayList<>();
     }
 
     public Integer getId()
@@ -90,6 +94,14 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
 
     public void addParticipation(Participation participation) {
         participations.add(participation);
+    }
+
+    public List<Organisation> getOrganisations() {
+        return organisations;
+    }
+
+    public void setOrganisations(List<Organisation> organisations) {
+        this.organisations = organisations;
     }
 
     @Override

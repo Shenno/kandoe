@@ -17,6 +17,7 @@ public class OrganisationResource {
     private int organisationId;
     private String organisationName;
     private List<ThemeResource> themes;
+    private UserResource organisator;
 
     public OrganisationResource(Organisation organisation) {
         this.organisationId = organisation.getId();
@@ -26,6 +27,7 @@ public class OrganisationResource {
             themeResources.add(new ThemeResource(t));
         }
         this.setThemes(themeResources);
+        this.organisator = new UserResource(organisation.getOrganisator());
     }
 
     public OrganisationResource() {
@@ -54,5 +56,13 @@ public class OrganisationResource {
 
     public void setThemes(List<ThemeResource> themes) {
         this.themes = themes;
+    }
+
+    public UserResource getOrganisator() {
+        return organisator;
+    }
+
+    public void setOrganisator(UserResource organisator) {
+        this.organisator = organisator;
     }
 }

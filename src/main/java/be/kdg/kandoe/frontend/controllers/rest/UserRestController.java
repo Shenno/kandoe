@@ -103,18 +103,14 @@ public class UserRestController
             organisationResources.add(new OrganisationResource(o));
         }
         return new ResponseEntity<>(organisationResources, HttpStatus.OK);
-        /*
-        OrganisationResource organisationResource = new OrganisationResource();
-        organisationResource.setOrganisationId(1);
-        organisationResource.setOrganisationName("ShennoOrga");
-        List<ThemeResource> list = new ArrayList<>();
-        Theme t1 = new Theme("naam", "desc", true, true, null, null, null); t1.setThemeId(1);
-        Theme t2 = new Theme("naam2", "desc2", true, true, null, null, null); t2.setThemeId(2);
-        list.add(new ThemeResource(t1));
-        list.add(new ThemeResource(t2));
-        organisationResource.setThemes(list);
-        return new ResponseEntity<>(organisationResource, HttpStatus.OK);*/
+    }
 
+    @RequestMapping(value = "/organisations", method = RequestMethod.POST)
+    public ResponseEntity<OrganisationResource> createOrganisation(@Valid @RequestBody OrganisationResource organisationResource)
+    {
+        Organisation organisation = new Organisation(organisationResource.getOrganisationName());
+        Organisation returnOrganisation = userService.addOrganisation(organisation);
+        return new ResponseEntity<>(new OrganisationResource(returnOrganisation), HttpStatus.OK);
     }
 
     /*@RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
