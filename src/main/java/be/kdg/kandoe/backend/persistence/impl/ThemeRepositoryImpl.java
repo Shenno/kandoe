@@ -22,11 +22,11 @@ public class ThemeRepositoryImpl implements ThemeRepositoryCustom {
     @PersistenceContext
     private EntityManager em;
 
-    @Override //TODO per organisatie
+    @Override
     public Theme addTheme(Theme theme) throws ContentServiceException {
-        final TypedQuery<Theme> q = em.createNamedQuery("Theme.findByThemeName", Theme.class);
+        final TypedQuery<Theme> q = em.createNamedQuery("Theme.findByThemeNameByOrganisation", Theme.class);
         q.setParameter("themename", theme.getThemeName());
-        //q.setParameter("organisation",theme.getOrganisation());
+        q.setParameter("organisation",theme.getOrganisation());
         if (!q.getResultList().isEmpty())
         {
             throw new ContentServiceException("Theme " + theme.getThemeName() + " already exists in organisation "+theme.getOrganisation());

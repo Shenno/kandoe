@@ -100,22 +100,26 @@ public class TestTheme {
         assertNotNull(theme);
         contentService.addTheme(duplicatetheme);
     }
-    /*@Test //TODO
+    /*@Test
     public void testAddExistingThemeDifferentOrganisation() {
         Organisation organisation2 = new Organisation("organisation2");
         organisation2 = userService.addOrganisation(organisation2);
+        assertNotNull(organisation2);
 
         String name = "theme name";
         String description = "description of theme";
-
         List<Tag> tags = new ArrayList<>();
 
         Theme theme = new Theme(name,description,user,organisation,tags);
-        Theme theme2 = new Theme(name,description,user,organisation2,tags);
         theme = contentService.addTheme(theme);
         assertNotNull(theme);
-        contentService.addTheme(theme2);
+
+        Theme theme2 = new Theme(name,description,user,organisation2,tags);
+        theme2 = contentService.addTheme(theme2);
         assertNotNull(theme2);
+
+        userService.deleteOrganisation(organisation2.getId());
+
     }*/
 
    @Test(expected = ContentServiceException.class)

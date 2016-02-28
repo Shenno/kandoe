@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "Theme")
 @NamedQueries(
         {
-                @NamedQuery(name = "Theme.findByThemeName", query = "SELECT t FROM Theme t WHERE t.themeName = :themename"),
+                @NamedQuery(name = "Theme.findByThemeNameByOrganisation", query = "SELECT t FROM Theme t WHERE t.themeName = :themename and t.organisation = :organisation"),
                 @NamedQuery(name = "Theme.findThemesByOrganisation",query = "SELECT t FROM Theme t where t.organisation = :organisation")
         })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
