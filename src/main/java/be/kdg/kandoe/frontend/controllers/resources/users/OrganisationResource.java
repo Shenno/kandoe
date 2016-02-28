@@ -20,6 +20,7 @@ public class OrganisationResource implements Serializable {
     private List<ThemeResource> themes;
     private UserResource organisator;
 
+    //PUSH
 
    /* public OrganisationResource(Organisation organisation) {
         this.organisationId = organisation.getId();
