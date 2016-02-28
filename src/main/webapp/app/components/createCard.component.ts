@@ -23,7 +23,7 @@ export class CreateCardComponent {
 
     public onSubmit(): void {
         //TODO: id teruggeven en gebruiken om te navigeren
-        this.contentService.addTheme(this.card);
+        this.contentService.addCard(this.card);
         //  this.router.navigate(['/Theme', {id: 1}]);
     }
 

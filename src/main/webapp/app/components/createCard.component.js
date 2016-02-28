@@ -29,7 +29,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1) {
                 }
                 CreateCardComponent.prototype.onSubmit = function () {
                     //TODO: id teruggeven en gebruiken om te navigeren
-                    this.contentService.addTheme(this.card);
+                    this.contentService.addCard(this.card);
                     //  this.router.navigate(['/Theme', {id: 1}]);
                 };
                 CreateCardComponent = __decorate([
