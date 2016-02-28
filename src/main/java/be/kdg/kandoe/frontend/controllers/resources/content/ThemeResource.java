@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class ThemeResource implements Serializable {
 
     private String description;
-    private String name;
+    private String themeName;
     private boolean commentaryAllowed;
     private boolean addingAdmitted;
     private Integer id;
@@ -42,12 +42,12 @@ public class ThemeResource implements Serializable {
         this.description = description;
     }
 
-    public String getName() {
-        return name;
+    public String getThemeName() {
+        return themeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setThemeName(String themeName) {
+        this.themeName = themeName;
     }
 
     public boolean isCommentaryAllowed() {
@@ -64,9 +64,5 @@ public class ThemeResource implements Serializable {
 
     public void setIsAddingAdmitted(boolean isAddingAdmitted) {
         this.addingAdmitted = isAddingAdmitted;
-    }
-
-    public Theme toDOM() {
-        return new Theme(name, description, commentaryAllowed, addingAdmitted, null, null, null);
     }
 }
