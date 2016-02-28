@@ -8,4 +8,23 @@ import {Router} from 'angular2/router';
 })
 export class CreateCardComponent {
 
+    private router: Router;
+
+    private contentService: ContentService;
+
+    private card: Card = Card;
+    //new Promise<Theme[]>(resolve => setTimeout(() =>resolve(Theme), 2000));
+
+    public constructor(contentService: ContentService, router: Router) {
+        this.router = router;
+        this.contentService = contentService;
+        document.title = 'Maak thema aan';
+    }
+
+    public onSubmit(): void {
+        //TODO: id teruggeven en gebruiken om te navigeren
+        this.contentService.addTheme(this.card);
+        //  this.router.navigate(['/Theme', {id: 1}]);
+    }
+
 }
