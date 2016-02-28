@@ -23,10 +23,11 @@ public class Participation implements Serializable, Identifiable<Integer> {
     @Column(name = "IsOnTurn", nullable = false)
     private boolean isOnTurn;
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER, optional = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = true/* TODO optional = false*/)
     private Session session;
 
     @OneToMany(targetEntity = Card.class, mappedBy = "participationChoosen", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -42,6 +43,10 @@ public class Participation implements Serializable, Identifiable<Integer> {
 
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public boolean isRegistered() {

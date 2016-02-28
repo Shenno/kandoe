@@ -11,23 +11,23 @@ import java.util.Date;
 public class AsynchronousSession extends Session implements Serializable{
 
     @Column(name = "MaxTimeRound", nullable = false)
-    private LocalDateTime maxTimeRound;
+    private int maxTimeRound; //in seconds
 
-    public AsynchronousSession(boolean isProblem, LocalDateTime maxTimeRound) {
+    public AsynchronousSession(boolean isProblem, int maxTimeRound) {
         super(isProblem);
         this.maxTimeRound = maxTimeRound;
     }
 
-    public AsynchronousSession(boolean isProblem,int minCards, int maxCards, LocalDateTime maxTimeRound) {
+    public AsynchronousSession(boolean isProblem,int minCards, int maxCards, int maxTimeRound) {
         super(isProblem,minCards, maxCards);
         this.maxTimeRound = maxTimeRound;
     }
 
-    public LocalDateTime getMaxTimeRound() {
+    public int getMaxTimeRound() {
         return maxTimeRound;
     }
 
-    public void setMaxTimeRound(LocalDateTime maxTimeRound) {
+    public void setMaxTimeRound(int maxTimeRound) {
         this.maxTimeRound = maxTimeRound;
     }
 }

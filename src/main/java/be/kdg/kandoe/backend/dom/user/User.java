@@ -66,6 +66,7 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
         this.username = username;
         this.encryptedPassword = encryptedPassword;
         this.organisations = new ArrayList<>();
+        this.participations = new ArrayList<>();
     }
 
     public Integer getId()

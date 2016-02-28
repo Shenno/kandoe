@@ -2,6 +2,8 @@ package be.kdg.kandoe.acceptance;
 
 import be.kdg.kandoe.backend.dom.session.Participation;
 import be.kdg.kandoe.backend.dom.user.User;
+import be.kdg.kandoe.backend.services.api.ContentService;
+import be.kdg.kandoe.backend.services.api.SessionService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import org.junit.After;
 import org.junit.Before;
@@ -22,6 +24,9 @@ public class TestParticipation {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private SessionService sessionService;
+
     @Before
     public void setup() {
         user = new User("firstname.lastname@kandoe.be", "123");
@@ -31,6 +36,17 @@ public class TestParticipation {
     @After
     public void tearDown() {
         userService.deleteUser(user.getId());
+    }
+
+    @Test
+    public void testHibernateMapping() {
+        User testuser = new User("een@test.be", "123");
+        Participation p = new Participation();
+        testuser.addParticipation(p);
+        p.setUser(testuser);
+        testuser = userService.addUser(testuser);
+        p = sessionService.addParticipation(p);
+        System.out.println(testuser.getParticipations().size());
     }
 
     @Test

@@ -106,6 +106,10 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
         this.participations = participations;
     }
 
+    public void addParticipation(Participation participation) {
+        this.participations.add(participation);
+    }
+
     @Override
     public Integer getId() {
         return sessionId;
