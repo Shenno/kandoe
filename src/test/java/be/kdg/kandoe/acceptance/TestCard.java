@@ -60,6 +60,8 @@ public class TestCard {
         userService.deleteUser(user.getId());
         userService.deleteOrganisation(organisation.getId());
     }
+
+
     @Test
     public void testAddCard(){
         String description="This is a card";
@@ -114,14 +116,4 @@ public class TestCard {
         Card card = new Card(description, url,emptyTheme);
         card=contentService.addCard(card);
     }
-
-
-
-
-
-
-
-
-
-
 }
