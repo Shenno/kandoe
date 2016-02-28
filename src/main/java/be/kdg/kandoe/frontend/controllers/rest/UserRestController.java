@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -80,10 +81,12 @@ public class UserRestController
     }
 */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> findUsers()
+    public ResponseEntity<List<UserResource>> findUsers()
     {
         List<User> users = userService.findUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+
+        List<UserResource> userResources = users.stream().map(u -> mapperFacade.map(u, UserResource.class)).collect(Collectors.toList());
+        return new ResponseEntity<>(userResources, HttpStatus.OK);
     }
 
     @RequestMapping(value = "users/{userId}", method = RequestMethod.GET)
@@ -93,16 +96,17 @@ public class UserRestController
         return new ResponseEntity<>(mapperFacade.map(user, UserResource.class), HttpStatus.OK);
     }
 
-   /* @RequestMapping(value = "/organisations", method = RequestMethod.GET)
+    @RequestMapping(value = "/organisations", method = RequestMethod.GET)
     public ResponseEntity<List<OrganisationResource>> findorganisations()
     {
         List<Organisation> organisations = this.userService.findOrganisations();
-        List<OrganisationResource> organisationResources = new ArrayList<>();
+      /*  List<OrganisationResource> organisationResources = new ArrayList<>();
         for(Organisation o : organisations) {
             organisationResources.add(new OrganisationResource(o));
-        }
+        }*/
+        List<OrganisationResource> organisationResources = organisations.stream().map(o -> mapperFacade.map(o, OrganisationResource.class)).collect(Collectors.toList());
         return new ResponseEntity<>(organisationResources, HttpStatus.OK);
-    }*/
+    }
 
     @RequestMapping(value = "/organisations", method = RequestMethod.POST)
     public ResponseEntity<OrganisationResource> createOrganisation(@Valid @RequestBody OrganisationResource organisationResource)
