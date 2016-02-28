@@ -49,7 +49,8 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public Theme getTheme(int themeId) {
-        return themeRepository.findOne(themeId);
+        Theme foundTheme = themeRepository.findOne(themeId);
+        return foundTheme;
     }
 
     @Override
