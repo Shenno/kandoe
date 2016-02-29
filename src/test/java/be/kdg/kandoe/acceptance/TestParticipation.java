@@ -2,7 +2,6 @@ package be.kdg.kandoe.acceptance;
 
 import be.kdg.kandoe.backend.dom.session.Participation;
 import be.kdg.kandoe.backend.dom.user.User;
-import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.SessionService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import org.junit.After;
@@ -51,34 +50,16 @@ public class TestParticipation {
 
     @Test
     public void testAddParticipation() {
-        Participation participation = new Participation();
-        Boolean isRegistered = false;
-        Boolean isOnTurn = false;
-        participation.setIsRegistered(isRegistered);
-        participation.setIsOnTurn(isOnTurn);
+        boolean isRegistered = false;
+        boolean isOnTurn = false;
+
+        Participation participation = new Participation(isRegistered, isOnTurn);
+        participation = sessionService.addParticipation(participation);
 
         assertNotNull(participation);
-        assertEquals("isRegistered must be correct", isRegistered, participation.isRegistered());
-        assertEquals("isOnTurn must be correct", isOnTurn, participation.isOnTurn());
+        assertEquals("isRegistered must match", isRegistered, participation.isRegistered());
+        assertEquals("isOnTurn must match", isOnTurn, participation.isOnTurn());
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testParticipationNullFields() {
-        Boolean isRegistered = null;
-        Boolean isOnTurn = null;
 
-        Participation participation = new Participation();
-        participation.setIsRegistered(isRegistered);
-        participation.setIsOnTurn(isOnTurn);
-
-        user.addParticipation(participation);
-        userService.addUser(user);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testNullParticipation() {
-        Participation participation = null;
-        user.addParticipation(participation);
-        userService.addUser(user);
-    }
 }
