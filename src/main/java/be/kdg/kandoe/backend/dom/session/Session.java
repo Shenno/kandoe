@@ -7,6 +7,7 @@ import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,11 +20,11 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @GeneratedValue
     private Integer sessionId;
 
-    @Column(name="isProblem",nullable= false)
-    private boolean isProblem;
+    @Column(name="Problem",nullable= false)
+    private boolean problem;
 
-    @Column(name = "IsEnded", nullable = false)
-    private boolean isEnded;
+    @Column(name = "GameOver", nullable = false)
+    private boolean gameOver;
 
     @Column(name = "MinCards", nullable = false)
     private int minCards;
@@ -49,25 +50,32 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = Remark.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Remark> remarks;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "Card_Session",
+            joinColumns = @JoinColumn(name = "CardId", referencedColumnName = "CardId"),
+            inverseJoinColumns = @JoinColumn(name = "SessionId", referencedColumnName = "SessionId"))
+    private List<Card> organisators = new ArrayList<>();
+
     public Session(boolean isProblem) {
         this(isProblem,1,20);
     }
 
-    public Session(boolean isProblem, int minCards, int maxCards) {
-        this.isProblem=isProblem;
-        this.isEnded = false;
+    public Session(boolean problem, int minCards, int maxCards) {
+        this.problem = problem;
+        this.gameOver = false;
         this.currentRound = 1;
         this.minCards = minCards;
         this.maxCards = maxCards;
         this.snapshotID = 1;
     }
 
-    public boolean isEnded() {
-        return isEnded;
+    public boolean isGameOver() {
+        return gameOver;
     }
 
-    public void setIsEnded(boolean isEnded) {
-        this.isEnded = isEnded;
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
     }
 
     public int getMinCards() {

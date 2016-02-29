@@ -7,6 +7,7 @@ import be.kdg.kandoe.backend.dom.session.Session;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.ContentService;
+import be.kdg.kandoe.backend.services.api.SessionService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import org.junit.After;
 import org.junit.Before;
@@ -36,6 +37,9 @@ public class TestSession {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private SessionService sessionService;
+
     @Before
     public void setup() {
         user = new User("firstname.lastname@kandoe.be", "password");
@@ -61,7 +65,6 @@ public class TestSession {
     @Test
     public void testCreateAsyncSession() {
         Session session = new AsynchronousSession(true, 60);
-        }
-
     }
+}
 
