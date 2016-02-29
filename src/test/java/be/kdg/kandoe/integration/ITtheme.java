@@ -31,8 +31,8 @@ public class ITtheme {
         element.sendKeys("themename");
 
         element = driver.findElement(By.name("ib_description"));
-        assertEquals("input", element.getTagName());
-        assertEquals("text", element.getAttribute("type"));
+        assertEquals("textarea", element.getTagName());
+        assertEquals("textarea", element.getAttribute("type"));
         element.sendKeys("description");
 
         element = driver.findElement(By.name("cb_commentaryAllowed"));

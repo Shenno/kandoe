@@ -21,6 +21,19 @@ export class ContentService {
         this.baseUrl = urlService.getUrl();
     }
 
+    /*Theme*/
+
+    public getTheme(id:string): Observable<Theme> {
+        var url = this.baseUrl + "/api/themes/" + id;
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        return this.http.get(url, {headers: headers}).map((res:Response) => res.json())/*.subscribe(
+            (data) => this.logger.log('Thema succesvol teruggekregen')
+            ((err:Error) => this.logger.log('Fout tijdens opvragen van thema' + id + ': ' + err.message))
+        )*/;
+    }
+
     public addTheme(theme:Theme): void {
         var url = this.baseUrl + "/api/themes";
         var themeString = JSON.stringify(theme);
@@ -37,6 +50,8 @@ export class ContentService {
         this.logger.log('Thema "' + theme.themeName + '" is aangemaakt"');
         this.router.navigate(['/Theme', {id: id}]);
     }
+
+    /*Tag*/
 
     public addTag(tag:Tag): void {
         var url = this.baseUrl + "/api/themes/{mainThemeId}/tags";

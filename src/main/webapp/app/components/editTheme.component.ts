@@ -1,10 +1,9 @@
 import {Component, ViewEncapsulation} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Router, RouteParams} from 'angular2/router';
 import {Tag} from '../entity/tag';
 import {Http, Response, Headers} from "angular2/http";
 import {UrlService} from "../service/urlService";
 import {ContentService} from "../service/contentService";
-import {RouteParams} from "angular2/router";
 
 @Component({
     selector: 'edit-theme',
