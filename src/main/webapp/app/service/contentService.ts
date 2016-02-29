@@ -48,7 +48,7 @@ export class ContentService {
 
     private onSuccesfulAddTheme(id:number, theme:Theme): void {
         this.logger.log('Thema "' + theme.themeName + '" is aangemaakt"');
-        this.router.navigate(['/Theme', {id: id}]);
+        this.router.navigate(['/DetailTheme', {themeId: id}]);
     }
 
     /*Tag*/

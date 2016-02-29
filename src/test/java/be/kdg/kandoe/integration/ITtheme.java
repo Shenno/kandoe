@@ -66,8 +66,8 @@ public class ITtheme {
 
         (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Theme: themename"));
 
-        element = driver.findElement(By.id("p_themename"));
-        assertEquals("p", element.getTagName());
+        element = driver.findElement(By.id("h1_themename"));
+        assertEquals("h1", element.getTagName());
         assertEquals("The themename must be correct", "themename", element.getText());
 
         element = driver.findElement(By.id("p_description"));
