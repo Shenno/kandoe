@@ -5,15 +5,18 @@ import {Tag} from '../entity/tag';
 import {UrlService} from "../service/urlService";
 import {Logger} from "../util/logger";
 import {Observable} from "rxjs/Observable";
+import {Router} from "angular2/router";
 
 @Injectable()
 export class ContentService {
     private http:Http = null;
     private logger:Logger;
     private baseUrl: string;
+    private router:Router;
 
-    public constructor(http:Http, urlService: UrlService, logger:Logger) {
+    public constructor(http:Http, urlService: UrlService, logger:Logger, router:Router) {
         this.http = http;
+        this.router = router;
         this.logger = logger;
         this.baseUrl = urlService.getUrl();
     }
@@ -25,13 +28,16 @@ export class ContentService {
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
         this.http.post(url, themeString, {headers: headers}).map((res:Response) => res.json()).subscribe(
-            (data) => this.logger.log('Thema "' + theme.name + '" is aangemaakt'),
+            (data) => this.onSuccesfulAddTheme(data.id, theme),
             ((err:Error) => this.logger.log('Fout tijdens aanmaken van thema: ' + err.message))
         );
     }
-    /*public getFigure(id:string):Observable<Theme>{
-        //
-    }*/
+
+    private onSuccesfulAddTheme(id:number, theme:Theme): void {
+        this.logger.log('Thema "' + theme.themeName + '" is aangemaakt"');
+        this.router.navigate(['/Theme', {id: id}]);
+    }
+
     public addTag(tag:Tag): void {
         var url = this.baseUrl + "/api/themes/{mainThemeId}/tags";
         var themeString = JSON.stringify(tag);

@@ -41,6 +41,11 @@ public class Participation implements Serializable, Identifiable<Integer> {
         this.isOnTurn = false;
     }
 
+    public Participation(boolean isRegistered, boolean isOnTurn) {
+        this.isRegistered = isRegistered;
+        this.isOnTurn = isOnTurn;
+    }
+
     public User getUser() {
         return user;
     }
@@ -63,6 +68,30 @@ public class Participation implements Serializable, Identifiable<Integer> {
 
     public void setIsOnTurn(boolean isOnTurn) {
         this.isOnTurn = isOnTurn;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public List<Card> getChosenCards() {
+        return chosenCards;
+    }
+
+    public void setChosenCards(List<Card> chosenCards) {
+        this.chosenCards = chosenCards;
+    }
+
+    public List<Card> getAddedCards() {
+        return addedCards;
+    }
+
+    public void setAddedCards(List<Card> addedCards) {
+        this.addedCards = addedCards;
     }
 
     @Override
