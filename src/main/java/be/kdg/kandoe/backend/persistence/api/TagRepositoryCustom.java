@@ -1,7 +1,10 @@
 package be.kdg.kandoe.backend.persistence.api;
 
 import be.kdg.kandoe.backend.dom.content.Tag;
+import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
+
+import java.util.List;
 
 /**
  * @author: Evelien
@@ -10,4 +13,6 @@ import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
 public interface TagRepositoryCustom {
 
     Tag addTag(Tag tag) throws ContentServiceException;
+
+    List<Tag> findTagByTheme(Theme theme);
 }

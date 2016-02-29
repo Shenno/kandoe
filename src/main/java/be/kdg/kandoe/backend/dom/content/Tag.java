@@ -15,6 +15,7 @@ import java.io.Serializable;
 @NamedQueries(
         {
                 @NamedQuery(name = "Tag.findByTagNamebyTheme", query = "SELECT t FROM Tag t WHERE t.tagName = :tagname and t.theme = :theme"),
+                @NamedQuery(name = "Tag.findTagByTheme",query = "SELECT t FROM Tag t where t.theme = :theme")
         })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Tag implements Serializable, Identifiable<Integer>{

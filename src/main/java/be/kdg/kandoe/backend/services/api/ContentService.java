@@ -31,4 +31,9 @@ public interface ContentService {
 
     List<Tag> findTags();
 
+    List<Tag> findTagByTheme(Theme theme);
+
+    Theme updateTheme(Theme theme);
+
+    Tag updateTag(Tag tag);
 }

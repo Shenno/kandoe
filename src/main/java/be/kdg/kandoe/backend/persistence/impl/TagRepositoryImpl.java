@@ -1,6 +1,7 @@
 package be.kdg.kandoe.backend.persistence.impl;
 
 import be.kdg.kandoe.backend.dom.content.Tag;
+import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.persistence.api.TagRepositoryCustom;
 import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 /**
  * @author: Evelien
@@ -33,5 +35,12 @@ public class TagRepositoryImpl implements TagRepositoryCustom {
         final Session session = em.unwrap(Session.class);
         session.saveOrUpdate(tag);
         return tag;
+    }
+
+    @Override
+    public List<Tag> findTagByTheme(Theme theme) {
+        final TypedQuery<Tag> q = em.createNamedQuery("Tag.findTagByTheme",Tag.class);
+        q.setParameter("theme",theme);
+        return q.getResultList();
     }
 }

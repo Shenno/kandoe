@@ -10,6 +10,7 @@ import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -219,6 +220,31 @@ public class TestTheme {
         List<Theme> themes = contentService.findThemesByOrganisation(organisation);
         assertEquals(themes.size(),1);
         assertEquals(themes.get(0).getThemeName(),theme.getThemeName());
+
+    }
+
+    @Test
+    public void testUpdateTheme(){
+        String name = "theme name";
+        String description = "description of theme";
+        boolean isCommentaryAllowed = true;
+        boolean isAddingAdmited = true;
+
+        List<Tag> tags = new ArrayList<>();
+
+        Theme theme = new Theme(name,description,isCommentaryAllowed,isAddingAdmited,user,organisation,tags);
+        theme = contentService.addTheme(theme);
+        assertNotNull(theme);
+
+        theme = contentService.getTheme(theme.getId());
+        assertNotNull(theme
+        );
+        String newName = "new theme name";
+        theme.setThemeName(newName);
+
+        Theme persistedTheme = contentService.updateTheme(theme);
+        assertNotNull(persistedTheme);
+        assertEquals("Theme is not correct updated",persistedTheme.getThemeName(),newName);
 
 
     }

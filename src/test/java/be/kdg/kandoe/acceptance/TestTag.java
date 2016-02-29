@@ -143,6 +143,39 @@ public class TestTag {
         assertEquals(t.getTagName(),tag.getTagName());
     }
 
+    @Test
+    public void findTagbyTheme(){
+        String name = "tag name";
+        Tag tag = new Tag(name,theme);
+        tag = contentService.addTag(tag);
+        assertNotNull(tag);
+
+        List<Tag> tags = contentService.findTagByTheme(theme);
+        assertEquals(tags.size(),1);
+        assertEquals(tags.get(0).getTagName(),tag.getTagName());
+
+    }
+
+    @Test
+    public void testUpdateTag(){
+        String name = "tag name";
+        Tag tag = new Tag(name,theme);
+        tag = contentService.addTag(tag);
+        assertNotNull(tag);
+
+        tag = contentService.getTag(tag.getId());
+        assertNotNull(tag);
+
+        String newName = "new theme name";
+        tag.setTagName(newName);
+
+        Tag persistedTag = contentService.updateTag(tag);
+        assertNotNull(persistedTag);
+        assertEquals("Tag is not updated",persistedTag.getTagName(),newName);
+
+
+    }
+
     //TODO: Subtheme
 
 }

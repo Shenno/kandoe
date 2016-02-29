@@ -68,6 +68,11 @@ public class ContentServiceImpl implements ContentService {
         themeRepository.delete(themeId);
     }
 
+    @Override
+    public Theme updateTheme(Theme theme) {
+        return themeRepository.save(theme);
+    }
+
     /*Tag*/
     @Override
     public Tag addTag(Tag tag) throws ContentServiceException {
@@ -87,10 +92,19 @@ public class ContentServiceImpl implements ContentService {
         return tagRepository.findOne(tagId);
     }
 
-
     @Override
     public List<Tag> findTags() {
         return tagRepository.findAll();
+    }
+
+    @Override
+    public List<Tag> findTagByTheme(Theme theme) {
+        return tagRepository.findTagByTheme(theme);
+    }
+
+    @Override
+    public Tag updateTag(Tag tag) {
+        return tagRepository.save(tag);
     }
 
     /*Card*/
