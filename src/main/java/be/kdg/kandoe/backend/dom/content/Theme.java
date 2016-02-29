@@ -34,11 +34,11 @@ public class Theme implements Serializable, Identifiable<Integer> {
     @Column(name = "Description", nullable = true)
     private String description;
 
-    @Column(name = "IsCommentaryAllowed", nullable = false)
-    private boolean isCommentaryAllowed;
+    @Column(name = "CommentaryAllowed", nullable = false)
+    private boolean commentaryAllowed;
 
-    @Column(name = "IsAddingAdmited", nullable = false)
-    private boolean isAddingAdmitted;
+    @Column(name = "AddingAdmited", nullable = false)
+    private boolean addingAdmitted;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -74,11 +74,11 @@ public class Theme implements Serializable, Identifiable<Integer> {
         this(name, description, true, true, organisator, organisation, tags);
     }
 
-    public Theme(String name, String description, boolean isCommentaryAllowed, boolean isAddingAdmitted, User organisator, Organisation organisation, List<Tag> tags) {
+    public Theme(String name, String description, boolean commentaryAllowed, boolean addingAdmitted, User organisator, Organisation organisation, List<Tag> tags) {
         this.themeName = name;
         this.description = description;
-        this.isCommentaryAllowed = isCommentaryAllowed;
-        this.isAddingAdmitted = isAddingAdmitted;
+        this.commentaryAllowed = commentaryAllowed;
+        this.addingAdmitted = addingAdmitted;
         this.organisators = new ArrayList<>();
         addOrganisator(organisator);
         this.organisation = organisation;
@@ -107,11 +107,11 @@ public class Theme implements Serializable, Identifiable<Integer> {
     }
 
     public boolean isCommentaryAllowed() {
-        return isCommentaryAllowed;
+        return commentaryAllowed;
     }
 
     public boolean isAddingAdmitted() {
-        return isAddingAdmitted;
+        return addingAdmitted;
     }
 
     public List<Tag> getTags() {
@@ -143,10 +143,10 @@ public class Theme implements Serializable, Identifiable<Integer> {
     }
 
     public void setCommentaryAllowed(boolean commentaryAllowed) {
-        isCommentaryAllowed = commentaryAllowed;
+        this.commentaryAllowed = commentaryAllowed;
     }
 
     public void setAddingAdmitted(boolean addingAdmitted) {
-        isAddingAdmitted = addingAdmitted;
+        this.addingAdmitted = addingAdmitted;
     }
 }

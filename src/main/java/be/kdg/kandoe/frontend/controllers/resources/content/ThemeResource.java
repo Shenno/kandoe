@@ -12,8 +12,8 @@ public class ThemeResource implements Serializable {
 
     private String description;
     private String themeName;
-    private boolean isCommentaryAllowed;
-    private boolean isAddingAdmitted;
+    private boolean commentaryAllowed;
+    private boolean addingAdmitted;
     private Integer id;
 
     public ThemeResource() {}
@@ -51,18 +51,18 @@ public class ThemeResource implements Serializable {
     }
 
     public boolean isCommentaryAllowed() {
-        return isCommentaryAllowed;
+        return commentaryAllowed;
     }
 
-    public void setIsCommentaryAllowed(boolean isCommentaryAllowed) {
-        this.isCommentaryAllowed = isCommentaryAllowed;
+    public void setCommentaryAllowed(boolean commentaryAllowed) {
+        this.commentaryAllowed = commentaryAllowed;
     }
 
     public boolean isAddingAdmitted() {
-        return isAddingAdmitted;
+        return addingAdmitted;
     }
 
-    public void setIsAddingAdmitted(boolean isAddingAdmitted) {
-        this.isAddingAdmitted = isAddingAdmitted;
+    public void setAddingAdmitted(boolean addingAdmitted) {
+        this.addingAdmitted = addingAdmitted;
     }
 }
