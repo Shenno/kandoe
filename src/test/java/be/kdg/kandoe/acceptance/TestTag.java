@@ -115,6 +115,34 @@ public class TestTag {
         contentService.addTag(tag);
     }
 
-    //TODO: Testen op add tag to subtheme
+    @Test
+    public void testFindAllTag(){
+        String name = "tag name";
+        Tag tag = new Tag(name,theme);
+        tag = contentService.addTag(tag);
+
+        String name2 = "tag name2";
+        Tag tag2 = new Tag(name2,theme);
+        tag2 = contentService.addTag(tag2);
+
+        List<Tag> tags = contentService.findTags();
+        assertEquals(tags.size(),2);
+        assertEquals(tags.get(0).getTagName(),tag.getTagName());
+        assertEquals(tags.get(1).getTagName(),tag2.getTagName());
+
+    }
+
+    @Test
+    public void findTagById(){
+        String name = "tag name";
+        Tag tag = new Tag(name,theme);
+        tag = contentService.addTag(tag);
+        assertNotNull(tag);
+
+        Tag t = contentService.getTag(tag.getId());
+        assertEquals(t.getTagName(),tag.getTagName());
+    }
+
+    //TODO: Subtheme
 
 }

@@ -87,6 +87,12 @@ public class ContentServiceImpl implements ContentService {
         return tagRepository.findOne(tagId);
     }
 
+
+    @Override
+    public List<Tag> findTags() {
+        return tagRepository.findAll();
+    }
+
     /*Card*/
     @Override
     public Card addCard(Card card) {

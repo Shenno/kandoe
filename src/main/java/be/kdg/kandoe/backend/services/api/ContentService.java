@@ -29,4 +29,6 @@ public interface ContentService {
 
     Card getCard(int cardId);
 
+    List<Tag> findTags();
+
 }
