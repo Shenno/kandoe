@@ -1,6 +1,7 @@
 package be.kdg.kandoe.backend.services.api;
 
 import be.kdg.kandoe.backend.dom.content.Card;
+import be.kdg.kandoe.backend.dom.content.Remark;
 import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.Organisation;
@@ -36,4 +37,6 @@ public interface ContentService {
     Theme updateTheme(Theme theme);
 
     Tag updateTag(Tag tag);
+
+    Remark addRemark(Remark remark);
 }

@@ -1,10 +1,12 @@
 package be.kdg.kandoe.backend.services.impl;
 
 import be.kdg.kandoe.backend.dom.content.Card;
+import be.kdg.kandoe.backend.dom.content.Remark;
 import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.persistence.api.CardRepository;
+import be.kdg.kandoe.backend.persistence.api.RemarkRepository;
 import be.kdg.kandoe.backend.persistence.api.TagRepository;
 import be.kdg.kandoe.backend.persistence.api.ThemeRepository;
 import be.kdg.kandoe.backend.services.api.ContentService;
@@ -24,12 +26,14 @@ public class ContentServiceImpl implements ContentService {
     private final TagRepository tagRepository;
     private final CardRepository cardRepository;
     private final ThemeRepository themeRepository;
+    private final RemarkRepository remarkRepository;
 
     @Autowired
-    public ContentServiceImpl(TagRepository tagRepository, CardRepository cardRepository, ThemeRepository themeRepository) {
+    public ContentServiceImpl(TagRepository tagRepository, CardRepository cardRepository, ThemeRepository themeRepository, RemarkRepository remarkRepository) {
         this.tagRepository = tagRepository;
         this.cardRepository = cardRepository;
         this.themeRepository = themeRepository;
+        this.remarkRepository = remarkRepository;
     }
 
     /*Theme*/
@@ -138,4 +142,17 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public Card getCard(int cardId) { return cardRepository.findOne(cardId); }
 
+    /*Remark*/
+    @Override
+    public Remark addRemark(Remark remark) throws ContentServiceException{
+        if (remark == null)
+            throw new ContentServiceException("remark can not be empty");
+        else if (remark.getText().isEmpty())
+            throw new ContentServiceException("Empty text");
+        else if (remark.getCard() == null)
+            throw new ContentServiceException("Empty card");
+        else if (remark.getUser() == null)
+            throw new ContentServiceException("Empty user");
+        return remarkRepository.addRemark(remark);
+    }
 }

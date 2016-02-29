@@ -12,6 +12,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Remark")
+@NamedQueries(
+        {
+                @NamedQuery(name = "Remark.findByTextByCard", query = "SELECT r FROM Remark r WHERE r.text = :text and r.card = :card"),
+        })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Remark implements Serializable, Identifiable<Integer> {
 
@@ -35,9 +39,22 @@ public class Remark implements Serializable, Identifiable<Integer> {
     @ManyToOne(targetEntity = Card.class, fetch = FetchType.EAGER, optional = true)
     private Card card;
 
-    public Remark(String text) {
+    public Remark(){
+
+    }
+    public Remark(String text,User user, Card card) {
         this.text = text;
         this.timeStamp = LocalDateTime.now();
+        this.user = user;
+        this.card = card;
+        this.session = null;
+    }
+    public Remark(String text,User user, Session session) {
+        this.text = text;
+        this.timeStamp = LocalDateTime.now();
+        this.user = user;
+        this.card = null;
+        this.session = session;
     }
 
     public String getText() {
@@ -54,6 +71,30 @@ public class Remark implements Serializable, Identifiable<Integer> {
 
     public void setTimeStamp(LocalDateTime timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
     }
 
     @Override

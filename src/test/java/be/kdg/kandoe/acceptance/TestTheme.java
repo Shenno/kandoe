@@ -67,7 +67,6 @@ public class TestTheme {
         assertEquals("Organisation must be correct", theme.getOrganisation(), organisation);
         assertEquals("There must be one tag", theme.getTags().size(), tags.size());
         assertEquals("Tag must be correct", theme.getTags().size(),tags.size());
-        contentService.deleteTheme(theme.getId());
     }
 
     @Test(expected = ContentServiceException.class)

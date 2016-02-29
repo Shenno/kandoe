@@ -6,6 +6,7 @@ import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -59,7 +60,7 @@ public class Card implements Serializable, Identifiable<Integer> {
     private Session session;
 
     public Card(String text, Theme theme) {
-        this(text, "", theme);
+        this(text, "www.google.be", theme); //TODO good image
 
     }
 
@@ -70,6 +71,7 @@ public class Card implements Serializable, Identifiable<Integer> {
         this.priority = 0;
         this.snapShotID = 1;
         this.theme= theme;
+        this.remarks = new ArrayList<>();
     }
     public Theme getTheme() {
         return theme;
