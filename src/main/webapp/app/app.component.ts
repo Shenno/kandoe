@@ -4,6 +4,7 @@ import {CirkelsessieComponent} from "./components/cirkelsessie.component";
 import {CreateThemeComponent} from "./components/createTheme.component";
 import {EditThemeComponent} from "./components/editTheme.component";
 import {bootstrap} from "angular2/bootstrap";
+import {DetailThemeComponent} from "./components/detailTheme.component";
 
 @Component({
     selector: 'my-app',
@@ -15,6 +16,7 @@ import {bootstrap} from "angular2/bootstrap";
 @RouteConfig([
     {path:'/test', name: 'Test', component: CirkelsessieComponent},
     {path:'/createTheme',name:'CreateTheme',component: CreateThemeComponent},
+    {path:'/detailTheme/:themeId', name:'DetailTheme', component: DetailThemeComponent},
     {path:'/editTheme/:themeId',name:'EditTheme',component:EditThemeComponent}
 ])
 
