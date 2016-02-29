@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class CardResource  implements Serializable {
     private Integer id;
     private String text;
-    private boolean isPicked;
+    private boolean picked;
 
     private ThemeResource themeResource;
 
@@ -46,5 +46,13 @@ public class CardResource  implements Serializable {
 
     public void setThemeResource(ThemeResource themeResource) {
         this.themeResource = themeResource;
+    }
+
+    public boolean isPicked() {
+        return picked;
+    }
+
+    public void setPicked(boolean picked) {
+        this.picked = picked;
     }
 }

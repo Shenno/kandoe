@@ -34,8 +34,8 @@ public class Card implements Serializable, Identifiable<Integer> {
     @Column(name = "ImageURL", nullable = true)
     private String imageURL;
 
-    @Column(name = "IsPicked", nullable = true)
-    private boolean isPicked;
+    @Column(name = "Picked", nullable = true)
+    private boolean picked;
 
     @Column(name = "Priority", nullable = true)
     private int priority;
@@ -67,7 +67,7 @@ public class Card implements Serializable, Identifiable<Integer> {
     public Card(String text, String imageURL, Theme theme) {
         this.text = text;
         this.imageURL = imageURL;
-        this.isPicked = false;
+        this.picked = false;
         this.priority = 0;
         this.snapShotID = 1;
         this.theme= theme;
@@ -93,11 +93,11 @@ public class Card implements Serializable, Identifiable<Integer> {
     }
 
     public boolean isPicked() {
-        return isPicked;
+        return picked;
     }
 
     public void setIsPicked(boolean isPicked) {
-        this.isPicked = isPicked;
+        this.picked = isPicked;
     }
 
     public int getPriority() {
