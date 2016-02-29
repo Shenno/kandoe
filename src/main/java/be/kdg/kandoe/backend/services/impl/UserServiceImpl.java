@@ -98,6 +98,26 @@ public class UserServiceImpl implements UserService
         return organisationRepository.findAll();
     }
 
+    @Override
+    public Organisation addOrganisationWithOrganisator(Organisation organisation, int userId) throws UserServiceException {
+        if(organisation.getName().isEmpty()) {
+            throw new UserServiceException("Empty name");
+        }
+        if(getOrganisationByName(organisation.getName()) != null) {
+            throw new UserServiceException("Duplicate name");
+        }
+        User user = findUserById(userId);
+        if(user == null) {
+            throw new UserServiceException("User is null");
+        }
+        user.addOrganisation(organisation);
+        organisation.setOrganisator(user);
+        organisation = organisationRepository.save(organisation);
+        user = userRepository.save(user);
+
+        return organisation;
+    }
+
 
     /**
      * Returns user having username
@@ -223,4 +243,6 @@ public class UserServiceImpl implements UserService
 
         return u;
     }
+
+
 }

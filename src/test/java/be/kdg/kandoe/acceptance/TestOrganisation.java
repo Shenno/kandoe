@@ -1,18 +1,23 @@
 package be.kdg.kandoe.acceptance;
 
+import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.Organisation;
+import be.kdg.kandoe.backend.dom.user.User;
+import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.SystemProfileValueSource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by   Shenno Willaert
@@ -28,24 +33,20 @@ public class TestOrganisation {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ContentService contentService;
+
+    User user;
+
     @Before
     public void setup() {
- /*       User user = new User("firstname.lastname@kandoe.be", "password");
-        user = userService.addUser(user);
-        int userId = user.getUserId();
+        user = new User("TestGebruiker", "pwd");
+        userService.addUser(user);
+    }
 
-        Organisation organisation = new Organisation("organisation");
-        //organisation = userService.addOrganisation(organisation,userId);
-
-        String name = "theme name";
-        String description = "description of theme";
-        boolean isCommentaryAllowed = true;
-        boolean isAddingAdmitted = true;
-        List<Tag> tags = new ArrayList<>();
-
-        Theme theme = new Theme(name, description, isCommentaryAllowed, isAddingAdmitted, user, organisation, tags);
-        contentService.addTheme(userId, theme);*/
-
+    @After
+    public void tearDown() {
+        userService.deleteUser(user.getUserId());
     }
 
     @Test
@@ -77,11 +78,35 @@ public class TestOrganisation {
     public void testDeleteOrganisation(){
         String name = "organisation name";
         Organisation organisation = new Organisation(name);
-        organisation =userService.addOrganisation(organisation);
+        organisation = userService.addOrganisation(organisation);
         assertNotNull(organisation);
         userService.deleteOrganisation(organisation.getId());
         organisation = userService.getOrganisationById(organisation.getId());
         assertNull(organisation);
+    }
+
+    @Test
+    public void testAddOrganisationWithOrganisator() {
+        String name = "OrganisationOrg";
+        Organisation organisation = new Organisation(name);
+        organisation = userService.addOrganisationWithOrganisator(organisation, user.getUserId());
+        user = userService.findUserById(user.getId());
+        assertNotNull(organisation);
+        assertEquals(organisation.getOrganisator(), user);
+        assertEquals(user.getOrganisations().size(), 1);
+        assertEquals(user.getOrganisations().get(0).getName(), organisation.getName());
+        System.out.println(userService.findUsers());
+        List<Organisation> organisationList = userService.findOrganisations();
+        for(Organisation o : organisationList) {
+            System.out.println(o.getName());
+        }
+
+        Organisation test = userService.getOrganisationById(1);
+        System.out.println(test.getThemes().get(0).getOrganisation().getName());
+        Theme testje = contentService.getTheme(1);
+        System.out.println(testje.getOrganisation().getName());
+
+
 
     }
 }
