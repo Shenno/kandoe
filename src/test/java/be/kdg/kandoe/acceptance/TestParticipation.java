@@ -4,6 +4,7 @@ import be.kdg.kandoe.backend.dom.session.Participation;
 import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.SessionService;
 import be.kdg.kandoe.backend.services.api.UserService;
+import be.kdg.kandoe.backend.services.exceptions.SessionServiceException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,5 +62,10 @@ public class TestParticipation {
         assertEquals("isOnTurn must match", isOnTurn, participation.isOnTurn());
     }
 
+    @Test(expected = SessionServiceException.class)
+    public void testAddNullParticipation() {
+        Participation participation = null;
 
+        sessionService.addParticipation(participation);
+    }
 }

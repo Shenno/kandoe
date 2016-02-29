@@ -3,6 +3,7 @@ package be.kdg.kandoe.backend.services.impl;
 import be.kdg.kandoe.backend.dom.session.Participation;
 import be.kdg.kandoe.backend.persistence.api.ParticipationRepository;
 import be.kdg.kandoe.backend.services.api.SessionService;
+import be.kdg.kandoe.backend.services.exceptions.SessionServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,10 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public Participation addParticipation(Participation participation) {
+        if (participation == null) {
+            throw new SessionServiceException("Participation can not be empty");
+        }
+
         return participationRepository.save(participation);
     }
 
