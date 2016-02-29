@@ -1,5 +1,6 @@
 export class Theme {
-    constructor(public themeName: string,
+    constructor(public id: number,
+                public themeName: string,
                 public description: string,
                 public commentaryAllowed: boolean,
                 public addingAdmitted: boolean) {

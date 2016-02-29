@@ -25,7 +25,7 @@ export class DetailThemeComponent {
         this.contentService = contentService;
         contentService.getTheme(routeParam.params["themeId"]).subscribe((theme:Theme) => {
             this.theme = theme;
-            document.title = 'Theme: ' + this.theme.themeName;
+            document.title = 'Thema: ' + this.theme.themeName;
         })
     }
 }

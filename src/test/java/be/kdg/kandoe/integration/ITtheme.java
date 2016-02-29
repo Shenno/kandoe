@@ -22,6 +22,8 @@ public class ITtheme {
         WebDriver driver = new ChromeDriver();
         driver.get("http://127.0.0.1:9966/kandoe/#/createTheme");
 
+        allowDomToLoad();
+
         WebElement element = driver.findElement(By.id("app"));
         element = element.findElement(By.tagName("create-theme"));
 
@@ -32,7 +34,6 @@ public class ITtheme {
 
         element = driver.findElement(By.name("ib_description"));
         assertEquals("textarea", element.getTagName());
-        assertEquals("textarea", element.getAttribute("type"));
         element.sendKeys("description");
 
         element = driver.findElement(By.name("cb_commentaryAllowed"));
@@ -64,7 +65,7 @@ public class ITtheme {
         assertEquals("Opslaan", element.getText());
         element.submit();
 
-        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Theme: themename"));
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Thema: themename"));
 
         element = driver.findElement(By.id("h1_themename"));
         assertEquals("h1", element.getTagName());
@@ -74,8 +75,92 @@ public class ITtheme {
         assertEquals("p", element.getTagName());
         assertEquals("The description must be correct", "description", element.getText());
 
+        element = driver.findElement(By.name("cb_commentaryAllowed"));
+        assertEquals("input", element.getTagName());
+        assertEquals("checkbox", element.getAttribute("type"));
+        assertEquals("true", element.getAttribute("disabled"));
+        assertEquals("true", element.getAttribute("checked"));
+
+        element = driver.findElement(By.name("cb_addingAdmitted"));
+        assertEquals("input", element.getTagName());
+        assertEquals("checkbox", element.getAttribute("type"));
+        assertEquals("true", element.getAttribute("disabled"));
+        assertEquals("true", element.getAttribute("checked"));
+
         element = driver.findElement(By.id("tags"));
         assertEquals("div", element.getTagName());
     }
 
+    @Test
+    public void testEditTheme() {
+        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("http://localhost:9966/kandoe/#/editTheme/1");
+
+        allowDomToLoad();
+
+        WebElement element = driver.findElement(By.id("app"));
+        element = element.findElement(By.tagName("edit-theme"));
+
+        element = driver.findElement(By.id("ib_themeName"));
+        assertEquals("input", element.getTagName());
+        assertEquals("text", element.getAttribute("type"));
+
+        assertEquals("The name must be correct", "Drankjes", element.getAttribute("value"));
+
+        element.clear();
+        element.sendKeys("Nieuwe themanaam");
+
+        element = driver.findElement(By.id("ib_description"));
+        assertEquals("textarea", element.getTagName());
+        assertEquals("The description must be correct", "Lekker drankje!", element.getAttribute("value"));
+
+        element.clear();
+        element.sendKeys("Nieuwe beschrijving");
+
+        element = driver.findElement(By.name("cb_commentaryAllowed"));
+        assertEquals("input", element.getTagName());
+        assertEquals("checkbox", element.getAttribute("type"));
+        element.click();
+
+        element = driver.findElement(By.name("cb_addingAdmitted"));
+        assertEquals("input", element.getTagName());
+        assertEquals("checkbox", element.getAttribute("type"));
+        element.click();
+
+        element = driver.findElement(By.name("btn_save"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Opslaan", element.getText());
+        element.submit();
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Thema: Nieuwe themanaam"));
+
+        element = driver.findElement(By.id("h1_themename"));
+        assertEquals("h1", element.getTagName());
+        assertEquals("The themename must be correct", "Nieuwe themanaam", element.getText());
+
+        element = driver.findElement(By.id("p_description"));
+        assertEquals("p", element.getTagName());
+        assertEquals("The description must be correct", "Nieuwe beschrijving", element.getText());
+
+        element = driver.findElement(By.name("cb_commentaryAllowed"));
+        assertEquals("input", element.getTagName());
+        assertEquals("checkbox", element.getAttribute("type"));
+        assertEquals("true", element.getAttribute("disabled"));
+        assertEquals("true", element.getAttribute("checked"));
+
+        element = driver.findElement(By.name("cb_addingAdmitted"));
+        assertEquals("input", element.getTagName());
+        assertEquals("checkbox", element.getAttribute("type"));
+        assertEquals("true", element.getAttribute("disabled"));
+        assertEquals("true", element.getAttribute("checked"));
+    }
+
+    private void allowDomToLoad() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

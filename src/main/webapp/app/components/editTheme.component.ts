@@ -4,6 +4,7 @@ import {Tag} from '../entity/tag';
 import {Http, Response, Headers} from "angular2/http";
 import {UrlService} from "../service/urlService";
 import {ContentService} from "../service/contentService";
+import {Theme} from "../entity/theme";
 
 @Component({
     selector: 'edit-theme',
@@ -13,15 +14,24 @@ import {ContentService} from "../service/contentService";
 export class EditThemeComponent {
     private contentService: ContentService;
 
-    private tag: Tag = Tag.createEmptyTag();
+    //private tag: Tag = Tag.createEmptyTag();
+    private theme: Theme = Theme.createEmptyTheme();
 
     public constructor(contentService: ContentService,routeParam:RouteParams,router:Router) {
         //this.router = router;
 
         this.contentService = contentService;
+        this.contentService.getTheme(routeParam.params["themeId"]).subscribe((theme:Theme) => {
+            this.theme = theme;
+            document.title = 'Wijzig thema';
+        });
     }
 
-    public onSubmit(): void {
+   /* public onSubmit(): void {
         this.contentService.addTag(this.tag);
+    }*/
+
+    public onSubmit(): void {
+        this.contentService.updateTheme(this.theme);
     }
 }

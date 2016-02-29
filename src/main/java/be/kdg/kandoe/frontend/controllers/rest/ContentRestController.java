@@ -9,6 +9,7 @@ import be.kdg.kandoe.frontend.controllers.resources.content.TagResource;
 import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,14 @@ public class ContentRestController {
         //Theme themeToAdd = new Theme(themeResource.getName(), themeResource.getDescription(), themeResource.isCommentaryAllowed(), themeResource.isAddingAdmitted(), null, null, null);
         Theme addedTheme = contentService.addTheme(mapperFacade.map(themeResource, Theme.class));
         return new ResponseEntity<>(mapperFacade.map(addedTheme, ThemeResource.class), HttpStatus.CREATED);
+    }
+
+    @RequestMapping( method = RequestMethod.PUT)
+    public ResponseEntity<ThemeResource> updateMainTheme(@RequestBody ThemeResource themeResource)
+    {
+        //Theme themeToAdd = new Theme(themeResource.getName(), themeResource.getDescription(), themeResource.isCommentaryAllowed(), themeResource.isAddingAdmitted(), null, null, null);
+        Theme addedTheme = contentService.updateTheme(mapperFacade.map(themeResource, Theme.class));
+        return new ResponseEntity<>(mapperFacade.map(addedTheme, ThemeResource.class), HttpStatus.OK);
     }
 
     @RequestMapping(value="/{mainThemeId}/tags", method = RequestMethod.POST)

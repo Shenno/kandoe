@@ -1,7 +1,29 @@
 <form (submit)="onSubmit()">
-    <div id="tags"></div>
+    <div class="form-group">
+        <label for="ib_themeName">Naam</label>
+        <input id="ib_themeName" name="ib_themeName" [(ngModel)]="theme.themeName" ngValue="theme.themeName">
+    </div>
+
+    <div class="form-group">
+        <label for="ib_description">Beschrijving</label>
+        <textarea id="ib_description" name="ib_description" [(ngModel)]="theme.description"></textarea>
+    </div>
+
+    <div class="form-group">
+        <input type="checkbox" id="cb_commentaryAllowed" name="cb_commentaryAllowed"
+               [(ngModel)]="theme.commentaryAllowed">
+        <label for="cb_commentaryAllowed">Commentaar op kaartjes toegelaten</label>
+    </div>
+
+    <div class="form-group">
+        <input type="checkbox" id="cb_addingAdmitted" name="cb_addingAdmitted" [(ngModel)]="theme.addingAdmitted">
+        <label for="cb_addingAdmitted">Toevoegen van kaartjes toegelaten</label>
+    </div>
+
+    <button name="btn_save">Opslaan</button>
+
+    <!--<div id="tags"></div>
     <label for="ib_new_tag">Tag: </label>
     <input id="ib_new_tag" name="ib_new_tag">
-    <button name="btn_addTag">Voeg tag toe</button>
-    <button name="btn_save">Opslaan</button>
+    <button name="btn_addTag">Voeg tag toe</button>-->
 </form>

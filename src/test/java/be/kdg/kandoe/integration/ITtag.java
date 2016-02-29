@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ITtag {
     @Test
-    public void testAddTag() {
+    public void testAddTag() { //TODO: Deze integratietest verwijderen en opnemen bij ITtheme > addTheme()
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("http://127.0.0.1:9966/kandoe/#/editTheme/1");
