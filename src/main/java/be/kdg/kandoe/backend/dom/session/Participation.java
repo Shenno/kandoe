@@ -27,7 +27,8 @@ public class Participation implements Serializable, Identifiable<Integer> {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = true/* TODO optional = false*/)
+    @ManyToOne
+    @JoinColumn(name = "session_id")
     private Session session;
 
     @OneToMany(targetEntity = Card.class, mappedBy = "participationChoosen", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

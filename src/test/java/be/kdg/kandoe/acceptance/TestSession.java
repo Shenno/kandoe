@@ -1,8 +1,10 @@
 package be.kdg.kandoe.acceptance;
 
+import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.session.AsynchronousSession;
+import be.kdg.kandoe.backend.dom.session.Participation;
 import be.kdg.kandoe.backend.dom.session.Session;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.dom.user.User;
@@ -46,6 +48,7 @@ public class TestSession {
         user = userService.addUser(user);
 
         organisation = new Organisation("organisation");
+        organisation.setOrganisator(user);
         organisation = userService.addOrganisation(organisation);
 
         String name = "theme name";
@@ -65,6 +68,10 @@ public class TestSession {
     @Test
     public void testCreateAsyncSession() {
         Session session = new AsynchronousSession(true, 60);
+     //   session = sessionService.addSession(session);
+
+
+
     }
 }
 

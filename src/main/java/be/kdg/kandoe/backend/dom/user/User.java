@@ -105,6 +105,11 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
         this.organisations = organisations;
     }
 
+    public void addOrganisation(Organisation organisation) {
+        organisations.add(organisation);
+    }
+
+
     @Override
     public int hashCode()
     {

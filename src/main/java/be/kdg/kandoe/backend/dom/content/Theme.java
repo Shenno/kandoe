@@ -128,6 +128,14 @@ public class Theme implements Serializable, Identifiable<Integer> {
         }
     }
 
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
     //todo delete
 
     public void setThemeId(Integer themeId) {

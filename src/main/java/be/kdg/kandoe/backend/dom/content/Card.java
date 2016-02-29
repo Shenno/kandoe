@@ -43,7 +43,7 @@ public class Card implements Serializable, Identifiable<Integer> {
     @Column(name = "SnapshotID", nullable = true)
     private int snapShotID;
 
-    @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = false)
+    @ManyToOne
     @JoinColumn(name = "ThemeId")
     private Theme theme;
 
@@ -76,6 +76,11 @@ public class Card implements Serializable, Identifiable<Integer> {
     public Theme getTheme() {
         return theme;
     }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
+
     public String getText() {
         return text;
     }

@@ -38,9 +38,6 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @Column(name = "CurrentRound", nullable = false)
     private int currentRound;
 
-    @OneToMany(targetEntity = Card.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Card> cards;
-
     @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = false)
     private Theme theme;
 
@@ -53,9 +50,9 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "Card_Session",
-            joinColumns = @JoinColumn(name = "CardId", referencedColumnName = "CardId"),
-            inverseJoinColumns = @JoinColumn(name = "SessionId", referencedColumnName = "SessionId"))
-    private List<Card> organisators = new ArrayList<>();
+            joinColumns = @JoinColumn(name = "SessionId", referencedColumnName = "SessionId"),
+            inverseJoinColumns = @JoinColumn(name = "CardId", referencedColumnName = "CardId"))
+    private List<Card> cards = new ArrayList<>();
 
     public Session(boolean isProblem) {
         this(isProblem,1,20);
