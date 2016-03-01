@@ -4,6 +4,8 @@ import {Theme} from '../entity/theme';
 import {Http, Response, Headers} from "angular2/http";
 import {UrlService} from "../service/urlService";
 import {ContentService} from "../service/contentService";
+import {Organisation} from "../entity/organisation";
+import {User} from "../entity/user";
 
 @Component({
     selector: 'create-theme',
@@ -23,6 +25,7 @@ export class CreateThemeComponent {
     }
 
     public onSubmit(): void {
+        this.theme.organisation = new Organisation(1, "Test", new User(1, "test"));
         this.contentService.addTheme(this.theme);
     }
 }

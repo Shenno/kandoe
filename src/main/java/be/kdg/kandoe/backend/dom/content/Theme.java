@@ -157,4 +157,8 @@ public class Theme implements Serializable, Identifiable<Integer> {
     public void setAddingAdmitted(boolean addingAdmitted) {
         this.addingAdmitted = addingAdmitted;
     }
+
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
+    }
 }

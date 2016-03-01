@@ -1,6 +1,7 @@
 package be.kdg.kandoe.frontend.controllers.resources.content;
 
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.frontend.controllers.resources.users.OrganisationResource;
 import org.springframework.hateoas.ResourceSupport;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public class ThemeResource implements Serializable {
     private boolean commentaryAllowed;
     private boolean addingAdmitted;
     private Integer id;
+    private OrganisationResource organisation;
 
     public ThemeResource() {}
 
@@ -64,5 +66,13 @@ public class ThemeResource implements Serializable {
 
     public void setAddingAdmitted(boolean addingAdmitted) {
         this.addingAdmitted = addingAdmitted;
+    }
+
+    public OrganisationResource getOrganisation() {
+        return organisation;
+    }
+
+    public void setOrganisation(OrganisationResource organisationResource) {
+        this.organisation = organisationResource;
     }
 }
