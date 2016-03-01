@@ -1,10 +1,10 @@
 import {Component, ViewEncapsulation} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {Organisation} from '../entity/organisation';
+import {User} from "../entity/user";
 import {Http, Response, Headers} from "angular2/http";
 import {UrlService} from "../service/urlService";
 import {UserService} from "../service/userService";
-import {User} from "../entity/user";
 
 @Component({
     selector: 'create-organisation',
@@ -23,7 +23,7 @@ export class CreateOrganisationComponent {
     }
 
     public onSubmit(): void {
-        this.organisation.organisator = new User(1, "test");
+        this.organisation.organisator = new User(2, "test@test.be");
         this.userService.addOrganisation(this.organisation);
     }
 }

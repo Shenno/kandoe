@@ -29,11 +29,25 @@ export class UserService {
         headers.append('Accept', 'application/json');
         this.http.post(url, organisationString, {headers: headers}).map((res:Response) => res.json()).subscribe(
             (data) => this.onSuccesfulAddOrganisation(data.id, organisation),
-            ((err:Error) => this.logger.log('Fout tijdens aanmaken van thema: ' + err.message))
+            ((err:Error) => this.logger.log('Fout tijdens aanmaken van organisation: ' + err.message))
         );
     }
+
     private onSuccesfulAddOrganisation(id:number, organisation:Organisation): void {
+        alert("1");
         this.logger.log('Organisatie "' + organisation.name + '" is aangemaakt"');
-        //this.router.navigate(['/test']);
+        alert("2" + id);
+        this.router.navigate(['/detailOrganisation',{organisationId:id}]);
+        alert("3");
     }
+
+    public getOrganisation(id:string):Observable<Organisation>{
+        var url = this.baseUrl + "/api/organisations/" + id;
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        return this.http.get(url, {headers: headers}).map((res:Response) => res.json())
+    }
+
+
 }
