@@ -6,6 +6,7 @@ import {UrlService} from "../service/urlService";
 import {Logger} from "../util/logger";
 import {Observable} from "rxjs/Observable";
 import {Router} from "angular2/router";
+import {Card} from "../entity/card";
 
 @Injectable()
 export class ContentService {
@@ -80,5 +81,23 @@ export class ContentService {
             (data) => this.logger.log('Tag "' + tag.name + '" is aangemaakt'),
             ((err:Error) => this.logger.log('Fout tijdens aanmaken van tag: ' + err.message))
         );
+    }
+
+    /*Card*/
+    public addCard(card:Card): void {
+        var url = this.baseUrl + "/api/themes/cards";
+        var cardString = JSON.stringify(card);
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        this.http.post(url, cardString, {headers: headers}).map((res:Response) => res.json()).subscribe(
+            (data) => this.onSuccesfulAddCard(data.id, card),
+            ((err:Error) => this.logger.log('Fout tijdens aanmaken van card: ' + err.message))
+        );
+    }
+
+    private onSuccesfulAddCard(id:number, card:Card): void {
+        this.logger.log('Card "' + card.text + '" is aangemaakt"');
+        this.router.navigate(['/DetailTheme', {themeId: id}]);
     }
 }
