@@ -50,7 +50,7 @@ public class TestOrganisation {
     }
 
     @Test
-    public void testAddOrganisation() {
+    public void testAddOrganisationNoUser() {
         String name = "Organisation 1";
         Organisation organisation = new Organisation(name);
         userService.addOrganisation(organisation);
@@ -74,8 +74,8 @@ public class TestOrganisation {
         userService.addOrganisation(organisationDupl);
     }
 
-    @Test
-    public void testDeleteOrganisation(){
+    @Test(expected = UserServiceException.class)
+    public void testDeleteOrganisationNoOrganisator(){
         String name = "organisation name";
         Organisation organisation = new Organisation(name);
         organisation = userService.addOrganisation(organisation);
@@ -98,16 +98,22 @@ public class TestOrganisation {
         assertEquals(user.getOrganisations().get(0).getId(), organisation.getId());
     }
 
-  /*  @Test
+    @Test
     public void testRemoveOrganisationCheckOrganisator() {
         String name = "RemoveOrganisation";
         Organisation organisation = new Organisation(name);
+        //Bidirectional linking
         organisation = userService.addOrganisationWithOrganisator(organisation, user.getUserId());
         user = userService.findUserById(user.getId());
+        int size = user.getOrganisations().size();
+
+        //Bidirectional removing
         userService.deleteOrganisation(organisation.getId());
-        organisation = userService.addOrganisation(organisation);
 
         organisation = userService.getOrganisationById(organisation.getId());
-        assertNull(organisation);
-    }*/
+        user = userService.findUserById(user.getId());
+        assertNull(organisation); //Make sure organisation is removed
+        assertNotNull(user); // Make sure user is still alive
+        assertEquals(user.getOrganisations().size(), size-1); // Make sure organisation is removed TODO better check
+    }
 }
