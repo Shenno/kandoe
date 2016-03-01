@@ -1,3 +1,51 @@
-<input name="ib_text">
-<input name="ib_imageURL">
-<button name="btn_save" bs-text="Add Card"></button>
+<h1>Maak een kaartje aan</h1>
+
+<form (submit)="onSubmit()">
+    <div class="form-group">
+        <label for="ib_text">Tekst </label>
+        <input id="ib_text" name="ib_text" [(ngModel)]="card.text">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="ib_imageURL">Afbeelding: </label>
+        <input id="ib_imageURL" type="file"
+               name="ib_imageURL" accept="image/*"
+               [(ngModel)]="card.imageURL">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="ib_priority">Prioriteit </label>
+        <input id="ib_priority" name="ib_priority"
+               [(ngModel)]="card.priority"
+               style="width: 30px">
+    </div>
+    <br>
+
+    <!-- Auto-aanvul lijstje voor thema te kiezen -->
+    <div class="form-group">
+        <label for="ib_theme">Thema </label>
+        <input id="ib_theme" name="ib_theme" [(ngModel)]="card.theme" list="themes">
+        <datalist id="themes">
+            <option value="Theme1">
+            <option value="Theme2">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Safari">
+        </datalist>
+        <!-- OF
+            gewoon een lijst
+        -->
+        <select name="ib_theme" size="7" title="themes" [(ngModel)]="card.theme">
+            <option value="SM">http://www.scriptingmaster.com</option>
+            <option value="Google">http://www.google.com</option>
+            <option value="MSN">http://www.msn.com</option>
+            <option value="yahoo">http://www.yahoo.com</option>
+            <option value="microsoft">http://www.microsoft.com</option>
+        </select>
+
+    </div>
+
+    <br>
+    <button name="btn_save">Opslaan</button>
+
+</form>
