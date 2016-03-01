@@ -3,6 +3,7 @@ package be.kdg.kandoe.backend.dom.session;
 import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Remark;
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.user.User;
 import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
@@ -41,18 +42,27 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = false)
     private Theme theme;
 
-    @OneToMany(targetEntity = Participation.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Participation> participations;
+ /*   @OneToMany(targetEntity = Participation.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Participation> participations;*/
 
     @OneToMany(targetEntity = Remark.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Remark> remarks;
 
+    @OneToMany(targetEntity = CardSession.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<CardSession> cardSessions;
+
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "UserSession",
+               joinColumns = @JoinColumn(name = "Sessionid", referencedColumnName = "SessionId"),
+               inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
+    private List<User> users = new ArrayList<>();
+
+/*    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "Card_Session",
             joinColumns = @JoinColumn(name = "SessionId", referencedColumnName = "SessionId"),
             inverseJoinColumns = @JoinColumn(name = "CardId", referencedColumnName = "CardId"))
-    private List<Card> cards = new ArrayList<>();
+    private List<Card> cards = new ArrayList<>();*/
 
     public Session(boolean isProblem) {
         this(isProblem,1,20);
@@ -65,6 +75,22 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
         this.minCards = minCards;
         this.maxCards = maxCards;
         this.snapshotID = 1;
+    }
+
+    public List<CardSession> getCardSessions() {
+        return cardSessions;
+    }
+
+    public void setCardSessions(List<CardSession> cardSessions) {
+        this.cardSessions = cardSessions;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public boolean isGameOver() {
@@ -107,13 +133,13 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
         this.currentRound = currentRound;
     }
 
-    public void setParticipations(List<Participation> participations) {
+ /*   public void setParticipations(List<Participation> participations) {
         this.participations = participations;
     }
 
     public void addParticipation(Participation participation) {
         this.participations.add(participation);
-    }
+    }*/
 
     @Override
     public Integer getId() {

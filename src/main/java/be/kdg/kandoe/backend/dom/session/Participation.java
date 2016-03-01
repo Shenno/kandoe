@@ -1,3 +1,4 @@
+/*
 package be.kdg.kandoe.backend.dom.session;
 
 import be.kdg.kandoe.backend.dom.content.Card;
@@ -100,3 +101,4 @@ public class Participation implements Serializable, Identifiable<Integer> {
         return participationId;
     }
 }
+*/

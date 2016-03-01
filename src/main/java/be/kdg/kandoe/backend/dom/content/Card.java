@@ -1,6 +1,6 @@
 package be.kdg.kandoe.backend.dom.content;
 
-import be.kdg.kandoe.backend.dom.session.Participation;
+import be.kdg.kandoe.backend.dom.session.CardSession;
 import be.kdg.kandoe.backend.dom.session.Session;
 import org.springframework.hateoas.Identifiable;
 
@@ -47,17 +47,17 @@ public class Card implements Serializable, Identifiable<Integer> {
     @JoinColumn(name = "ThemeId")
     private Theme theme;
 
-    @ManyToOne(targetEntity = Participation.class, fetch = FetchType.EAGER, optional = true) //TODO optinial -> false
+    /*@ManyToOne(targetEntity = Participation.class, fetch = FetchType.EAGER, optional = true) //TODO optinial -> false
     private Participation participationChoosen;  //deelnemer die kaartje heeft gekozen
 
     @ManyToOne(targetEntity = Participation.class, fetch = FetchType.EAGER, optional = true) //TODO optinial -> false
-    private Participation participationAdded;  //deelnemer die kaartje heeft toegevoegd
+    private Participation participationAdded;  //deelnemer die kaartje heeft toegevoegd*/
 
     @OneToMany(targetEntity = Remark.class, mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Remark> remarks;
 
-    @ManyToOne(targetEntity = Session.class, fetch = FetchType.EAGER, optional = true) //TODO optionial -> false
-    private Session session;
+    @OneToMany(targetEntity = CardSession.class, mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<CardSession> cardSessions;
 
     public Card(String text, Theme theme) {
         this(text, "www.google.be", theme); //TODO good image
@@ -73,6 +73,15 @@ public class Card implements Serializable, Identifiable<Integer> {
         this.theme= theme;
         this.remarks = new ArrayList<>();
     }
+
+    public List<CardSession> getCardSessions() {
+        return cardSessions;
+    }
+
+    public void setCardSessions(List<CardSession> cardSessions) {
+        this.cardSessions = cardSessions;
+    }
+
     public Theme getTheme() {
         return theme;
     }

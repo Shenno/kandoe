@@ -1,7 +1,10 @@
 package be.kdg.kandoe.backend.persistence.impl;
 
+import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.persistence.api.OrganisationRepositoryCustom;
+import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

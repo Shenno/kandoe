@@ -1,7 +1,6 @@
 package be.kdg.kandoe.backend.dom.user;
 
 import be.kdg.kandoe.backend.dom.content.Theme;
-import be.kdg.kandoe.backend.dom.session.Participation;
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
 import org.springframework.hateoas.Identifiable;
 import org.springframework.security.core.GrantedAuthority;
@@ -51,8 +50,8 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
             joinColumns=@JoinColumn(name="UserId", referencedColumnName="UserId"))
     private List<Theme> themes = new ArrayList<>();
 
-    @OneToMany(targetEntity = Participation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Participation> participations;
+/*    @OneToMany(targetEntity = Participation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Participation> participations; */
 
     @OneToMany(targetEntity = Organisation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Organisation> organisations;
@@ -67,7 +66,7 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
         this.username = username;
         this.encryptedPassword = encryptedPassword;
         this.organisations = new CopyOnWriteArrayList<>();
-        this.participations = new ArrayList<>();
+     //   this.participations = new ArrayList<>();
     }
 
     public Integer getId()
@@ -90,13 +89,13 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
         this.userId = userId;
     }
 
-    public List<Participation> getParticipations() {
+ /*   public List<Participation> getParticipations() {
         return participations;
     }
 
     public void addParticipation(Participation participation) {
         participations.add(participation);
-    }
+    }*/
 
     public List<Organisation> getOrganisations() {
         return organisations;

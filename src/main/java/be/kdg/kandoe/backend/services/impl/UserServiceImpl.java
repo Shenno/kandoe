@@ -45,7 +45,6 @@ public class UserServiceImpl implements UserService
         if(getOrganisationByName(organisation.getName()) != null) {
             throw new UserServiceException("Duplicate name");
         }
-
         return organisationRepository.save(organisation);
     }
 
@@ -104,7 +103,7 @@ public class UserServiceImpl implements UserService
         return organisationRepository.findAll();
     }
 
-    @Override
+ /*   @Override
     public Organisation addOrganisationWithOrganisator(Organisation organisation, int userId) throws UserServiceException {
         if(organisation.getName().isEmpty()) {
             throw new UserServiceException("Empty name");
@@ -122,7 +121,7 @@ public class UserServiceImpl implements UserService
         user = userRepository.save(user);
 
         return organisation;
-    }
+    }*/
 
 
     /**

@@ -37,7 +37,7 @@ public class TestOrganisation {
     @Before
     public void setup() {
         user = new User("TestGebruiker", "pwd");
-        userService.addUser(user);
+        user = userService.addUser(user);
     }
 
     @After
@@ -85,7 +85,8 @@ public class TestOrganisation {
     public void testAddOrganisationWithOrganisator() {
         String name = "OrganisationOrg";
         Organisation organisation = new Organisation(name);
-        organisation = userService.addOrganisationWithOrganisator(organisation, user.getUserId());
+        organisation.setOrganisator(user);
+        organisation = userService.addOrganisation(organisation);
         user = userService.findUserById(user.getId());
         assertNotNull(organisation);
         assertEquals(organisation.getOrganisator(), user);
@@ -98,8 +99,9 @@ public class TestOrganisation {
     public void testRemoveOrganisationCheckOrganisator() {
         String name = "RemoveOrganisation";
         Organisation organisation = new Organisation(name);
+        organisation.setOrganisator(user);
         //Bidirectional linking
-        organisation = userService.addOrganisationWithOrganisator(organisation, user.getUserId());
+        organisation = userService.addOrganisation(organisation);
         user = userService.findUserById(user.getId());
         int size = user.getOrganisations().size();
 
