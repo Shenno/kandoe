@@ -141,6 +141,27 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
+    public Card addCardWithTheme(Card card, int themeId) throws ContentServiceException {
+        if(card.getText().isEmpty()) {
+            throw new ContentServiceException("Empty text");
+        }
+
+        Theme theme = getTheme(themeId);
+        if(theme == null) {
+            throw new ContentServiceException("Theme is null");
+        }
+
+        List<Card> themeCards = theme.getCards();
+        themeCards.add(card);
+        theme.setCards(themeCards);
+
+        theme = themeRepository.save(theme);
+        card = cardRepository.save(card);
+
+        return card;
+    }
+
+    @Override
     public Card getCard(int cardId) { return cardRepository.findOne(cardId); }
 
     /*Remark*/

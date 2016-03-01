@@ -28,6 +28,8 @@ public interface ContentService {
     /*Card*/
     Card addCard (Card card);
 
+    Card addCardWithTheme(Card card, int themeId);
+
     Card getCard(int cardId);
 
     List<Tag> findTags();

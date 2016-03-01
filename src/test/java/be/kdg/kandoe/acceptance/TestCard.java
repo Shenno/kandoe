@@ -116,4 +116,15 @@ public class TestCard {
         Card card = new Card(description, url,emptyTheme);
         card=contentService.addCard(card);
     }
+
+    @Test
+    public void testThemeCardLink() {
+        String description = "Tziozrbirhbirhb";
+        String url = "http://www.blablabla.com";
+
+        Card card = new Card(description, url, theme);
+        card = contentService.addCardWithTheme(card, theme.getId());
+
+        assertEquals("Themes must match", theme.getId(), contentService.getCard(card.getId()).getTheme().getId());
+    }
 }
