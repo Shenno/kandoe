@@ -5,7 +5,7 @@ import {CreateThemeComponent} from "./components/createTheme.component";
 import {EditThemeComponent} from "./components/editTheme.component";
 import {bootstrap} from "angular2/bootstrap";
 import {DetailThemeComponent} from "./components/detailTheme.component";
-import {CreateOrganisationComponent} from "./components/createOrganisation.component";
+import {CreateOrganisationComponent} from "./components/createOrganisation.component.ts";
 
 @Component({
     selector: 'my-app',
