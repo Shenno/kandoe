@@ -16,16 +16,23 @@ import {FORM_DIRECTIVES} from "angular2/common";
 })
 export class DetailThemeComponent {
 
+    private router: Router;
+
     private contentService: ContentService;
 
     private theme: Theme = Theme.createEmptyTheme();
     //new Promise<Theme[]>(resolve => setTimeout(() =>resolve(Theme), 2000));
 
-    public constructor(contentService: ContentService, routeParam:RouteParams) {
+    public constructor(contentService: ContentService, routeParam:RouteParams, router:Router) {
+        this.router = router;
         this.contentService = contentService;
         contentService.getTheme(routeParam.params["themeId"]).subscribe((theme:Theme) => {
             this.theme = theme;
             document.title = 'Thema: ' + this.theme.themeName;
         })
+    }
+
+    public onSubmit(): void {
+        this.router.navigate(['/EditTheme', {themeId: this.theme.id}]);
     }
 }

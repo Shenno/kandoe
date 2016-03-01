@@ -51,10 +51,9 @@ public class ContentRestController {
         return new ResponseEntity<>(mapperFacade.map(addedTheme, ThemeResource.class), HttpStatus.CREATED);
     }
 
-    @RequestMapping( method = RequestMethod.PUT)
-    public ResponseEntity<ThemeResource> updateMainTheme(@RequestBody ThemeResource themeResource)
+    @RequestMapping(value="/{themeId}",method = RequestMethod.PUT)
+    public ResponseEntity<ThemeResource> updateMainTheme(@PathVariable("themeId") Integer themeId, @RequestBody ThemeResource themeResource)
     {
-        //Theme themeToAdd = new Theme(themeResource.getName(), themeResource.getDescription(), themeResource.isCommentaryAllowed(), themeResource.isAddingAdmitted(), null, null, null);
         Theme addedTheme = contentService.updateTheme(mapperFacade.map(themeResource, Theme.class));
         return new ResponseEntity<>(mapperFacade.map(addedTheme, ThemeResource.class), HttpStatus.OK);
     }
