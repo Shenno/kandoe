@@ -1,0 +1,11 @@
+<h1>Aanmaken organisatie</h1>
+
+<form (submit)="onSubmit()">
+    <div class="form-group">
+        <label for="ib_new_organisation">Organisatie naam:</label>
+        <input id="ib_new_organisation" name="ib_new_organisation" [(ngModel)]="organisation.organisationName">
+    </div>
+
+    <button name="btn_add_organisation">Organisatie toevoegen</button>
+
+</form>

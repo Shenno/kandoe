@@ -8,12 +8,14 @@ import 'rxjs/add/operator/map';
 import {HTTP_PROVIDERS} from "angular2/http";
 import {UrlService} from "./service/urlService";
 import {ContentService} from "./service/contentService";
+import {UserService} from "./service/userService";
 import {Logger} from "./util/logger";
 
 bootstrap(AppComponent, [
     Logger,
     UrlService,
     ContentService,
+    UserService,
     HTTP_PROVIDERS,
     ROUTER_PROVIDERS,
     provide(LocationStrategy,

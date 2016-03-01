@@ -1,5 +1,5 @@
-System.register(['angular2/platform/browser', './app.component', 'angular2/router', 'angular2/core', 'rxjs/add/operator/map', "angular2/http", "./service/urlService", "./service/contentService", "./util/logger"], function(exports_1) {
-    var browser_1, app_component_1, router_1, core_1, router_2, http_1, urlService_1, contentService_1, logger_1;
+System.register(['angular2/platform/browser', './app.component', 'angular2/router', 'angular2/core', 'rxjs/add/operator/map', "angular2/http", "./service/urlService", "./service/contentService", "./service/userService", "./util/logger"], function(exports_1) {
+    var browser_1, app_component_1, router_1, core_1, router_2, http_1, urlService_1, contentService_1, userService_1, logger_1;
     return {
         setters:[
             function (browser_1_1) {
@@ -25,6 +25,9 @@ System.register(['angular2/platform/browser', './app.component', 'angular2/route
             function (contentService_1_1) {
                 contentService_1 = contentService_1_1;
             },
+            function (userService_1_1) {
+                userService_1 = userService_1_1;
+            },
             function (logger_1_1) {
                 logger_1 = logger_1_1;
             }],
@@ -33,6 +36,7 @@ System.register(['angular2/platform/browser', './app.component', 'angular2/route
                 logger_1.Logger,
                 urlService_1.UrlService,
                 contentService_1.ContentService,
+                userService_1.UserService,
                 http_1.HTTP_PROVIDERS,
                 router_1.ROUTER_PROVIDERS,
                 core_1.provide(router_2.LocationStrategy, { useClass: router_2.HashLocationStrategy }) // .../#/crisis-center/
