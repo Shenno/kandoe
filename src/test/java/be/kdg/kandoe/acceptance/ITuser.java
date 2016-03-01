@@ -1,4 +1,4 @@
-package be.kdg.kandoe.integration;
+package be.kdg.kandoe.acceptance;
 
 import org.junit.Before;
        //test sfsdf
