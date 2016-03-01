@@ -33,7 +33,7 @@ export class UserService {
         );
     }
     private onSuccesfulAddOrganisation(id:number, organisation:Organisation): void {
-        this.logger.log('Organisatie "' + organisation.organisationName + '" is aangemaakt"');
+        this.logger.log('Organisatie "' + organisation.name + '" is aangemaakt"');
         //this.router.navigate(['/test']);
     }
 }
