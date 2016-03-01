@@ -95,6 +95,19 @@ public class TestOrganisation {
         assertEquals(organisation.getOrganisator(), user);
         assertEquals(user.getOrganisations().size(), 1);
         assertEquals(user.getOrganisations().get(0).getName(), organisation.getName());
-        assertEquals(user.getOrganisations().get(0).getId(), organisation.getName());
+        assertEquals(user.getOrganisations().get(0).getId(), organisation.getId());
     }
+
+  /*  @Test
+    public void testRemoveOrganisationCheckOrganisator() {
+        String name = "RemoveOrganisation";
+        Organisation organisation = new Organisation(name);
+        organisation = userService.addOrganisationWithOrganisator(organisation, user.getUserId());
+        user = userService.findUserById(user.getId());
+        userService.deleteOrganisation(organisation.getId());
+        organisation = userService.addOrganisation(organisation);
+
+        organisation = userService.getOrganisationById(organisation.getId());
+        assertNull(organisation);
+    }*/
 }
