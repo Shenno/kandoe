@@ -10,6 +10,7 @@ import be.kdg.kandoe.backend.persistence.api.RemarkRepository;
 import be.kdg.kandoe.backend.persistence.api.TagRepository;
 import be.kdg.kandoe.backend.persistence.api.ThemeRepository;
 import be.kdg.kandoe.backend.services.api.ContentService;
+import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,17 @@ import java.util.regex.Pattern;
 @Transactional
 public class ContentServiceImpl implements ContentService {
 
+    private final UserService userService;
+
     private final TagRepository tagRepository;
     private final CardRepository cardRepository;
     private final ThemeRepository themeRepository;
     private final RemarkRepository remarkRepository;
 
     @Autowired
-    public ContentServiceImpl(TagRepository tagRepository, CardRepository cardRepository, ThemeRepository themeRepository, RemarkRepository remarkRepository) {
+    public ContentServiceImpl(UserService userService, TagRepository tagRepository, CardRepository cardRepository, ThemeRepository themeRepository, RemarkRepository remarkRepository) {
+        this.userService = userService;
+
         this.tagRepository = tagRepository;
         this.cardRepository = cardRepository;
         this.themeRepository = themeRepository;
@@ -49,7 +54,11 @@ public class ContentServiceImpl implements ContentService {
         } else if (theme.getOrganisators().size() == 0) {
             throw new ContentServiceException("There must be at least one organisator");
         } */
-        return themeRepository.addTheme(theme);
+        theme = themeRepository.addTheme(theme);
+        /*Organisation organisation = userService.getOrganisationById(theme.getOrganisation().getId());
+        organisation.getThemes().add(theme);
+        userService.updateOrganisation(organisation);*/
+        return theme;
     }
 
     @Override

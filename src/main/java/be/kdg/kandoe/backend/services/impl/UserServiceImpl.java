@@ -50,6 +50,11 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
+    public Organisation updateOrganisation(Organisation organisation) {
+        return organisationRepository.save(organisation);
+    }
+
+    @Override
     public Organisation getOrganisationById(int id) {
         return organisationRepository.findOne(id);
     }

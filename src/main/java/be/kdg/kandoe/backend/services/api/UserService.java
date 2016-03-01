@@ -21,6 +21,7 @@ public interface UserService extends UserDetailsService
 {
     // Organisation
     Organisation addOrganisation(Organisation organisation);
+    Organisation updateOrganisation(Organisation organisation);
     Organisation getOrganisationById(int id);
     Organisation getOrganisationByName(String name);
     List<Organisation> findOrganisations();

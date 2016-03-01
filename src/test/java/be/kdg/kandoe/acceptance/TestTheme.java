@@ -67,6 +67,13 @@ public class TestTheme {
         assertEquals("Organisation must be correct", theme.getOrganisation(), organisation);
         assertEquals("There must be one tag", theme.getTags().size(), tags.size());
         assertEquals("Tag must be correct", theme.getTags().size(),tags.size());
+
+        organisation = userService.getOrganisationByName("organisation");
+        List<Theme> themes = organisation.getThemes();
+        assertEquals("There must be one theme in organisation", 1, themes.size());
+        assertEquals("Organisation must have the right theme", theme.getThemeName(), themes.get(0).getThemeName());
+        assertEquals("Organisation must have one organisator", theme.getOrganisators().size(), themes.get(0).getOrganisators().size());
+        assertEquals("Organisation must have the right organisator", theme.getOrganisators().get(0).getUsername(), themes.get(0).getOrganisators().get(0).getUsername());
     }
 
     @Test(expected = ContentServiceException.class)
