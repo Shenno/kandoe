@@ -95,18 +95,6 @@ public class TestOrganisation {
         assertEquals(organisation.getOrganisator(), user);
         assertEquals(user.getOrganisations().size(), 1);
         assertEquals(user.getOrganisations().get(0).getName(), organisation.getName());
-        System.out.println(userService.findUsers());
-        List<Organisation> organisationList = userService.findOrganisations();
-        for(Organisation o : organisationList) {
-            System.out.println(o.getName());
-        }
-
-        Organisation test = userService.getOrganisationById(1);
-        System.out.println(test.getThemes().get(0).getOrganisation().getName());
-        Theme testje = contentService.getTheme(1);
-        System.out.println(testje.getOrganisation().getName());
-
-
-
+        assertEquals(user.getOrganisations().get(0).getId(), organisation.getName());
     }
 }
