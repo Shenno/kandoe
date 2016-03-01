@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -223,8 +224,20 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public void deleteOrganisation(Integer organisationId) {
+    public void deleteOrganisation(Integer organisationId) throws UserServiceException {
+        Organisation o = organisationRepository.findOne(organisationId);
+        User u;
+        try {
+            u = userRepository.findOne(o.getOrganisator().getId());
+        } catch (Exception e) {
+            throw new UserServiceException("No organisator found");
+        }
+        u.removeOrganisation(o);
+        userRepository.saveAndFlush(u);
+        o.setOrganisator(null);
+        organisationRepository.save(o);
         organisationRepository.delete(organisationId);
+        organisationRepository.flush();
     }
 
     /**

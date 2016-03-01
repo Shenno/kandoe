@@ -8,6 +8,6 @@ export class Theme {
     }
 
     public static createEmptyTheme(): Theme {
-        return new Theme("", "", false, false);
+        return new Theme(0, "", "", false, false);
     }
 }

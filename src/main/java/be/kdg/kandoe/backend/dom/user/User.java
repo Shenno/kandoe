@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**
@@ -48,7 +49,7 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
             name="Org_Theme",
             inverseJoinColumns=@JoinColumn(name="ThemeId", referencedColumnName="ThemeId"),
             joinColumns=@JoinColumn(name="UserId", referencedColumnName="UserId"))
-    private List<Theme> themes=new ArrayList<>();
+    private List<Theme> themes = new ArrayList<>();
 
     @OneToMany(targetEntity = Participation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Participation> participations;
@@ -65,7 +66,7 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
     {
         this.username = username;
         this.encryptedPassword = encryptedPassword;
-        this.organisations = new ArrayList<>();
+        this.organisations = new CopyOnWriteArrayList<>();
         this.participations = new ArrayList<>();
     }
 
@@ -107,6 +108,15 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
 
     public void addOrganisation(Organisation organisation) {
         organisations.add(organisation);
+    }
+
+    public void removeOrganisation(Organisation organisation) {
+        for(Organisation o : organisations) {
+            if(o.getId().equals(organisation.getId())) {
+                organisations.remove(o);
+                return;
+            }
+        }
     }
 
 
