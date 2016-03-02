@@ -1,6 +1,6 @@
 package be.kdg.kandoe.backend.persistence.impl;
 
-import be.kdg.kandoe.backend.persistence.api.ParticipationRepository;
+//import be.kdg.kandoe.backend.persistence.api.ParticipationRepository;
 import be.kdg.kandoe.backend.persistence.api.ParticipationRepositoryCustom;
 import be.kdg.kandoe.backend.persistence.api.TagRepositoryCustom;
 import org.springframework.stereotype.Repository;

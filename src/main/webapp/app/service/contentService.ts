@@ -7,6 +7,7 @@ import {Logger} from "../util/logger";
 import {Observable} from "rxjs/Observable";
 import {Router} from "angular2/router";
 import {Card} from "../entity/card";
+import {AuthService} from "./authService";
 
 @Injectable()
 export class ContentService {
@@ -14,12 +15,14 @@ export class ContentService {
     private logger:Logger;
     private baseUrl: string;
     private router:Router;
+    private authService:AuthService;
 
-    public constructor(http:Http, urlService: UrlService, logger:Logger, router:Router) {
+    public constructor(http:Http, urlService: UrlService, logger:Logger, router:Router, authService: AuthService) {
         this.http = http;
         this.router = router;
         this.logger = logger;
         this.baseUrl = urlService.getUrl();
+        this.authService = authService;
     }
 
     /*Theme*/
@@ -29,6 +32,7 @@ export class ContentService {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
+
         return this.http.get(url, {headers: headers}).map((res:Response) => res.json())/*.subscribe(
             (data) => this.logger.log('Thema succesvol teruggekregen')
             ((err:Error) => this.logger.log('Fout tijdens opvragen van thema' + id + ': ' + err.message))

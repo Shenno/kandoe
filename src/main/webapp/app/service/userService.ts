@@ -5,6 +5,8 @@ import {UrlService} from "../service/urlService";
 import {Logger} from "../util/logger";
 import {Observable} from "rxjs/Observable";
 import {Router} from "angular2/router";
+import {LoginUser} from "../entity/loginUser";
+import {AuthService} from "./authService";
 
 @Injectable()
 export class UserService {
@@ -12,12 +14,14 @@ export class UserService {
     private logger:Logger;
     private baseUrl:string;
     private router:Router;
+    private authService:AuthService;
 
-    public constructor(http:Http, urlService:UrlService, logger:Logger, router:Router) {
+    public constructor(http:Http, urlService:UrlService, logger:Logger, router:Router, authService: AuthService) {
         this.http = http;
         this.router = router;
         this.logger = logger;
         this.baseUrl = urlService.getUrl();
+        this.authService = authService;
     }
 
     /*Organisation*/
@@ -46,5 +50,11 @@ export class UserService {
         return this.http.get(url, {headers: headers}).map((res:Response) => res.json())
     }
 
+    public login(loginUser: LoginUser): Observable<Response> {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        return this.http.post(this.baseUrl + "/api/login", JSON.stringify(loginUser), {headers:headers});
+    }
 
 }
