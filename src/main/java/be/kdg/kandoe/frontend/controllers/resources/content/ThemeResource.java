@@ -16,7 +16,7 @@ public class ThemeResource implements Serializable {
     private boolean commentaryAllowed;
     private boolean addingAdmitted;
     private Integer id;
-    private OrganisationResource organisation;
+//    private OrganisationResource organisation;
 
     public ThemeResource() {}
 
@@ -68,11 +68,11 @@ public class ThemeResource implements Serializable {
         this.addingAdmitted = addingAdmitted;
     }
 
-    public OrganisationResource getOrganisation() {
+    /*public OrganisationResource getOrganisation() {
         return organisation;
     }
 
     public void setOrganisation(OrganisationResource organisationResource) {
         this.organisation = organisationResource;
-    }
+    }*/
 }

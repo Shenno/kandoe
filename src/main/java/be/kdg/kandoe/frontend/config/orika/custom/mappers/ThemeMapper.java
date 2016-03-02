@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 public class ThemeMapper extends CustomMapper<Theme, ThemeResource> {
     @Override
     public void mapAtoB(Theme theme, ThemeResource themeResource, MappingContext context) {
-        mapperFacade.map(theme.getOrganisation(), themeResource.getOrganisation());
+      //  mapperFacade.map(theme.getOrganisation(), themeResource.getOrganisation());
         // mapperFacade.map(organisation.getName(), organisationResource.getOrganisationName());
     }
 
     @Override
     public void mapBtoA(ThemeResource themeResource, Theme theme, MappingContext context) {
-        mapperFacade.map(themeResource.getOrganisation(), theme.getOrganisation());
+     //   mapperFacade.map(themeResource.getOrganisation(), theme.getOrganisation());
         System.out.println("test");
-      //  super.mapBtoA(themeResource, theme, context);
+        super.mapBtoA(themeResource, theme, context);
     }
 }
