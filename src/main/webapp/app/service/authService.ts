@@ -25,7 +25,6 @@ export class AuthService {
     public get(url: string) : Observable<Response> {
         var headers = new Headers();
         headers.append("Authorization", "Bearer-" + localStorage.getItem("id_token"));
-        this.router.navigate(["/Home"]);
         return this.http.get(url,{headers:headers});
     }
 
