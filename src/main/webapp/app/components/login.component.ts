@@ -43,7 +43,7 @@ export class LoginComponent {
     public getLucky(): void {
         this.userService.login(this.user)
             .subscribe((res: Response) => {
-                    localStorage.setItem("id_token", res.text());
+                    localStorage.setItem("jwt", res.text());
                     this.router.navigate(['/Test']);
                 },
                 error => {

@@ -24,16 +24,15 @@ export class AuthService {
 
     public get(url: string) : Observable<Response> {
         var headers = new Headers();
-        headers.append("Authorization", "Bearer-" + localStorage.getItem("id_token"));
+        headers.append("Authorization", "Bearer " + localStorage.getItem("jwt"));
         return this.http.get(url,{headers:headers});
     }
 
     public post(url: string, body: string) {
-        this.get("d").subscribe((response:Response) => {this.res = response});
 
         var headers = new Headers();
         headers.append("Content-Type", "application/json");
-        headers.append("Authorization", "Bearer " + localStorage.getItem("id_token"));
+        headers.append("Authorization", "Bearer " + localStorage.getItem("jwt"));
         return this.http.post(url, body, {headers: headers});
     }
 }
