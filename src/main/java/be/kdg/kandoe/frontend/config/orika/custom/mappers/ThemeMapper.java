@@ -24,6 +24,9 @@ public class ThemeMapper extends CustomMapper<Theme, ThemeResource> {
     public void mapAtoB(Theme theme, ThemeResource themeResource, MappingContext context) {
       //  mapperFacade.map(theme.getOrganisation(), themeResource.getOrganisation());
         // mapperFacade.map(organisation.getName(), organisationResource.getOrganisationName());
+        themeResource.setOrganisationId(theme.getOrganisation().getId());
+        if (theme.getOrganisators().size() == 0) themeResource.setOrganisatorId(1); //TODO: Slechts tijdelijk, zolang het default thema nog geen organisator heeft
+        else themeResource.setOrganisatorId(theme.getOrganisators().get(0).getId());
     }
 
     @Override
@@ -32,7 +35,9 @@ public class ThemeMapper extends CustomMapper<Theme, ThemeResource> {
         Organisation organisation = userService.getOrganisationById(themeResource.getOrganisationId());
         theme.setOrganisation(organisation);
 
-        User organisator = userService.findUserById(themeResource.getOrganisatorId());
+        int organisatorId = themeResource.getOrganisatorId();
+        if(organisatorId == 0) organisatorId = 1; //TODO: Slechts tijdelijk, zolang het default thema nog geen organisator heeft
+        User organisator = userService.findUserById(organisatorId);
         theme.addOrganisator(organisator);
 
         super.mapBtoA(themeResource, theme, context);

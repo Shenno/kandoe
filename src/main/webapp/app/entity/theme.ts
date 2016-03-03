@@ -1,6 +1,6 @@
 import {Organisation} from "./organisation";
 export class Theme {
-    constructor(public id: number,
+    constructor(public themeId: number,
                 public themeName: string,
                 public description: string,
                 public commentaryAllowed: boolean,

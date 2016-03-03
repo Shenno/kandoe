@@ -15,7 +15,7 @@ public class ThemeResource implements Serializable {
     private String themeName;
     private boolean commentaryAllowed;
     private boolean addingAdmitted;
-    private Integer id;
+    private Integer themeId;
     private Integer organisationId;
     private Integer organisatorId;
 //    private OrganisationResource organisation;
@@ -30,12 +30,12 @@ public class ThemeResource implements Serializable {
         this.themeId = theme.getId();
     }*/
 
-    public Integer getId() {
-        return id;
+    public Integer getThemeId() {
+        return themeId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setThemeId(Integer themeId) {
+        this.themeId = themeId;
     }
 
     public String getDescription() {

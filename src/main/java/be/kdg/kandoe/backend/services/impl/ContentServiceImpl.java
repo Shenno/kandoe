@@ -84,7 +84,7 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public Theme updateTheme(Theme theme) {
-        return themeRepository.save(theme);
+        return themeRepository.updateTheme(theme);
     }
 
     /*Tag*/

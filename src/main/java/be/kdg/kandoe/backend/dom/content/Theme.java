@@ -98,6 +98,10 @@ public class Theme implements Serializable, Identifiable<Integer> {
         return themeId;
     }
 
+    public Integer getThemeId() {
+        return getId();
+    }
+
     public List<User> getOrganisators() {
         return organisators;
     }

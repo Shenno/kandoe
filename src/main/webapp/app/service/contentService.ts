@@ -30,7 +30,6 @@ export class ContentService {
         var url = this.baseUrl + "/api/themes/" + id;
         var headers =  this.urlService.getHeaders(false);
        // var headers = this.urlService.getHeaders(true);
-
         return this.http.get(url, {headers: headers}).map((res:Response) => res.json())/*.subscribe(
             (data) => this.logger.log('Thema succesvol teruggekregen')
             ((err:Error) => this.logger.log('Fout tijdens opvragen van thema' + id + ': ' + err.message))
@@ -43,7 +42,7 @@ export class ContentService {
         var headers =  this.urlService.getHeaders(true);
 
         this.http.post(url, themeString, {headers: headers}).map((res:Response) => res.json()).subscribe(
-            (data) => this.onSuccesfulAddTheme(data.id, theme),
+            (data) => this.onSuccesfulAddTheme(data.themeId, theme),
             ((err:Error) => this.logger.log('Fout tijdens aanmaken van thema: ' + err.message))
         );
     }
@@ -54,11 +53,11 @@ export class ContentService {
     }
 
     public updateTheme(theme:Theme): void {
-        var url = this.baseUrl + "/api/themes/" + theme.id;
+        var url = this.baseUrl + "/api/themes/" + theme.themeId;
         var themeString = JSON.stringify(theme);
         var headers =  this.urlService.getHeaders(true);
         this.http.put(url, themeString, {headers: headers}).map((res:Response) => res.json()).subscribe(
-            (data) => this.onSuccesfulUpdateTheme(data.id, theme),
+            (data) => this.onSuccesfulUpdateTheme(data.themeId, theme),
             ((err:Error) => this.logger.log('Fout tijdens bewerken van thema: ' + err.message))
         );
     }

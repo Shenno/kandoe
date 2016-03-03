@@ -3,6 +3,7 @@ package be.kdg.kandoe.frontend.controllers.rest;
 import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.frontend.controllers.resources.content.CardResource;
 import be.kdg.kandoe.frontend.controllers.resources.content.TagResource;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -52,10 +54,14 @@ public class ContentRestController {
     }
 
     @RequestMapping(value="/{themeId}",method = RequestMethod.PUT)
-    public ResponseEntity<ThemeResource> updateMainTheme(@PathVariable("themeId") Integer themeId, @RequestBody ThemeResource themeResource)
+    public ResponseEntity<ThemeResource> updateMainTheme(@PathVariable("themeId") Integer themeId, @RequestBody ThemeResource themeResource, @AuthenticationPrincipal User user)
     {
-        Theme addedTheme = contentService.updateTheme(mapperFacade.map(themeResource, Theme.class));
-        return new ResponseEntity<>(mapperFacade.map(addedTheme, ThemeResource.class), HttpStatus.OK);
+        if (themeResource.getOrganisatorId().intValue() == user.getId()) {
+            Theme addedTheme = contentService.updateTheme(mapperFacade.map(themeResource, Theme.class));
+            return new ResponseEntity<>(mapperFacade.map(addedTheme, ThemeResource.class), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
     @RequestMapping(value="/{mainThemeId}/tags", method = RequestMethod.POST)

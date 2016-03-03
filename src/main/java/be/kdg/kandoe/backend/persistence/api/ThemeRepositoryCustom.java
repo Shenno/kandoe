@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface ThemeRepositoryCustom {
     Theme addTheme(Theme theme) throws ContentServiceException;
+    Theme updateTheme(Theme theme);
 
     List<Theme> getThemesByOrganisation(Organisation organisation);
 }

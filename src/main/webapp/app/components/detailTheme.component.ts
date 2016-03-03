@@ -33,6 +33,6 @@ export class DetailThemeComponent {
     }
 
     public onSubmit(): void {
-        this.router.navigate(['/EditTheme', {themeId: this.theme.id}]);
+        this.router.navigate(['/EditTheme', {themeId: this.theme.themeId}]);
     }
 }

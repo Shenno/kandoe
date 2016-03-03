@@ -31,6 +31,14 @@ public class ThemeRepositoryImpl implements ThemeRepositoryCustom {
         {
             throw new ContentServiceException("Theme " + theme.getThemeName() + " already exists in organisation "+theme.getOrganisation());
         }
+
+        final Session session = em.unwrap(Session.class);
+        session.save(theme);
+        return theme;
+    }
+
+    @Override
+    public Theme updateTheme(Theme theme) {
         final Session session = em.unwrap(Session.class);
         session.saveOrUpdate(theme);
         return theme;
@@ -41,6 +49,5 @@ public class ThemeRepositoryImpl implements ThemeRepositoryCustom {
         final TypedQuery<Theme> q = em.createNamedQuery("Theme.findThemesByOrganisation",Theme.class);
         q.setParameter("organisation",organisation);
         return q.getResultList();
-
     }
 }
