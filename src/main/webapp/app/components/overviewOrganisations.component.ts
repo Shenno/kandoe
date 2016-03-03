@@ -33,6 +33,5 @@ export class OverviewOrganisationComponent {
     }
     public addOrganisation(): void {
         this.router.navigate(['/CreateOrganisation']);
-
     }
 }

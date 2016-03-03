@@ -12,6 +12,7 @@ import {UserService} from "./service/userService";
 import {User} from "./entity/user";
 import {OverviewOrganisationComponent} from "./components/overviewOrganisations.component";
 import {RegisterComponent} from "./components/register.component";
+import {ContentService} from "./service/contentService";
 
 @Component({
     selector: 'my-app',
@@ -32,7 +33,7 @@ import {RegisterComponent} from "./components/register.component";
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="#" style="font-weight: bold"><span class="glyphicon glyphicon-play-circle"></span> Maak een cirkelsessie</a></li>
-                <li><a href="#">Maak een organisatie</a></li>
+                <li><a href="#/organisations">Organisaties</a></li>
                 <li><a href="#">Thema's</a></li>
                 <li><a href="#">Kaartjes</a></li>
             </ul>
@@ -81,6 +82,7 @@ export class AppComponent {
             (user:User) => this.currentUserDetails = user,
             err => alert(localStorage.getItem("jwt") + err))*/
     }
+
 }/*(theme:Theme) => {
  this.theme = theme;
  document.title = 'Wijzig thema';

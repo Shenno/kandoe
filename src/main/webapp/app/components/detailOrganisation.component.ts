@@ -31,4 +31,7 @@ export class DetailOrganisationComponent {
             document.title = 'Organisatie: ' + this.organisation.name;
         })
     }
+    public backToList() : void {
+        this.router.navigate(['/Organisations']);
+    }
 }
