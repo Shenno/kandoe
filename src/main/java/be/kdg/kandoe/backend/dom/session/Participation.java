@@ -1,4 +1,4 @@
-/*
+
 package be.kdg.kandoe.backend.dom.session;
 
 import be.kdg.kandoe.backend.dom.content.Card;
@@ -18,7 +18,7 @@ public class Participation implements Serializable, Identifiable<Integer> {
     @GeneratedValue
     private Integer participationId;
 
-    @Column(name = "IsRegistered", nullable = false)
+/*    @Column(name = "IsRegistered", nullable = false)
     private boolean isRegistered;
 
     @Column(name = "IsOnTurn", nullable = false)
@@ -95,10 +95,10 @@ public class Participation implements Serializable, Identifiable<Integer> {
     public void setAddedCards(List<Card> addedCards) {
         this.addedCards = addedCards;
     }
-
+     */
     @Override
     public Integer getId() {
         return participationId;
     }
 }
-*/
+
