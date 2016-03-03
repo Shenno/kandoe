@@ -14,11 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,6 +45,12 @@ public class UserRestController
         this.userService = userService;
         this.mapperFacade = mapperFacade;
        // this.userResourceAssembler = userResourceAssembler;
+    }
+
+    @RequestMapping(value = "/users/me", method = RequestMethod.GET)
+    public ResponseEntity<UserResource> getCurrentUser(@AuthenticationPrincipal User user) {
+        //No need to check for user being null, API call is authenticated
+        return new ResponseEntity<UserResource>(mapperFacade.map(user, UserResource.class), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/users/info", method = RequestMethod.GET)

@@ -4,7 +4,6 @@ import {Theme} from '../entity/theme';
 import {Http, Response, Headers} from "angular2/http";
 import {UrlService} from "../service/urlService";
 import {UserService} from "../service/userService";
-import {AuthService} from "../service/authService";
 import {LoginUser} from "../entity/loginUser";
 
 @Component({
@@ -29,14 +28,12 @@ import {LoginUser} from "../entity/loginUser";
 export class LoginComponent {
 
     private userService:UserService;
-    private authService:AuthService;
     private router;
 
     private user: LoginUser = new LoginUser("", "");
 
-    public constructor(userService:UserService, authSerivce:AuthService, router:Router) {
+    public constructor(router:Router, userService:UserService) {
         this.userService = userService;
-        this.authService = authSerivce;
         this.router = router;
     }
 
@@ -52,6 +49,6 @@ export class LoginComponent {
         }
 
     public getUnlucky(): void {
-        localStorage.removeItem("id_token");
+        localStorage.removeItem("jwt");
     }
 }

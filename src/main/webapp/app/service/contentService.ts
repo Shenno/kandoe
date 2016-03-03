@@ -7,7 +7,6 @@ import {Logger} from "../util/logger";
 import {Observable} from "rxjs/Observable";
 import {Router} from "angular2/router";
 import {Card} from "../entity/card";
-import {AuthService} from "./authService";
 
 @Injectable()
 export class ContentService {
@@ -15,23 +14,21 @@ export class ContentService {
     private logger:Logger;
     private baseUrl: string;
     private router:Router;
-    private authService:AuthService;
+    private urlService: UrlService;
 
-    public constructor(http:Http, urlService: UrlService, logger:Logger, router:Router, authService: AuthService) {
+    public constructor(http:Http, urlService: UrlService, logger:Logger, router:Router) {
         this.http = http;
         this.router = router;
         this.logger = logger;
         this.baseUrl = urlService.getUrl();
-        this.authService = authService;
+        this.urlService = urlService;
     }
 
     /*Theme*/
 
     public getTheme(id:string): Observable<Theme> {
         var url = this.baseUrl + "/api/themes/" + id;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
+        var headers =  this.urlService.getHeaders(false);
 
         return this.http.get(url, {headers: headers}).map((res:Response) => res.json())/*.subscribe(
             (data) => this.logger.log('Thema succesvol teruggekregen')
@@ -42,9 +39,8 @@ export class ContentService {
     public addTheme(theme:Theme): void {
         var url = this.baseUrl + "/api/themes";
         var themeString = JSON.stringify(theme);
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
+        var headers =  this.urlService.getHeaders(true);
+
         this.http.post(url, themeString, {headers: headers}).map((res:Response) => res.json()).subscribe(
             (data) => this.onSuccesfulAddTheme(data.id, theme),
             ((err:Error) => this.logger.log('Fout tijdens aanmaken van thema: ' + err.message))
@@ -59,9 +55,7 @@ export class ContentService {
     public updateTheme(theme:Theme): void {
         var url = this.baseUrl + "/api/themes/" + theme.id;
         var themeString = JSON.stringify(theme);
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
+        var headers =  this.urlService.getHeaders(true);
         this.http.put(url, themeString, {headers: headers}).map((res:Response) => res.json()).subscribe(
             (data) => this.onSuccesfulUpdateTheme(data.id, theme),
             ((err:Error) => this.logger.log('Fout tijdens bewerken van thema: ' + err.message))
@@ -78,9 +72,7 @@ export class ContentService {
     public addTag(tag:Tag): void {
         var url = this.baseUrl + "/api/themes/{mainThemeId}/tags";
         var themeString = JSON.stringify(tag);
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
+        var headers =  this.urlService.getHeaders(true);
         this.http.post(url, themeString, {headers: headers}).map((res:Response) => res.json()).subscribe(
             (data) => this.logger.log('Tag "' + tag.name + '" is aangemaakt'),
             ((err:Error) => this.logger.log('Fout tijdens aanmaken van tag: ' + err.message))
@@ -91,9 +83,7 @@ export class ContentService {
     public addCard(card:Card): void {
         var url = this.baseUrl + "/api/themes/cards";
         var cardString = JSON.stringify(card);
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
+        var headers =  this.urlService.getHeaders(true);
         this.http.post(url, cardString, {headers: headers}).map((res:Response) => res.json()).subscribe(
             (data) => this.onSuccesfulAddCard(data.id, card),
             ((err:Error) => this.logger.log('Fout tijdens aanmaken van card: ' + err.message))

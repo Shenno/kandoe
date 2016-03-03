@@ -10,14 +10,12 @@ import {UrlService} from "./service/urlService";
 import {ContentService} from "./service/contentService";
 import {UserService} from "./service/userService";
 import {Logger} from "./util/logger";
-import {AuthService} from "./service/authService";
 
 bootstrap(AppComponent, [
     Logger,
     UrlService,
     ContentService,
     UserService,
-    AuthService,
     HTTP_PROVIDERS,
     ROUTER_PROVIDERS,
     provide(LocationStrategy,

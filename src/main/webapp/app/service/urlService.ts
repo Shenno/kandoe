@@ -1,4 +1,5 @@
 import {Injectable} from 'angular2/core';
+import {Headers} from "angular2/http";
 
 @Injectable()
 export class UrlService {
@@ -8,5 +9,14 @@ export class UrlService {
 
     public getUrl(): string {
         return this.url;
+    }
+
+    public getHeaders(authNeeded: boolean) : Headers {
+        var headers = new Headers();
+        if(authNeeded && localStorage.getItem("jwt")) {
+            headers.append("Authorization", "Bearer " + localStorage.getItem("jwt"));
+        }
+        headers.append("Content-Type", "application/json");
+        return headers;
     }
 }
