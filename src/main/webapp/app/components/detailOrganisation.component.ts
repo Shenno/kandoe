@@ -25,9 +25,9 @@ export class DetailOrganisationComponent {
     public constructor(userService: UserService, routeParam:RouteParams, router:Router) {
         this.router = router;
         this.userService = userService;
-        alert("test");
         userService.getOrganisation(routeParam.params["organisationId"]).subscribe((organisation:Organisation) => {
             this.organisation = organisation;
+            alert(organisation.name);
             document.title = 'Organisatie: ' + this.organisation.name;
         })
     }

@@ -36,16 +36,25 @@ export class UserService {
     }
 
     private onSuccesfulAddOrganisation(id:number, organisation:Organisation): void {
+        alert("log");
         this.logger.log('Organisatie "' + organisation.name + '" is aangemaakt"');
+        alert("navigate");
         this.router.navigate(['/DetailOrganisation',{organisationId:id}]);
     }
 
     public getOrganisation(id:string):Observable<Organisation>{
         var url = this.baseUrl + "/api/organisations/" + id;
-        var headers =  this.urlService.getHeaders(false);
+        var headers =  this.urlService.getHeaders(true);
         return this.http.get(url, {headers: headers}).map((res:Response) => res.json());
     }
 
+    public getOrganisations():Observable<Organisation[]>{
+        var url = this.baseUrl + "/api/organisations";
+        var headers =  this.urlService.getHeaders(true);
+        return this.http.get(url, {headers: headers}).map((res:Response) => res.json());
+    }
+
+    /*Login/Logout*/
     public login(loginUser: LoginUser): Observable<Response> {
         var headers =  this.urlService.getHeaders(false);
         return this.http.post(this.baseUrl + "/api/login", JSON.stringify(loginUser), {headers:headers});

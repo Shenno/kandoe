@@ -10,6 +10,7 @@ import {DetailOrganisationComponent} from "./components/detailOrganisation.compo
 import {LoginComponent} from "./components/login.component";
 import {UserService} from "./service/userService";
 import {User} from "./entity/user";
+import {OverviewOrganisationComponent} from "./components/overviewOrganisations.component";
 
 @Component({
     selector: 'my-app',
@@ -63,8 +64,8 @@ import {User} from "./entity/user";
     {path:'/detailTheme/:themeId', name:'DetailTheme', component: DetailThemeComponent},
     {path:'/editTheme/:themeId',name:'EditTheme',component:EditThemeComponent},
     {path:'/createOrganisation',name:'CreateOrganisation',component: CreateOrganisationComponent},
-    {path:'/detailOrganisation/:organisationId',name:'DetailOrganisation',component: DetailOrganisationComponent}
-
+    {path:'/detailOrganisation/:organisationId',name:'DetailOrganisation',component: DetailOrganisationComponent},
+    {path:'/organisations',name:'Organisations',component:OverviewOrganisationComponent}
 ])
 
 export class AppComponent {
