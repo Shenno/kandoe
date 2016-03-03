@@ -43,6 +43,12 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
     @Column(name = "Password", nullable = true, length = 255)
     private String encryptedPassword;
 
+    @Column(name = "FirstName", nullable = true, length = 255)
+    private String firstName;
+
+    @Column(name = "LastName", nullable = true, length = 255)
+    private String lastName;
+
     @ManyToMany
     @JoinTable(
             name="Org_Theme",
@@ -77,6 +83,22 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
     public void setId(Integer id)
     {
         this.userId = id;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public Integer getUserId()

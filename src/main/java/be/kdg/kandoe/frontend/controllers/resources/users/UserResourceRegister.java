@@ -7,10 +7,10 @@ import java.io.Serializable;
  */
 
 public class UserResourceRegister implements Serializable {
-    public String username;
-    public String password;
-    public String firstName;
-    public String lastName;
+    private String username;
+    private String password;
+    private String firstName;
+    private String lastName;
 
     public String getUsername() {
         return username;
