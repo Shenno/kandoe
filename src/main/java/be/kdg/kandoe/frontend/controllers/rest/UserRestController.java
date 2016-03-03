@@ -109,6 +109,14 @@ public class UserRestController
         return new ResponseEntity<>(organisationResources, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/organisations/{organisationId}", method = RequestMethod.GET)
+    public ResponseEntity<OrganisationResource> findorganisation(@PathVariable int organisationId)
+    {
+        Organisation organisation = this.userService.getOrganisationById(organisationId);
+
+        return new ResponseEntity<>(mapperFacade.map(organisation, OrganisationResource.class), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/organisations", method = RequestMethod.POST)
     public ResponseEntity<OrganisationResource> createOrganisation(@Valid @RequestBody OrganisationResource organisationResource)
     {
