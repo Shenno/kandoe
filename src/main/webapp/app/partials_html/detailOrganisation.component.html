@@ -1,2 +1,9 @@
 <h1>Organisatie: <span id="span_organisationname">{{organisation.name}}</span></h1>
+<p>Organisator: {{organisation.organisator.username}}</p>
+<h2>Thema's</h2>
+<ul>
+    <li *ngFor="#theme of organisation.themes">
+        {{theme.id}} | {{theme.themeName}}
+    </li>
+</ul>
 <button (click)="backToList()" >Terug naar lijst</button>

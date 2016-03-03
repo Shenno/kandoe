@@ -1,14 +1,16 @@
 import {User} from "./user";
+import {Theme} from"./theme";
 
 export class Organisation {
     constructor(public id: number,
                 public name: string,
-                public organisator: User
+                public organisator: User,
+                public themes : Theme[]
                 ) {
 
     }
 
     public static createEmptyOrganisation(): Organisation {
-        return new Organisation(0, "", User.createEmptyUser());
+        return new Organisation(0, "", User.createEmptyUser(),[]);
     }
 }
