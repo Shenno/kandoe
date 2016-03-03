@@ -10,7 +10,7 @@ import {DetailOrganisationComponent} from "./components/detailOrganisation.compo
 import {LoginComponent} from "./components/login.component";
 import {UserService} from "./service/userService";
 import {User} from "./entity/user";
-import {RegisterComponent} from "./components/register.component";
+import {OverviewOrganisationComponent} from "./components/overviewOrganisations.component";
 
 @Component({
     selector: 'my-app',
@@ -44,7 +44,7 @@ import {RegisterComponent} from "./components/register.component";
                         <li><a href="#">Dashboard</a></li>
                         <li><a href="#">Beheer</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="" (click)="userService.logout()">Uitloggen</a></li>
+                        <li><a href="#" (click)="userService.logout()">Uitloggen</a></li>
                     </ul>
                 </li>
             </ul>
@@ -59,14 +59,13 @@ import {RegisterComponent} from "./components/register.component";
 })
 @RouteConfig([
     {path:'/login', name: 'Login', component: LoginComponent},
-    {path:'/register', name:'Register', component: RegisterComponent},
     {path:'/test', name: 'Test', component: CirkelsessieComponent},
     {path:'/organisation/:organisationId/createTheme',name:'CreateTheme',component: CreateThemeComponent},
     {path:'/detailTheme/:themeId', name:'DetailTheme', component: DetailThemeComponent},
     {path:'/editTheme/:themeId',name:'EditTheme',component:EditThemeComponent},
     {path:'/createOrganisation',name:'CreateOrganisation',component: CreateOrganisationComponent},
-    {path:'/detailOrganisation/:organisationId',name:'DetailOrganisation',component: DetailOrganisationComponent}
-
+    {path:'/detailOrganisation/:organisationId',name:'DetailOrganisation',component: DetailOrganisationComponent},
+    {path:'/organisations',name:'Organisations',component:OverviewOrganisationComponent}
 ])
 
 export class AppComponent {
@@ -75,10 +74,10 @@ export class AppComponent {
     currentUserDetails: User;
 
     public constructor(userService:UserService) {
-        this.userService = userService;
+       /* this.userService = userService;
         userService.getMyDetails().subscribe(
             (user:User) => this.currentUserDetails = user,
-            err => console.log(this.currentUserDetails = null))
+            err => alert(localStorage.getItem("jwt") + err))*/
     }
 }/*(theme:Theme) => {
  this.theme = theme;

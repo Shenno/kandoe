@@ -43,13 +43,7 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
     @Column(name = "Password", nullable = true, length = 255)
     private String encryptedPassword;
 
-    @Column(name = "Firstname", nullable = true, length = 255)
-    private String firstName;
-
-    @Column(name = "Lastname", nullable = true, length = 255)
-    private String lastName;
-
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name="Org_Theme",
             inverseJoinColumns=@JoinColumn(name="ThemeId", referencedColumnName="ThemeId"),
@@ -59,7 +53,7 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
 /*    @OneToMany(targetEntity = Participation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Participation> participations; */
 
-    @OneToMany(targetEntity = Organisation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Organisation.class, mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH}, fetch = FetchType.EAGER)
     private List<Organisation> organisations;
 
     public User()
@@ -95,23 +89,7 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
         this.userId = userId;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /*   public List<Participation> getParticipations() {
+ /*   public List<Participation> getParticipations() {
         return participations;
     }
 

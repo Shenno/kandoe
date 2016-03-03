@@ -37,13 +37,14 @@ public class TestTheme {
         user = userService.addUser(user);
 
         organisation = new Organisation("organisation");
+        organisation.setOrganisator(user);
         organisation = userService.addOrganisation(organisation);
     }
 
     @After
     public void tearDown(){
-        userService.deleteUser(user.getId());
         userService.deleteOrganisation(organisation.getId());
+        userService.deleteUser(user.getId());
     }
 
     @Test

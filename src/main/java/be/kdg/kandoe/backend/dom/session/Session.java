@@ -51,8 +51,8 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = CardSession.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CardSession> cardSessions;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "UserSession",
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "UserSessionn",
                joinColumns = @JoinColumn(name = "Sessionid", referencedColumnName = "SessionId"),
                inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
     private List<User> users = new ArrayList<>();
@@ -133,7 +133,15 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
         this.currentRound = currentRound;
     }
 
- /*   public void setParticipations(List<Participation> participations) {
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
+
+    /*   public void setParticipations(List<Participation> participations) {
         this.participations = participations;
     }
 

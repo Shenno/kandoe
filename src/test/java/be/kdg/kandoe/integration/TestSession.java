@@ -37,8 +37,8 @@ public class TestSession {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private SessionService sessionService;
+ /*   @Autowired
+    private SessionService sessionService;*/
 
     @Before
     public void setup() {
@@ -59,12 +59,12 @@ public class TestSession {
 
     @After
     public void tearDown() {
-        userService.deleteUser(user.getId());
         userService.deleteOrganisation(organisation.getId());
+        userService.deleteUser(user.getId());
     }
 
     @Test
-    public void testCreateAsyncSession() {
+    public void testCreateAsyncSessionAddTheme() {
         Session session = new AsynchronousSession(true, 60);
      //   session = sessionService.addSession(session);
 

@@ -1,5 +1,6 @@
 package be.kdg.kandoe.acceptance;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,19 @@ import static org.junit.Assert.assertEquals;
  * Package      be.kdg.kandoe.integration
  */
 public class ITorganisation {
+    @Test
+    public void testGetOrganisations(){
+        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("http://localhost:9966/kandoe/#/createOrganisation");
+
+        allowDomToLoad();
+
+        WebElement element = driver.findElement(By.id("app"));
+        element = element.findElement(By.tagName("overview-organisation"));
+
+        //TODO: enzovoort
+    }
     @Test
     public void testAddOrganisation() {
         String organisationName = "KdG Test";
