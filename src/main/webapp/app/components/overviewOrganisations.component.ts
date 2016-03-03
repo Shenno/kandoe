@@ -34,4 +34,7 @@ export class OverviewOrganisationComponent {
     public addOrganisation(): void {
         this.router.navigate(['/CreateOrganisation']);
     }
+    public detailOrganisation(id:string):void{
+        this.router.navigate(['/DetailOrganisation',{organisationId:id}]);
+    }
 }

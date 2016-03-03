@@ -37,9 +37,7 @@ export class UserService {
     }
 
     private onSuccesfulAddOrganisation(id:number, organisation:Organisation): void {
-        alert("log");
         this.logger.log('Organisatie "' + organisation.name + '" is aangemaakt"');
-        alert("navigate");
         this.router.navigate(['/DetailOrganisation',{organisationId:id}]);
     }
 

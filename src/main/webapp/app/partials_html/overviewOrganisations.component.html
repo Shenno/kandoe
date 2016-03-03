@@ -1,7 +1,7 @@
 <h1>Organisaties:</h1>
 <ul>
-    <li *ngFor="#organisation of organisations">
-        {{organisation.name}}
+    <li *ngFor="#organisation of organisations" (click)="detailOrganisation(organisation.id)">
+        {{organisation.id}} | {{organisation.name}}
     </li>
 </ul>
 <button (click)="addOrganisation()">AddOrganisation</button>
