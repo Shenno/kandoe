@@ -43,7 +43,7 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
     @Column(name = "Password", nullable = true, length = 255)
     private String encryptedPassword;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name="Org_Theme",
             inverseJoinColumns=@JoinColumn(name="ThemeId", referencedColumnName="ThemeId"),
@@ -53,7 +53,7 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
 /*    @OneToMany(targetEntity = Participation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Participation> participations; */
 
-    @OneToMany(targetEntity = Organisation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Organisation.class, mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH}, fetch = FetchType.EAGER)
     private List<Organisation> organisations;
 
     public User()

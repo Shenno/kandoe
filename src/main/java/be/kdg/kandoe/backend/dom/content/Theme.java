@@ -40,7 +40,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
     @Column(name = "AddingAdmited", nullable = false)
     private boolean addingAdmitted;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Org_Theme",
             joinColumns = @JoinColumn(name = "ThemeId", referencedColumnName = "ThemeId"),
