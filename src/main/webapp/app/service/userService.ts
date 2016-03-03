@@ -7,6 +7,7 @@ import {Observable} from "rxjs/Observable";
 import {Router} from "angular2/router";
 import {LoginUser} from "../entity/loginUser";
 import {User} from "../entity/user";
+import {RegisterUser} from "../entity/registerUser";
 
 @Injectable()
 export class UserService {
@@ -49,6 +50,16 @@ export class UserService {
     public login(loginUser: LoginUser): Observable<Response> {
         var headers =  this.urlService.getHeaders(false);
         return this.http.post(this.baseUrl + "/api/login", JSON.stringify(loginUser), {headers:headers});
+    }
+
+
+    public register(registerUser: RegisterUser): void {
+        var content = JSON.stringify(registerUser);
+        var headers =  this.urlService.getHeaders(false);
+        this.http.post(this.baseUrl + "/api/users", content, {headers: headers}).map((res:Response) => res.json()).subscribe(
+            (data) => alert(data),
+            ((err:Error) => this.logger.log('Fout tijdens het registreren ' + err.message))
+        );
     }
 
     public logout() {

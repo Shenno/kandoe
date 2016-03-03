@@ -22,7 +22,7 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
                                         HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         User user = (User)authentication.getPrincipal();
         String token = Jwts.builder().setSubject(user.getUsername())
-                .signWith(SignatureAlgorithm.HS256, "secretpaladin").compact();
+                .signWith(SignatureAlgorithm.HS256, "toomanysecrets").compact();
         response.setStatus(HttpServletResponse.SC_OK);
         response.getOutputStream().println(token);
     }

@@ -8,6 +8,7 @@ import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
 import be.kdg.kandoe.frontend.controllers.resources.users.OrganisationResource;
 import be.kdg.kandoe.frontend.controllers.resources.users.UserResource;
 import be.kdg.kandoe.frontend.controllers.resources.users.UserResourcePost;
+import be.kdg.kandoe.frontend.controllers.resources.users.UserResourceRegister;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,7 @@ import java.util.stream.Collectors;
 @ExposesResourceFor(UserResource.class)
 public class UserRestController
 {
-    @Autowired
-    PasswordEncoder encoder;
+    private final BCryptPasswordEncoder passwordEncoder;
     private final Logger logger = Logger.getLogger(UserRestController.class);
     private final UserService userService;
     private final MapperFacade mapperFacade;
@@ -39,9 +39,10 @@ public class UserRestController
 
     @Autowired
     public UserRestController(UserService userService,
-                              MapperFacade mapperFacade/*, UserResourceAssembler userResourceAssembler*/
+                              MapperFacade mapperFacade, BCryptPasswordEncoder passwordEncoder
                               )
     {
+        this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.mapperFacade = mapperFacade;
        // this.userResourceAssembler = userResourceAssembler;
@@ -67,14 +68,6 @@ public class UserRestController
     }
     */
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity<UserResource> createUser(@Valid @RequestBody UserResourcePost userResourcePost)
-    {
-        String pwd = encoder.encode(userResourcePost.getPassword());
-        User user = new User(userResourcePost.getUsername(), pwd);
-        User returnUser = userService.addUser(user);
-        return new ResponseEntity<>(mapperFacade.map(returnUser, UserResource.class), HttpStatus.OK);
-    }
 
 /*    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<UserResource>> findUsers()

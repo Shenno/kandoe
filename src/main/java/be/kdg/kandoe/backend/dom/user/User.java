@@ -43,6 +43,12 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
     @Column(name = "Password", nullable = true, length = 255)
     private String encryptedPassword;
 
+    @Column(name = "Firstname", nullable = true, length = 255)
+    private String firstName;
+
+    @Column(name = "Lastname", nullable = true, length = 255)
+    private String lastName;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="Org_Theme",
@@ -89,7 +95,23 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
         this.userId = userId;
     }
 
- /*   public List<Participation> getParticipations() {
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /*   public List<Participation> getParticipations() {
         return participations;
     }
 
