@@ -11,6 +11,7 @@ import {LoginComponent} from "./components/login.component";
 import {UserService} from "./service/userService";
 import {User} from "./entity/user";
 import {OverviewOrganisationComponent} from "./components/overviewOrganisations.component";
+import {RegisterComponent} from "./components/register.component";
 
 @Component({
     selector: 'my-app',
@@ -59,6 +60,7 @@ import {OverviewOrganisationComponent} from "./components/overviewOrganisations.
 })
 @RouteConfig([
     {path:'/login', name: 'Login', component: LoginComponent},
+    {path:'/register', name: 'Register', component: RegisterComponent},
     {path:'/test', name: 'Test', component: CirkelsessieComponent},
     {path:'/organisation/:organisationId/createTheme',name:'CreateTheme',component: CreateThemeComponent},
     {path:'/detailTheme/:themeId', name:'DetailTheme', component: DetailThemeComponent},
