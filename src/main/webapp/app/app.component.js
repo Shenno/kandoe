@@ -61,7 +61,7 @@ System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.
                     router_1.RouteConfig([
                         { path: '/login', name: 'Login', component: login_component_1.LoginComponent },
                         { path: '/test', name: 'Test', component: cirkelsessie_component_1.CirkelsessieComponent },
-                        { path: '/createTheme', name: 'CreateTheme', component: createTheme_component_1.CreateThemeComponent },
+                        { path: '/organisation/:organisationId/createTheme', name: 'CreateTheme', component: createTheme_component_1.CreateThemeComponent },
                         { path: '/detailTheme/:themeId', name: 'DetailTheme', component: detailTheme_component_1.DetailThemeComponent },
                         { path: '/editTheme/:themeId', name: 'EditTheme', component: editTheme_component_1.EditThemeComponent },
                         { path: '/createOrganisation', name: 'CreateOrganisation', component: createOrganisation_component_1.CreateOrganisationComponent },

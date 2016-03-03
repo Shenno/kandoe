@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../entity/theme', "../service/contentService", "../entity/organisation", "../entity/user"], function(exports_1) {
+System.register(['angular2/core', '../entity/theme', "../service/contentService", "angular2/router", "../service/userService"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', '../entity/theme', "../service/contentService"
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, theme_1, contentService_1, organisation_1, user_1;
+    var core_1, theme_1, contentService_1, router_1, userService_1;
     var CreateThemeComponent;
     return {
         setters:[
@@ -21,22 +21,27 @@ System.register(['angular2/core', '../entity/theme', "../service/contentService"
             function (contentService_1_1) {
                 contentService_1 = contentService_1_1;
             },
-            function (organisation_1_1) {
-                organisation_1 = organisation_1_1;
+            function (router_1_1) {
+                router_1 = router_1_1;
             },
-            function (user_1_1) {
-                user_1 = user_1_1;
+            function (userService_1_1) {
+                userService_1 = userService_1_1;
             }],
         execute: function() {
             CreateThemeComponent = (function () {
                 //new Promise<Theme[]>(resolve => setTimeout(() =>resolve(Theme), 2000));
-                function CreateThemeComponent(contentService) {
+                function CreateThemeComponent(contentService, userService, routeParam) {
+                    var _this = this;
                     this.theme = theme_1.Theme.createEmptyTheme();
                     this.contentService = contentService;
                     document.title = 'Maak thema aan';
+                    this.theme.organisationId = +routeParam.params["organisationId"];
+                    this.userService = userService;
+                    this.userService.getMyDetails().subscribe(function (user) {
+                        _this.theme.organisatorId = user.id;
+                    });
                 }
                 CreateThemeComponent.prototype.onSubmit = function () {
-                    this.theme.organisation = new organisation_1.Organisation(1, "Test", new user_1.User(1, "test"));
                     this.contentService.addTheme(this.theme);
                 };
                 CreateThemeComponent = __decorate([
@@ -45,7 +50,7 @@ System.register(['angular2/core', '../entity/theme', "../service/contentService"
                         templateUrl: 'app/partials_html/createTheme.component.html',
                         encapsulation: core_1.ViewEncapsulation.None
                     }), 
-                    __metadata('design:paramtypes', [contentService_1.ContentService])
+                    __metadata('design:paramtypes', [contentService_1.ContentService, userService_1.UserService, router_1.RouteParams])
                 ], CreateThemeComponent);
                 return CreateThemeComponent;
             })();

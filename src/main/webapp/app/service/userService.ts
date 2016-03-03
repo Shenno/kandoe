@@ -59,7 +59,7 @@ export class UserService {
 
     public getMyDetails() : Observable<User> {
         var headers =  this.urlService.getHeaders(true);
-        return this.http.get(this.baseUrl, {headers: headers}).map((res:Response) => res.json());
+        return this.http.get(this.baseUrl + "/api/users/me", {headers: headers}).map((res:Response) => res.json());
     }
 
 }

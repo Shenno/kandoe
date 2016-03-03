@@ -59,7 +59,7 @@ import {User} from "./entity/user";
 @RouteConfig([
     {path:'/login', name: 'Login', component: LoginComponent},
     {path:'/test', name: 'Test', component: CirkelsessieComponent},
-    {path:'/createTheme',name:'CreateTheme',component: CreateThemeComponent},
+    {path:'/organisation/:organisationId/createTheme',name:'CreateTheme',component: CreateThemeComponent},
     {path:'/detailTheme/:themeId', name:'DetailTheme', component: DetailThemeComponent},
     {path:'/editTheme/:themeId',name:'EditTheme',component:EditThemeComponent},
     {path:'/createOrganisation',name:'CreateOrganisation',component: CreateOrganisationComponent},

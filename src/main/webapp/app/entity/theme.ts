@@ -5,11 +5,12 @@ export class Theme {
                 public description: string,
                 public commentaryAllowed: boolean,
                 public addingAdmitted: boolean,
-                public organisation: Organisation) {
+                public organisationId: number,
+                public organisatorId: number) {
 
     }
 
     public static createEmptyTheme(): Theme {
-        return new Theme(0, "", "", false, false, Organisation.createEmptyOrganisation());
+        return new Theme(0, "", "", false, false, 0, 0);
     }
 }

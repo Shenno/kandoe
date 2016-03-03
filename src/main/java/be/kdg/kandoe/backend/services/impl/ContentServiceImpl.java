@@ -51,9 +51,9 @@ public class ContentServiceImpl implements ContentService {
             //TODO: Moet nog terug uit commentaar wanneer een organisatie en organisatoren worden meegegeven
         } else if (theme.getOrganisation() == null) {
             throw new ContentServiceException("Organisation can not be empty");
-        }/* else if (theme.getOrganisators().size() == 0) {
+        } else if (theme.getOrganisators().size() == 0) {
             throw new ContentServiceException("There must be at least one organisator");
-        } */
+        }
         theme = themeRepository.addTheme(theme);
         /*Organisation organisation = userService.getOrganisationById(theme.getOrganisation().getId());
         organisation.getThemes().add(theme);
