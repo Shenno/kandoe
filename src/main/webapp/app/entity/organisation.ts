@@ -11,6 +11,7 @@ export class Organisation {
     }
 
     public static createEmptyOrganisation(): Organisation {
+        alert(test);
         return new Organisation(0, "", User.createEmptyUser(),[]);
     }
 }
