@@ -36,6 +36,12 @@ export class ContentService {
         )*/;
     }
 
+    public getThemesByOrganisatorId(id:string): Observable<Theme[]> {
+        var url = this.baseUrl + "/api/themes/organisator/" + id;
+        var headers = this.urlService.getHeaders(true);
+        return this.http.get(url,{headers: headers}).map((res:Response) => res.json());
+    }
+
     public addTheme(theme:Theme): void {
         var url = this.baseUrl + "/api/themes";
         var themeString = JSON.stringify(theme);

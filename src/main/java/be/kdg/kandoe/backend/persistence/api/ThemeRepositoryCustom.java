@@ -15,4 +15,5 @@ public interface ThemeRepositoryCustom {
     Theme updateTheme(Theme theme);
 
     List<Theme> getThemesByOrganisation(Organisation organisation);
+    List<Theme> getThemesByOrganisatorId(int id);
 }

@@ -68,6 +68,10 @@ public class TestTheme {
         assertEquals("There must be one tag", theme.getTags().size(), tags.size());
         assertEquals("Tag must be correct", theme.getTags().size(),tags.size());
 
+        List<Theme> themesOfOrganisator = contentService.findThemesByOrganisatorId(theme.getOrganisators().get(0).getId());
+        assertEquals("User should only be organisator of 1 theme", 1, themesOfOrganisator.size());
+        assertEquals("Theme should be the same", theme.getId(), themesOfOrganisator.get(0).getId());
+
         organisation = userService.getOrganisationByName("organisation");
         List<Theme> themes = organisation.getThemes();
         assertEquals("There must be one theme in organisation", 1, themes.size());
@@ -154,7 +158,8 @@ public class TestTheme {
         contentService.addTheme(theme);
     }
 
-    @Test
+
+   /* @Test
     public void testDeleteTheme(){
         String name = "theme name";
         String description = "description of theme";
@@ -168,7 +173,7 @@ public class TestTheme {
         contentService.deleteTheme(theme.getId());
         theme = contentService.getTheme(theme.getId());
         assertNull(theme);
-    }
+    }*/
     @Test
     public void testFindAllThemes(){
         String name = "theme name";

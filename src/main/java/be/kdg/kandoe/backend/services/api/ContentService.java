@@ -14,6 +14,8 @@ public interface ContentService {
 
     Theme getTheme(int themeId);
 
+    List<Theme> findThemesByOrganisatorId(int organisatorId);
+
     List<Theme> findThemes();
 
     List<Theme> findThemesByOrganisation(Organisation organisation);

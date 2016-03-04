@@ -4,12 +4,14 @@ import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.persistence.api.ThemeRepositoryCustom;
 import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,7 +42,7 @@ public class ThemeRepositoryImpl implements ThemeRepositoryCustom {
     @Override
     public Theme updateTheme(Theme theme) {
         final Session session = em.unwrap(Session.class);
-        session.saveOrUpdate(theme);
+        session.update(theme);
         return theme;
     }
 
@@ -48,6 +50,15 @@ public class ThemeRepositoryImpl implements ThemeRepositoryCustom {
     public List<Theme> getThemesByOrganisation(Organisation organisation) {
         final TypedQuery<Theme> q = em.createNamedQuery("Theme.findThemesByOrganisation",Theme.class);
         q.setParameter("organisation",organisation);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Theme> getThemesByOrganisatorId(int organisatorId) {
+        final TypedQuery<Theme> q = em.createNamedQuery("Theme.findThemesByOrganisatorId",Theme.class);
+        //final javax.persistence.Query q = em.createQuery("SELECT t.themeId FROM Theme t join t.organisators o WHERE o.userId = :organisatorId");
+        q.setParameter("organisatorId", organisatorId);
+        //List<Integer> idList = (List<Integer>) q.getResultList();
         return q.getResultList();
     }
 }

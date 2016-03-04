@@ -13,6 +13,7 @@ import {User} from "./entity/user";
 import {OverviewOrganisationComponent} from "./components/overviewOrganisations.component";
 import {RegisterComponent} from "./components/register.component";
 import {ContentService} from "./service/contentService";
+import {CreateSessionComponent} from "./components/createSession.component";
 
 @Component({
     selector: 'my-app',
@@ -67,6 +68,7 @@ import {ContentService} from "./service/contentService";
     {path:'/detailTheme/:themeId', name:'DetailTheme', component: DetailThemeComponent},
     {path:'/editTheme/:themeId',name:'EditTheme',component:EditThemeComponent},
     {path:'/createOrganisation',name:'CreateOrganisation',component: CreateOrganisationComponent},
+    {path:'/createSession', name:'CreateSession', component: CreateSessionComponent},
     {path:'/detailOrganisation/:organisationId',name:'DetailOrganisation',component: DetailOrganisationComponent},
     {path:'/organisations',name:'Organisations',component:OverviewOrganisationComponent}
 ])

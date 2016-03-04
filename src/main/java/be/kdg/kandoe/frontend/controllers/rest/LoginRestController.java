@@ -43,11 +43,13 @@ public class LoginRestController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity<UserResource> createUser(@Valid @RequestBody UserResourceRegister userResourceRegister)
+    public ResponseEntity<String> createUser(@Valid @RequestBody UserResourceRegister userResourceRegister)
     {
         User u = mapperFacade.map(userResourceRegister, User.class);
         userService.addUser(u);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        String token = Jwts.builder().setSubject(u.getUsername())
+                .signWith(SignatureAlgorithm.HS256, "toomanysecrets").compact();
+        return new ResponseEntity<>(token, HttpStatus.CREATED);
         //return new ResponseEntity<>(mapperFacade.map(userResourceRegister, UserResource.class), HttpStatus.OK);
     }
 

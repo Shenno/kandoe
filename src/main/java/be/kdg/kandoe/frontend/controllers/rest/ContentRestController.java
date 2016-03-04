@@ -16,6 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/themes")
 public class ContentRestController {
@@ -43,6 +46,13 @@ public class ContentRestController {
         Theme foundTheme = contentService.getTheme(themeId);
         ThemeResource themeResource = mapperFacade.map(foundTheme, ThemeResource.class);
         return new ResponseEntity<>(themeResource, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/organisator/{organisatorId}", method = RequestMethod.GET)
+    public ResponseEntity<List<ThemeResource>> findThemesByOrganisatorId(@PathVariable int organisatorId) {
+        List<Theme> foundThemes = contentService.findThemesByOrganisatorId(organisatorId);
+        List<ThemeResource> themeResources = foundThemes.stream().map(t -> mapperFacade.map(t, ThemeResource.class)).collect(Collectors.toList());
+        return new ResponseEntity<List<ThemeResource>>(themeResources, HttpStatus.OK);
     }
 
     @RequestMapping( method = RequestMethod.POST)

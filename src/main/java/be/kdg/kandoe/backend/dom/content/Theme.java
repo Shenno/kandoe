@@ -18,7 +18,8 @@ import java.util.List;
 @NamedQueries(
         {
                 @NamedQuery(name = "Theme.findByThemeNameByOrganisation", query = "SELECT t FROM Theme t WHERE t.themeName = :themename and t.organisation = :organisation"),
-                @NamedQuery(name = "Theme.findThemesByOrganisation",query = "SELECT t FROM Theme t where t.organisation = :organisation")
+                @NamedQuery(name = "Theme.findThemesByOrganisation",query = "SELECT t FROM Theme t where t.organisation = :organisation"),
+                @NamedQuery(name = "Theme.findThemesByOrganisatorId", query = "SELECT t FROM Theme t join t.organisators o WHERE o.userId = :organisatorId")
         })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Theme implements Serializable, Identifiable<Integer> {
