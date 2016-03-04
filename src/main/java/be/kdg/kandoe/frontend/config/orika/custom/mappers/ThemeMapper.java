@@ -12,6 +12,9 @@ import ma.glasnost.orika.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class ThemeMapper extends CustomMapper<Theme, ThemeResource> {
 
@@ -31,6 +34,14 @@ public class ThemeMapper extends CustomMapper<Theme, ThemeResource> {
         themeResource.setOrganisationId(theme.getOrganisation().getId());
         if (theme.getOrganisators().size() == 0) themeResource.setOrganisatorId(1); //TODO: Slechts tijdelijk, zolang het default thema nog geen organisator heeft
         else themeResource.setOrganisatorId(theme.getOrganisators().get(0).getId());
+
+        List<String> tags = new ArrayList<>();
+
+        for(Tag tag: theme.getTags()) {
+            tags.add(tag.getTagName());
+        }
+
+        themeResource.setTags(tags);
     }
 
     @Override

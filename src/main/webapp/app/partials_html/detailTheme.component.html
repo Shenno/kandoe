@@ -15,7 +15,11 @@
         <label for="cb_addingAdmitted">Toevoegen van kaartjes toegelaten</label>
     </div>
 
-    <div id="tags"></div>
+    <div id="tags">
+        <p *ngFor="#tag of theme.tags">
+            {{tag}}
+        </p>
+    </div>
 
     <button id="btn_edit">Wijzigen</button>
 </form>
