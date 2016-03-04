@@ -1,5 +1,6 @@
 package be.kdg.kandoe.backend.services.api;
 
+import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.session.Session;
 import be.kdg.kandoe.backend.dom.user.Organisation;
@@ -16,5 +17,6 @@ public interface SessionService {
     // Session
     Session addSession(Session session, int themeId);
     Session findSession(int sessionId);
+    Session addCardToSession(Session session, Card card);
 
 }

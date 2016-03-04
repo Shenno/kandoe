@@ -48,10 +48,10 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = Remark.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Remark> remarks;
 
-    @OneToMany(targetEntity = CardSession.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<CardSession> cardSessions;
+    @OneToMany(targetEntity = CardSession.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CardSession> cardSessions = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.DETACH)
+    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE })
     @JoinTable(name = "UserSession",
                joinColumns = @JoinColumn(name = "Sessionid", referencedColumnName = "SessionId"),
                inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
@@ -153,13 +153,9 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
         this.problem = problem;
     }
 
-    /*   public void setParticipations(List<Participation> participations) {
-        this.participations = participations;
+    public void addCardSession(CardSession cardSession) {
+        this.cardSessions.add(cardSession);
     }
-
-    public void addParticipation(Participation participation) {
-        this.participations.add(participation);
-    }*/
 
     @Override
     public Integer getId() {

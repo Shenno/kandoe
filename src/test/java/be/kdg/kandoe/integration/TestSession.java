@@ -75,9 +75,6 @@ public class TestSession {
         user3 = userService.addUser(user3);
         session.addUser(user3);
 
-        // Persist session
-        session = sessionService.addSession(session, theme.getId());
-
         // Create cards and add to the session
         Card card1 = new Card("CardOne", theme);
         Card card2 = new Card("CardTwo", theme);
@@ -85,22 +82,32 @@ public class TestSession {
         card1 = contentService.addCard(card1);
         card2 = contentService.addCard(card2);
         card3 = contentService.addCard(card3);
-        //TODO Card adden -> delete op 1 of andere manier users
 
-       /* sessionService.addCardToSession(card1);
-        sessionService.addCardToSession(card2);
-        sessionService.addCardToSession(card3);*/
+        // Persist session
+        session = sessionService.addSession(session, theme.getId());
+
+        session = sessionService.addCardToSession(session, card1);
+        session = sessionService.addCardToSession(session, card2);
+        session = sessionService.addCardToSession(session, card3);
+        contentService.deleteCard(card1.getId());
+        session = sessionService.findSession(session.getId());
 
 
+      //  assertEquals("No 3 cardsessions found in session", 3, session.getCardSessions().size());
+
+       /* try {
+            Thread.sleep(50000000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
         // Assert
         assertNotNull(session);
         theme = contentService.getTheme(theme.getId());
         user = userService.findUserById(user.getId());
         assertNotNull(theme);
-        assertEquals("Theme has 1 session", 1, theme.getSessions().size());
+        assertEquals("Theme has more than 1 session", 1, theme.getSessions().size());
         assertEquals("Theme sessionId is correct",theme.getSessions().get(0).getId(), session.getId());
         assertEquals("Playerlist must contain 3 user(s)", session.getUsers().size(),3);
-
 
     }
 

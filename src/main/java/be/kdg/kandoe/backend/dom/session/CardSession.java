@@ -27,14 +27,22 @@ public class CardSession implements Serializable, Identifiable<Integer> {
     @Column(name = "CardText")
     private String card;
 
+    @Column(name = "Image")
+    private String image;
+
     @ManyToOne
     @JoinColumn(name = "session_id")
     private Session session;
 
-    public CardSession(int priority, String card, Session session) {
+    public CardSession(int priority, String card, String image, Session session) {
         this.priority = priority;
         this.card = card;
+        this.image = image;
         this.session = session;
+    }
+
+    public CardSession() {
+        new CardSession(0, null, null, null);
     }
 
     public int getPriority() {
@@ -51,6 +59,14 @@ public class CardSession implements Serializable, Identifiable<Integer> {
 
     public void setCard(String card) {
         this.card = card;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Session getSession() {

@@ -34,39 +34,20 @@ public class Card implements Serializable, Identifiable<Integer> {
     @Column(name = "ImageURL", nullable = true)
     private String imageURL;
 
-    @Column(name = "Picked", nullable = true)
-    private boolean picked;
-
-    @Column(name = "Priority", nullable = true)
-    private int priority;
-
-    @Column(name = "SnapshotID", nullable = true)
-    private int snapShotID;
-
     @ManyToOne
     @JoinColumn(name = "ThemeId")
     private Theme theme;
 
-    /*@ManyToOne(targetEntity = Participation.class, fetch = FetchType.EAGER, optional = true) //TODO optinial -> false
-    private Participation participationChoosen;  //deelnemer die kaartje heeft gekozen
-
-    @ManyToOne(targetEntity = Participation.class, fetch = FetchType.EAGER, optional = true) //TODO optinial -> false
-    private Participation participationAdded;  //deelnemer die kaartje heeft toegevoegd*/
-
     @OneToMany(targetEntity = Remark.class, mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    List<Remark> remarks;
+    List<Remark> remarks; //TODO review
 
     public Card(String text, Theme theme) {
         this(text, "www.google.be", theme); //TODO good image
-
     }
 
     public Card(String text, String imageURL, Theme theme) {
         this.text = text;
         this.imageURL = imageURL;
-        this.picked = false;
-        this.priority = 0;
-        this.snapShotID = 1;
         this.theme= theme;
         this.remarks = new ArrayList<>();
     }
@@ -93,30 +74,6 @@ public class Card implements Serializable, Identifiable<Integer> {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
-    }
-
-    public boolean isPicked() {
-        return picked;
-    }
-
-    public void setIsPicked(boolean isPicked) {
-        this.picked = isPicked;
-    }
-
-    public int getPriority() {
-        return priority;
-    }
-
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
-
-    public int getSnapShotID() {
-        return snapShotID;
-    }
-
-    public void setSnapShotID(int snapShotID) {
-        this.snapShotID = snapShotID;
     }
 
     @Override

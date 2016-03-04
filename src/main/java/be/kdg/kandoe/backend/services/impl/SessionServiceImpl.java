@@ -1,12 +1,15 @@
 
 package be.kdg.kandoe.backend.services.impl;
 
+import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.session.CardSession;
 import be.kdg.kandoe.backend.dom.session.Session;
 import be.kdg.kandoe.backend.persistence.api.SessionRepository;
 import be.kdg.kandoe.backend.persistence.api.ThemeRepository;
 import be.kdg.kandoe.backend.services.api.SessionService;
 import be.kdg.kandoe.backend.services.exceptions.SessionServiceException;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +43,17 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public Session findSession(int sessionId) {
-        return this.sessionRepository.findOne(sessionId);
+        Session session = this.sessionRepository.findOne(sessionId);
+        Hibernate.initialize(session.getUsers());
+        Hibernate.initialize(session.getCardSessions());
+        return session;
+    }
+
+    @Override
+    public Session addCardToSession(Session session, Card card) {
+        CardSession cardsession = new CardSession(0, card.getText(), card.getImageURL(), session);
+        session.addCardSession(cardsession);
+        return sessionRepository.save(session);
     }
 
 

@@ -172,6 +172,12 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
+    public void deleteCard(int cardId) {
+        cardRepository.delete(cardId);
+    }
+
+
+    @Override
     public Card getCard(int cardId) { return cardRepository.findOne(cardId); }
 
     /*Remark*/

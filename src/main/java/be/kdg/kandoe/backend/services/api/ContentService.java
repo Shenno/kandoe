@@ -32,6 +32,8 @@ public interface ContentService {
 
     Card getCard(int cardId);
 
+    void deleteCard(int cardId);
+
     List<Tag> findTags();
 
     List<Tag> findTagByTheme(Theme theme);
