@@ -16,13 +16,13 @@ import {FORM_DIRECTIVES} from "angular2/common";
 })
 export class DetailOrganisationComponent {
 
-    private router: Router;
+    private router:Router;
 
-    private userService: UserService;
+    private userService:UserService;
 
-    private organisation: Organisation = Organisation.createEmptyOrganisation();
+    private organisation:Organisation = Organisation.createEmptyOrganisation();
 
-    public constructor(userService: UserService, routeParam:RouteParams, router:Router) {
+    public constructor(userService:UserService, routeParam:RouteParams, router:Router) {
         this.router = router;
         this.userService = userService;
         userService.getOrganisation(routeParam.params["organisationId"]).subscribe((organisation:Organisation) => {
@@ -30,7 +30,16 @@ export class DetailOrganisationComponent {
             document.title = 'Organisatie: ' + this.organisation.name;
         })
     }
-    public backToList() : void {
+
+    public backToList():void {
         this.router.navigate(['/Organisations']);
+    }
+
+    public detailTheme(id:string):void {
+        this.router.navigate(['/DetailTheme', {themeId: id}]);
+    }
+
+    public addTheme() : void{
+        //this.router.navigate(['/Organisation/:organisationId/createTheme',{organisationId:this.organisation.id}]);
     }
 }
