@@ -40,6 +40,6 @@ export class DetailOrganisationComponent {
     }
 
     public addTheme() : void{
-        //this.router.navigate(['/Organisation/:organisationId/createTheme',{organisationId:this.organisation.id}]);
+        this.router.navigate(['/CreateTheme',{organisationId:this.organisation.id}]);
     }
 }
