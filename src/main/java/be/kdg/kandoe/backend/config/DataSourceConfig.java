@@ -46,7 +46,7 @@ public class DataSourceConfig
 
         // datasource remote tcp server
         // in this case:also start H2 server from commandline with: java -cp h2*.jar org.h2.tools.Server
-         //dataSource.setUrl("jdbc:h2:tcp://127.0.0.1:9092/mem:kandoe;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
+        // dataSource.setUrl("jdbc:h2:tcp://127.0.0.1:9092/mem:kandoe;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
 
         // optional
         // dataSource.setUsername("sa");

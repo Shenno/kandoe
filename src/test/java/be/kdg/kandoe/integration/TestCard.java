@@ -42,6 +42,7 @@ public class TestCard {
         user = userService.addUser(user);
 
         organisation= new Organisation("organisation");
+        organisation.setOrganisator(user);
         organisation = userService.addOrganisation(organisation);
 
         String name = "theme name";
@@ -56,8 +57,8 @@ public class TestCard {
 
     @After
     public void tearDown(){
-        userService.deleteUser(user.getId());
         userService.deleteOrganisation(organisation.getId());
+        userService.deleteUser(user.getId());
     }
 
 

@@ -12,7 +12,7 @@ import java.util.Date;
 @DiscriminatorValue("SynchronousSession")
 public class SynchronousSession extends Session implements Serializable{
 
-    @Column(name = "StartingTime", nullable = false)
+    @Column(name = "StartingTime")
     private LocalDateTime startingTime;
 
     public SynchronousSession(boolean isProblem,LocalDateTime startingTime) {

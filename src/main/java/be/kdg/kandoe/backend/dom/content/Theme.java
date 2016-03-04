@@ -47,7 +47,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
             inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
     private List<User> organisators = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "organisation_id")
     private Organisation organisation;
 
@@ -93,13 +93,21 @@ public class Theme implements Serializable, Identifiable<Integer> {
         return themeName;
     }
 
+    public List<Session> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List<Session> sessions) {
+        this.sessions = sessions;
+    }
+
     @Override
     public Integer getId() {
         return themeId;
     }
 
     public Integer getThemeId() {
-        return getId();
+        return themeId;
     }
 
     public List<User> getOrganisators() {

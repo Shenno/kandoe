@@ -56,9 +56,6 @@ public class Card implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = Remark.class, mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Remark> remarks;
 
-    @OneToMany(targetEntity = CardSession.class, mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<CardSession> cardSessions;
-
     public Card(String text, Theme theme) {
         this(text, "www.google.be", theme); //TODO good image
 
@@ -72,14 +69,6 @@ public class Card implements Serializable, Identifiable<Integer> {
         this.snapShotID = 1;
         this.theme= theme;
         this.remarks = new ArrayList<>();
-    }
-
-    public List<CardSession> getCardSessions() {
-        return cardSessions;
-    }
-
-    public void setCardSessions(List<CardSession> cardSessions) {
-        this.cardSessions = cardSessions;
     }
 
     public Theme getTheme() {

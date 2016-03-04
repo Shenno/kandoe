@@ -13,6 +13,12 @@ public class AsynchronousSession extends Session implements Serializable{
     @Column(name = "MaxTimeRound", nullable = false)
     private int maxTimeRound; //in seconds
 
+    public AsynchronousSession() {
+        super(false);
+        this.maxTimeRound = 60;
+
+    }
+
     public AsynchronousSession(boolean isProblem, int maxTimeRound) {
         super(isProblem);
         this.maxTimeRound = maxTimeRound;

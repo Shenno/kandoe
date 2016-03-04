@@ -51,8 +51,8 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = CardSession.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CardSession> cardSessions;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "UserSessionn",
+    @ManyToMany(cascade = CascadeType.DETACH)
+    @JoinTable(name = "UserSession",
                joinColumns = @JoinColumn(name = "Sessionid", referencedColumnName = "SessionId"),
                inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
     private List<User> users = new ArrayList<>();
@@ -91,6 +91,10 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public void addUser(User user) {
+        this.users.add(user);
     }
 
     public boolean isGameOver() {
@@ -139,6 +143,14 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
 
     public void setTheme(Theme theme) {
         this.theme = theme;
+    }
+
+    public boolean isProblem() {
+        return problem;
+    }
+
+    public void setProblem(boolean problem) {
+        this.problem = problem;
     }
 
     /*   public void setParticipations(List<Participation> participations) {

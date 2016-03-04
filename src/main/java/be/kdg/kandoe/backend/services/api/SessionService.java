@@ -1,6 +1,7 @@
 package be.kdg.kandoe.backend.services.api;
 
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.session.Session;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.List;
  * Package      be.kdg.kandoe.backend.services.api
  */
 public interface SessionService {
-    /* Participation */
-   // Participation addParticipation(Participation participation);
-   // Participation getParticipation(int pId);
+    // Session
+    Session addSession(Session session, int themeId);
+    Session findSession(int sessionId);
+
 }

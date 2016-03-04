@@ -1,5 +1,6 @@
 package be.kdg.kandoe.integration;
 
+import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.session.AsynchronousSession;
@@ -26,7 +27,6 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:**/testcontext.xml"})
 public class TestSession {
-    Session session;
     Theme theme;
     User user;
     Organisation organisation;
@@ -37,8 +37,8 @@ public class TestSession {
     @Autowired
     private UserService userService;
 
- /*   @Autowired
-    private SessionService sessionService;*/
+    @Autowired
+    private SessionService sessionService;
 
     @Before
     public void setup() {
@@ -64,11 +64,61 @@ public class TestSession {
     }
 
     @Test
-    public void testCreateAsyncSessionAddTheme() {
+    public void testCreateAsyncSession() {
+        // Create AsyncSession and add three users to it
         Session session = new AsynchronousSession(true, 60);
-     //   session = sessionService.addSession(session);
+        session.addUser(user);
+        User user2 = new User("gebruikertje2", "pass");
+        user2 = userService.addUser(user2);
+        session.addUser(user2);
+        User user3 = new User("gebruikertje3", "pass");
+        user3 = userService.addUser(user3);
+        session.addUser(user3);
+
+        // Persist session
+        session = sessionService.addSession(session, theme.getId());
+
+        // Create cards and add to the session
+        Card card1 = new Card("CardOne", theme);
+        Card card2 = new Card("CardTwo", theme);
+        Card card3 = new Card("CardThree", theme);
+        card1 = contentService.addCard(card1);
+        card2 = contentService.addCard(card2);
+        card3 = contentService.addCard(card3);
+        //TODO Card adden -> delete op 1 of andere manier users
+
+       /* sessionService.addCardToSession(card1);
+        sessionService.addCardToSession(card2);
+        sessionService.addCardToSession(card3);*/
 
 
+        // Assert
+        assertNotNull(session);
+        theme = contentService.getTheme(theme.getId());
+        user = userService.findUserById(user.getId());
+        assertNotNull(theme);
+        assertEquals("Theme has 1 session", 1, theme.getSessions().size());
+        assertEquals("Theme sessionId is correct",theme.getSessions().get(0).getId(), session.getId());
+        assertEquals("Playerlist must contain 3 user(s)", session.getUsers().size(),3);
+
+
+    }
+
+    @Test
+    public void testCreateTwoAsyncSessionsSameTheme() {
+        Session sessionOne = new AsynchronousSession(true, 60);
+        Session sessionTwo = new AsynchronousSession(false, 50);
+        sessionOne = sessionService.addSession(sessionOne, theme.getId());
+        sessionTwo = sessionService.addSession(sessionTwo, theme.getId());
+        assertNotNull(sessionOne);
+        assertNotNull(sessionTwo);
+        theme = contentService.getTheme(theme.getId());
+        assertNotNull(theme);
+        assertEquals(theme.getSessions().size(), 2);
+    }
+
+    @Test
+    public void test() {
 
     }
 }

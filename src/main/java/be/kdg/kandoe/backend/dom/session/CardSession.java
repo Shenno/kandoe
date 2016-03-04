@@ -24,15 +24,14 @@ public class CardSession implements Serializable, Identifiable<Integer> {
     @Column(name = "Priority", nullable = false)
     private int priority;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "card_id")
-    private Card card;
+    @Column(name = "CardText")
+    private String card;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "session_id")
     private Session session;
 
-    public CardSession(int priority, Card card, Session session) {
+    public CardSession(int priority, String card, Session session) {
         this.priority = priority;
         this.card = card;
         this.session = session;
@@ -46,11 +45,11 @@ public class CardSession implements Serializable, Identifiable<Integer> {
         this.priority = priority;
     }
 
-    public Card getCard() {
+    public String getCard() {
         return card;
     }
 
-    public void setCard(Card card) {
+    public void setCard(String card) {
         this.card = card;
     }
 

@@ -93,6 +93,7 @@ public class TestOrganisation {
         assertEquals(user.getOrganisations().size(), 1);
         assertEquals(user.getOrganisations().get(0).getName(), organisation.getName());
         assertEquals(user.getOrganisations().get(0).getId(), organisation.getId());
+        userService.deleteOrganisation(organisation.getId());
     }
 
     @Test
