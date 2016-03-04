@@ -19,11 +19,13 @@ export class CreateOrganisationComponent {
 
     public constructor(userService: UserService) {
         this.userService = userService;
+        this.userService.getMyDetails().subscribe((user:User) => {
+            this.organisation.organisatorId = user.id;
+        });
         document.title = 'Maak organisatie aan';
     }
 
     public onSubmit(): void {
-        this.organisation.organisator = new User(2, "test@test.be");
         this.userService.addOrganisation(this.organisation);
     }
 }

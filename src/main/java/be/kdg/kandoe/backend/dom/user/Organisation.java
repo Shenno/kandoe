@@ -57,6 +57,10 @@ public class Organisation implements Serializable, Identifiable<Integer> {
         return organisationId;
     }
 
+    public Integer getOrganisationId() {
+        return getId();
+    }
+
     public List<Theme> getThemes() {
         return themes;
     }

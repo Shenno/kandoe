@@ -4,14 +4,13 @@ import {Theme} from"./theme";
 export class Organisation {
     constructor(public id: number,
                 public name: string,
-                public organisator: User,
-                public themes : Theme[]
+                public organisatorId: number,
+                public themes : string[]
                 ) {
 
     }
 
     public static createEmptyOrganisation(): Organisation {
-        alert("test");
-        return new Organisation(0, "", User.createEmptyUser(),[]);
+        return new Organisation(0, "", 0,[]);
     }
 }

@@ -17,8 +17,9 @@ import java.util.List;
 public class OrganisationResource implements Serializable {
     private Integer id;
     private String name;
-    private List<ThemeResource> themes;
-    private UserResource organisator;
+    private List<String> themes;
+    //private UserResource organisator;
+    private Integer organisatorId;
 
     //PUSH
 
@@ -34,8 +35,7 @@ public class OrganisationResource implements Serializable {
     }*/
 
     public OrganisationResource() {
-        this.themes = new ArrayList<ThemeResource>();
-        this.organisator = new UserResource();
+        this.themes = new ArrayList<>();
     }
 
     public Integer getId() {
@@ -54,19 +54,27 @@ public class OrganisationResource implements Serializable {
         this.name = name;
     }
 
-    public List<ThemeResource> getThemes() {
+    public List<String> getThemes() {
         return themes;
     }
 
-    public void setThemes(List<ThemeResource> themes) {
+    public void setThemes(List<String> themes) {
         this.themes = themes;
     }
 
-    public UserResource getOrganisator() {
+    /*public UserResource getOrganisator() {
         return organisator;
     }
 
     public void setOrganisator(UserResource organisator) {
         this.organisator = organisator;
+    }*/
+
+    public Integer getOrganisatorId() {
+        return organisatorId;
+    }
+
+    public void setOrganisatorId(Integer organisatorId) {
+        this.organisatorId = organisatorId;
     }
 }
