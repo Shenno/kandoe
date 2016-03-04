@@ -27,10 +27,8 @@ public class OrganisationMapper extends CustomMapper<Organisation, OrganisationR
 
     @Override
     public void mapAtoB(Organisation organisation, OrganisationResource organisationResource, MappingContext context) {
-    /*    mapperFacade.map(organisation.getOrganisator().getId(), organisationResource.getOrganisatorId());
-        mapperFacade.map(organisation.getThemes(), organisationResource.getThemes());*/
-       // mapperFacade.map(organisation.getName(), organisationResource.getOrganisationName());
         organisationResource.setOrganisatorId(organisation.getOrganisator().getId());
+        organisationResource.setOrganisatorName((organisation.getOrganisator().getFirstName())+" "+(organisation.getOrganisator().getLastName()));
         List<String> themeNames = new ArrayList<>();
         for(Theme theme: organisation.getThemes()) {
             themeNames.add(theme.getThemeName());

@@ -1,5 +1,5 @@
 <h1>Organisatie: <span id="span_organisationname">{{organisation.name}}</span></h1>
-<!--<p>Organisator: {{organisation.organisator.username}}</p>-->
+<p>Organisator: {{organisation.organisatorName}}</p>
 <div><h2>Thema's</h2>
     <ul>
         <li *ngFor="#theme of organisation.themes; #i=index" (click)="detailTheme(i+1)">

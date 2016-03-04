@@ -20,7 +20,7 @@ public class OrganisationResource implements Serializable {
     private List<String> themes;
     //private UserResource organisator;
     private Integer organisatorId;
-
+    private String organisatorName;
     //PUSH
 
    /* public OrganisationResource(Organisation organisation) {
@@ -76,5 +76,13 @@ public class OrganisationResource implements Serializable {
 
     public void setOrganisatorId(Integer organisatorId) {
         this.organisatorId = organisatorId;
+    }
+
+    public String getOrganisatorName() {
+        return organisatorName;
+    }
+
+    public void setOrganisatorName(String organisatorName) {
+        this.organisatorName = organisatorName;
     }
 }

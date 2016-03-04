@@ -5,12 +5,13 @@ export class Organisation {
     constructor(public id: number,
                 public name: string,
                 public organisatorId: number,
+                public organisatorName: string,
                 public themes : string[]
                 ) {
 
     }
 
     public static createEmptyOrganisation(): Organisation {
-        return new Organisation(0, "", 0,[]);
+        return new Organisation(0, "", 0,"",[]);
     }
 }
