@@ -20,6 +20,7 @@ export class CreateThemeComponent {
     private userService: UserService;
 
     private theme: Theme = Theme.createEmptyTheme();
+    private newTag: string = "";
         //new Promise<Theme[]>(resolve => setTimeout(() =>resolve(Theme), 2000));
 
     public constructor(contentService: ContentService, userService: UserService, routeParam: RouteParams) {
@@ -34,5 +35,13 @@ export class CreateThemeComponent {
 
     public onSubmit(): void {
         this.contentService.addTheme(this.theme);
+    }
+
+    public onAddTag(): void {
+        this.theme.tags[this.theme.tags.length] = this.newTag;
+        var newTagElement = document.createElement("p");
+        newTagElement.id = 'tag' + this.theme.tags.length;
+        newTagElement.innerHTML = this.newTag;
+        document.getElementById('tags').appendChild(newTagElement);
     }
 }

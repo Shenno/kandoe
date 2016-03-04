@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,12 +49,12 @@ public class ContentServiceImpl implements ContentService {
             throw new ContentServiceException("Theme can not be empty");
         } else if (theme.getThemeName().isEmpty()) {
             throw new ContentServiceException("Empty name for theme");
-            //TODO: Moet nog terug uit commentaar wanneer een organisatie en organisatoren worden meegegeven
         } else if (theme.getOrganisation() == null) {
             throw new ContentServiceException("Organisation can not be empty");
         } else if (theme.getOrganisators().size() == 0) {
             throw new ContentServiceException("There must be at least one organisator");
         }
+        theme.setTags(new ArrayList<>()); //TODO: Betere manier om bug op te lossen?
         theme = themeRepository.addTheme(theme);
         /*Organisation organisation = userService.getOrganisationById(theme.getOrganisation().getId());
         organisation.getThemes().add(theme);

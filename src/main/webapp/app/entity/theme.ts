@@ -6,11 +6,12 @@ export class Theme {
                 public commentaryAllowed: boolean,
                 public addingAdmitted: boolean,
                 public organisationId: number,
-                public organisatorId: number) {
+                public organisatorId: number,
+                public tags: string[]) {
 
     }
 
     public static createEmptyTheme(): Theme {
-        return new Theme(0, "", "", false, false, 0, 0);
+        return new Theme(0, "", "", false, false, 0, 0, []);
     }
 }

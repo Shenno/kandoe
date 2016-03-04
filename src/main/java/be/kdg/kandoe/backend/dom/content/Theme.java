@@ -130,6 +130,12 @@ public class Theme implements Serializable, Identifiable<Integer> {
         return tags;
     }
 
+    public void addTag(Tag tag) {
+        if (tag != null) {
+            tags.add(tag);
+        }
+    }
+
     public Organisation getOrganisation() {
         return organisation;
     }
@@ -172,5 +178,29 @@ public class Theme implements Serializable, Identifiable<Integer> {
 
     public void setOrganisation(Organisation organisation) {
         this.organisation = organisation;
+    }
+
+    public void setOrganisators(List<User> organisators) {
+        this.organisators = organisators;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public Theme getMainTheme() {
+        return mainTheme;
+    }
+
+    public void setMainTheme(Theme mainTheme) {
+        this.mainTheme = mainTheme;
+    }
+
+    public List<Theme> getSubthemes() {
+        return subthemes;
+    }
+
+    public void setSubthemes(List<Theme> subthemes) {
+        this.subthemes = subthemes;
     }
 }

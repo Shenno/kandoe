@@ -41,6 +41,7 @@ public class TestTag {
         user = userService.addUser(user);
 
         organisation = new Organisation("organisation");
+        organisation.setOrganisator(user);
         organisation = userService.addOrganisation(organisation);
 
         String name = "theme name";
@@ -53,8 +54,8 @@ public class TestTag {
 
     @After
     public void tearDown() {
-        userService.deleteUser(user.getId());
         userService.deleteOrganisation(organisation.getId());
+        userService.deleteUser(user.getId());
     }
 
     @Test
@@ -67,7 +68,13 @@ public class TestTag {
         assertNotNull(tag);
         assertEquals("Tag name must be correct", name, tag.getTagName());
         assertEquals("Theme must be correct",theme,tag.getTheme());
+
+        Theme theme = contentService.getTheme(this.theme.getId());
+
+        assertEquals("Theme must have 1 tag", 1, theme.getTags().size());
+        assertEquals("Theme must have correct tag", tag.getTagName(), theme.getTags().get(0).getTagName());
     }
+
     @Test(expected = ContentServiceException.class)
     public void testAddEmptyTag(){
         Tag tag = null;
@@ -166,14 +173,17 @@ public class TestTag {
         tag = contentService.getTag(tag.getId());
         assertNotNull(tag);
 
-        String newName = "new theme name";
+        String newName = "new tag name";
         tag.setTagName(newName);
 
         Tag persistedTag = contentService.updateTag(tag);
         assertNotNull(persistedTag);
-        assertEquals("Tag is not updated",persistedTag.getTagName(),newName);
+        assertEquals("Tag must be updated",newName, persistedTag.getTagName());
 
+        Theme theme = contentService.getTheme(this.theme.getId());
 
+        assertEquals("Theme must have 1 tag", 1, theme.getTags().size());
+        assertEquals("Theme must have correct tag", persistedTag.getTagName(), theme.getTags().get(0).getTagName());
     }
 
     //TODO: Subtheme

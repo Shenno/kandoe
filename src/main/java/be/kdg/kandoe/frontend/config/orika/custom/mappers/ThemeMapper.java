@@ -1,8 +1,10 @@
 package be.kdg.kandoe.frontend.config.orika.custom.mappers;
 
+import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.dom.user.User;
+import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
 import ma.glasnost.orika.CustomMapper;
@@ -14,10 +16,12 @@ import org.springframework.stereotype.Component;
 public class ThemeMapper extends CustomMapper<Theme, ThemeResource> {
 
     private UserService userService;
+    private ContentService contentService;
 
     @Autowired
-    public ThemeMapper(UserService userService) {
+    public ThemeMapper(UserService userService, ContentService contentService) {
         this.userService = userService;
+        this.contentService = contentService;
     }
 
     @Override

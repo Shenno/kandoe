@@ -5,6 +5,7 @@ import be.kdg.kandoe.frontend.controllers.resources.users.OrganisationResource;
 import org.springframework.hateoas.ResourceSupport;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Kevin on 26/02/2016.
@@ -19,6 +20,7 @@ public class ThemeResource implements Serializable {
     private Integer organisationId;
     private Integer organisatorId;
 //    private OrganisationResource organisation;
+    private List<String> tags;
 
     public ThemeResource() {}
 
@@ -92,5 +94,13 @@ public class ThemeResource implements Serializable {
 
     public void setOrganisatorId(Integer organisatorId) {
         this.organisatorId = organisatorId;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 }

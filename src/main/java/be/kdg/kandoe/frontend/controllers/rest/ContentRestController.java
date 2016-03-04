@@ -50,6 +50,12 @@ public class ContentRestController {
     {
         //Theme themeToAdd = new Theme(themeResource.getName(), themeResource.getDescription(), themeResource.isCommentaryAllowed(), themeResource.isAddingAdmitted(), null, null, null);
         Theme addedTheme = contentService.addTheme(mapperFacade.map(themeResource, Theme.class));
+
+        for(String tagName: themeResource.getTags()) {
+            Tag tag = contentService.addTag(new Tag(tagName, addedTheme));
+            addedTheme.addTag(tag);
+        }
+
         return new ResponseEntity<>(mapperFacade.map(addedTheme, ThemeResource.class), HttpStatus.CREATED);
     }
 

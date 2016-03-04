@@ -18,7 +18,7 @@ public class ITtheme {
     public void testAddTheme() {
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
-        driver.get("http://localhost:9966/kandoe/#/createTheme");
+        driver.get("http://localhost:9966/kandoe/#/organisation/1/createTheme");
 
         allowDomToLoad();
 
@@ -53,15 +53,21 @@ public class ITtheme {
         element = driver.findElement(By.name("ib_newTag"));
         assertEquals("input", element.getTagName());
         assertEquals("text", element.getAttribute("type"));
+        element.sendKeys("tag1");
 
         element = driver.findElement(By.name("btn_addTag"));
         assertEquals("button", element.getTagName());
         assertEquals("Voeg tag toe", element.getText());
+        element.click();
+
+        element = driver.findElement(By.id("tag1"));
+        assertEquals("span", element.getTagName());
+        assertEquals("Content of tag must be correct", "tag1", element.getText());
 
         element = driver.findElement(By.name("btn_save"));
         assertEquals("button", element.getTagName());
         assertEquals("Opslaan", element.getText());
-        element.submit();
+        element.click();
 
         (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Thema: themename"));
 
@@ -87,6 +93,10 @@ public class ITtheme {
 
         element = driver.findElement(By.id("tags"));
         assertEquals("div", element.getTagName());
+
+        element = driver.findElement(By.id("tag1"));
+        assertEquals("span", element.getTagName());
+        assertEquals("Content of tag must be correct", "tag1", element.getText());
     }
 
     @Test
@@ -105,6 +115,9 @@ public class ITtheme {
 
         element = driver.findElement(By.id("p_description"));
         String description = element.getText();
+
+        element = driver.findElement(By.id("tag1"));
+        String tag1 = element.getText();
 
         element = driver.findElement(By.id("btn_edit"));
         assertEquals("button", element.getTagName());
@@ -139,6 +152,27 @@ public class ITtheme {
         assertEquals("checkbox", element.getAttribute("type"));
         element.click();
 
+        element = driver.findElement(By.id("tags"));
+        assertEquals("div", element.getTagName());
+
+        element = driver.findElement(By.id("tag1"));
+        assertEquals("span", element.getTagName());
+        assertEquals("Content of tag must be correct", tag1, element.getText());
+
+        element = driver.findElement(By.name("ib_newTag"));
+        assertEquals("input", element.getTagName());
+        assertEquals("text", element.getAttribute("type"));
+        element.sendKeys("tag2");
+
+        element = driver.findElement(By.name("btn_addTag"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Voeg tag toe", element.getText());
+        element.click();
+
+        element = driver.findElement(By.id("tag2"));
+        assertEquals("span", element.getTagName());
+        assertEquals("Content of tag must be correct", "tag2", element.getText());
+
         element = driver.findElement(By.name("btn_save"));
         assertEquals("button", element.getTagName());
         assertEquals("Opslaan", element.getText());
@@ -165,6 +199,17 @@ public class ITtheme {
         assertEquals("checkbox", element.getAttribute("type"));
         assertEquals("true", element.getAttribute("disabled"));
         assertEquals("true", element.getAttribute("checked"));
+
+        element = driver.findElement(By.id("tags"));
+        assertEquals("div", element.getTagName());
+
+        element = driver.findElement(By.id("tag1"));
+        assertEquals("span", element.getTagName());
+        assertEquals("Content of tag must be correct", tag1, element.getText());
+
+        element = driver.findElement(By.id("tag2"));
+        assertEquals("span", element.getTagName());
+        assertEquals("Content of tag must be correct", "tag2", element.getText());
     }
 
     private void allowDomToLoad() {

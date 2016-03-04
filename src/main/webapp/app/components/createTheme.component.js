@@ -33,6 +33,7 @@ System.register(['angular2/core', '../entity/theme', "../service/contentService"
                 function CreateThemeComponent(contentService, userService, routeParam) {
                     var _this = this;
                     this.theme = theme_1.Theme.createEmptyTheme();
+                    this.newTag = "";
                     this.contentService = contentService;
                     document.title = 'Maak thema aan';
                     this.theme.organisationId = +routeParam.params["organisationId"];
@@ -43,6 +44,13 @@ System.register(['angular2/core', '../entity/theme', "../service/contentService"
                 }
                 CreateThemeComponent.prototype.onSubmit = function () {
                     this.contentService.addTheme(this.theme);
+                };
+                CreateThemeComponent.prototype.onAddTag = function () {
+                    this.theme.tags[this.theme.tags.length] = this.newTag;
+                    var newTagElement = document.createElement("p");
+                    newTagElement.id = 'tag' + this.theme.tags.length;
+                    newTagElement.innerHTML = this.newTag;
+                    document.getElementById('tags').appendChild(newTagElement);
                 };
                 CreateThemeComponent = __decorate([
                     core_1.Component({

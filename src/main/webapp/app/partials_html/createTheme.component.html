@@ -1,6 +1,6 @@
 <h1>Maak een thema aan</h1>
 
-<form (submit)="onSubmit()">
+<form>
     <div class="form-group">
         <label for="ib_name">Naam</label>
         <input id="ib_name" name="ib_name" [(ngModel)]="theme.themeName">
@@ -25,10 +25,10 @@
     <div id="tags"></div>
 
     <div class="form-group">
-        <input name="ib_newTag">
-        <button name="btn_addTag">Voeg tag toe</button>
+        <input name="ib_newTag" [(ngModel)]="newTag">
+        <button name="btn_addTag" (click)="onAddTag()">Voeg tag toe</button>
     </div>
 
-    <button name="btn_save">Opslaan</button>
+    <button name="btn_save" (click)="onSubmit()">Opslaan</button>
 
 </form>

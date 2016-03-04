@@ -33,7 +33,7 @@ public class TagRepositoryImpl implements TagRepositoryCustom {
             throw new ContentServiceException("Tag " + tag.getTagName() + " already exists in Theme "+ tag.getTheme());
         }
         final Session session = em.unwrap(Session.class);
-        session.saveOrUpdate(tag);
+        session.save(tag);
         return tag;
     }
 

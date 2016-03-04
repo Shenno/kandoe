@@ -40,10 +40,10 @@ public class UserServiceImpl implements UserService
     @Override
     public Organisation addOrganisation(Organisation organisation) throws UserServiceException {
         if(organisation.getName().isEmpty()) {
-            throw new UserServiceException("Empty name");
+            throw new UserServiceException("Empty name for organisation");
         }
         if(getOrganisationByName(organisation.getName()) != null) {
-            throw new UserServiceException("Duplicate name");
+            throw new UserServiceException("Duplicate organisation");
         }
         return organisationRepository.save(organisation);
     }
