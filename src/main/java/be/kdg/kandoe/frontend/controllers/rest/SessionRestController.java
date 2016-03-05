@@ -7,6 +7,7 @@ import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.SessionService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
+import be.kdg.kandoe.frontend.controllers.resources.sessions.SessionResourceActive;
 import be.kdg.kandoe.frontend.controllers.resources.sessions.SessionResourcePost;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/sessions")
+@RequestMapping("api/sessions")
 public class SessionRestController {
 
     private SessionService sessionService;
@@ -35,15 +36,29 @@ public class SessionRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Integer> createSession(@RequestBody SessionResourcePost sessionResourcePost)
+    public ResponseEntity<Integer> createAsynchronousSession(@RequestBody SessionResourcePost sessionResourcePost)
     {
-        final Session session = new AsynchronousSession(true, 60);
+        final AsynchronousSession session = new AsynchronousSession(true, 60, 4);
 
         Session persistedSession = sessionService.addSession(session, sessionResourcePost.getThemeId());
         sessionResourcePost.getParticipantsEmails().forEach(e -> sessionService.addUserToSession(session, e));
-        sessionResourcePost.getCardsIds().forEach(c -> sessionService.addCardToSession(session, contentService.getCard(c)));
+
+        //Kan niet op deze manier..? Moet result session hebben
+         sessionResourcePost.getCardIds().forEach(c -> sessionService.addCardToSession(session, contentService.getCard(c)));
+
+        //PUSH
+
+        /*for(Integer c : sessionResourcePost.getCardIds()) {
+            persistedSession = sessionService.addCardToSession(session, contentService.getCard(c));
+        }*/
 
         //Do magic
         return new ResponseEntity<Integer>(persistedSession.getId(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/{sessionId}", method = RequestMethod.GET)
+    public ResponseEntity<SessionResourceActive> findAsynchronousSession(@PathVariable int sessionId) {
+        AsynchronousSession session = (AsynchronousSession) sessionService.findSession(sessionId);
+        return new ResponseEntity<SessionResourceActive>(mapperFacade.map(session, SessionResourceActive.class), HttpStatus.OK);
     }
 }
