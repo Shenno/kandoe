@@ -33,13 +33,6 @@ public class ContentRestController {
         this.mapperFacade = mapperFacade;
     }
 
-   /* @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<ThemeResource> findUserById(@PathVariable int userId)
-    {
-        Theme theme = contentService.getMainThemesByOrganisationId;
-        return new ResponseEntity<>(new UserResource(user), HttpStatus.OK);
-    } */
-
     @RequestMapping(value = "/{themeId}", method = RequestMethod.GET)
     public ResponseEntity<ThemeResource> findMainThemeById(@PathVariable int themeId)
     {     //

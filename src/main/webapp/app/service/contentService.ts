@@ -7,6 +7,8 @@ import {Logger} from "../util/logger";
 import {Observable} from "rxjs/Observable";
 import {Router} from "angular2/router";
 import {Card} from "../entity/card";
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/switchMap';
 
 @Injectable()
 export class ContentService {
@@ -46,6 +48,13 @@ export class ContentService {
         var url = this.baseUrl + "/api/themes/" + id + "/cards";
         var headers = this.urlService.getHeaders(true);
         return this.http.get(url, {headers:headers}).map((res:Response) => res.json());
+    }
+
+    public pollCardsByThemeId(id:string, interval:number): Observable<Theme[]> {
+        var url = this.baseUrl + "/api/themes/" + id + "/cards";
+        var headers = this.urlService.getHeaders(true);
+        return Observable.interval(1000)
+            .switchMap(() => this.http.get(url, {headers:headers})).map((res:Response) => res.json());
     }
 
     public addTheme(theme:Theme): void {
