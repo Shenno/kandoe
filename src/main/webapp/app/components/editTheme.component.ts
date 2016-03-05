@@ -31,6 +31,10 @@ export class EditThemeComponent {
         this.newTag = "";
     }
 
+    public onRemoveTag(i: number): void {
+        this.theme.tags.splice(i, 1);
+    }
+
     public onSubmit(): void {
         this.contentService.updateTheme(this.theme);
     }

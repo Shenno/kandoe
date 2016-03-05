@@ -27,8 +27,8 @@
     </div>
 
     <div id="tags">
-        <p *ngFor="#tag of theme.tags">
-            {{tag}}
+        <p *ngFor="#tag of theme.tags;#i=index">
+            {{tag}} <span [id]="'delete_tag' + i" class="glyphicon glyphicon-remove" (click)="onRemoveTag(i)"></span>
         </p>
     </div>
 

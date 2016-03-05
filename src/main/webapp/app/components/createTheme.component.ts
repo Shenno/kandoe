@@ -38,6 +38,10 @@ export class CreateThemeComponent {
         this.newTag = "";
     }
 
+    public onRemoveTag(i: number): void {
+        this.theme.tags.splice(i, 1);
+    }
+
     public onSubmit(): void {
         this.contentService.addTheme(this.theme);
     }

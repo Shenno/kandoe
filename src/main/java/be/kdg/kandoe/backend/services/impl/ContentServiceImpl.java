@@ -113,6 +113,7 @@ public class ContentServiceImpl implements ContentService {
             throw new ContentServiceException("Empty theme");
         }
 
+        tag.setTagName(tag.getTagName().toLowerCase());
         return tagRepository.addTag(tag);
     }
 

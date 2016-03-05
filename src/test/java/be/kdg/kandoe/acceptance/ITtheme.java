@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * @author: Evelien
@@ -64,6 +66,21 @@ public class ITtheme {
         assertEquals("span", element.getTagName());
         assertEquals("Content of tag must be correct", "tag1", element.getText());
 
+        element = driver.findElement(By.id("delete_tag0"));
+        assertEquals("span", element.getTagName());
+        assertEquals("glyphicon glyphicon-remove", element.getAttribute("class"));
+        element.click();
+
+        element = driver.findElement(By.name("ib_newTag"));
+        element.sendKeys("tag1Updated");
+
+        element = driver.findElement(By.name("btn_addTag"));
+        element.click();
+
+        element = driver.findElement(By.id("tag1"));
+        assertEquals("span", element.getTagName());
+        assertEquals("Content of tag must be correct", "tag1Updated", element.getText());
+
         element = driver.findElement(By.name("btn_save"));
         assertEquals("button", element.getTagName());
         assertEquals("Opslaan", element.getText());
@@ -96,7 +113,7 @@ public class ITtheme {
 
         element = driver.findElement(By.id("tag1"));
         assertEquals("span", element.getTagName());
-        assertEquals("Content of tag must be correct", "tag1", element.getText());
+        assertEquals("Content of tag must be correct", "tag1Updated", element.getText());
     }
 
     @Test
@@ -159,14 +176,29 @@ public class ITtheme {
         assertEquals("span", element.getTagName());
         assertEquals("Content of tag must be correct", tag1, element.getText());
 
+        element = driver.findElement(By.id("delete_tag0"));
+        assertEquals("span", element.getTagName());
+        assertEquals("glyphicon glyphicon-remove", element.getAttribute("class"));
+        element.click();
+
         element = driver.findElement(By.name("ib_newTag"));
         assertEquals("input", element.getTagName());
         assertEquals("text", element.getAttribute("type"));
-        element.sendKeys("tag2");
+        element.sendKeys("tag1Updated");
 
         element = driver.findElement(By.name("btn_addTag"));
         assertEquals("button", element.getTagName());
         assertEquals("Voeg tag toe", element.getText());
+        element.click();
+
+        element = driver.findElement(By.id("tag1"));
+        assertEquals("span", element.getTagName());
+        assertEquals("Content of tag must be correct", "tag1Updated", element.getText());
+
+        element = driver.findElement(By.name("ib_newTag"));
+        element.sendKeys("tag2");
+
+        element = driver.findElement(By.name("btn_addTag"));
         element.click();
 
         element = driver.findElement(By.id("tag2"));

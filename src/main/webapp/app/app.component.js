@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.component", "./components/createTheme.component", "./components/editTheme.component", "./components/detailTheme.component", "./components/createOrganisation.component", "./components/detailOrganisation.component", "./components/login.component", "./service/userService", "./components/overviewOrganisations.component", "./components/register.component", "./components/createSession.component", "./components/overviewThemes.component", "./components/overviewCards.component", "./components/createCard.component"], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.component", "./components/createTheme.component", "./components/editTheme.component", "./components/detailTheme.component", "./components/createOrganisation.component", "./components/detailOrganisation.component", "./components/login.component", "./service/userService", "./components/overviewOrganisations.component", "./components/register.component", "./components/createSession.component", "./components/overviewThemes.component", "./components/overviewCards.component", "./components/createCard.component", "./components/home.component", "./components/dashboard.component", "./components/manageAccount.component"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, cirkelsessie_component_1, createTheme_component_1, editTheme_component_1, detailTheme_component_1, createOrganisation_component_1, detailOrganisation_component_1, login_component_1, userService_1, overviewOrganisations_component_1, register_component_1, createSession_component_1, overviewThemes_component_1, overviewCards_component_1, createCard_component_1;
+    var core_1, router_1, cirkelsessie_component_1, createTheme_component_1, editTheme_component_1, detailTheme_component_1, createOrganisation_component_1, detailOrganisation_component_1, login_component_1, userService_1, overviewOrganisations_component_1, register_component_1, createSession_component_1, overviewThemes_component_1, overviewCards_component_1, createCard_component_1, home_component_1, dashboard_component_1, manageAccount_component_1;
     var AppComponent;
     return {
         setters:[
@@ -59,6 +59,15 @@ System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.
             },
             function (createCard_component_1_1) {
                 createCard_component_1 = createCard_component_1_1;
+            },
+            function (home_component_1_1) {
+                home_component_1 = home_component_1_1;
+            },
+            function (dashboard_component_1_1) {
+                dashboard_component_1 = dashboard_component_1_1;
+            },
+            function (manageAccount_component_1_1) {
+                manageAccount_component_1 = manageAccount_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -90,7 +99,11 @@ System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.
                         { path: '/themes', name: 'Themes', component: overviewThemes_component_1.OverviewThemeComponent },
                         { path: '/cards', name: 'Cards', component: overviewCards_component_1.OverviewCardComponent },
                         { path: '/createCard', name: 'CreateCard', component: createCard_component_1.CreateCardComponent },
-                        { path: '/createTheme', name: 'CreateTheme', component: createTheme_component_1.CreateThemeComponent }
+                        { path: '/createTheme', name: 'CreateTheme', component: createTheme_component_1.CreateThemeComponent },
+                        { path: '/home', name: 'Home', component: home_component_1.HomeComponent },
+                        { path: '/', name: 'Home', component: home_component_1.HomeComponent },
+                        { path: '/dashboard', name: 'Dashboard', component: dashboard_component_1.DashboardComponent },
+                        { path: '/manageAccount', name: 'ManageAccount', component: manageAccount_component_1.ManageAccountComponent }
                     ]), 
                     __metadata('design:paramtypes', [userService_1.UserService])
                 ], AppComponent);

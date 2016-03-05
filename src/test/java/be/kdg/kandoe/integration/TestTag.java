@@ -75,6 +75,17 @@ public class TestTag {
         assertEquals("Theme must have correct tag", tag.getTagName(), theme.getTags().get(0).getTagName());
     }
 
+    @Test
+    public void testAddTagUppercase() {
+        String name = "TaG nAme";
+
+        Tag tag = new Tag(name,theme);
+        tag = contentService.addTag(tag);
+
+        assertNotNull(tag);
+        assertEquals("Tag name must be lowercase", name.toLowerCase(), tag.getTagName());
+    }
+
     @Test(expected = ContentServiceException.class)
     public void testAddEmptyTag(){
         Tag tag = null;

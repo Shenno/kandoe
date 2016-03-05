@@ -41,6 +41,9 @@ System.register(['angular2/core', 'angular2/router', "../service/contentService"
                     this.theme.tags[this.theme.tags.length] = this.newTag.toLowerCase();
                     this.newTag = "";
                 };
+                EditThemeComponent.prototype.onRemoveTag = function (i) {
+                    this.theme.tags.splice(i, 1);
+                };
                 EditThemeComponent.prototype.onSubmit = function () {
                     this.contentService.updateTheme(this.theme);
                 };
