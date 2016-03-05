@@ -17,6 +17,9 @@ import {CreateSessionComponent} from "./components/createSession.component";
 import {OverviewThemeComponent} from "./components/overviewThemes.component";
 import {OverviewCardComponent} from "./components/overviewCards.component";
 import {CreateCardComponent} from "./components/createCard.component";
+import {HomeComponent} from "./components/home.component";
+import {DashboardComponent} from "./components/dashboard.component";
+import {ManageAccountComponent} from "./components/manageAccount.component";
 
 @Component({
     selector: 'my-app',
@@ -39,7 +42,11 @@ import {CreateCardComponent} from "./components/createCard.component";
     {path:'/themes',name:'Themes',component:OverviewThemeComponent},
     {path:'/cards',name:'Cards',component:OverviewCardComponent},
     {path:'/createCard',name:'CreateCard',component:CreateCardComponent},
-    {path:'/createTheme',name:'CreateTheme',component:CreateThemeComponent}
+    {path:'/createTheme',name:'CreateTheme',component:CreateThemeComponent},
+    {path:'/home',name:'Home',component:HomeComponent},
+    {path:'/',name:'Home',component:HomeComponent},
+    {path:'/dashboard',name:'Dashboard',component:DashboardComponent},
+    {path:'/manageAccount',name:'ManageAccount',component:ManageAccountComponent}
 ])
 
 export class AppComponent {

@@ -1,0 +1,1 @@
+{"version":3,"file":"tag.js","sourceRoot":"","sources":["tag.ts"],"names":["Tag","Tag.constructor","Tag.createEmptyTag"],"mappings":";;;;;YAAA;gBACIA,aAAmBA,IAAYA;oBAAZC,SAAIA,GAAJA,IAAIA,CAAQA;gBAG/BA,CAACA;gBAEaD,kBAAcA,GAA5BA;oBACIE,MAAMA,CAACA,IAAIA,GAAGA,CAACA,EAAEA,CAACA,CAACA;gBACvBA,CAACA;gBACLF,UAACA;YAADA,CAACA,AATD,IASC;YATD,qBASC,CAAA"}
