@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.component", "./components/createTheme.component", "./components/editTheme.component", "./components/detailTheme.component", "./components/createOrganisation.component", "./components/detailOrganisation.component", "./components/login.component", "./service/userService", "./components/overviewOrganisations.component", "./components/register.component", "./components/createSession.component"], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.component", "./components/createTheme.component", "./components/editTheme.component", "./components/detailTheme.component", "./components/createOrganisation.component", "./components/detailOrganisation.component", "./components/login.component", "./service/userService", "./components/overviewOrganisations.component", "./components/register.component", "./components/createSession.component", "./components/overviewThemes.component", "./components/overviewCards.component", "./components/createCard.component"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
         switch (arguments.length) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, cirkelsessie_component_1, createTheme_component_1, editTheme_component_1, detailTheme_component_1, createOrganisation_component_1, detailOrganisation_component_1, login_component_1, userService_1, overviewOrganisations_component_1, register_component_1, createSession_component_1;
+    var core_1, router_1, cirkelsessie_component_1, createTheme_component_1, editTheme_component_1, detailTheme_component_1, createOrganisation_component_1, detailOrganisation_component_1, login_component_1, userService_1, overviewOrganisations_component_1, register_component_1, createSession_component_1, overviewThemes_component_1, overviewCards_component_1, createCard_component_1;
     var AppComponent;
     return {
         setters:[
@@ -52,6 +52,15 @@ System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.
             },
             function (createSession_component_1_1) {
                 createSession_component_1 = createSession_component_1_1;
+            },
+            function (overviewThemes_component_1_1) {
+                overviewThemes_component_1 = overviewThemes_component_1_1;
+            },
+            function (overviewCards_component_1_1) {
+                overviewCards_component_1 = overviewCards_component_1_1;
+            },
+            function (createCard_component_1_1) {
+                createCard_component_1 = createCard_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -64,7 +73,7 @@ System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "<nav class=\"navbar navbar-default\">\n    <div class=\"container-fluid\">\n        <div class=\"navbar-header\">\n            <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\"\n                    data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n                <span class=\"sr-only\">Toggle navigation</span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n            </button>\n            <a class=\"navbar-brand\" href=\"#\">\n                <img alt=\"Brand\" src=\"./favicon.ico\">\n            </a>\n        </div>\n        <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n            <ul class=\"nav navbar-nav\">\n                <li><a href=\"#\" style=\"font-weight: bold\"><span class=\"glyphicon glyphicon-play-circle\"></span> Maak een cirkelsessie</a></li>\n                <li><a href=\"#/organisations\">Organisaties</a></li>\n                <li><a href=\"#\">Thema's</a></li>\n                <li><a href=\"#\">Kaartjes</a></li>\n            </ul>\n            <ul class=\"nav navbar-nav navbar-right\">\n                <li><a href=\"#\" *ngIf=\"currentUserDetails\">Registreren</a></li>\n                <li class=\"dropdown\">\n                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\"\n                       aria-expanded=\"false\">Mijn account <span class=\"caret\"></span></a>\n                    <ul class=\"dropdown-menu\">\n                        <li><a href=\"#\">Dashboard</a></li>\n                        <li><a href=\"#\">Beheer</a></li>\n                        <li role=\"separator\" class=\"divider\"></li>\n                        <li><a href=\"#\" (click)=\"userService.logout()\">Uitloggen</a></li>\n                    </ul>\n                </li>\n            </ul>\n        </div><!-- /.navbar-collapse -->\n    </div><!-- /.container-fluid -->\n</nav>\n    <router-outlet></router-outlet>\n    ",
+                        templateUrl: 'app/partials_html/app.component.html',
                         styleUrls: ['app/partials_css/app.component.css'],
                         directives: [router_1.ROUTER_DIRECTIVES],
                         encapsulation: core_1.ViewEncapsulation.None
@@ -79,7 +88,11 @@ System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.
                         { path: '/createOrganisation', name: 'CreateOrganisation', component: createOrganisation_component_1.CreateOrganisationComponent },
                         { path: '/createSession', name: 'CreateSession', component: createSession_component_1.CreateSessionComponent },
                         { path: '/detailOrganisation/:organisationId', name: 'DetailOrganisation', component: detailOrganisation_component_1.DetailOrganisationComponent },
-                        { path: '/organisations', name: 'Organisations', component: overviewOrganisations_component_1.OverviewOrganisationComponent }
+                        { path: '/organisations', name: 'Organisations', component: overviewOrganisations_component_1.OverviewOrganisationComponent },
+                        { path: '/themes', name: 'Themes', component: overviewThemes_component_1.OverviewThemeComponent },
+                        { path: '/cards', name: 'Cards', component: overviewCards_component_1.OverviewCardComponent },
+                        { path: '/createCard', name: 'CreateCard', component: createCard_component_1.CreateCardComponent },
+                        { path: '/createTheme', name: 'CreateTheme', component: createTheme_component_1.CreateThemeComponent }
                     ]), 
                     __metadata('design:paramtypes', [userService_1.UserService])
                 ], AppComponent);
