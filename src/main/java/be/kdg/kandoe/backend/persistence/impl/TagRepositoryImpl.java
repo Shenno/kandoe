@@ -25,10 +25,8 @@ public class TagRepositoryImpl implements TagRepositoryCustom {
 
     @Override
     public Tag addTag(Tag tag) throws ContentServiceException {
-        final TypedQuery<Tag> q = em.createNamedQuery("Tag.findByTagNamebyTheme", Tag.class);
-        q.setParameter("tagname", tag.getTagName());
-        q.setParameter("theme",tag.getTheme());
-        if (!q.getResultList().isEmpty())
+        List<Tag> tags = findTagByTagNameByTheme(tag.getTagName(), tag.getTheme());
+        if (!tags.isEmpty())
         {
             throw new ContentServiceException("Tag " + tag.getTagName() + " already exists in Theme "+ tag.getTheme());
         }
@@ -41,6 +39,14 @@ public class TagRepositoryImpl implements TagRepositoryCustom {
     public List<Tag> findTagByTheme(Theme theme) {
         final TypedQuery<Tag> q = em.createNamedQuery("Tag.findTagByTheme",Tag.class);
         q.setParameter("theme",theme);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Tag> findTagByTagNameByTheme(String tagname, Theme theme) {
+        final TypedQuery<Tag> q = em.createNamedQuery("Tag.findByTagNamebyTheme", Tag.class);
+        q.setParameter("tagname", tagname);
+        q.setParameter("theme", theme);
         return q.getResultList();
     }
 }

@@ -16,10 +16,9 @@ export class EditThemeComponent {
 
     //private tag: Tag = Tag.createEmptyTag();
     private theme: Theme = Theme.createEmptyTheme();
+    private newTag: string = "";
 
-    public constructor(contentService: ContentService,routeParam:RouteParams,router:Router) {
-        //this.router = router;
-
+    public constructor(contentService: ContentService,routeParam:RouteParams) {
         this.contentService = contentService;
         this.contentService.getTheme(routeParam.params["themeId"]).subscribe((theme:Theme) => {
             this.theme = theme;
@@ -27,9 +26,9 @@ export class EditThemeComponent {
         });
     }
 
-   /* public onSubmit(): void {
-        this.contentService.addTag(this.tag);
-    }*/
+    public onAddTag(): void {
+        this.theme.tags[this.theme.tags.length] = this.newTag;
+    }
 
     public onSubmit(): void {
         this.contentService.updateTheme(this.theme);

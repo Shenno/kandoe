@@ -48,7 +48,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
             inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
     private List<User> organisators = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne/*(cascade = CascadeType.ALL)*/
     @JoinColumn(name = "organisation_id")
     private Organisation organisation;
 

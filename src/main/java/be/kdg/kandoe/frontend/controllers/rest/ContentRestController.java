@@ -5,6 +5,7 @@ import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.ContentService;
+import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
 import be.kdg.kandoe.frontend.controllers.resources.content.CardResource;
 import be.kdg.kandoe.frontend.controllers.resources.content.TagResource;
 import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
@@ -27,15 +28,13 @@ public class ContentRestController {
     MapperFacade mapperFacade;
 
     @Autowired
-    public ContentRestController(ContentService contentService, MapperFacade mapperFacade)
-    {
+    public ContentRestController(ContentService contentService, MapperFacade mapperFacade) {
         this.contentService = contentService;
         this.mapperFacade = mapperFacade;
     }
 
     @RequestMapping(value = "/{themeId}", method = RequestMethod.GET)
-    public ResponseEntity<ThemeResource> findMainThemeById(@PathVariable int themeId)
-    {     //
+    public ResponseEntity<ThemeResource> findMainThemeById(@PathVariable int themeId) {     //
         Theme foundTheme = contentService.getTheme(themeId);
         ThemeResource themeResource = mapperFacade.map(foundTheme, ThemeResource.class);
         return new ResponseEntity<>(themeResource, HttpStatus.OK);
@@ -48,13 +47,12 @@ public class ContentRestController {
         return new ResponseEntity<List<ThemeResource>>(themeResources, HttpStatus.OK);
     }
 
-    @RequestMapping( method = RequestMethod.POST)
-    public ResponseEntity<ThemeResource> createMainTheme(@RequestBody ThemeResource themeResource)
-    {
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<ThemeResource> createMainTheme(@RequestBody ThemeResource themeResource) {
         //Theme themeToAdd = new Theme(themeResource.getName(), themeResource.getDescription(), themeResource.isCommentaryAllowed(), themeResource.isAddingAdmitted(), null, null, null);
         Theme addedTheme = contentService.addTheme(mapperFacade.map(themeResource, Theme.class));
 
-        for(String tagName: themeResource.getTags()) {
+        for (String tagName : themeResource.getTags()) {
             Tag tag = contentService.addTag(new Tag(tagName, addedTheme));
             addedTheme.addTag(tag);
         }
@@ -62,33 +60,41 @@ public class ContentRestController {
         return new ResponseEntity<>(mapperFacade.map(addedTheme, ThemeResource.class), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value="/{themeId}",method = RequestMethod.PUT)
-    public ResponseEntity<ThemeResource> updateMainTheme(@PathVariable("themeId") Integer themeId, @RequestBody ThemeResource themeResource, @AuthenticationPrincipal User user)
-    {
+    @RequestMapping(value = "/{themeId}", method = RequestMethod.PUT)
+    public ResponseEntity<ThemeResource> updateMainTheme(@PathVariable("themeId") Integer themeId, @RequestBody ThemeResource themeResource, @AuthenticationPrincipal User user) {
         if (themeResource.getOrganisatorId().intValue() == user.getId()) {
-            Theme addedTheme = contentService.updateTheme(mapperFacade.map(themeResource, Theme.class));
-            return new ResponseEntity<>(mapperFacade.map(addedTheme, ThemeResource.class), HttpStatus.OK);
+            Theme updatedTheme = contentService.updateTheme(mapperFacade.map(themeResource, Theme.class));
+
+            for (String tagName : themeResource.getTags()) {
+                try {
+                    contentService.findTagByTagNameByTheme(tagName, updatedTheme);
+                } catch(ContentServiceException ex) {
+                    Tag tag = contentService.addTag(new Tag(tagName, updatedTheme));
+                    updatedTheme.addTag(tag);
+                }
+            }
+
+            return new ResponseEntity<>(mapperFacade.map(updatedTheme, ThemeResource.class), HttpStatus.OK);
         }
 
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
-    @RequestMapping(value="/{mainThemeId}/tags", method = RequestMethod.POST)
-    public ResponseEntity<TagResource> addTagToMainTheme(@PathVariable int mainThemeId, @RequestBody TagResource tagResource)
-    {
+    @RequestMapping(value = "/{mainThemeId}/tags", method = RequestMethod.POST)
+    public ResponseEntity<TagResource> addTagToMainTheme(@PathVariable int mainThemeId, @RequestBody TagResource tagResource) {
         Tag t = tagResource.toDOM();
         t.setTheme(contentService.getTheme(mainThemeId));
         Tag tag = contentService.addTag(t);
         return new ResponseEntity<>(new TagResource(tag), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/cards", method = RequestMethod.POST)
+    @RequestMapping(value = "/cards", method = RequestMethod.POST)
     public ResponseEntity<CardResource> addCard(@RequestBody CardResource cardResource) {
         contentService.addCard(mapperFacade.map(cardResource, Card.class));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value="{themeId}/cards", method = RequestMethod.GET)
+    @RequestMapping(value = "{themeId}/cards", method = RequestMethod.GET)
     public ResponseEntity<List<CardResource>> findCardsByThemeId(@PathVariable int themeId) {
 
         List<Card> cards = contentService.findCardsByThemeId(themeId);
@@ -96,7 +102,7 @@ public class ContentRestController {
         return new ResponseEntity<List<CardResource>>(cardResources, HttpStatus.OK);
     }
 
-    @RequestMapping(value="/cards/{cardId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/cards/{cardId}", method = RequestMethod.GET)
     public ResponseEntity<CardResource> findCardById(@PathVariable int cardId) {
         Card card = contentService.getCard(cardId);
         System.out.println(card.getTheme().getId() + " /// " + card.getTheme().getDescription());

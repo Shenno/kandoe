@@ -2,19 +2,16 @@
 
 <h3>Beschrijving:</h3>
 <p id="p_description"> {{theme.description}}</p>
-<form (submit)="onSubmit()">
+<form>
     <div class="form-group">
         <input type="checkbox" id="cb_commentaryAllowed" name="cb_commentaryAllowed" disabled
-               [(ngModel)]="theme.commentaryAllowed"
-               class="form-control">
+               [(ngModel)]="theme.commentaryAllowed" class="form-control">
         <label for="cb_commentaryAllowed">Commentaar op kaartjes toegelaten</label>
     </div>
 
     <div class="form-group">
-        <input type="checkbox" id="cb_addingAdmitted"
-               name="cb_addingAdmitted" disabled
-               [(ngModel)]="theme.addingAdmitted"
-               class="form-control">
+        <input type="checkbox" id="cb_addingAdmitted" name="cb_addingAdmitted" disabled
+               [(ngModel)]="theme.addingAdmitted" class="form-control">
         <label for="cb_addingAdmitted">Toevoegen van kaartjes toegelaten</label>
     </div>
 
@@ -24,5 +21,5 @@
         </p>
     </div>
 
-    <button class="btn btn-default" id="btn_edit">Wijzigen</button>
+    <button class="btn btn-default" id="btn_edit" (click)="onSubmit()">Wijzigen</button>
 </form>

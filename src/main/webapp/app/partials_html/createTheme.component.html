@@ -32,7 +32,11 @@
         </div>
     </div>
 
-    <div id="tags"></div>
+    <div id="tags">
+        <p *ngFor="#tag of theme.tags">
+            {{tag}}
+        </p>
+    </div>
 
     <div class="form-group">
         <input class="form-control" name="ib_newTag" [(ngModel)]="newTag">

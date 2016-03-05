@@ -42,6 +42,8 @@ public interface ContentService {
 
     List<Tag> findTagByTheme(Theme theme);
 
+    Tag findTagByTagNameByTheme(String tagname, Theme theme);
+
     Theme updateTheme(Theme theme);
 
     Tag updateTag(Tag tag);

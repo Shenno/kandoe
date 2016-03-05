@@ -31,11 +31,7 @@ export class ContentService {
     public getTheme(id:string): Observable<Theme> {
         var url = this.baseUrl + "/api/themes/" + id;
         var headers =  this.urlService.getHeaders(false);
-       // var headers = this.urlService.getHeaders(true);
-        return this.http.get(url, {headers: headers}).map((res:Response) => res.json())/*.subscribe(
-            (data) => this.logger.log('Thema succesvol teruggekregen')
-            ((err:Error) => this.logger.log('Fout tijdens opvragen van thema' + id + ': ' + err.message))
-        )*/;
+        return this.http.get(url, {headers: headers}).map((res:Response) => res.json());
     }
 
     public getThemesByOrganisatorId(id:string): Observable<Theme[]> {

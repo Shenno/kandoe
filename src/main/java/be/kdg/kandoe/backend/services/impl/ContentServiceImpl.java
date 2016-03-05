@@ -98,6 +98,7 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public Theme updateTheme(Theme theme) {
+        theme.setTags(new ArrayList<>()); //TODO: Betere manier om bug op te lossen?
         return themeRepository.updateTheme(theme);
     }
 
@@ -128,6 +129,15 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public List<Tag> findTagByTheme(Theme theme) {
         return tagRepository.findTagByTheme(theme);
+    }
+
+    @Override
+    public Tag findTagByTagNameByTheme(String tagname, Theme theme) throws ContentServiceException{
+        try {
+            return tagRepository.findTagByTagNameByTheme(tagname, theme).get(0);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new ContentServiceException("Tag '" + tagname + "' was not found for theme '" + theme.getThemeName() + "'");
+        }
     }
 
     @Override
