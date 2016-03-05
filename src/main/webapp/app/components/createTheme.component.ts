@@ -39,9 +39,5 @@ export class CreateThemeComponent {
 
     public onAddTag(): void {
         this.theme.tags[this.theme.tags.length] = this.newTag;
-        var newTagElement = document.createElement("p");
-        newTagElement.id = 'tag' + this.theme.tags.length;
-        newTagElement.innerHTML = this.newTag;
-        document.getElementById('tags').appendChild(newTagElement);
     }
 }

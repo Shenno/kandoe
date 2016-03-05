@@ -15,4 +15,6 @@ public interface TagRepositoryCustom {
     Tag addTag(Tag tag) throws ContentServiceException;
 
     List<Tag> findTagByTheme(Theme theme);
+
+    List<Tag> findTagByTagNameByTheme(String tagname, Theme theme);
 }
