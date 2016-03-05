@@ -11,5 +11,5 @@ import {FORM_DIRECTIVES} from "angular2/common";
 })
 
 export class DashboardComponent {
-
+    
 }
