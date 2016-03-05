@@ -34,6 +34,9 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @Column(name = "MaxCards", nullable = false)
     private int maxCards;
 
+    @Column(name= "AmountOfCircles", nullable = false)
+    private int amountOfCircles;
+
     @Column(name = "SnapshotId", nullable = false)
     private int snapshotID;
 
@@ -62,6 +65,11 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
         this(isProblem,1,20);
     }
 
+    public Session(boolean isProblem, int amountOfCircles) {
+        this(isProblem,1,20);
+        this.amountOfCircles = amountOfCircles;
+    }
+
     public Session(boolean problem, int minCards, int maxCards) {
         this.problem = problem;
         this.gameOver = false;
@@ -86,6 +94,14 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public int getAmountOfCircles() {
+        return amountOfCircles;
+    }
+
+    public void setAmountOfCircles(int amountOfCircles) {
+        this.amountOfCircles = amountOfCircles;
     }
 
     public void addUser(User user) {

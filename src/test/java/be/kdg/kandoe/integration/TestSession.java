@@ -73,7 +73,7 @@ public class TestSession {
     @Test
     public void testCreateAsyncSession() {
         // Create AsyncSession and add three users to it
-        Session session = new AsynchronousSession(true, 60);
+        Session session = new AsynchronousSession(true, 60, 4);
         User user2 = new User("gebruikertje2", "pass");
         user2 = userService.addUser(user2);
         User user3 = new User("gebruikertje3", "pass");
@@ -128,10 +128,10 @@ public class TestSession {
         //TODO split in multiple tests
         // Make move correct user
         CardSession cardSessionOne = sessionService.findCardSession(session.getCardSessions().get(0).getId());
-        int priority = cardSessionOne.getPriority();
+        int distanceToCenter = cardSessionOne.getDistanceToCenter();
         sessionService.makeMove(cardSessionOne, user.getId());
         session = sessionService.findSession(session.getId());
-        assertEquals("Priority must be inc'd",priority + 1, session.getCardSessions().get(0).getPriority());
+        assertEquals("Distance to center of card should be one less", distanceToCenter - 1, session.getCardSessions().get(0).getDistanceToCenter());
         assertEquals("Current user must be user2", user2.getUserId(), session.getCurrentUser());
 
         // Make move incorrect user
@@ -141,8 +141,8 @@ public class TestSession {
 
     @Test
     public void testCreateTwoAsyncSessionsSameTheme() {
-        Session sessionOne = new AsynchronousSession(true, 60);
-        Session sessionTwo = new AsynchronousSession(false, 50);
+        Session sessionOne = new AsynchronousSession(true, 60, 4);
+        Session sessionTwo = new AsynchronousSession(false, 50, 4);
         sessionOne = sessionService.addSession(sessionOne, theme.getId());
         sessionTwo = sessionService.addSession(sessionTwo, theme.getId());
         assertNotNull(sessionOne);
@@ -155,7 +155,7 @@ public class TestSession {
     @Test(expected = SessionServiceException.class)
     public void testAddSessionWithUnknownUser() {
         // Create AsyncSession and add three users to it
-        Session session = new AsynchronousSession(true, 60);
+        Session session = new AsynchronousSession(true, 60, 4);
         session = sessionService.addUserToSession(session, "NonExistingUsername");
     }
 

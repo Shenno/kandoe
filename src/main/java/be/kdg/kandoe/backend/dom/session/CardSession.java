@@ -21,8 +21,8 @@ public class CardSession implements Serializable, Identifiable<Integer> {
     @GeneratedValue
     private Integer cardSessionId;
 
-    @Column(name = "Priority", nullable = false)
-    private int priority;
+    @Column(name = "DistanceToCenter", nullable = false)
+    private int distanceToCenter;
 
     @Column(name = "CardText")
     private String card;
@@ -34,8 +34,8 @@ public class CardSession implements Serializable, Identifiable<Integer> {
     @JoinColumn(name = "session_id")
     private Session session;
 
-    public CardSession(int priority, String card, String image, Session session) {
-        this.priority = priority;
+    public CardSession(int distanceToCenter, String card, String image, Session session) {
+        this.distanceToCenter = distanceToCenter;
         this.card = card;
         this.image = image;
         this.session = session;
@@ -45,12 +45,12 @@ public class CardSession implements Serializable, Identifiable<Integer> {
         new CardSession(0, null, null, null);
     }
 
-    public int getPriority() {
-        return priority;
+    public int getDistanceToCenter() {
+        return distanceToCenter;
     }
 
-    public void setPriority(int priority) {
-        this.priority = priority;
+    public void setDistanceToCenter(int distanceToCenter) {
+        this.distanceToCenter = distanceToCenter;
     }
 
     public String getCard() {

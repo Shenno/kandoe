@@ -13,12 +13,12 @@ public class SessionResourcePost implements Serializable {
                 public themeId: number)*/
 
     private List<String> participantsEmails;
-    private List<Integer> cardsIds;
+    private List<Integer> cardIds;
     private Integer themeId;
 
     public SessionResourcePost() {
         this.participantsEmails = new ArrayList<>();
-        this.cardsIds = new ArrayList<>();
+        this.cardIds = new ArrayList<>();
     }
 
     public Integer getThemeId() {
@@ -29,12 +29,12 @@ public class SessionResourcePost implements Serializable {
         this.themeId = themeId;
     }
 
-    public List<Integer> getCardsIds() {
-        return cardsIds;
+    public List<Integer> getCardIds() {
+        return cardIds;
     }
 
-    public void setCardsIds(List<Integer> cardsIds) {
-        this.cardsIds = cardsIds;
+    public void setCardIds(List<Integer> cardsIds) {
+        this.cardIds = cardsIds;
     }
 
     public List<String> getParticipantsEmails() {

@@ -19,8 +19,8 @@ public class AsynchronousSession extends Session implements Serializable{
 
     }
 
-    public AsynchronousSession(boolean isProblem, int maxTimeRound) {
-        super(isProblem);
+    public AsynchronousSession(boolean isProblem, int maxTimeRound, int amountOfCircles) {
+        super(isProblem, amountOfCircles);
         this.maxTimeRound = maxTimeRound;
     }
 

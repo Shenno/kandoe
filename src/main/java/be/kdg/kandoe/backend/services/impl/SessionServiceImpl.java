@@ -13,6 +13,7 @@ import be.kdg.kandoe.backend.persistence.api.UserRepository;
 import be.kdg.kandoe.backend.services.api.SessionService;
 import be.kdg.kandoe.backend.services.exceptions.SessionServiceException;
 import org.hibernate.Hibernate;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,7 +60,7 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public Session addCardToSession(Session session, Card card) {
-        CardSession cardsession = new CardSession(0, card.getText(), card.getImageURL(), session);
+        CardSession cardsession = new CardSession(session.getAmountOfCircles(), card.getText(), card.getImageURL(), session);
         session.addCardSession(cardsession);
         return sessionRepository.save(session);
     }
@@ -82,8 +83,11 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public void makeMove(CardSession cardSession, int userId) throws SessionServiceException {
         Session session = findSession(cardSession.getSession().getId());
+        if(cardSession.getDistanceToCenter() == 0) {
+            throw new ServiceException("This card can't be pushed any further, it's already at the center.");
+        }
         if(session.getCurrentUser() == userId) {
-            cardSession.setPriority(cardSession.getPriority() + 1);
+            cardSession.setDistanceToCenter(cardSession.getDistanceToCenter() - 1);
             session.updateCurrentUser();
             cardSessionRepository.save(cardSession);
             sessionRepository.save(session);
