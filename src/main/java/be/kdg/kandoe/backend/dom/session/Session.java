@@ -9,6 +9,7 @@ import org.springframework.hateoas.Identifiable;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -37,13 +38,13 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     private int snapshotID;
 
     @Column(name = "CurrentRound", nullable = false)
-    private int currentRound;
+    private Integer currentRound;
+
+    @Column(name = "CurrentUser")
+    private int currentUser;
 
     @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = false)
     private Theme theme;
-
- /*   @OneToMany(targetEntity = Participation.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Participation> participations;*/
 
     @OneToMany(targetEntity = Remark.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Remark> remarks;
@@ -51,18 +52,11 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = CardSession.class, mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CardSession> cardSessions = new ArrayList<>();
 
-    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE })
+    @ManyToMany
     @JoinTable(name = "UserSession",
                joinColumns = @JoinColumn(name = "Sessionid", referencedColumnName = "SessionId"),
                inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
     private List<User> users = new ArrayList<>();
-
-/*    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "Card_Session",
-            joinColumns = @JoinColumn(name = "SessionId", referencedColumnName = "SessionId"),
-            inverseJoinColumns = @JoinColumn(name = "CardId", referencedColumnName = "CardId"))
-    private List<Card> cards = new ArrayList<>();*/
 
     public Session(boolean isProblem) {
         this(isProblem,1,20);
@@ -75,6 +69,7 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
         this.minCards = minCards;
         this.maxCards = maxCards;
         this.snapshotID = 1;
+        this.currentUser = -1;
     }
 
     public List<CardSession> getCardSessions() {
@@ -95,6 +90,9 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
 
     public void addUser(User user) {
         this.users.add(user);
+        if(currentUser == -1) {
+            currentUser = user.getId();
+        }
     }
 
     public boolean isGameOver() {
@@ -153,8 +151,22 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
         this.problem = problem;
     }
 
+    public Integer getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(int currentUser) {
+        this.currentUser = currentUser;
+    }
+
     public void addCardSession(CardSession cardSession) {
         this.cardSessions.add(cardSession);
+    }
+
+    public void updateCurrentUser() {
+        User current = users.remove(0);
+        currentUser = users.get(0).getUserId();
+        users.add(current);
     }
 
     @Override

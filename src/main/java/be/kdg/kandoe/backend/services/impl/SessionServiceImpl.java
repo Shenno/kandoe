@@ -5,8 +5,11 @@ import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.session.CardSession;
 import be.kdg.kandoe.backend.dom.session.Session;
+import be.kdg.kandoe.backend.dom.user.User;
+import be.kdg.kandoe.backend.persistence.api.CardSessionRepository;
 import be.kdg.kandoe.backend.persistence.api.SessionRepository;
 import be.kdg.kandoe.backend.persistence.api.ThemeRepository;
+import be.kdg.kandoe.backend.persistence.api.UserRepository;
 import be.kdg.kandoe.backend.services.api.SessionService;
 import be.kdg.kandoe.backend.services.exceptions.SessionServiceException;
 import org.hibernate.Hibernate;
@@ -27,11 +30,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class SessionServiceImpl implements SessionService {
     private final SessionRepository sessionRepository;
     private final ThemeRepository themeRepository;
+    private final UserRepository userRepository;
+    private final CardSessionRepository cardSessionRepository;
 
     @Autowired
-    public SessionServiceImpl(SessionRepository sessionRepository, ThemeRepository themeRepository) {
+    public SessionServiceImpl(SessionRepository sessionRepository, ThemeRepository themeRepository,
+                              UserRepository userRepository, CardSessionRepository cardSessionRepository) {
         this.sessionRepository = sessionRepository;
         this.themeRepository = themeRepository;
+        this.userRepository = userRepository;
+        this.cardSessionRepository = cardSessionRepository;
     }
 
     @Override
@@ -56,6 +64,32 @@ public class SessionServiceImpl implements SessionService {
         return sessionRepository.save(session);
     }
 
+    @Override
+    public Session addUserToSession(Session session, String username) throws SessionServiceException {
+        User user = userRepository.findUserByUsername(username);
+        if(user == null) {
+            throw new SessionServiceException("Can't add unexisting user to session");
+        }
+        session.addUser(user);
+        return sessionRepository.save(session);
+    }
 
+    @Override
+    public CardSession findCardSession(int cardSessionId) {
+        return cardSessionRepository.findOne(cardSessionId);
+    }
+
+    @Override
+    public void makeMove(CardSession cardSession, int userId) throws SessionServiceException {
+        Session session = findSession(cardSession.getSession().getId());
+        if(session.getCurrentUser() == userId) {
+            cardSession.setPriority(cardSession.getPriority() + 1);
+            session.updateCurrentUser();
+            cardSessionRepository.save(cardSession);
+            sessionRepository.save(session);
+            return;
+        }
+        throw new SessionServiceException("It's not user " + userId + "'s turn");
+    }
 }
 
