@@ -33,11 +33,12 @@ export class CreateThemeComponent {
         });
     }
 
-    public onSubmit(): void {
-        this.contentService.addTheme(this.theme);
+    public onAddTag(): void {
+        this.theme.tags[this.theme.tags.length] = this.newTag.toLowerCase();
+        this.newTag = "";
     }
 
-    public onAddTag(): void {
-        this.theme.tags[this.theme.tags.length] = this.newTag;
+    public onSubmit(): void {
+        this.contentService.addTheme(this.theme);
     }
 }

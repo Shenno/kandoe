@@ -27,7 +27,8 @@ export class EditThemeComponent {
     }
 
     public onAddTag(): void {
-        this.theme.tags[this.theme.tags.length] = this.newTag;
+        this.theme.tags[this.theme.tags.length] = this.newTag.toLowerCase();
+        this.newTag = "";
     }
 
     public onSubmit(): void {

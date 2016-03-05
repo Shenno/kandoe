@@ -38,7 +38,8 @@ System.register(['angular2/core', 'angular2/router', "../service/contentService"
                     });
                 }
                 EditThemeComponent.prototype.onAddTag = function () {
-                    this.theme.tags[this.theme.tags.length] = this.newTag;
+                    this.theme.tags[this.theme.tags.length] = this.newTag.toLowerCase();
+                    this.newTag = "";
                 };
                 EditThemeComponent.prototype.onSubmit = function () {
                     this.contentService.updateTheme(this.theme);

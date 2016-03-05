@@ -42,11 +42,12 @@ System.register(['angular2/core', '../entity/theme', "../service/contentService"
                         _this.theme.organisatorId = user.id;
                     });
                 }
+                CreateThemeComponent.prototype.onAddTag = function () {
+                    this.theme.tags[this.theme.tags.length] = this.newTag.toLowerCase();
+                    this.newTag = "";
+                };
                 CreateThemeComponent.prototype.onSubmit = function () {
                     this.contentService.addTheme(this.theme);
-                };
-                CreateThemeComponent.prototype.onAddTag = function () {
-                    this.theme.tags[this.theme.tags.length] = this.newTag;
                 };
                 CreateThemeComponent = __decorate([
                     core_1.Component({
