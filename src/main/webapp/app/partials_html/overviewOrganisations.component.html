@@ -1,7 +1,9 @@
 <h1>Organisaties:</h1>
-<ul>
-    <li *ngFor="#organisation of organisations" (click)="detailOrganisation(organisation.id)">
+<ul class="list-group">
+    <li *ngFor="#organisation of organisations"
+        (click)="detailOrganisation(organisation.id)"
+        class="list-group-item">
         {{organisation.id}} | {{organisation.name}}
     </li>
 </ul>
-<button (click)="addOrganisation()">AddOrganisation</button>
+<button class="btn btn-primary" (click)="addOrganisation()">Organisatie Toevoegen</button>

@@ -68,6 +68,13 @@ h1 {
     padding-bottom: 5em;
 }
 
+.form-control {
+    width: 50%;
+}
+
+.list-group {
+    width: 50%;
+}
 
 /*----------------Sticky footer----------------------------------*/
 .footer {

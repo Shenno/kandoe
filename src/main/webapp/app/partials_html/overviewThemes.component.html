@@ -1,0 +1,10 @@
+<h1>Thema's: </h1>
+
+<ul class="list-group">
+    <li class="list-group-item"
+        *ngFor="#theme of themes"
+        (click)="detailTheme(theme.id)">
+        {{theme.themeId}} | {{theme.themeName}}
+    </li>
+</ul>
+<button class="btn btn-primary" (click)="addTheme()">Thema Toevoegen</button>
