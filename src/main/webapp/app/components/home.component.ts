@@ -11,5 +11,4 @@ directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
 
 export class HomeComponent {
-private bla:number;
 }
