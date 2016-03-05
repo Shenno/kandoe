@@ -14,6 +14,7 @@ import java.util.List;
 @NamedQueries(
         {
                 @NamedQuery(name = "Card.findByText", query = "SELECT c FROM Card c WHERE c.text=:text"),
+                @NamedQuery(name = "Card.findByThemeId", query = "SELECT c FROM Card c join c.theme t WHERE t.themeId=:themeId")
         })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Card implements Serializable, Identifiable<Integer> {

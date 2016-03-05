@@ -95,6 +95,14 @@ public class ContentRestController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @RequestMapping(value="{themeId}/cards", method = RequestMethod.GET)
+    public ResponseEntity<List<CardResource>> findCardsByThemeId(@PathVariable int themeId) {
+
+        List<Card> cards = contentService.findCardsByThemeId(themeId);
+        List<CardResource> cardResources = cards.stream().map(c -> mapperFacade.map(c, CardResource.class)).collect(Collectors.toList());
+        return new ResponseEntity<List<CardResource>>(cardResources, HttpStatus.OK);
+    }
+
     @RequestMapping(value="/cards/{cardId}", method = RequestMethod.GET)
     public ResponseEntity<CardResource> findCardById(@PathVariable int cardId) {
         Card card = contentService.getCard(cardId);

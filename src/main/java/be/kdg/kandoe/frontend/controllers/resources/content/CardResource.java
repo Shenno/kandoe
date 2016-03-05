@@ -11,18 +11,14 @@ import java.io.Serializable;
 public class CardResource  implements Serializable {
     private Integer id;
     private String text;
-    private boolean picked;
+    private String imageURL;
+    private Integer themeId;
 
     private ThemeResource themeResource;
 
     public CardResource() {
         this.themeResource = new ThemeResource();
     }
-
-   /* public CardResource(Card card) {
-        this.cardId = card.getId();
-        this.text = card.getText();
-    }*/
 
     public Integer getId() {
         return id;
@@ -36,23 +32,33 @@ public class CardResource  implements Serializable {
         return text;
     }
 
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public Integer getThemeId() {
+        return themeId;
+    }
+
+    public void setThemeId(Integer themeId) {
+        this.themeId = themeId;
+    }
+
     public void setText(String text) {
         this.text = text;
     }
 
-    public ThemeResource getThemeResource() {
+   /* public ThemeResource getThemeResource() {
         return themeResource;
     }
 
     public void setThemeResource(ThemeResource themeResource) {
         this.themeResource = themeResource;
-    }
+    }*/
 
-    public boolean isPicked() {
-        return picked;
-    }
 
-    public void setPicked(boolean picked) {
-        this.picked = picked;
-    }
 }

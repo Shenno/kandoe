@@ -3,12 +3,11 @@ export class Card {
     constructor(public id: number,
                 public text: string,
                 public imageURL: string,
-                public priority: number,
-                public theme: Theme) {
+                public themeId: number) {
 
     }
 
     public static createEmptyCard(): Card {
-        return new Card(0, "", "", 0, null);
+        return new Card(0, "", "",  0);
     }
 }

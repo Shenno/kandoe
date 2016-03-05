@@ -72,6 +72,11 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
+    public List<Card> findCardsByThemeId(int themeId) {
+        return cardRepository.getCardsByThemeId(themeId);
+    }
+
+    @Override
     public List<Theme> findThemes() {
         return themeRepository.findAll();
     }
