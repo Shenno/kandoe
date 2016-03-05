@@ -11,15 +11,7 @@ import {Card} from "../entity/card";
 
 @Component({
     selector: 'create-session',
-    template: `
-    <select #t (change)="onSelectTheme(t.value)">
-        <option></option>
-        <option *ngFor="#th of themes" [value]="th.themeId">{{th.themeName}}</option>
-    </select>
-    <div *ngIf="theme">Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:
-        <p *ngFor="#card of cards">{{card?.text}} {{card?.imageURL}}</p>
-    </div>
-    `,
+    templateUrl: 'app/partials_html/createSession.component.html',
     encapsulation: ViewEncapsulation.None
 })
 /*<select [(ng-model)]="objValue1">

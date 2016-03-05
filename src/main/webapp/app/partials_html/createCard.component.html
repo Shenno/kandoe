@@ -3,7 +3,7 @@
 <form (submit)="onSubmit()">
     <div class="form-group">
         <label for="ib_text">Tekst </label>
-        <input id="ib_text" name="ib_text" [(ngModel)]="card.text">
+        <input id="ib_text" class="form-control" name="ib_text" [(ngModel)]="card.text">
     </div>
     <br>
     <div class="form-group">
@@ -17,7 +17,8 @@
         <label for="ib_priority">Prioriteit </label>
         <input id="ib_priority" name="ib_priority"
                [(ngModel)]="card.priority"
-               style="width: 30px">
+               style="width: 30px"
+               class="form-control">
     </div>
     <br>
 
@@ -35,17 +36,34 @@
         <!-- OF
             gewoon een lijst
         -->
-        <select name="ib_theme" size="7" title="themes" [(ngModel)]="card.theme">
+        <br><br>
+        <select name="ib_theme" size="7"
+                title="themes"
+                [(ngModel)]="card.theme"
+                class="form-control">
             <option value="SM">http://www.scriptingmaster.com</option>
             <option value="Google">http://www.google.com</option>
             <option value="MSN">http://www.msn.com</option>
             <option value="yahoo">http://www.yahoo.com</option>
             <option value="microsoft">http://www.microsoft.com</option>
         </select>
-
+        <br>
+        <!---
+        OF
+        -->
+        <select name="ib_theme" size="7"
+                title="themes"
+                [(ngModel)]="card.theme"
+                class="form-control" multiple>
+            <option value="SM">http://www.scriptingmaster.com</option>
+            <option value="Google">http://www.google.com</option>
+            <option value="MSN">http://www.msn.com</option>
+            <option value="yahoo">http://www.yahoo.com</option>
+            <option value="microsoft">http://www.microsoft.com</option>
+        </select>
     </div>
 
     <br>
-    <button name="btn_save">Opslaan</button>
-
+    <button class="btn btn-primary" name="btn_save">Opslaan</button>
+    <button class="btn btn-default">Annuleren</button>
 </form>

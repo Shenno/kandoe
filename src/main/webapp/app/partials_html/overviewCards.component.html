@@ -1,0 +1,8 @@
+<h1>Kaartjes: </h1>
+
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="#card of cards">
+        {{card.id}} | {{theme.text}}
+    </li>
+</ul>
+<button class="btn btn-primary" (click)="addCard()">Kaartje Toevoegen</button>

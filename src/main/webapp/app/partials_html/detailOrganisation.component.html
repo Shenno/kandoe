@@ -1,11 +1,16 @@
 <h1>Organisatie: <span id="span_organisationname">{{organisation.name}}</span></h1>
 <p>Organisator: {{organisation.organisatorName}}</p>
-<div><h2>Thema's</h2>
-    <ul>
-        <li *ngFor="#theme of organisation.themes; #i=index" (click)="detailTheme(i+1)">
+
+<div>
+    <h2>Thema's</h2>
+    <ul class="list-group">
+        <li *ngFor="#theme of organisation.themes; #i=index"
+            (click)="detailTheme(i+1)"
+            class="list-group-item">
             {{i+1}} | {{theme}}
         </li>
     </ul>
-    <button (click)="addTheme()">Thema toevoegen</button>
+    <button class="btn btn-default" (click)="addTheme()">Thema toevoegen</button>
 </div>
-<button (click)="backToList()">Terug naar lijst</button>
+<br>
+<button class="btn btn-default" (click)="backToList()">Terug naar lijst</button>
