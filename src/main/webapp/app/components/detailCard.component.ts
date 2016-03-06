@@ -1,6 +1,6 @@
 import {Component,  ViewEncapsulation} from 'angular2/core';
 import {Router, RouteParams} from 'angular2/router';
-import {Theme} from '../entity/theme';
+import {Card} from '../entity/card';
 import {Http, Response, Headers} from "angular2/http";
 import {UrlService} from "../service/urlService";
 import {ContentService} from "../service/contentService";
@@ -9,31 +9,34 @@ import {FORM_DIRECTIVES} from "angular2/common";
 
 
 @Component({
-    selector: 'detail-theme',
-    templateUrl: 'app/partials_html/detailTheme.component.html',
+    selector: 'detail-card',
+    templateUrl: 'app/partials_html/detailCard.component.html',
     encapsulation: ViewEncapsulation.None,
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
-export class DetailThemeComponent {
+export class DetailCardComponent {
 
     private router: Router;
 
     private contentService: ContentService;
 
-    private theme: Theme = Theme.createEmptyTheme();
-    //new Promise<Theme[]>(resolve => setTimeout(() =>resolve(Theme), 2000));
+    private card: Card = Card.createEmptyCard();
 
     public constructor(contentService: ContentService, routeParam:RouteParams, router:Router) {
         this.router = router;
         this.contentService = contentService;
-        contentService.getTheme(routeParam.params["themeId"]).subscribe((theme:Theme) => {
-            this.theme = theme;
-            document.title = 'Thema: ' + this.theme.themeName;
+        contentService.getCard(routeParam.params["cardId"]).subscribe((card:Card) => {
+            this.card = card;
+            //document.title = 'Kaart: ' + this.card.text;
+            document.title = 'Kaart';
         })
     }
 
-    public onSubmit(event): void {
-        event.preventDefault();
-        this.router.navigate(['/EditTheme', {themeId: this.theme.themeId}]);
+    public edit(): void {
+        this.router.navigate(['/EditCard', {cardId: this.card.id}]);
+    }
+
+    public backToTheme(id:string): void {
+        this.router.navigate(['/DetailTheme',{themeId: id }]);
     }
 }

@@ -18,9 +18,7 @@ export class CreateCardComponent {
     public constructor(contentService: ContentService, router: Router, routeParam: RouteParams) {
         this.contentService = contentService;
         document.title = 'Maak kaartje aan';
-        alert("constructor")
         this.card.themeId = +routeParam.params["themeId"];
-        alert(this.card.themeId);
     }
 
     public onSubmit(): void {

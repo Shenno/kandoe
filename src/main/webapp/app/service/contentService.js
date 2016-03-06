@@ -104,10 +104,13 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
                     this.http.post(url, cardString, { headers: headers }).map(function (res) { return res.json(); }).subscribe(function (data) { return _this.onSuccesfulAddCard(data.id, card); }, (function (err) { return _this.logger.log('Fout tijdens aanmaken van card: ' + err.message); }));
                 };
                 ContentService.prototype.onSuccesfulAddCard = function (id, card) {
-                    alert("log");
-                    this.logger.log('Card "' + card.text + '" is aangemaakt"');
-                    alert("navigate");
-                    this.router.navigate(['/DetailTheme', { themeId: card.themeId }]);
+                    this.logger.log('Card "' + card.text + '" is aangemaakt voor thema "' + card.themeId);
+                    this.router.navigate(['/DetailCard', { cardId: id }]);
+                };
+                ContentService.prototype.getCard = function (id) {
+                    var url = this.baseUrl + "/api/themes/cards/" + id;
+                    var headers = this.urlService.getHeaders(true);
+                    return this.http.get(url, { headers: headers }).map(function (res) { return res.json(); });
                 };
                 ContentService = __decorate([
                     core_1.Injectable(), 

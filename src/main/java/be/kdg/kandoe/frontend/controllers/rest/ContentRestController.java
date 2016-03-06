@@ -10,6 +10,7 @@ import be.kdg.kandoe.frontend.controllers.resources.content.CardResource;
 import be.kdg.kandoe.frontend.controllers.resources.content.TagResource;
 import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
 import ma.glasnost.orika.MapperFacade;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,8 @@ import java.util.stream.Collectors;
 public class ContentRestController {
 
     private ContentService contentService;
-    MapperFacade mapperFacade;
+    private MapperFacade mapperFacade;
+    private Logger logger = Logger.getLogger(ContentRestController.class);
 
     @Autowired
     public ContentRestController(ContentService contentService, MapperFacade mapperFacade) {
@@ -34,9 +36,10 @@ public class ContentRestController {
     }
 
     @RequestMapping(value = "/{themeId}", method = RequestMethod.GET)
-    public ResponseEntity<ThemeResource> findMainThemeById(@PathVariable int themeId) {     //
+    public ResponseEntity<ThemeResource> findMainThemeById(@PathVariable int themeId) {
         Theme foundTheme = contentService.getTheme(themeId);
         ThemeResource themeResource = mapperFacade.map(foundTheme, ThemeResource.class);
+        logger.info("Theme " + themeId + " has been found.");
         return new ResponseEntity<>(themeResource, HttpStatus.OK);
     }
 

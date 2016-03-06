@@ -108,9 +108,13 @@ export class ContentService {
     }
 
     private onSuccesfulAddCard(id:number, card:Card): void {
-        alert("log")
-        this.logger.log('Card "' + card.text + '" is aangemaakt"');
-        alert("navigate");
-        this.router.navigate(['/DetailTheme', {themeId: card.themeId}]);
+        this.logger.log('Card "' + card.text + '" is aangemaakt voor thema "'+ card.themeId);
+        this.router.navigate(['/DetailCard', {cardId: id}]);
+    }
+
+    public getCard(id:string): Observable<Card> {
+        var url = this.baseUrl + "/api/themes/cards/" + id;
+        var headers =  this.urlService.getHeaders(true);
+        return this.http.get(url, {headers: headers}).map((res:Response) => res.json());
     }
 }
