@@ -41,16 +41,20 @@ public class SessionRestController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Integer> createAsynchronousSession(@RequestBody SessionResourcePost sessionResourcePost)
     {
-        final AsynchronousSession session = new AsynchronousSession(true, 60, 4);
+        Session session = new AsynchronousSession(true, 60, 4);
 
         Session persistedSession = sessionService.addSession(session, sessionResourcePost.getThemeId());
-        sessionResourcePost.getParticipantsEmails().forEach(e -> sessionService.addUserToSession(session, e));
+        //sessionResourcePost.getParticipantsEmails().forEach(e -> sessionService.addUserToSession(session, e));
+
+        for(String s : sessionResourcePost.getParticipantsEmails()) {
+            persistedSession = sessionService.addUserToSession(persistedSession, s);
+        }
 
         //Kan niet op deze manier..? Moet result session hebben
 
          //sessionResourcePost.getCardIds().forEach(c -> sessionService.addCardToSession(session, contentService.getCard(c)));
         for(Integer c : sessionResourcePost.getCardIds()) {
-            sessionService.addCardToSession(session, contentService.getCard(c));
+            persistedSession =sessionService.addCardToSession(persistedSession, contentService.getCard(c));
             System.out.println(c);
         }
 
