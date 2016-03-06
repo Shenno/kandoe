@@ -1,5 +1,5 @@
 INSERT INTO "User" ( Username, Password)
-VALUES ( 'clarence.ho@gmail.com', '$2a$10$d8OaqZ47XHngjcn5.CXfleGOHNfSd80nJwPl1WBBeLC7R4Px/aLoy');
+VALUES ( 'clarence.ho@gmail.com', '$2a$10$GaPeuHGVAtxkksKyHCkQceOT5blhRfeGcmwoER8MeMeX8f65.uf0G');
 INSERT INTO "User" ( Username, Password)
 VALUES ( 'scott.tiger@live.com', '$2a$10$GaPeuHGVAtxkksKyHCkQceOT5blhRfeGcmwoER8MeMeX8f65.uf0G');
 INSERT INTO "User" ( Username, Password)

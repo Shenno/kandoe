@@ -20,6 +20,7 @@ import {CreateCardComponent} from "./components/createCard.component";
 import {HomeComponent} from "./components/home.component";
 import {DashboardComponent} from "./components/dashboard.component";
 import {ManageAccountComponent} from "./components/manageAccount.component";
+import {SessionComponent} from "./components/session.component";
 
 @Component({
     selector: 'my-app',
@@ -40,6 +41,7 @@ import {ManageAccountComponent} from "./components/manageAccount.component";
     {path:'/detailOrganisation/:organisationId',name:'DetailOrganisation',component: DetailOrganisationComponent},
     {path:'/organisations',name:'Organisations',component:OverviewOrganisationComponent},
     {path:'/themes',name:'Themes',component:OverviewThemeComponent},
+    {path:'/session/:sessionId', name:'Session',component:SessionComponent},
     {path:'/cards',name:'Cards',component:OverviewCardComponent},
     {path:'/createCard',name:'CreateCard',component:CreateCardComponent},
     {path:'/createTheme',name:'CreateTheme',component:CreateThemeComponent},

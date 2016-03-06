@@ -14,7 +14,7 @@ import {SessionService} from "../service/sessionService";
 
 @Component({
     selector: 'view-session',
-    template: `<p>Hallo daar</p>
+    template: `<p>Hallo daar {{currentUser?.username}}</p>
     `,
     encapsulation: ViewEncapsulation.None
 })

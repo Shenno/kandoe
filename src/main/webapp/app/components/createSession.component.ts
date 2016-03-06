@@ -10,6 +10,7 @@ import {ContentService} from "../service/contentService";
 import {Card} from "../entity/card";
 import {Observable, } from "../../node_modules/rxjs/Observable";
 import {createSession} from "../entity/createSession";
+import {SessionService} from "../service/sessionService";
 
 @Component({
     selector: 'create-session',
@@ -35,16 +36,21 @@ import {createSession} from "../entity/createSession";
 
 export class CreateSessionComponent {
 
+    private router: Router;
+
     private userService: UserService;
     private contentService: ContentService;
+    private sessionService: SessionService;
     private themes : Theme[] = [];
     private theme: Theme = Theme.createEmptyTheme();
     private cards: Card[] = null;
     private currentUser = null;
 
-    public constructor(userService: UserService, contentService: ContentService) {
+    public constructor(userService: UserService, contentService: ContentService, sessionService: SessionService, router: Router) {
         this.userService = userService;
         this.contentService = contentService;
+        this.sessionService = sessionService;
+        this.router = router;
         document.title = 'Start een nieuwe Kandoe sessie!';
         this.userService.getMyDetails().subscribe((user:User) => {
             this.contentService.getThemesByOrganisatorId(user.id.toString()).subscribe((theme:Theme[]) =>{ this.themes = theme});
@@ -80,11 +86,17 @@ export class CreateSessionComponent {
 
             /* CardIds ophalen */
             this.cards.forEach( function (card) {
-                cardids.push(card.id)
+                cardids.push(card.id);
+                alert(card.id);
             });
 
             var session: createSession = new createSession(emails, cardids, this.theme.themeId);
             //this.sessionService.post....
+            this.sessionService.addSession(session).subscribe((persistedSessionId:number) => {
+                this.router.navigate(['/Session', {sessionId:persistedSessionId}]);
+                //this.router.navigate(['/DetailTheme',{themeId:id}]);
+            });
+
             alert("Ok");
         }
         else {
