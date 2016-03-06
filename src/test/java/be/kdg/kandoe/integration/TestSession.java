@@ -28,6 +28,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:**/testcontext.xml"})
@@ -137,6 +138,17 @@ public class TestSession {
         // Make move incorrect user
         exception.expect(SessionServiceException.class);
         sessionService.makeMove(cardSessionOne, user.getId());
+
+        // Make moves 3 more moves on same card to check gameOver
+        sessionService.makeMove(cardSessionOne, user2.getId());
+        sessionService.makeMove(cardSessionOne, user3.getId());
+        sessionService.makeMove(cardSessionOne, user.getId());
+
+        session = sessionService.findSession(session.getId());
+        assertTrue(session.isGameOver());
+
+
+
     }
 
     @Test

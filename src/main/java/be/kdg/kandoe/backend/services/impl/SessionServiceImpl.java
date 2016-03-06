@@ -89,6 +89,9 @@ public class SessionServiceImpl implements SessionService {
         if(session.getCurrentUser() == userId) {
             cardSession.setDistanceToCenter(cardSession.getDistanceToCenter() - 1);
             session.updateCurrentUser();
+            if(cardSession.getDistanceToCenter() == 0) {
+                session.setGameOver(true);
+            }
             cardSessionRepository.save(cardSession);
             sessionRepository.save(session);
             return;

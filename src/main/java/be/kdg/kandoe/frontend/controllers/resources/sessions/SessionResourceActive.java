@@ -11,6 +11,7 @@ public class SessionResourceActive implements Serializable {
     private Integer currentUser;
     private List<CardSessionResource> cardSessionResources;
     private boolean problem;
+    private boolean gameOver;
     private int amountOfCircles;
 
     public SessionResourceActive() {
@@ -39,6 +40,14 @@ public class SessionResourceActive implements Serializable {
 
     public void setProblem(boolean problem) {
         this.problem = problem;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
     }
 
     public int getAmountOfCircles() {
