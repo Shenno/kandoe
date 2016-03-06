@@ -140,10 +140,10 @@ public class TestSession {
         sessionService.makeMove(cardSessionOne, user.getId());
 
         // Make moves 3 more moves on same card to check gameOver
+        assertTrue(!session.isGameOver());
         sessionService.makeMove(cardSessionOne, user2.getId());
         sessionService.makeMove(cardSessionOne, user3.getId());
         sessionService.makeMove(cardSessionOne, user.getId());
-
         session = sessionService.findSession(session.getId());
         assertTrue(session.isGameOver());
 
