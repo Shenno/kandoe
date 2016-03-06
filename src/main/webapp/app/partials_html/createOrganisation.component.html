@@ -3,10 +3,20 @@
 <form (submit)="onSubmit()">
     <div class="form-group">
         <label for="ib_new_organisation">Organisatie naam:</label>
-        <input id="ib_new_organisation"
-               name="ib_new_organisation"
-               [(ngModel)]="organisation.name"
-               class="form-control">
+        <input id="ib_new_organisation" name="ib_new_organisation"
+               [(ngModel)]="organisation.name" class="form-control">
+        <br>
+
+        <label for="ib_theme">Thema: </label>
+        <select id="ib_theme" name="ib_theme" size="7"
+                title="themes" class="form-control" multiple
+                #t (change)="onSelectTheme(t.value)">
+
+            <option [value]="0">Geen thema</option>
+            <option *ngFor="#th of themes"
+                    [value]="th.themeId">{{th.themeName}}
+            </option>
+        </select>
     </div>
 
     <button class="btn btn-primary" name="btn_add_organisation">Toevoegen</button>

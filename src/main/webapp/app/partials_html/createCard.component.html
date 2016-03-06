@@ -3,7 +3,8 @@
 <form (submit)="onSubmit()">
     <div class="form-group">
         <label for="ib_text">Tekst </label>
-        <input id="ib_text" class="form-control" name="ib_text" [(ngModel)]="card.text">
+        <input id="ib_text" class="form-control"
+               name="ib_text" [(ngModel)]="card.text">
     </div>
     <br>
     <div class="form-group">
@@ -12,6 +13,7 @@
                name="ib_imageURL" accept="image/*"
                [(ngModel)]="card.imageURL">
     </div>
+
     <br>
     <div class="form-group">
         <label for="ib_priority">Prioriteit </label>
@@ -20,48 +22,17 @@
                style="width: 30px"
                class="form-control">
     </div>
-    <br>
 
-    <!-- Auto-aanvul lijstje voor thema te kiezen -->
-    <div class="form-group">
-        <label for="ib_theme">Thema </label>
-        <input id="ib_theme" name="ib_theme" [(ngModel)]="card.theme" list="themes">
-        <datalist id="themes">
-            <option value="Theme1">
-            <option value="Theme2">
-            <option value="Chrome">
-            <option value="Opera">
-            <option value="Safari">
-        </datalist>
-        <!-- OF
-            gewoon een lijst
-        -->
-        <br><br>
-        <select name="ib_theme" size="7"
-                title="themes"
-                [(ngModel)]="card.theme"
-                class="form-control">
-            <option value="SM">http://www.scriptingmaster.com</option>
-            <option value="Google">http://www.google.com</option>
-            <option value="MSN">http://www.msn.com</option>
-            <option value="yahoo">http://www.yahoo.com</option>
-            <option value="microsoft">http://www.microsoft.com</option>
-        </select>
-        <br>
-        <!---
-        OF
-        -->
-        <select name="ib_theme" size="7"
-                title="themes"
-                [(ngModel)]="card.theme"
-                class="form-control" multiple>
-            <option value="SM">http://www.scriptingmaster.com</option>
-            <option value="Google">http://www.google.com</option>
-            <option value="MSN">http://www.msn.com</option>
-            <option value="yahoo">http://www.yahoo.com</option>
-            <option value="microsoft">http://www.microsoft.com</option>
-        </select>
-    </div>
+    <br>
+    <select name="ib_theme" size="7"
+            title="themes"
+            class="form-control" multiple
+            #t (change)="onSelectTheme(t.value)">
+        <option [value]="0">Geen thema</option>
+        <option *ngFor="#th of themes"
+                [value]="th.themeId">{{th.themeName}}
+        </option>
+    </select>
 
     <br>
     <button class="btn btn-primary" name="btn_save">Opslaan</button>

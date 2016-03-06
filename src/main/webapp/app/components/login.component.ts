@@ -10,7 +10,7 @@ import {LoginUser} from "../entity/loginUser";
     selector: 'login',
     template: `
     <div>
-        <label for="ib_username">E-mail adres</label>
+        <label for="ib_username">E-mailadres</label>
         <input class="form-control" id="ib_username" name="ib_username" [(ngModel)]="user.username"/>
     </div>
 
@@ -18,7 +18,7 @@ import {LoginUser} from "../entity/loginUser";
         <label for="ib_password">Paswoord</label>
         <input class="form-control" type="password" id="ib_password" name="ib_password" [(ngModel)]="user.password"/>
     </div>
-
+    <br>
     <button class="btn btn-primary" name="btn_login" (click)="getLucky()" >Get lucky</button>
     <button class="btn btn-default" name="btn_logout" (click)="getUnlucky()">Get unlucky</button>
 
