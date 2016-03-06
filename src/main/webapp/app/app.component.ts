@@ -21,6 +21,7 @@ import {HomeComponent} from "./components/home.component";
 import {DashboardComponent} from "./components/dashboard.component";
 import {ManageAccountComponent} from "./components/manageAccount.component";
 import {SessionComponent} from "./components/session.component";
+import {LogoutComponent} from "./components/logout.component";
 
 @Component({
     selector: 'my-app',
@@ -48,7 +49,8 @@ import {SessionComponent} from "./components/session.component";
     {path:'/home',name:'Home',component:HomeComponent},
     {path:'/',name:'Home',component:HomeComponent},
     {path:'/dashboard',name:'Dashboard',component:DashboardComponent},
-    {path:'/manageAccount',name:'ManageAccount',component:ManageAccountComponent}
+    {path:'/manageAccount',name:'ManageAccount',component:ManageAccountComponent},
+    {path:'/logout',name:'Logout',component:LogoutComponent}
 ])
 
 export class AppComponent {

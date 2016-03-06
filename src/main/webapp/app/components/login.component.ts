@@ -11,16 +11,16 @@ import {LoginUser} from "../entity/loginUser";
     template: `
     <div>
         <label for="ib_username">E-mail adres</label>
-        <input id="ib_username" name="ib_username" [(ngModel)]="user.username"/>
+        <input class="form-control" id="ib_username" name="ib_username" [(ngModel)]="user.username"/>
     </div>
 
     <div>
         <label for="ib_password">Paswoord</label>
-        <input type="password" id="ib_password" name="ib_password" [(ngModel)]="user.password"/>
+        <input class="form-control" type="password" id="ib_password" name="ib_password" [(ngModel)]="user.password"/>
     </div>
 
-    <button name="btn_login" (click)="getLucky()" >Get lucky</button>
-    <button name="btn_logout" (click)="getUnlucky()">Get unlucky</button>
+    <button class="btn btn-primary" name="btn_login" (click)="getLucky()" >Get lucky</button>
+    <button class="btn btn-default" name="btn_logout" (click)="getUnlucky()">Get unlucky</button>
 
     `,
     encapsulation: ViewEncapsulation.None

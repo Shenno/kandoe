@@ -1,4 +1,4 @@
-System.register(['angular2/core', "../service/userService", "../entity/theme", "../service/contentService", "../entity/createSession"], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', "../service/userService", "../entity/theme", "../service/contentService", "../entity/createSession", "../service/sessionService"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,12 +8,15 @@ System.register(['angular2/core', "../service/userService", "../entity/theme", "
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, userService_1, theme_1, contentService_1, createSession_1;
+    var core_1, router_1, userService_1, theme_1, contentService_1, createSession_1, sessionService_1;
     var CreateSessionComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             },
             function (userService_1_1) {
                 userService_1 = userService_1_1;
@@ -26,10 +29,13 @@ System.register(['angular2/core', "../service/userService", "../entity/theme", "
             },
             function (createSession_1_1) {
                 createSession_1 = createSession_1_1;
+            },
+            function (sessionService_1_1) {
+                sessionService_1 = sessionService_1_1;
             }],
         execute: function() {
             CreateSessionComponent = (function () {
-                function CreateSessionComponent(userService, contentService) {
+                function CreateSessionComponent(userService, contentService, sessionService, router) {
                     var _this = this;
                     this.themes = [];
                     this.theme = theme_1.Theme.createEmptyTheme();
@@ -37,6 +43,8 @@ System.register(['angular2/core', "../service/userService", "../entity/theme", "
                     this.currentUser = null;
                     this.userService = userService;
                     this.contentService = contentService;
+                    this.sessionService = sessionService;
+                    this.router = router;
                     document.title = 'Start een nieuwe Kandoe sessie!';
                     this.userService.getMyDetails().subscribe(function (user) {
                         _this.contentService.getThemesByOrganisatorId(user.id.toString()).subscribe(function (theme) { _this.themes = theme; });
@@ -57,6 +65,7 @@ System.register(['angular2/core', "../service/userService", "../entity/theme", "
                     // Observable.do .map(function(v) { return [1,2,3];}) .subscribe(console.log.bind(console))
                 };
                 CreateSessionComponent.prototype.createSession = function () {
+                    var _this = this;
                     //Checken of alles ingevuld is
                     if (this.cards != null) {
                         var emails = [];
@@ -69,9 +78,14 @@ System.register(['angular2/core', "../service/userService", "../entity/theme", "
                         /* CardIds ophalen */
                         this.cards.forEach(function (card) {
                             cardids.push(card.id);
+                            alert(card.id);
                         });
                         var session = new createSession_1.createSession(emails, cardids, this.theme.themeId);
                         //this.sessionService.post....
+                        this.sessionService.addSession(session).subscribe(function (persistedSessionId) {
+                            _this.router.navigate(['/Session', { sessionId: persistedSessionId }]);
+                            //this.router.navigate(['/DetailTheme',{themeId:id}]);
+                        });
                         alert("Ok");
                     }
                     else {
@@ -84,7 +98,7 @@ System.register(['angular2/core', "../service/userService", "../entity/theme", "
                         template: "\n\n    <select #t (change)=\"onSelectTheme(t.value)\">\n        <option [value]=\"0\">Geen thema</option>\n        <option *ngFor=\"#th of themes\" [value]=\"th.themeId\">{{th.themeName}}</option>\n    </select>\n    <div *ngIf=\"cards\">Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:\n        <div *ngFor=\"#card of cards\">{{card?.text}}\n            <img src=\"{{card.imageURL}}\">\n        </div>\n    </div>\n    <button *ngIf=\"cards\" class=\"btn btn-success\" (click)=\"createSession()\">Sessie aanmaken rond het thema {{theme.themeName}} </button>\n\n    ",
                         encapsulation: core_1.ViewEncapsulation.None
                     }), 
-                    __metadata('design:paramtypes', [userService_1.UserService, contentService_1.ContentService])
+                    __metadata('design:paramtypes', [userService_1.UserService, contentService_1.ContentService, sessionService_1.SessionService, router_1.Router])
                 ], CreateSessionComponent);
                 return CreateSessionComponent;
             })();
