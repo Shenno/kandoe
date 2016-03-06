@@ -90,8 +90,8 @@ public class ContentRestController {
 
     @RequestMapping(value = "/cards", method = RequestMethod.POST)
     public ResponseEntity<CardResource> addCard(@RequestBody CardResource cardResource) {
-        contentService.addCard(mapperFacade.map(cardResource, Card.class));
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        Card addedCard = contentService.addCard(mapperFacade.map(cardResource, Card.class));
+        return new ResponseEntity<>(mapperFacade.map(addedCard, CardResource.class), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "{themeId}/cards", method = RequestMethod.GET)

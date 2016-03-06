@@ -14,10 +14,7 @@ public class CardResource  implements Serializable {
     private String imageURL;
     private Integer themeId;
 
-    private ThemeResource themeResource;
-
     public CardResource() {
-        this.themeResource = new ThemeResource();
     }
 
     public Integer getId() {
@@ -51,14 +48,5 @@ public class CardResource  implements Serializable {
     public void setText(String text) {
         this.text = text;
     }
-
-   /* public ThemeResource getThemeResource() {
-        return themeResource;
-    }
-
-    public void setThemeResource(ThemeResource themeResource) {
-        this.themeResource = themeResource;
-    }*/
-
 
 }

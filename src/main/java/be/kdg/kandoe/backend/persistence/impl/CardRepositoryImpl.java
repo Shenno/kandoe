@@ -34,7 +34,7 @@ public class CardRepositoryImpl implements CardRepositoryCustom {
             throw new ContentServiceException("Card " + card.getText() + " already exists");
         }
         final Session session = em.unwrap(Session.class);
-        session.saveOrUpdate(card);
+        session.save(card);
         return card;
     }
 

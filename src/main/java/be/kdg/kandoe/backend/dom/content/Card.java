@@ -81,4 +81,20 @@ public class Card implements Serializable, Identifiable<Integer> {
     public Integer getId() {
         return cardId;
     }
+
+    public Integer getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(Integer cardId) {
+        this.cardId = cardId;
+    }
+
+    public List<Remark> getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(List<Remark> remarks) {
+        this.remarks = remarks;
+    }
 }

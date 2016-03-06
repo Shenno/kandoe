@@ -39,6 +39,7 @@ import {LogoutComponent} from "./components/logout.component";
     {path:'/editTheme/:themeId',name:'EditTheme',component:EditThemeComponent},
     {path:'/createOrganisation',name:'CreateOrganisation',component: CreateOrganisationComponent},
     {path:'/createSession', name:'CreateSession', component: CreateSessionComponent},
+    {path:'/detailTheme/:themeId/createCard',name:'CreateCard',component:CreateCardComponent},
     {path:'/detailOrganisation/:organisationId',name:'DetailOrganisation',component: DetailOrganisationComponent},
     {path:'/organisations',name:'Organisations',component:OverviewOrganisationComponent},
     {path:'/themes',name:'Themes',component:OverviewThemeComponent},
@@ -65,7 +66,4 @@ export class AppComponent {
             err => alert(localStorage.getItem("jwt") + err))*/
     }
 
-}/*(theme:Theme) => {
- this.theme = theme;
- document.title = 'Wijzig thema';
- })*/
+}

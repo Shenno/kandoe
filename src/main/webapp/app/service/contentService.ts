@@ -108,7 +108,9 @@ export class ContentService {
     }
 
     private onSuccesfulAddCard(id:number, card:Card): void {
+        alert("log")
         this.logger.log('Card "' + card.text + '" is aangemaakt"');
-        this.router.navigate(['/DetailTheme', {themeId: id}]);
+        alert("navigate");
+        this.router.navigate(['/DetailTheme', {themeId: card.themeId}]);
     }
 }

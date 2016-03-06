@@ -1,4 +1,3 @@
-import {Theme} from "./theme";
 export class Card {
     constructor(public id: number,
                 public text: string,

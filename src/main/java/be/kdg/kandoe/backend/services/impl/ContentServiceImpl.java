@@ -154,10 +154,9 @@ public class ContentServiceImpl implements ContentService {
             throw new ContentServiceException("Card can not be empty");
         } else if (card.getText().isEmpty()) {
             throw new ContentServiceException("Empty Description");
-        } else if (card.getTheme() == null) {
+        }else if (card.getTheme() == null) {
             throw new ContentServiceException("Empty themeID");
         }
-
 
         // Create a Pattern object
         Pattern r = Pattern.compile("(@)?(href=')?(HREF=')?(HREF=\")?(href=\")?(http://)?[a-zA-Z_0-9\\-]+(\\.\\w[a-zA-Z_0-9\\-]+)+(/[#&\\n\\-=?\\+\\%/\\.\\w]+)?");
@@ -169,7 +168,6 @@ public class ContentServiceImpl implements ContentService {
         if (!m.find()) {
             throw new ContentServiceException("Wrong Image location");
         }
-
 
         return cardRepository.addCard(card);
     }

@@ -1,6 +1,7 @@
 package be.kdg.kandoe.frontend.config.orika.custom.mappers;
 
 import be.kdg.kandoe.backend.dom.content.Card;
+import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.frontend.controllers.resources.content.CardResource;
@@ -25,13 +26,13 @@ public class CardMapper extends CustomMapper<Card, CardResource> {
     @Override
     public void mapAtoB(Card card, CardResource cardResource, MappingContext context) {
         cardResource.setThemeId(card.getTheme().getId());
-        super.mapAtoB(card, cardResource, context);
-        //mapperFacade.map(card.getTheme(), cardResource.getThemeResource());
+        //super.mapAtoB(card, cardResource, context);
     }
 
     @Override
     public void mapBtoA(CardResource cardResource, Card card, MappingContext context) {
-        card.setTheme(contentService.getTheme(cardResource.getThemeId()));
+        Theme theme = contentService.getTheme(cardResource.getThemeId());
+        card.setTheme(theme);
         super.mapBtoA(cardResource, card, context);
     }
 }
