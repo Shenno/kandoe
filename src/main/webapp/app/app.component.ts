@@ -22,7 +22,7 @@ import {DashboardComponent} from "./components/dashboard.component";
 import {ManageAccountComponent} from "./components/manageAccount.component";
 import {SessionComponent} from "./components/session.component";
 import {LogoutComponent} from "./components/logout.component";
-
+import {DetailCardComponent} from "./components/detailCard.component";
 @Component({
     selector: 'my-app',
     templateUrl: 'app/partials_html/app.component.html',
@@ -40,6 +40,7 @@ import {LogoutComponent} from "./components/logout.component";
     {path:'/createOrganisation',name:'CreateOrganisation',component: CreateOrganisationComponent},
     {path:'/createSession', name:'CreateSession', component: CreateSessionComponent},
     {path:'/detailTheme/:themeId/createCard',name:'CreateCard',component:CreateCardComponent},
+    {path:'/detailCard/:cardId',name:'DetailCard',component: DetailCardComponent},
     {path:'/detailOrganisation/:organisationId',name:'DetailOrganisation',component: DetailOrganisationComponent},
     {path:'/organisations',name:'Organisations',component:OverviewOrganisationComponent},
     {path:'/themes',name:'Themes',component:OverviewThemeComponent},

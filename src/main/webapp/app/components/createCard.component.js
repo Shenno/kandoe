@@ -33,9 +33,7 @@ System.register(['angular2/core', 'angular2/router', "../service/contentService"
                     this.card = card_1.Card.createEmptyCard();
                     this.contentService = contentService;
                     document.title = 'Maak kaartje aan';
-                    alert("constructor");
                     this.card.themeId = +routeParam.params["themeId"];
-                    alert(this.card.themeId);
                 }
                 CreateCardComponent.prototype.onSubmit = function () {
                     this.contentService.addCard(this.card);
