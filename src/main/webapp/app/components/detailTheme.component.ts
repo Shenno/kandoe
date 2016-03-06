@@ -32,7 +32,8 @@ export class DetailThemeComponent {
         })
     }
 
-    public onSubmit(): void {
+    public onSubmit(event): void {
+        event.preventDefault();
         this.router.navigate(['/EditTheme', {themeId: this.theme.themeId}]);
     }
 }

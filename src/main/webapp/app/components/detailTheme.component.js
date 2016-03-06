@@ -41,7 +41,8 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
                         document.title = 'Thema: ' + _this.theme.themeName;
                     });
                 }
-                DetailThemeComponent.prototype.onSubmit = function () {
+                DetailThemeComponent.prototype.onSubmit = function (event) {
+                    event.preventDefault();
                     this.router.navigate(['/EditTheme', { themeId: this.theme.themeId }]);
                 };
                 DetailThemeComponent = __decorate([
