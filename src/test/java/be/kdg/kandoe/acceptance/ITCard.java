@@ -28,40 +28,21 @@ public class ITCard {
 
         element = element.findElement(By.name("ib_text"));
         assertEquals("input",element.getTagName());
-        element.sendKeys("cardText");
+        element.sendKeys("card");
 
         element = driver.findElement(By.name("ib_imageURL"));
         assertEquals("input",element.getTagName());
-        element.sendKeys("htt");
-        element.sendKeys("p:/");
-        element.sendKeys("/my");
-        element.sendKeys("ede");
-        element.sendKeys("n.be");
-        element.sendKeys("/im");
-        element.sendKeys("age");
-        element.sendKeys("/co");
-        element.sendKeys("m_de");
-        element.sendKeys("ta");
-        element.sendKeys("il");
-        element.sendKeys("/201");
-        element.sendKeys("309");
-        element.sendKeys("10_");
-        element.sendKeys("183");
-        element.sendKeys("661");
-        element.sendKeys("691");
-        element.sendKeys("352");
-        element.sendKeys("2f0");
-        element.sendKeys("609");
-        element.sendKeys("c0d2");
-        element.sendKeys("f.");
-        element.sendKeys("j");
-        element.sendKeys("p");
-        element.sendKeys("g");
+        String url = "http://www.wired.com/wp-content/uploads/2015/09/google-logo.jpg";
+        String[] splitUrl = url.split("");
+        for (String s : splitUrl){
+            element.sendKeys(s);
+        }
 
         element = driver.findElement(By.name("btn_save"));
+        assertEquals(element.getText(),"Opslaan");
         element.submit();
 
-        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Kaart: cardText"));
+        (new WebDriverWait(driver, 15)).until((WebDriver d) -> d.getTitle().equals("Kaart"));
 
         element = driver.findElement(By.id("span_cardName"));
         assertEquals("The cardText must be correct", "cardText", element.getText());
