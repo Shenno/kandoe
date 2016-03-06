@@ -19,9 +19,11 @@ import java.util.stream.Collectors;
 public class SessionMapper extends CustomMapper<AsynchronousSession, SessionResourceActive> {
     @Override
     public void mapAtoB(AsynchronousSession asynchronousSession, SessionResourceActive sessionResourceActive, MappingContext context) {
+        //System.out.println("IN DE MAPPER" + asynchronousSession.getCardSessions().size());
         List<CardSessionResource> cardSessionResources = asynchronousSession.getCardSessions().stream().map(cs -> mapperFacade.map(cs, CardSessionResource.class)).collect(Collectors.toList());
         //mapperFacade.map(asynchronousSession.getCardSessions(), sessionResourceActive.getCardSessionResources());
         sessionResourceActive.setCardSessionResources(cardSessionResources);
+        //super.mapAtoB(asynchronousSession, sessionResourceActive, context);
     }
 
     @Override
