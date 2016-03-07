@@ -22,6 +22,7 @@ import {SessionService} from "../service/sessionService";
     </select>
     <div *ngIf="cards">Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:
         <div *ngFor="#card of cards">
+            <input (change)="changeCardSelectedStatus(card)" type="checkbox" [checked]="card.selected">
             <img src="{{card.imageURL}}" height="225px" width="200px">{{card?.text}}
         </div>
     </div>
@@ -45,6 +46,8 @@ export class CreateSessionComponent {
     private theme: Theme = Theme.createEmptyTheme();
     private cards: Card[] = null;
     private currentUser = null;
+    //var cardids: number[] = [];
+    private cardIds: number[] = [];
 
     public constructor(userService: UserService, contentService: ContentService, sessionService: SessionService, router: Router) {
         this.userService = userService;
@@ -61,7 +64,12 @@ export class CreateSessionComponent {
     public onSelectTheme(selectedThemeId:number) {
         alert(selectedThemeId);
         if(selectedThemeId != 0) {
-            this.contentService.getCardsByThemeId(selectedThemeId.toString()).subscribe((cards:Card[]) => {this.cards = cards;});
+            this.contentService.getCardsByThemeId(selectedThemeId.toString()).subscribe((cards:Card[]) => {
+                this.cards = cards;
+                this.cards.forEach( function (card) {
+                    card.selected = true;
+                });
+            });
             this.contentService.getTheme(selectedThemeId.toString()).subscribe((theme:Theme) => {this.theme = theme});
         }
         else {
@@ -69,6 +77,14 @@ export class CreateSessionComponent {
             this.theme = null;
         }
        // Observable.do .map(function(v) { return [1,2,3];}) .subscribe(console.log.bind(console))
+    }
+
+    public changeCardSelectedStatus(card:Card) {
+        if(card.selected) {
+            card.selected = false;
+            return
+        }
+        card.selected = true;
     }
 
     public createSession() {
@@ -86,8 +102,9 @@ export class CreateSessionComponent {
 
             /* CardIds ophalen */
             this.cards.forEach( function (card) {
-                cardids.push(card.id);
-                alert(card.id);
+                if(card.selected) {
+                    cardids.push(card.id);
+                }
             });
 
             var session: createSession = new createSession(emails, cardids, this.theme.themeId);
