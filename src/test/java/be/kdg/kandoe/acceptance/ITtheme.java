@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNull;
  */
 public class ITtheme {
 
-    WebDriver driver;
+    private WebDriver driver;
 
     public ITtheme() {
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
@@ -41,7 +41,7 @@ public class ITtheme {
         assertEquals("input", element.getTagName());
         assertEquals("text", element.getAttribute("type"));
 
-        SeleniumHelper.fillTextIntoElement(element, "clarence.ho@gmail.com");
+        SeleniumHelper.fillTextIntoElement(element, "scott.tiger@live.com");
 
         element = driver.findElement(By.id("ib_password"));
         assertEquals("input", element.getTagName());
@@ -59,9 +59,8 @@ public class ITtheme {
     @Test
     public void testAddTheme() {
 
-        SeleniumHelper.allowDomToLoad();
+        SeleniumHelper.allowDomToLoad(); //allow time for login to complete
 
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
         driver.get("http://localhost:9966/kandoe/#/organisation/1/createTheme");
 
         SeleniumHelper.allowDomToLoad();
@@ -72,24 +71,21 @@ public class ITtheme {
         element = element.findElement(By.name("ib_name"));
         assertEquals("input", element.getTagName());
         assertEquals("text", element.getAttribute("type"));
-        element.sendKeys("themename");
+        SeleniumHelper.fillTextIntoElement(element, "my themename");
 
         element = driver.findElement(By.name("ib_description"));
         assertEquals("textarea", element.getTagName());
-        element.sendKeys("d");
+        SeleniumHelper.fillTextIntoElement(element, "my description");
 
         element = driver.findElement(By.name("cb_commentaryAllowed"));
         assertEquals("input", element.getTagName());
         assertEquals("checkbox", element.getAttribute("type"));
-        element.click();
+        SeleniumHelper.clickOnElement(driver, element);
 
         element = driver.findElement(By.name("cb_addingAdmitted"));
         assertEquals("input", element.getTagName());
         assertEquals("checkbox", element.getAttribute("type"));
-        element.click();
-
-        // Select dropdown = new Select(driver.findElement(By.name("dd_organisation")));
-        //dropdown.selectByVisibleText("organisatie");
+        SeleniumHelper.clickOnElement(driver, element);
 
         element = driver.findElement(By.id("tags"));
         assertEquals("div", element.getTagName());
@@ -97,46 +93,46 @@ public class ITtheme {
         element = driver.findElement(By.name("ib_newTag"));
         assertEquals("input", element.getTagName());
         assertEquals("text", element.getAttribute("type"));
-        element.sendKeys("t0");
+        SeleniumHelper.fillTextIntoElement(element, "my tag0");
 
         element = driver.findElement(By.name("btn_addTag"));
         assertEquals("button", element.getTagName());
         assertEquals("Voeg tag toe", element.getText());
-        executor.executeScript("arguments[0].click();", element);
+        SeleniumHelper.clickOnElement(driver, element);
 
         element = driver.findElement(By.id("tag0"));
         assertEquals("p", element.getTagName());
-        assertEquals("Content of tag must be correct", "t0", element.getText());
+        assertEquals("Content of tag must be correct", "my tag0", element.getText());
 
         element = driver.findElement(By.id("delete_tag0"));
         assertEquals("span", element.getTagName());
         assertEquals("glyphicon glyphicon-remove", element.getAttribute("class"));
-        executor.executeScript("arguments[0].click();", element);
+        SeleniumHelper.clickOnElement(driver, element);
 
         element = driver.findElement(By.name("ib_newTag"));
-        element.sendKeys("t1");
+        SeleniumHelper.fillTextIntoElement(element, "my tag1");
 
         element = driver.findElement(By.name("btn_addTag"));
-        executor.executeScript("arguments[0].click();", element);
+        SeleniumHelper.clickOnElement(driver, element);
 
         element = driver.findElement(By.id("tag0"));
         assertEquals("p", element.getTagName());
-        assertEquals("Content of tag must be correct", "t1", element.getText());
+        assertEquals("Content of tag must be correct", "my tag1", element.getText());
 
         element = driver.findElement(By.name("btn_save"));
         assertEquals("button", element.getTagName());
         assertEquals("Opslaan", element.getText());
-        executor.executeScript("arguments[0].click();", element);
+        SeleniumHelper.clickOnElement(driver, element);
 
-        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Thema: themename"));
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Thema: my themename"));
 
         element = driver.findElement(By.id("span_themename"));
         assertEquals("span", element.getTagName());
-        assertEquals("The themename must be correct", "themename", element.getText());
+        assertEquals("The themename must be correct", "my themename", element.getText());
 
         element = driver.findElement(By.id("p_description"));
         assertEquals("p", element.getTagName());
-        assertEquals("The description must be correct", "d", element.getText());
+        assertEquals("The description must be correct", "my description", element.getText());
 
         element = driver.findElement(By.name("cb_commentaryAllowed"));
         assertEquals("input", element.getTagName());
@@ -154,14 +150,15 @@ public class ITtheme {
         assertEquals("div", element.getTagName());
 
         element = driver.findElement(By.id("tag0"));
-        assertEquals("span", element.getTagName());
-        assertEquals("Content of tag must be correct", "tag1Updated", element.getText());
+        assertEquals("p", element.getTagName());
+        assertEquals("Content of tag must be correct", "my tag1", element.getText());
     }
 
     @Test
     public void testEditTheme() {
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+
+        SeleniumHelper.allowDomToLoad(); //allow time for login to complete
+
         driver.get("http://localhost:9966/kandoe/#/detailTheme/1");
 
         SeleniumHelper.allowDomToLoad();
@@ -175,13 +172,10 @@ public class ITtheme {
         element = driver.findElement(By.id("p_description"));
         String description = element.getText();
 
-        element = driver.findElement(By.id("tag1"));
-        String tag1 = element.getText();
-
         element = driver.findElement(By.id("btn_edit"));
         assertEquals("button", element.getTagName());
         assertEquals("Wijzigen", element.getText());
-        element.submit();
+        SeleniumHelper.clickOnElement(driver, element);
 
         (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Wijzig thema"));
 
@@ -192,75 +186,66 @@ public class ITtheme {
         assertEquals("The name must be correct", themeName, element.getAttribute("value"));
 
         element.clear();
-        element.sendKeys("Nieuwe themanaam");
+        SeleniumHelper.fillTextIntoElement(element, "New themename");
 
         element = driver.findElement(By.id("ib_description"));
         assertEquals("textarea", element.getTagName());
         assertEquals("The description must be correct", description, element.getAttribute("value"));
 
         element.clear();
-        element.sendKeys("b");
+        SeleniumHelper.fillTextIntoElement(element, "New description");
 
         element = driver.findElement(By.name("cb_commentaryAllowed"));
         assertEquals("input", element.getTagName());
         assertEquals("checkbox", element.getAttribute("type"));
-        element.click();
+        SeleniumHelper.clickOnElement(driver, element);
 
         element = driver.findElement(By.name("cb_addingAdmitted"));
         assertEquals("input", element.getTagName());
         assertEquals("checkbox", element.getAttribute("type"));
-        element.click();
+        SeleniumHelper.clickOnElement(driver, element);
 
         element = driver.findElement(By.id("tags"));
         assertEquals("div", element.getTagName());
-
-        element = driver.findElement(By.id("tag1"));
-        assertEquals("span", element.getTagName());
-        assertEquals("Content of tag must be correct", tag1, element.getText());
-
-        element = driver.findElement(By.id("delete_tag0"));
-        assertEquals("span", element.getTagName());
-        assertEquals("glyphicon glyphicon-remove", element.getAttribute("class"));
-        element.click();
 
         element = driver.findElement(By.name("ib_newTag"));
         assertEquals("input", element.getTagName());
         assertEquals("text", element.getAttribute("type"));
-        element.sendKeys("tag1Updated");
+        SeleniumHelper.fillTextIntoElement(element, "my tag0");
 
         element = driver.findElement(By.name("btn_addTag"));
         assertEquals("button", element.getTagName());
         assertEquals("Voeg tag toe", element.getText());
-        element.click();
+        SeleniumHelper.clickOnElement(driver, element);
 
-        element = driver.findElement(By.id("tag1"));
-        assertEquals("span", element.getTagName());
-        assertEquals("Content of tag must be correct", "tag1Updated", element.getText());
+        element = driver.findElement(By.id("tag0"));
+        assertEquals("p", element.getTagName());
+        assertEquals("Content of tag must be correct", "my tag0", element.getText());
 
         element = driver.findElement(By.name("ib_newTag"));
-        element.sendKeys("tag2");
+        SeleniumHelper.fillTextIntoElement(element, "my tag1");
 
         element = driver.findElement(By.name("btn_addTag"));
-        element.click();
+        SeleniumHelper.clickOnElement(driver, element);
 
-        element = driver.findElement(By.id("tag2"));
-        assertEquals("span", element.getTagName());
-        assertEquals("Content of tag must be correct", "tag2", element.getText());
+        element = driver.findElement(By.id("tag1"));
+        assertEquals("p", element.getTagName());
+        assertEquals("Content of tag must be correct", "my tag1", element.getText());
 
         element = driver.findElement(By.name("btn_save"));
         assertEquals("button", element.getTagName());
         assertEquals("Opslaan", element.getText());
-        element.submit();
+        SeleniumHelper.clickOnElement(driver, element);
 
-        (new WebDriverWait(driver, 15)).until((WebDriver d) -> d.getTitle().equals("Thema: Nieuwe themanaam"));
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Thema: New themename"));
 
         element = driver.findElement(By.id("span_themename"));
         assertEquals("span", element.getTagName());
-        assertEquals("The themename must be correct", "Nieuwe themanaam", element.getText());
+        assertEquals("The themename must be correct", "New themename", element.getText());
 
         element = driver.findElement(By.id("p_description"));
         assertEquals("p", element.getTagName());
-        assertEquals("The description must be correct", "b", element.getText());
+        assertEquals("The description must be correct", "New description", element.getText());
 
         element = driver.findElement(By.name("cb_commentaryAllowed"));
         assertEquals("input", element.getTagName());
@@ -277,12 +262,12 @@ public class ITtheme {
         element = driver.findElement(By.id("tags"));
         assertEquals("div", element.getTagName());
 
-        element = driver.findElement(By.id("tag1"));
-        assertEquals("span", element.getTagName());
-        assertEquals("Content of tag must be correct", tag1, element.getText());
+        element = driver.findElement(By.id("tag0"));
+        assertEquals("p", element.getTagName());
+        assertEquals("Content of tag must be correct", "my tag0", element.getText());
 
-        element = driver.findElement(By.id("tag2"));
-        assertEquals("span", element.getTagName());
-        assertEquals("Content of tag must be correct", "tag2", element.getText());
+        element = driver.findElement(By.id("tag1"));
+        assertEquals("p", element.getTagName());
+        assertEquals("Content of tag must be correct", "my tag1", element.getText());
     }
 }

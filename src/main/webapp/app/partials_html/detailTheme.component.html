@@ -16,7 +16,7 @@
     </div>
 
     <div id="tags">
-        <p *ngFor="#tag of theme.tags">
+        <p [id]="'tag' + i" *ngFor="#tag of theme.tags;#i=index">
             {{tag}}
         </p>
     </div>
