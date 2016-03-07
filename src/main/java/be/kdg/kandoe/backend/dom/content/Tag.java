@@ -28,7 +28,7 @@ public class Tag implements Serializable, Identifiable<Integer>{
     @Column(name = "TagName", nullable = false)
     private String tagName;
 
-    @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(targetEntity = Theme.class, fetch = FetchType.LAZY, optional = false)
     private Theme theme;
 
     public Tag(){

@@ -3,6 +3,8 @@ package be.kdg.kandoe.backend.dom.content;
 import be.kdg.kandoe.backend.dom.session.Session;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.dom.user.User;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
@@ -53,6 +55,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
     private Organisation organisation;
 
     @OneToMany(targetEntity = Tag.class, mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<Tag> tags;
 
     @OneToMany(targetEntity = Card.class, mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

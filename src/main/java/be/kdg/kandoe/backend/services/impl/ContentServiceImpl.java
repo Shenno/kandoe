@@ -13,6 +13,7 @@ import be.kdg.kandoe.backend.persistence.api.ThemeRepository;
 import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,6 +69,7 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public Theme getTheme(int themeId) {
         Theme foundTheme = themeRepository.findOne(themeId);
+        Hibernate.initialize(foundTheme.getTags());
         return foundTheme;
     }
 
