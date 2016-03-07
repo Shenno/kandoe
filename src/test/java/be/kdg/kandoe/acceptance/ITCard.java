@@ -17,21 +17,57 @@ import static org.junit.Assert.assertEquals;
  */
 public class ITCard {
 
+    WebDriver driver;
+
+    public ITCard() {
+        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
+        driver = new ChromeDriver();
+    }
+
+    @Before
+    public void setup() {
+
+        driver.get("http://localhost:9966/kandoe/#/login");
+
+        SeleniumHelper.allowDomToLoad();
+
+        WebElement element = driver.findElement(By.id("app"));
+        element = element.findElement(By.tagName("login"));
+
+        element = element.findElement(By.id("ib_username"));
+        assertEquals("input", element.getTagName());
+        assertEquals("text", element.getAttribute("type"));
+
+        SeleniumHelper.fillTextIntoElement(element, "clarence.ho@gmail.com");
+
+        element = driver.findElement(By.id("ib_password"));
+        assertEquals("input", element.getTagName());
+        assertEquals("password", element.getAttribute("type"));
+
+        SeleniumHelper.fillTextIntoElement(element, "scott");
+
+        element = driver.findElement(By.name("btn_login"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Get lucky", element.getText());
+
+        SeleniumHelper.clickOnElement(driver, element);
+    }
     @Test
     public void testAddCard(){
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        String kaartnaam = "kaartje3";
+        SeleniumHelper.allowDomToLoad();
+
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         driver.get("http://localhost:9966/kandoe/#/detailTheme/1/createCard");
 
-        allowDomToLoad();
+        SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
         element = element.findElement(By.tagName("create-card"));
 
         element = element.findElement(By.name("ib_text"));
         assertEquals("input",element.getTagName());
-        element.sendKeys("card");
+        SeleniumHelper.fillTextIntoElement(element,kaartnaam);
 
         element = driver.findElement(By.name("ib_imageURL"));
         assertEquals("input",element.getTagName());
@@ -42,21 +78,13 @@ public class ITCard {
         assertEquals(element.getText(),"Opslaan");
         executor.executeScript("arguments[0].click();", element);
 
-        (new WebDriverWait(driver, 15)).until((WebDriver d) -> d.getTitle().equals("Kaart"));
+        (new WebDriverWait(driver, 15)).until((WebDriver d) -> d.getTitle().equals("Kaart: "+kaartnaam));
 
         element = driver.findElement(By.id("span_cardName"));
-        assertEquals("The cardText must be correct", "cardText", element.getText());
+        assertEquals("The cardText must be correct", kaartnaam, element.getText());
         element = driver.findElement(By.id("img_imageUrl"));
         String src = element.getAttribute("src");
-        assertEquals("The imageURL must be correct", "imageURL", src);
+        assertEquals("The imageURL must be correct",url, src);
 
-    }
-
-    private void allowDomToLoad() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

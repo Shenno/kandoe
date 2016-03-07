@@ -1,5 +1,6 @@
 package be.kdg.kandoe.acceptance;
 
+import be.kdg.kandoe.util.SeleniumHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -17,28 +18,49 @@ import static org.junit.Assert.assertEquals;
  * Package      be.kdg.kandoe.integration
  */
 public class ITorganisation {
-    @Test
-    public void testGetOrganisations(){
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://localhost:9966/kandoe/#/createOrganisation");
+    WebDriver driver;
 
-        allowDomToLoad();
+    public ITorganisation() {
+        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
+        driver = new ChromeDriver();
+    }
+
+    @Before
+    public void setup() {
+
+        driver.get("http://localhost:9966/kandoe/#/login");
+
+        SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("overview-organisation"));
+        element = element.findElement(By.tagName("login"));
 
-        //TODO: enzovoort
+        element = element.findElement(By.id("ib_username"));
+        assertEquals("input", element.getTagName());
+        assertEquals("text", element.getAttribute("type"));
+
+        SeleniumHelper.fillTextIntoElement(element, "clarence.ho@gmail.com");
+
+        element = driver.findElement(By.id("ib_password"));
+        assertEquals("input", element.getTagName());
+        assertEquals("password", element.getAttribute("type"));
+
+        SeleniumHelper.fillTextIntoElement(element, "scott");
+
+        element = driver.findElement(By.name("btn_login"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Get lucky", element.getText());
+
+        SeleniumHelper.clickOnElement(driver, element);
     }
     @Test
     public void testAddOrganisation() {
-        String organisationName = "KdG Test";
+        String organisationName = "KdG Test 2";
+        SeleniumHelper.allowDomToLoad();
 
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
         driver.get("http://localhost:9966/kandoe/#/createOrganisation");
 
-        allowDomToLoad();
+        SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
         element = element.findElement(By.tagName("create-organisation"));
@@ -48,24 +70,17 @@ public class ITorganisation {
         element = driver.findElement(By.name("ib_new_organisation"));
         assertEquals("input", element.getTagName());
         assertEquals("text", element.getAttribute("type"));
-        element.sendKeys(organisationName);
+        SeleniumHelper.fillTextIntoElement(element,organisationName);
 
         element = driver.findElement(By.name("btn_add_organisation"));
         assertEquals("button", element.getTagName());
-        assertEquals("Organisatie toevoegen", element.getText());
-        element.submit();
+        assertEquals("Toevoegen", element.getText());
+        SeleniumHelper.clickOnElement(driver,element);
 
         (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Organisatie: "+organisationName));
 
-        element = driver.findElement(By.id("h1_organisationName"));
-        assertEquals("h1", element.getTagName());
+        element = driver.findElement(By.id("span_organisationname"));
+        assertEquals("span", element.getTagName());
         assertEquals("The organistation name must be correct", organisationName, element.getText());
-    }
-    private void allowDomToLoad() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

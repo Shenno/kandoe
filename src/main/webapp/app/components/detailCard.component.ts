@@ -27,8 +27,7 @@ export class DetailCardComponent {
         this.contentService = contentService;
         contentService.getCard(routeParam.params["cardId"]).subscribe((card:Card) => {
             this.card = card;
-            //document.title = 'Kaart: ' + this.card.text;
-            document.title = 'Kaart';
+            document.title = 'Kaart: ' + this.card.text;
         })
     }
 
