@@ -7,6 +7,8 @@ import {Router} from "angular2/router";
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/switchMap';
 import {createSession} from "../entity/createSession";
+import {SessionActive} from "../entity/sessionActive";
+import {SessionCard} from "../entity/sessionCard";
 
 @Injectable()
 export class SessionService {
@@ -36,14 +38,22 @@ export class SessionService {
         return this.http.post(url, JSON.stringify(sessionToBeCreated), {headers: headers}).map((res:Response) => res.json());
     }
 
-    /*public pollSession(id:string, interval:number): Observable<Session> {
+    public getSession(id:string): Observable<SessionActive> {
+        var url = this.baseUrl + "/api/sessions/" + id;
+        var headers = this.urlService.getHeaders(true);
+        return this.http.get(url, {headers:headers}).map((res:Response) => res.json());
+    }
+
+    public pollSession(id:string, interval:number): Observable<SessionActive> {
         var url = this.baseUrl + "/api/sessions/" + id;
         var headers = this.urlService.getHeaders(true);
         return Observable.interval(interval)
             .switchMap(() => this.http.get(url, {headers:headers})).map((res:Response) => res.json());
-    }*/
+    }
 
-    public makeMove() {
-
+    public makeMove(sessionCard:SessionCard, id:string) : Observable<SessionActive> {
+        var url = this.baseUrl + "/api/sessions/" + id;
+        var headers = this.urlService.getHeaders(true);
+        return this.http.post(url, JSON.stringify(sessionCard), {headers: headers}).map((res:Response) => res.json());
     }
 }

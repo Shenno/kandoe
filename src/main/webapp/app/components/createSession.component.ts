@@ -21,8 +21,8 @@ import {SessionService} from "../service/sessionService";
         <option *ngFor="#th of themes" [value]="th.themeId">{{th.themeName}}</option>
     </select>
     <div *ngIf="cards">Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:
-        <div *ngFor="#card of cards">{{card?.text}}
-            <img src="{{card.imageURL}}">
+        <div *ngFor="#card of cards">
+            <img src="{{card.imageURL}}" height="225px" width="200px">{{card?.text}}
         </div>
     </div>
     <button *ngIf="cards" class="btn btn-success" (click)="createSession()">Sessie aanmaken rond het thema {{theme.themeName}} </button>
