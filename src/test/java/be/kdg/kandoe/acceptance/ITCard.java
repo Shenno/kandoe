@@ -3,6 +3,7 @@ package be.kdg.kandoe.acceptance;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,6 +20,7 @@ public class ITCard {
     public void testAddCard(){
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         driver.get("http://localhost:9966/kandoe/#/detailTheme/1/createCard");
 
         allowDomToLoad();
@@ -40,7 +42,7 @@ public class ITCard {
 
         element = driver.findElement(By.name("btn_save"));
         assertEquals(element.getText(),"Opslaan");
-        element.submit();
+        executor.executeScript("arguments[0].click();", element);
 
         (new WebDriverWait(driver, 15)).until((WebDriver d) -> d.getTitle().equals("Kaart"));
 

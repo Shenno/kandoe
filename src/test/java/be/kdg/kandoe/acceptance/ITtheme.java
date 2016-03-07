@@ -1,7 +1,9 @@
 package be.kdg.kandoe.acceptance;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,10 +18,31 @@ import static org.junit.Assert.assertNull;
  * @versionon 1.0 23-2-201614:20
  */
 public class ITtheme {
+
+    @Before
+    public void setup() {
+        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        driver.get("http://localhost:9966/kandoe/#/login");
+
+        allowDomToLoad();
+
+        WebElement element = driver.findElement(By.id("app"));
+        element = element.findElement(By.tagName("login"));
+
+        element = element.findElement(By.id("ib_username"));
+        assertEquals("input", element.getTagName());
+        assertEquals("text", element.getAttribute("type"));
+
+
+    }
+
     @Test
     public void testAddTheme() {
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         driver.get("http://localhost:9966/kandoe/#/organisation/1/createTheme");
 
         allowDomToLoad();
@@ -55,36 +78,36 @@ public class ITtheme {
         element = driver.findElement(By.name("ib_newTag"));
         assertEquals("input", element.getTagName());
         assertEquals("text", element.getAttribute("type"));
-        element.sendKeys("tag1");
+        element.sendKeys("t0");
 
         element = driver.findElement(By.name("btn_addTag"));
         assertEquals("button", element.getTagName());
         assertEquals("Voeg tag toe", element.getText());
-        element.click();
+        executor.executeScript("arguments[0].click();", element);
 
-        element = driver.findElement(By.id("tag1"));
-        assertEquals("span", element.getTagName());
-        assertEquals("Content of tag must be correct", "tag1", element.getText());
+        element = driver.findElement(By.id("tag0"));
+        assertEquals("p", element.getTagName());
+        assertEquals("Content of tag must be correct", "t0", element.getText());
 
         element = driver.findElement(By.id("delete_tag0"));
         assertEquals("span", element.getTagName());
         assertEquals("glyphicon glyphicon-remove", element.getAttribute("class"));
-        element.click();
+        executor.executeScript("arguments[0].click();", element);
 
         element = driver.findElement(By.name("ib_newTag"));
-        element.sendKeys("tag1Updated");
+        element.sendKeys("t1");
 
         element = driver.findElement(By.name("btn_addTag"));
-        element.click();
+        executor.executeScript("arguments[0].click();", element);
 
-        element = driver.findElement(By.id("tag1"));
-        assertEquals("span", element.getTagName());
-        assertEquals("Content of tag must be correct", "tag1Updated", element.getText());
+        element = driver.findElement(By.id("tag0"));
+        assertEquals("p", element.getTagName());
+        assertEquals("Content of tag must be correct", "t1", element.getText());
 
         element = driver.findElement(By.name("btn_save"));
         assertEquals("button", element.getTagName());
         assertEquals("Opslaan", element.getText());
-        element.click();
+        executor.executeScript("arguments[0].click();", element);
 
         (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Thema: themename"));
 
@@ -111,7 +134,7 @@ public class ITtheme {
         element = driver.findElement(By.id("tags"));
         assertEquals("div", element.getTagName());
 
-        element = driver.findElement(By.id("tag1"));
+        element = driver.findElement(By.id("tag0"));
         assertEquals("span", element.getTagName());
         assertEquals("Content of tag must be correct", "tag1Updated", element.getText());
     }
