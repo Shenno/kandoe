@@ -1,5 +1,6 @@
 package be.kdg.kandoe.acceptance;
 
+import be.kdg.kandoe.util.SeleniumHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -35,10 +36,7 @@ public class ITCard {
         element = driver.findElement(By.name("ib_imageURL"));
         assertEquals("input",element.getTagName());
         String url = "http://www.wired.com/wp-content/uploads/2015/09/google-logo.jpg";
-        String[] splitUrl = url.split("");
-        for (String s : splitUrl){
-            element.sendKeys(s);
-        }
+        SeleniumHelper.fillTextIntoElement(element, url);
 
         element = driver.findElement(By.name("btn_save"));
         assertEquals(element.getText(),"Opslaan");

@@ -1,5 +1,6 @@
 package be.kdg.kandoe.acceptance;
 
+import be.kdg.kandoe.util.SeleniumHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -19,14 +20,19 @@ import static org.junit.Assert.assertNull;
  */
 public class ITtheme {
 
+    WebDriver driver;
+
+    public ITtheme() {
+        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
+        driver = new ChromeDriver();
+    }
+
     @Before
     public void setup() {
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
+
         driver.get("http://localhost:9966/kandoe/#/login");
 
-        allowDomToLoad();
+        SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
         element = element.findElement(By.tagName("login"));
@@ -35,17 +41,30 @@ public class ITtheme {
         assertEquals("input", element.getTagName());
         assertEquals("text", element.getAttribute("type"));
 
+        SeleniumHelper.fillTextIntoElement(element, "clarence.ho@gmail.com");
 
+        element = driver.findElement(By.id("ib_password"));
+        assertEquals("input", element.getTagName());
+        assertEquals("password", element.getAttribute("type"));
+
+        SeleniumHelper.fillTextIntoElement(element, "scott");
+
+        element = driver.findElement(By.name("btn_login"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Get lucky", element.getText());
+
+        SeleniumHelper.clickOnElement(driver, element);
     }
 
     @Test
     public void testAddTheme() {
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+
+        SeleniumHelper.allowDomToLoad();
+
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         driver.get("http://localhost:9966/kandoe/#/organisation/1/createTheme");
 
-        allowDomToLoad();
+        SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
         element = element.findElement(By.tagName("create-theme"));
@@ -145,7 +164,7 @@ public class ITtheme {
         WebDriver driver = new ChromeDriver();
         driver.get("http://localhost:9966/kandoe/#/detailTheme/1");
 
-        allowDomToLoad();
+        SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
         element = element.findElement(By.tagName("detail-theme"));
@@ -265,13 +284,5 @@ public class ITtheme {
         element = driver.findElement(By.id("tag2"));
         assertEquals("span", element.getTagName());
         assertEquals("Content of tag must be correct", "tag2", element.getText());
-    }
-
-    private void allowDomToLoad() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }
