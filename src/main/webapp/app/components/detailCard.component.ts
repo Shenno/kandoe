@@ -31,11 +31,7 @@ export class DetailCardComponent {
         })
     }
 
-    public edit(): void {
-        this.router.navigate(['/EditCard', {cardId: this.card.id}]);
-    }
-
     public backToTheme(id:string): void {
-        this.router.navigate(['/DetailTheme',{themeId: id }]);
+        this.router.navigate(['/Theme',{themeId: id }]);
     }
 }

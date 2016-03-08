@@ -51,6 +51,10 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
                 DetailThemeComponent.prototype.detailCard = function (id) {
                     this.router.navigate(['/DetailCard', { cardId: id }]);
                 };
+                DetailThemeComponent.prototype.addCard = function (event) {
+                    event.preventDefault();
+                    this.router.navigate(['/CreateCard', { themeId: this.theme.themeId }]);
+                };
                 DetailThemeComponent = __decorate([
                     core_1.Component({
                         selector: 'detail-theme',
