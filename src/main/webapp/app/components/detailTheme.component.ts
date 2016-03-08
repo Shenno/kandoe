@@ -17,14 +17,14 @@ import {Card} from "../entity/card";
 })
 export class DetailThemeComponent {
 
-    private router: Router;
+    private router:Router;
 
-    private contentService: ContentService;
+    private contentService:ContentService;
 
-    private theme: Theme = Theme.createEmptyTheme();
+    private theme:Theme = Theme.createEmptyTheme();
     private cards:Card[] = [];
 
-    public constructor(contentService: ContentService, routeParam:RouteParams, router:Router) {
+    public constructor(contentService:ContentService, routeParam:RouteParams, router:Router) {
         this.router = router;
         this.contentService = contentService;
         contentService.getTheme(routeParam.params["themeId"]).subscribe((theme:Theme) => {
@@ -36,10 +36,16 @@ export class DetailThemeComponent {
         });
     }
 
-    public onSubmit(event): void {
+    public onSubmit(event):void {
         event.preventDefault(); //prevents weird ? URL bug
         this.router.navigate(['/EditTheme', {themeId: this.theme.themeId}]);
     }
-    public detailCard(id:string):void{
-        this.router.navigate(['/DetailCard',{cardId:id}]);
-    }}
+
+    public detailCard(id:string):void {
+        this.router.navigate(['/DetailCard', {cardId: id}]);
+    }
+    public addCard(event) : void{
+        event.preventDefault();
+        this.router.navigate(['/CreateCard',{themeId:this.theme.themeId}]);
+    }
+}
