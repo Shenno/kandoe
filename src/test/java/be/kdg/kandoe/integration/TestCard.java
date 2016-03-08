@@ -28,6 +28,8 @@ import static org.junit.Assert.assertNotNull;
 @ContextConfiguration(locations = {"classpath:**/testcontext.xml"})
 
 public class TestCard {
+
+    //trolololo
     @Autowired
     private ContentService contentService;
 
