@@ -1,7 +1,9 @@
 package be.kdg.kandoe.acceptance;
 
 import be.kdg.kandoe.util.SeleniumHelper;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -20,9 +22,10 @@ import static org.junit.Assert.assertNull;
  */
 public class ITtheme {
 
-    private WebDriver driver;
+    private static WebDriver driver;
 
-    public ITtheme() {
+    @BeforeClass
+    public static void setupClass() {
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
     }
@@ -289,5 +292,37 @@ public class ITtheme {
         element = driver.findElement(By.id("tag1"));
         assertEquals("p", element.getTagName());
         assertEquals("Content of tag must be correct", "my tag1", element.getText());
+    }
+
+    @Test
+    public void testCancelEditingTheme() {
+        SeleniumHelper.allowDomToLoad(); //allow time for login to complete
+
+        driver.get("http://localhost:9966/kandoe/#/detailTheme/1");
+
+        SeleniumHelper.allowDomToLoad();
+
+        WebElement element = driver.findElement(By.id("app"));
+        element = element.findElement(By.tagName("detail-theme"));
+
+        element = driver.findElement(By.id("span_themename"));
+        String themeName = element.getText();
+
+        element = driver.findElement(By.id("btn_edit"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Wijzig thema"));
+
+        element = driver.findElement(By.name("btn_cancel"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Annuleren", element.getText());
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Thema: " + themeName));
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+        driver.close();
     }
 }

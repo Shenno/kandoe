@@ -12,13 +12,17 @@ import {Theme} from "../entity/theme";
     encapsulation: ViewEncapsulation.None
 })
 export class EditThemeComponent {
+
+    private router: Router;
+
     private contentService: ContentService;
 
     //private tag: Tag = Tag.createEmptyTag();
     private theme: Theme = Theme.createEmptyTheme();
     private newTag: string = "";
 
-    public constructor(contentService: ContentService,routeParam:RouteParams) {
+    public constructor(contentService: ContentService, router:Router, routeParam:RouteParams) {
+        this.router = router;
         this.contentService = contentService;
         this.contentService.getTheme(routeParam.params["themeId"]).subscribe((theme:Theme) => {
             this.theme = theme;
@@ -37,5 +41,10 @@ export class EditThemeComponent {
 
     public onSubmit(): void {
         this.contentService.updateTheme(this.theme);
+    }
+
+    public onCancel(event): void {
+        event.preventDefault();
+        this.router.navigate(['/DetailTheme',{themeId: this.theme.themeId}]);
     }
 }

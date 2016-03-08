@@ -1,7 +1,9 @@
 package be.kdg.kandoe.acceptance;
 
 import be.kdg.kandoe.util.SeleniumHelper;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,15 +14,16 @@ import static org.junit.Assert.assertEquals;
 
 //test sfsdf
 public class ITuser {
-    @Before
-    public void setup() {
+    private static WebDriver driver;
 
+    @BeforeClass
+    public static void setupClass() {
+        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
+        driver = new ChromeDriver();
     }
 
     @Test
     public void testLogin() {
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
 
         driver.get("http://localhost:9966/kandoe/#/login");
 
@@ -48,4 +51,8 @@ public class ITuser {
         SeleniumHelper.clickOnElement(driver, element);
     }
 
+    @AfterClass
+    public static void tearDownClass() {
+        driver.close();
+    }
 }

@@ -1,7 +1,9 @@
 package be.kdg.kandoe.acceptance;
 
 import be.kdg.kandoe.util.SeleniumHelper;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,9 +20,11 @@ import static org.junit.Assert.assertEquals;
  * Package      be.kdg.kandoe.integration
  */
 public class ITorganisation {
-    WebDriver driver;
 
-    public ITorganisation() {
+    private static WebDriver driver;
+
+    @BeforeClass
+    public static void setupClass() {
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
     }
@@ -82,5 +86,10 @@ public class ITorganisation {
         element = driver.findElement(By.id("span_organisationname"));
         assertEquals("span", element.getTagName());
         assertEquals("The organistation name must be correct", organisationName, element.getText());
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+        driver.close();
     }
 }

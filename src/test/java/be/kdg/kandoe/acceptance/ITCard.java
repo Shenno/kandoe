@@ -1,7 +1,9 @@
 package be.kdg.kandoe.acceptance;
 
 import be.kdg.kandoe.util.SeleniumHelper;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,9 +19,10 @@ import static org.junit.Assert.assertEquals;
  */
 public class ITCard {
 
-    WebDriver driver;
+    private static WebDriver driver;
 
-    public ITCard() {
+    @BeforeClass
+    public static void setupClass() {
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
     }
@@ -86,5 +89,10 @@ public class ITCard {
         String src = element.getAttribute("src");
         assertEquals("The imageURL must be correct",url, src);
 
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+        driver.close();
     }
 }
