@@ -7,6 +7,8 @@ import {ContentService} from "../service/contentService";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {FORM_DIRECTIVES} from "angular2/common";
 import {Card} from "../entity/card";
+import {User} from "../entity/user";
+import {UserService} from "../service/userService";
 
 
 @Component({
@@ -20,19 +22,24 @@ export class DetailThemeComponent {
     private router:Router;
 
     private contentService:ContentService;
-
+    private userService: UserService;
+    private userId = 0;
     private theme:Theme = Theme.createEmptyTheme();
     private cards:Card[] = [];
 
-    public constructor(contentService:ContentService, routeParam:RouteParams, router:Router) {
+    public constructor(contentService:ContentService,userService:UserService, routeParam:RouteParams, router:Router) {
         this.router = router;
         this.contentService = contentService;
+        this.userService = userService;
         contentService.getTheme(routeParam.params["themeId"]).subscribe((theme:Theme) => {
             this.theme = theme;
             document.title = 'Thema: ' + this.theme.themeName;
         })
         contentService.getCardsByThemeId(routeParam.params["themeId"]).subscribe((cards:Card[]) => {
             this.cards = cards;
+        });
+        this.userService.getMyDetails().subscribe((user:User) => {
+            this.userId = user.id;
         });
     }
 

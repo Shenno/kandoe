@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../entity/theme', "../service/contentService", "angular2/common"], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', '../entity/theme', "../service/contentService", "angular2/common", "../service/userService"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, theme_1, contentService_1, common_1, common_2;
+    var core_1, router_1, theme_1, contentService_1, common_1, common_2, userService_1;
     var DetailThemeComponent;
     return {
         setters:[
@@ -27,21 +27,29 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
             function (common_1_1) {
                 common_1 = common_1_1;
                 common_2 = common_1_1;
+            },
+            function (userService_1_1) {
+                userService_1 = userService_1_1;
             }],
         execute: function() {
             DetailThemeComponent = (function () {
-                function DetailThemeComponent(contentService, routeParam, router) {
+                function DetailThemeComponent(contentService, userService, routeParam, router) {
                     var _this = this;
+                    this.userId = 0;
                     this.theme = theme_1.Theme.createEmptyTheme();
                     this.cards = [];
                     this.router = router;
                     this.contentService = contentService;
+                    this.userService = userService;
                     contentService.getTheme(routeParam.params["themeId"]).subscribe(function (theme) {
                         _this.theme = theme;
                         document.title = 'Thema: ' + _this.theme.themeName;
                     });
                     contentService.getCardsByThemeId(routeParam.params["themeId"]).subscribe(function (cards) {
                         _this.cards = cards;
+                    });
+                    this.userService.getMyDetails().subscribe(function (user) {
+                        _this.userId = user.id;
                     });
                 }
                 DetailThemeComponent.prototype.onSubmit = function (event) {
@@ -62,7 +70,7 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
                         encapsulation: core_1.ViewEncapsulation.None,
                         directives: [common_1.CORE_DIRECTIVES, common_2.FORM_DIRECTIVES]
                     }), 
-                    __metadata('design:paramtypes', [contentService_1.ContentService, router_1.RouteParams, router_1.Router])
+                    __metadata('design:paramtypes', [contentService_1.ContentService, userService_1.UserService, router_1.RouteParams, router_1.Router])
                 ], DetailThemeComponent);
                 return DetailThemeComponent;
             })();
