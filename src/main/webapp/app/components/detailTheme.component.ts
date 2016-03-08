@@ -23,7 +23,7 @@ export class DetailThemeComponent {
 
     private contentService:ContentService;
     private userService: UserService;
-    private userId = 0;
+    private currentUsername:string = ""
     private theme:Theme = Theme.createEmptyTheme();
     private cards:Card[] = [];
 
@@ -34,25 +34,31 @@ export class DetailThemeComponent {
         contentService.getTheme(routeParam.params["themeId"]).subscribe((theme:Theme) => {
             this.theme = theme;
             document.title = 'Thema: ' + this.theme.themeName;
-        })
+        });
         contentService.getCardsByThemeId(routeParam.params["themeId"]).subscribe((cards:Card[]) => {
             this.cards = cards;
         });
         this.userService.getMyDetails().subscribe((user:User) => {
-            this.userId = user.id;
+            this.currentUsername = user.username;
         });
     }
 
     public onSubmit(event):void {
-        event.preventDefault(); //prevents weird ? URL bug
+        event.preventDefault(); //prevents weird question mark url bug
         this.router.navigate(['/EditTheme', {themeId: this.theme.themeId}]);
     }
 
     public detailCard(id:string):void {
         this.router.navigate(['/DetailCard', {cardId: id}]);
     }
+
     public addCard(event) : void{
         event.preventDefault();
         this.router.navigate(['/CreateCard',{themeId:this.theme.themeId}]);
+    }
+
+    public backToList(event):void {
+        event.preventDefault();
+        this.router.navigate(['/Organisation',{organisationId: this.theme.organisationId}]);
     }
 }

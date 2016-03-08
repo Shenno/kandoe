@@ -27,7 +27,7 @@
         </p>
     </div>
 
-    <button *ngIf="userId == theme.organisatorId" class="btn btn-default" id="btn_edit" (click)="onSubmit($event)">Wijzigen</button>
+    <button *ngIf="theme.organisatorNames.indexOf(currentUsername) != -1" class="btn btn-default" id="btn_edit" (click)="onSubmit($event)">Wijzigen</button>
 
     <h2>Kaarten</h2>
     <div>
@@ -38,6 +38,8 @@
                 {{i+1}} | {{card.text}}
             </li>
         </ul>
-        <button *ngIf="userId == theme.organisatorId" class="btn btn-default" (click)="addCard($event)">Kaart toevoegen</button>
+        <button *ngIf="theme.organisatorNames.indexOf(currentUsername) != -1" class="btn btn-default" (click)="addCard($event)">Kaart toevoegen</button>
     </div>
+
+    <button class="btn btn-default" (click)="backToList($event)">Terug naar lijst</button>
 </form>
