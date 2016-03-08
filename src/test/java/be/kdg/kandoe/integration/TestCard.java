@@ -8,6 +8,7 @@ import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
+import be.kdg.kandoe.backend.util.CsvReader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +73,21 @@ public class TestCard {
         assertNotNull(card);
         assertEquals("Description must be correct",description,card.getText());
         assertEquals("URL must be correct",url,card.getImageURL());
+
+    }
+
+    @Test
+    public void testAddCsvCards(){
+        CsvReader csvReader= new CsvReader();
+        ArrayList<Card> cards;
+        String csvFile="C:\\Users\\Len\\OneDrive\\Documenten\\kandoe\\src\\main\\java\\be\\kdg\\kandoe\\backend\\util\\test.csv";
+        cards=csvReader.run(csvFile,theme);
+        for (Card card:cards) {
+            card=contentService.addCard(card);
+            System.out.println(card.getText()+" "+card.getImageURL());
+            assertNotNull(card);
+
+        }
 
     }
 
