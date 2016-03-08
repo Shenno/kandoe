@@ -22,4 +22,15 @@
     </div>
 
     <button class="btn btn-default" id="btn_edit" (click)="onSubmit($event)">Wijzigen</button>
+
+    <h2>Kaarten</h2>
+    <div>
+        <ul class="list-group">
+            <li *ngFor="#card of cards"
+                (click)="detailCard(card.id)"
+                class="list-group-item">
+                {{card.id}} | {{card.text}}
+            </li>
+        </ul>
+    </div>
 </form>

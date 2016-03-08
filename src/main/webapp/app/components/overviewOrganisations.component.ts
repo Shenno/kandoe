@@ -29,7 +29,7 @@ export class OverviewOrganisationComponent {
         userService.getOrganisations().subscribe((organisations:Organisation[]) => {
             this.organisations = organisations;
             document.title = 'Organisaties';
-        })
+        });
         this.userService.getMyDetails().subscribe((user:User) => {
             this.userId = user.id;
         });

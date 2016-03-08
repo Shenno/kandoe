@@ -30,20 +30,26 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
             }],
         execute: function() {
             DetailThemeComponent = (function () {
-                //new Promise<Theme[]>(resolve => setTimeout(() =>resolve(Theme), 2000));
                 function DetailThemeComponent(contentService, routeParam, router) {
                     var _this = this;
                     this.theme = theme_1.Theme.createEmptyTheme();
+                    this.cards = [];
                     this.router = router;
                     this.contentService = contentService;
                     contentService.getTheme(routeParam.params["themeId"]).subscribe(function (theme) {
                         _this.theme = theme;
                         document.title = 'Thema: ' + _this.theme.themeName;
                     });
+                    contentService.getCardsByThemeId(routeParam.params["themeId"]).subscribe(function (cards) {
+                        _this.cards = cards;
+                    });
                 }
                 DetailThemeComponent.prototype.onSubmit = function (event) {
                     event.preventDefault(); //prevents weird ? URL bug
                     this.router.navigate(['/EditTheme', { themeId: this.theme.themeId }]);
+                };
+                DetailThemeComponent.prototype.detailCard = function (id) {
+                    this.router.navigate(['/DetailCard', { cardId: id }]);
                 };
                 DetailThemeComponent = __decorate([
                     core_1.Component({

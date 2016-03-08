@@ -6,6 +6,7 @@ import {UrlService} from "../service/urlService";
 import {ContentService} from "../service/contentService";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {FORM_DIRECTIVES} from "angular2/common";
+import {Card} from "../entity/card";
 
 
 @Component({
@@ -21,7 +22,7 @@ export class DetailThemeComponent {
     private contentService: ContentService;
 
     private theme: Theme = Theme.createEmptyTheme();
-    //new Promise<Theme[]>(resolve => setTimeout(() =>resolve(Theme), 2000));
+    private cards:Card[] = [];
 
     public constructor(contentService: ContentService, routeParam:RouteParams, router:Router) {
         this.router = router;
@@ -30,10 +31,15 @@ export class DetailThemeComponent {
             this.theme = theme;
             document.title = 'Thema: ' + this.theme.themeName;
         })
+        contentService.getCardsByThemeId(routeParam.params["themeId"]).subscribe((cards:Card[]) => {
+            this.cards = cards;
+        });
     }
 
     public onSubmit(event): void {
         event.preventDefault(); //prevents weird ? URL bug
         this.router.navigate(['/EditTheme', {themeId: this.theme.themeId}]);
     }
-}
+    public detailCard(id:string):void{
+        this.router.navigate(['/DetailCard',{cardId:id}]);
+    }}
