@@ -45,6 +45,9 @@ public class UserServiceImpl implements UserService
         if(getOrganisationByName(organisation.getName()) != null) {
             throw new UserServiceException("Duplicate organisation");
         }
+        if (organisation.getOrganisator() == null){
+            throw new UserServiceException("Organisation must have an organisator");
+        }
         return organisationRepository.save(organisation);
     }
 

@@ -6,4 +6,4 @@
         {{organisation.id}} | {{organisation.name}}
     </li>
 </ul>
-<button class="btn btn-primary" (click)="addOrganisation()">Organisatie Toevoegen</button>
+<button *ngIf="userId!=0" class="btn btn-primary" (click)="addOrganisation()">Organisatie Toevoegen</button>

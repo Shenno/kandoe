@@ -6,6 +6,7 @@ import {UrlService} from "../service/urlService";
 import {UserService} from "../service/userService";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {FORM_DIRECTIVES} from "angular2/common";
+import {User} from "../entity/user";
 
 
 @Component({
@@ -19,8 +20,7 @@ export class OverviewOrganisationComponent {
     private router:Router;
 
     private userService:UserService;
-
-    //private organisation: Organisation = Organisation.createEmptyOrganisation();
+    private userId =0;
     private organisations:Organisation[] = [];
 
     public constructor(userService:UserService, routeParam:RouteParams, router:Router) {
@@ -30,6 +30,9 @@ export class OverviewOrganisationComponent {
             this.organisations = organisations;
             document.title = 'Organisaties';
         })
+        this.userService.getMyDetails().subscribe((user:User) => {
+            this.userId = user.id;
+        });
     }
     public addOrganisation(): void {
         this.router.navigate(['/CreateOrganisation']);

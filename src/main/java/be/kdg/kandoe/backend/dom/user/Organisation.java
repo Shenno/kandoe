@@ -31,7 +31,7 @@ public class Organisation implements Serializable, Identifiable<Integer> {
     private List<Theme> themes;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id",nullable = false)
     private User user; // Dit is de organisator maar moet user heten voor namingConvention hibernate TODO aanpassen!
 
     public Organisation() {

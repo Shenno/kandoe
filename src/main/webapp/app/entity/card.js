@@ -9,6 +9,7 @@ System.register([], function(exports_1) {
                     this.text = text;
                     this.imageURL = imageURL;
                     this.themeId = themeId;
+                    this.selected = true;
                 }
                 Card.createEmptyCard = function () {
                     return new Card(0, "", "", 0);

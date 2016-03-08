@@ -39,7 +39,6 @@ public class OrganisationMapper extends CustomMapper<Organisation, OrganisationR
     @Override
     public void mapBtoA(OrganisationResource organisationResource, Organisation organisation, MappingContext context) {
         int organisatorId = organisationResource.getOrganisatorId();
-        if(organisatorId == 0) organisatorId = 1;
         User organisator = userService.findUserById(organisatorId);
         organisation.setOrganisator(organisator);
         super.mapBtoA(organisationResource, organisation, context);

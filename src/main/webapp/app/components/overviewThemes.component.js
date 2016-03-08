@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../entity/theme', "../service/contentService", "angular2/common"], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', "angular2/common", "../service/contentService"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,8 +8,8 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, theme_1, contentService_1, common_1, common_2;
-    var DetailThemeComponent;
+    var core_1, router_1, common_1, common_2, contentService_1;
+    var OverviewThemeComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -18,46 +18,44 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (theme_1_1) {
-                theme_1 = theme_1_1;
-            },
-            function (contentService_1_1) {
-                contentService_1 = contentService_1_1;
-            },
             function (common_1_1) {
                 common_1 = common_1_1;
                 common_2 = common_1_1;
+            },
+            function (contentService_1_1) {
+                contentService_1 = contentService_1_1;
             }],
         execute: function() {
-            DetailThemeComponent = (function () {
-                //new Promise<Theme[]>(resolve => setTimeout(() =>resolve(Theme), 2000));
-                function DetailThemeComponent(contentService, routeParam, router) {
+            OverviewThemeComponent = (function () {
+                function OverviewThemeComponent(contentService, routeParam, router) {
                     var _this = this;
-                    this.theme = theme_1.Theme.createEmptyTheme();
+                    this.themes = [];
                     this.router = router;
                     this.contentService = contentService;
-                    contentService.getTheme(routeParam.params["themeId"]).subscribe(function (theme) {
-                        _this.theme = theme;
-                        document.title = 'Thema: ' + _this.theme.themeName;
+                    contentService.getThemesByOrganisatorId(routeParam.get("organisationId")).subscribe(function (themes) {
+                        _this.themes = themes;
+                        document.title = 'Themas';
                     });
                 }
-                DetailThemeComponent.prototype.onSubmit = function (event) {
-                    event.preventDefault(); //prevents weird ? URL bug
-                    this.router.navigate(['/EditTheme', { themeId: this.theme.themeId }]);
+                OverviewThemeComponent.prototype.addTheme = function () {
+                    this.router.navigate(['/CreateTheme']);
                 };
-                DetailThemeComponent = __decorate([
+                OverviewThemeComponent.prototype.detailTheme = function (id) {
+                    this.router.navigate(['/DetailTheme', { themeId: id }]);
+                };
+                OverviewThemeComponent = __decorate([
                     core_1.Component({
-                        selector: 'detail-theme',
-                        templateUrl: 'app/partials_html/detailTheme.component.html',
+                        selector: 'overview-theme',
+                        templateUrl: 'app/partials_html/overviewThemes.component.html',
                         encapsulation: core_1.ViewEncapsulation.None,
                         directives: [common_1.CORE_DIRECTIVES, common_2.FORM_DIRECTIVES]
                     }), 
                     __metadata('design:paramtypes', [contentService_1.ContentService, router_1.RouteParams, router_1.Router])
-                ], DetailThemeComponent);
-                return DetailThemeComponent;
+                ], OverviewThemeComponent);
+                return OverviewThemeComponent;
             })();
-            exports_1("DetailThemeComponent", DetailThemeComponent);
+            exports_1("OverviewThemeComponent", OverviewThemeComponent);
         }
     }
 });
-//# sourceMappingURL=detailTheme.component.js.map
+//# sourceMappingURL=overviewThemes.component.js.map

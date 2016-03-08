@@ -43,7 +43,7 @@ export class UserService {
 
     public getOrganisation(id:string):Observable<Organisation>{
         var url = this.baseUrl + "/api/organisations/" + id;
-        var headers =  this.urlService.getHeaders(true);
+        var headers =  this.urlService.getHeaders(false);
         return this.http.get(url, {headers: headers}).map((res:Response) => res.json());
     }
 

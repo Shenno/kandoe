@@ -12,12 +12,13 @@ import {UserService} from "../service/userService";
     encapsulation: ViewEncapsulation.None
 })
 export class CreateOrganisationComponent {
-
+    private router: Router
     private userService: UserService;
 
     private organisation: Organisation = Organisation.createEmptyOrganisation();
 
-    public constructor(userService: UserService) {
+    public constructor(userService: UserService, router: Router) {
+        this.router=router;
         this.userService = userService;
         this.userService.getMyDetails().subscribe((user:User) => {
             this.organisation.organisatorId = user.id;
@@ -27,5 +28,9 @@ export class CreateOrganisationComponent {
 
     public onSubmit(): void {
         this.userService.addOrganisation(this.organisation);
+    }
+    public onCancel(event): void {
+        event.preventDefault();
+        this.router.navigate(['/Organisations']);
     }
 }

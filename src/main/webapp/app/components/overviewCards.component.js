@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../entity/theme', "../service/contentService", "angular2/common"], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', "angular2/common", "../service/contentService"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,8 +8,8 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, theme_1, contentService_1, common_1, common_2;
-    var DetailThemeComponent;
+    var core_1, router_1, common_1, common_2, contentService_1;
+    var OverviewCardComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -18,46 +18,41 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (theme_1_1) {
-                theme_1 = theme_1_1;
-            },
-            function (contentService_1_1) {
-                contentService_1 = contentService_1_1;
-            },
             function (common_1_1) {
                 common_1 = common_1_1;
                 common_2 = common_1_1;
+            },
+            function (contentService_1_1) {
+                contentService_1 = contentService_1_1;
             }],
         execute: function() {
-            DetailThemeComponent = (function () {
-                //new Promise<Theme[]>(resolve => setTimeout(() =>resolve(Theme), 2000));
-                function DetailThemeComponent(contentService, routeParam, router) {
+            OverviewCardComponent = (function () {
+                function OverviewCardComponent(contentService, routeParam, router) {
                     var _this = this;
-                    this.theme = theme_1.Theme.createEmptyTheme();
+                    this.cards = [];
                     this.router = router;
                     this.contentService = contentService;
-                    contentService.getTheme(routeParam.params["themeId"]).subscribe(function (theme) {
-                        _this.theme = theme;
-                        document.title = 'Thema: ' + _this.theme.themeName;
+                    contentService.getCardsByThemeId(routeParam.get("themeId")).subscribe(function (cards) {
+                        _this.cards = cards;
+                        document.title = 'Kaartjes';
                     });
                 }
-                DetailThemeComponent.prototype.onSubmit = function (event) {
-                    event.preventDefault(); //prevents weird ? URL bug
-                    this.router.navigate(['/EditTheme', { themeId: this.theme.themeId }]);
+                OverviewCardComponent.prototype.addCard = function () {
+                    this.router.navigate(['/CreateCard']);
                 };
-                DetailThemeComponent = __decorate([
+                OverviewCardComponent = __decorate([
                     core_1.Component({
-                        selector: 'detail-theme',
-                        templateUrl: 'app/partials_html/detailTheme.component.html',
+                        selector: 'overview-card',
+                        templateUrl: 'app/partials_html/overviewCards.component.html',
                         encapsulation: core_1.ViewEncapsulation.None,
                         directives: [common_1.CORE_DIRECTIVES, common_2.FORM_DIRECTIVES]
                     }), 
                     __metadata('design:paramtypes', [contentService_1.ContentService, router_1.RouteParams, router_1.Router])
-                ], DetailThemeComponent);
-                return DetailThemeComponent;
+                ], OverviewCardComponent);
+                return OverviewCardComponent;
             })();
-            exports_1("DetailThemeComponent", DetailThemeComponent);
+            exports_1("OverviewCardComponent", OverviewCardComponent);
         }
     }
 });
-//# sourceMappingURL=detailTheme.component.js.map
+//# sourceMappingURL=overviewCards.component.js.map
