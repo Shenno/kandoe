@@ -21,15 +21,21 @@
         </p>
     </div>
 
+    <div id="organisators">
+        <p [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index">
+            {{organisator}}
+        </p>
+    </div>
+
     <button *ngIf="userId == theme.organisatorId" class="btn btn-default" id="btn_edit" (click)="onSubmit($event)">Wijzigen</button>
 
     <h2>Kaarten</h2>
     <div>
         <ul class="list-group">
-            <li *ngFor="#card of cards"
+            <li *ngFor="#card of cards; #i=index"
                 (click)="detailCard(card.id)"
                 class="list-group-item">
-                {{card.id}} | {{card.text}}
+                {{i+1}} | {{card.text}}
             </li>
         </ul>
         <button *ngIf="userId == theme.organisatorId" class="btn btn-default" (click)="addCard($event)">Kaart toevoegen</button>

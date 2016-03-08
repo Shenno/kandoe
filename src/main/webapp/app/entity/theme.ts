@@ -7,11 +7,12 @@ export class Theme {
                 public addingAdmitted: boolean,
                 public organisationId: number,
                 public organisatorId: number,
+                public organisatorNames: string[],
                 public tags: string[]) {
 
     }
 
     public static createEmptyTheme(): Theme {
-        return new Theme(0, "", "", false, false, 0, 0, []);
+        return new Theme(0, "", "", false, false, 0, 0, [], []);
     }
 }

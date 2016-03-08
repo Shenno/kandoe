@@ -10,6 +10,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
@@ -122,6 +123,25 @@ public class ITtheme {
         assertEquals("p", element.getTagName());
         assertEquals("Content of tag must be correct", "my tag1", element.getText());
 
+        element = driver.findElement(By.id("organisators"));
+        assertEquals("div", element.getTagName());
+
+       /* Select dropdown = new Select(driver.findElement(By.id("dd_users")));
+        dropdown.selectByVisibleText("clarence.ho@gmail.com"); */
+        element =  driver.findElement(By.id("dd_users"));
+        SeleniumHelper.selectOptionOnDropdown(element, "clarence.ho@gmail.com");
+
+        element = driver.findElement(By.name("btn_addOrganisator"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Voeg organisator toe", element.getText());
+        SeleniumHelper.clickOnElement(driver, element);
+       // element.submit();
+       //element.click();
+
+        element = driver.findElement(By.id("organisator0"));
+        assertEquals("p", element.getTagName());
+        assertEquals("The right organisator must be shown", "clarence.ho@gmail.com", element.getText());
+
         element = driver.findElement(By.name("btn_save"));
         assertEquals("button", element.getTagName());
         assertEquals("Opslaan", element.getText());
@@ -155,6 +175,17 @@ public class ITtheme {
         element = driver.findElement(By.id("tag0"));
         assertEquals("p", element.getTagName());
         assertEquals("Content of tag must be correct", "my tag1", element.getText());
+
+        element = driver.findElement(By.id("organisators"));
+        assertEquals("div", element.getTagName());
+
+        element = driver.findElement(By.id("organisator0"));
+        assertEquals("p", element.getTagName());
+        assertEquals("The first organisator must be correct", "scott.tiger@live.com", element.getText());
+
+        element = driver.findElement(By.id("organisator1"));
+        assertEquals("p", element.getTagName());
+        assertEquals("The second organisator must be correct", "clarence.ho@gmail.com", element.getText());
     }
 
     @Test

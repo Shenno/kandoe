@@ -57,6 +57,12 @@ public class TestTheme {
         List<Tag> tags = new ArrayList<>();
 
         Theme theme = new Theme(name,description,isCommentaryAllowed,isAddingAdmited,user,organisation,tags);
+
+        User user2 = new User("firstname2.lastname2@kandoe.be", "password2");
+        user2 = userService.addUser(user2);
+
+        theme.addOrganisator(user2);
+
         theme = contentService.addTheme(theme);
 
         assertNotNull(theme);
@@ -66,11 +72,15 @@ public class TestTheme {
         assertEquals("Adding must be admitted", theme.isAddingAdmitted(), isAddingAdmited);
         assertEquals("Organisation must be correct", theme.getOrganisation(), organisation);
         assertEquals("There must be one tag", theme.getTags().size(), tags.size());
-        assertEquals("Tag must be correct", theme.getTags().size(),tags.size());
+        assertEquals("There must be two organisators", theme.getOrganisators().size(), 2);
+        assertEquals("First organisator must be correct", theme.getOrganisators().get(0), user);
+        assertEquals("Second organisator must be correct", theme.getOrganisators().get(1), user2);
 
-        List<Theme> themesOfOrganisator = contentService.findThemesByOrganisatorId(theme.getOrganisators().get(0).getId());
-        assertEquals("User should only be organisator of 1 theme", 1, themesOfOrganisator.size());
-        assertEquals("Theme should be the same", theme.getId(), themesOfOrganisator.get(0).getId());
+        for(int i = 0; i < theme.getOrganisators().size(); i++) {
+            List<Theme> themesOfOrganisator = contentService.findThemesByOrganisatorId(theme.getOrganisators().get(i).getId());
+            assertEquals("User should only be organisator of 1 theme", 1, themesOfOrganisator.size());
+            assertEquals("Theme should be the same", theme.getId(), themesOfOrganisator.get(0).getId());
+        }
 
         organisation = userService.getOrganisationByName("organisation");
         List<Theme> themes = organisation.getThemes();

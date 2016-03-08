@@ -75,6 +75,13 @@ export class UserService {
         }
     }
 
+    /*Users*/
+
+    public getAllUsernames(): Observable<string[]> {
+        var headers = this.urlService.getHeaders(true);
+        return this.http.get(this.baseUrl + "/api/usernames", {headers: headers}).map((res:Response) => res.json());
+    }
+
     public getMyDetails() : Observable<User> {
         var headers =  this.urlService.getHeaders(true);
         return this.http.get(this.baseUrl + "/api/users/me", {headers: headers}).map((res:Response) => res.json());

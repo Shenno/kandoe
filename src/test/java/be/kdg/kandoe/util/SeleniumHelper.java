@@ -30,4 +30,8 @@ public class SeleniumHelper {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
     }
+
+    public static void selectOptionOnDropdown(WebElement dropdown, String option) {
+        dropdown.sendKeys(option);
+    }
 }

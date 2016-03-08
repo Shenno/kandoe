@@ -26,6 +26,8 @@ export class CreateThemeComponent {
     private theme: Theme = Theme.createEmptyTheme();
     private newTag: string = "";
 
+    private users: string[] = [];
+    private newOrganisator: string = "";
 
     public constructor(contentService: ContentService, userService: UserService, router:Router, routeParam: RouteParams) {
         document.title = 'Maak thema aan';
@@ -36,6 +38,9 @@ export class CreateThemeComponent {
         this.userService.getMyDetails().subscribe((user:User) => {
             this.theme.organisatorId = user.id;
         });
+        this.userService.getAllUsernames().subscribe((users:string[]) => {
+            this.users = users;
+        });
     }
 
     public onAddTag(): void {
@@ -45,6 +50,10 @@ export class CreateThemeComponent {
 
     public onRemoveTag(i: number): void {
         this.theme.tags.splice(i, 1);
+    }
+
+    public onAddOrganisator(): void {
+        this.theme.organisatorNames.push(this.newOrganisator);
     }
 
     public onSubmit(): void {

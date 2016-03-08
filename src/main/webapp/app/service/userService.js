@@ -75,6 +75,11 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
                         localStorage.removeItem("jwt");
                     }
                 };
+                /*Users*/
+                UserService.prototype.getAllUsernames = function () {
+                    var headers = this.urlService.getHeaders(true);
+                    return this.http.get(this.baseUrl + "/api/usernames", { headers: headers }).map(function (res) { return res.json(); });
+                };
                 UserService.prototype.getMyDetails = function () {
                     var headers = this.urlService.getHeaders(true);
                     return this.http.get(this.baseUrl + "/api/users/me", { headers: headers }).map(function (res) { return res.json(); });

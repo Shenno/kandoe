@@ -37,6 +37,8 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
                     var _this = this;
                     this.theme = theme_1.Theme.createEmptyTheme();
                     this.newTag = "";
+                    this.users = [];
+                    this.newOrganisator = "";
                     document.title = 'Maak thema aan';
                     this.router = router;
                     this.contentService = contentService;
@@ -45,6 +47,9 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
                     this.userService.getMyDetails().subscribe(function (user) {
                         _this.theme.organisatorId = user.id;
                     });
+                    this.userService.getAllUsernames().subscribe(function (users) {
+                        _this.users = users;
+                    });
                 }
                 CreateThemeComponent.prototype.onAddTag = function () {
                     this.theme.tags[this.theme.tags.length] = this.newTag.toLowerCase();
@@ -52,6 +57,9 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
                 };
                 CreateThemeComponent.prototype.onRemoveTag = function (i) {
                     this.theme.tags.splice(i, 1);
+                };
+                CreateThemeComponent.prototype.onAddOrganisator = function () {
+                    this.theme.organisatorNames.push(this.newOrganisator);
                 };
                 CreateThemeComponent.prototype.onSubmit = function () {
                     this.contentService.addTheme(this.theme);

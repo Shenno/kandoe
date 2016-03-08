@@ -36,6 +36,14 @@ public class UserServiceImpl implements UserService
     private final PasswordEncoder passwordEncoder;
     private final OrganisationRepository organisationRepository;
 
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, OrganisationRepository organisationRepository, PasswordEncoder passwordEncoder)
+    {
+        this.userRepository = userRepository;
+        this.organisationRepository = organisationRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
     //Organisation
     @Override
     public Organisation addOrganisation(Organisation organisation) throws UserServiceException {
@@ -70,14 +78,6 @@ public class UserServiceImpl implements UserService
         return organisationRepository.getOrganisationByName(name).get(0);
     }
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, OrganisationRepository organisationRepository, PasswordEncoder passwordEncoder)
-    {
-        this.userRepository = userRepository;
-        this.organisationRepository = organisationRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
-
     /**
      * Retrieves User by its unique userId
      *
@@ -93,6 +93,11 @@ public class UserServiceImpl implements UserService
             throw new UserServiceException("User not found");
 
         return u;
+    }
+
+    @Override
+    public List<String> findUsernames() {
+        return userRepository.findAllUsernames();
     }
 
     @Override

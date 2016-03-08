@@ -4,7 +4,7 @@ System.register([], function(exports_1) {
         setters:[],
         execute: function() {
             Theme = (function () {
-                function Theme(themeId, themeName, description, commentaryAllowed, addingAdmitted, organisationId, organisatorId, tags) {
+                function Theme(themeId, themeName, description, commentaryAllowed, addingAdmitted, organisationId, organisatorId, organisatorNames, tags) {
                     this.themeId = themeId;
                     this.themeName = themeName;
                     this.description = description;
@@ -12,10 +12,11 @@ System.register([], function(exports_1) {
                     this.addingAdmitted = addingAdmitted;
                     this.organisationId = organisationId;
                     this.organisatorId = organisatorId;
+                    this.organisatorNames = organisatorNames;
                     this.tags = tags;
                 }
                 Theme.createEmptyTheme = function () {
-                    return new Theme(0, "", "", false, false, 0, 0, []);
+                    return new Theme(0, "", "", false, false, 0, 0, [], []);
                 };
                 return Theme;
             })();

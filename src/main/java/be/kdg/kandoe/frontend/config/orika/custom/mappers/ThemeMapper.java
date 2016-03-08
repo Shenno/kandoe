@@ -42,6 +42,14 @@ public class ThemeMapper extends CustomMapper<Theme, ThemeResource> {
         }
 
         themeResource.setTags(tags);
+
+        List<String> organisatorNames = new ArrayList<>();
+
+        for(User organisator: theme.getOrganisators()) {
+            organisatorNames.add(organisator.getUsername());
+        }
+
+        themeResource.setOrganisatorNames(organisatorNames);
     }
 
     @Override
@@ -52,8 +60,13 @@ public class ThemeMapper extends CustomMapper<Theme, ThemeResource> {
 
         int organisatorId = themeResource.getOrganisatorId();
         if(organisatorId == 0) organisatorId = 1; //TODO: Slechts tijdelijk, zolang het default thema nog geen organisator heeft
-        User organisator = userService.findUserById(organisatorId);
-        theme.addOrganisator(organisator);
+        User mainOrganisator = userService.findUserById(organisatorId);
+        theme.addOrganisator(mainOrganisator);
+
+        for(String organisatorName: themeResource.getOrganisatorNames()) {
+            User extraOrganisator = userService.findUserByUsername(organisatorName);
+            theme.addOrganisator(extraOrganisator);
+        }
 
         super.mapBtoA(themeResource, theme, context);
     }

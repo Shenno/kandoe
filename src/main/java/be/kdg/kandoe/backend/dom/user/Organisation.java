@@ -1,6 +1,8 @@
 package be.kdg.kandoe.backend.dom.user;
 
 import be.kdg.kandoe.backend.dom.content.Theme;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
@@ -28,6 +30,7 @@ public class Organisation implements Serializable, Identifiable<Integer> {
     private String organisationName;
 
     @OneToMany(targetEntity = Theme.class, mappedBy = "organisation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<Theme> themes;
 
     @ManyToOne

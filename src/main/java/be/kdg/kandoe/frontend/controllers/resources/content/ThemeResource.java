@@ -21,6 +21,7 @@ public class ThemeResource implements Serializable {
     private Integer organisatorId;
 //    private OrganisationResource organisation;
     private List<String> tags;
+    private List<String> organisatorNames;
 
     public ThemeResource() {}
 
@@ -102,5 +103,13 @@ public class ThemeResource implements Serializable {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public List<String> getOrganisatorNames() {
+        return organisatorNames;
+    }
+
+    public void setOrganisatorNames(List<String> organisatorNames) {
+        this.organisatorNames = organisatorNames;
     }
 }

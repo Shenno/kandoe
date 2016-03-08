@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 /**
  * @author wouter
@@ -39,5 +40,11 @@ public class UserRepositoryImpl implements UserRepositoryCustom
         final Session session = em.unwrap(Session.class);
         session.saveOrUpdate(user);
         return user.getId();
+    }
+
+    @Override
+    public List<String> findAllUsernames() {
+        final TypedQuery<String> q = em.createNamedQuery("User.findAllUsernames", String.class);
+        return q.getResultList();
     }
 }

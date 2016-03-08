@@ -29,6 +29,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
         {
                 @NamedQuery(name = "User.findByUserid", query = "SELECT u FROM User u WHERE u.userId = :userid"),
                 @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
+                @NamedQuery(name = "User.findAllUsernames", query = "SELECT u.username FROM User u")
         })
 public class User implements Serializable, UserDetails, Identifiable<Integer>
 {

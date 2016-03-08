@@ -79,6 +79,13 @@ public class UserRestController {
             return new ResponseEntity<>(resources, HttpStatus.OK);
         }
     */
+
+    @RequestMapping(value = "/usernames", method = RequestMethod.GET)
+    public ResponseEntity<List<String>> findUsernames() {
+        List<String> usernames = userService.findUsernames();
+        return new ResponseEntity<>(usernames, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity<List<UserResource>> findUsers() {
         List<User> users = userService.findUsers();
