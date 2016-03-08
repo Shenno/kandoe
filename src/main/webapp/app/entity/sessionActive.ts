@@ -1,7 +1,10 @@
 import {SessionCard} from "./sessionCard";
+import {Remark} from "./remark";
 
 export class SessionActive {
-    constructor(public gameOver: boolean, public currentUser:number, public cardSessionResources: SessionCard[], public problem:boolean, public amountOfCircles: number) {
+//    private remarks: Remark[] = [];
+
+    constructor(public gameOver: boolean, public remarks: Remark[], public currentUser:number, public cardSessionResources: SessionCard[], public problem:boolean, public amountOfCircles: number) {
 
     }
 

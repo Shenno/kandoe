@@ -135,9 +135,17 @@ public class TestSession {
         assertEquals("Distance to center of card should be one less", distanceToCenter - 1, session.getCardSessions().get(0).getDistanceToCenter());
         assertEquals("Current user must be user2", user2.getUserId(), session.getCurrentUser());
 
+        // Add remark
+        String remarkText = "Dit is een opmerking";
+        session = sessionService.addRemarkToSession(session, user.getUsername(), remarkText);
+        assertEquals("Remark should be added", 1, session.getRemarks().size());
+        assertEquals("Remark content should be correct", remarkText, session.getRemarks().get(0).getText());
+
         // Make move incorrect user
         exception.expect(SessionServiceException.class);
         sessionService.makeMove(cardSessionOne, user.getId());
+
+
 
         // Make moves 3 more moves on same card to check gameOver
         assertTrue(!session.isGameOver());

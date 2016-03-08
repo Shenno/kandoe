@@ -4,6 +4,7 @@ import be.kdg.kandoe.backend.dom.session.AsynchronousSession;
 import be.kdg.kandoe.backend.dom.session.Session;
 import be.kdg.kandoe.frontend.controllers.resources.content.CardResource;
 import be.kdg.kandoe.frontend.controllers.resources.sessions.CardSessionResource;
+import be.kdg.kandoe.frontend.controllers.resources.sessions.RemarkResource;
 import be.kdg.kandoe.frontend.controllers.resources.sessions.SessionResourceActive;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
@@ -21,8 +22,10 @@ public class SessionMapper extends CustomMapper<AsynchronousSession, SessionReso
     public void mapAtoB(AsynchronousSession asynchronousSession, SessionResourceActive sessionResourceActive, MappingContext context) {
         //System.out.println("IN DE MAPPER" + asynchronousSession.getCardSessions().size());
         List<CardSessionResource> cardSessionResources = asynchronousSession.getCardSessions().stream().map(cs -> mapperFacade.map(cs, CardSessionResource.class)).collect(Collectors.toList());
+        List<RemarkResource> remarkResources = asynchronousSession.getRemarks().stream().map(r -> mapperFacade.map(r, RemarkResource.class)).collect(Collectors.toList());
         //mapperFacade.map(asynchronousSession.getCardSessions(), sessionResourceActive.getCardSessionResources());
         sessionResourceActive.setCardSessionResources(cardSessionResources);
+        sessionResourceActive.setRemarks(remarkResources);
         //super.mapAtoB(asynchronousSession, sessionResourceActive, context);
     }
 

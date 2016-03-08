@@ -8,6 +8,5 @@ import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
  * @versionon 1.0 29-2-201609:44
  */
 public interface RemarkRepositoryCustom {
-    Remark addRemark(Remark remark) throws ContentServiceException;
-
+    Remark addRemarkToCard(Remark remark) throws ContentServiceException;
 }

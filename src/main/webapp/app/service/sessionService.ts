@@ -9,6 +9,7 @@ import 'rxjs/add/operator/switchMap';
 import {createSession} from "../entity/createSession";
 import {SessionActive} from "../entity/sessionActive";
 import {SessionCard} from "../entity/sessionCard";
+import {Remark} from "../entity/remark";
 
 @Injectable()
 export class SessionService {
@@ -55,5 +56,11 @@ export class SessionService {
         var url = this.baseUrl + "/api/sessions/" + id;
         var headers = this.urlService.getHeaders(true);
         return this.http.post(url, JSON.stringify(sessionCard), {headers: headers}).map((res:Response) => res.json());
+    }
+
+    public addRemark(remark:Remark, id:string) : Observable<Remark[]> {
+        var url = this.baseUrl + "api/sessions" + id + "/remarks";
+        var headers = this.urlService.getHeaders(true);
+        return this.http.post(url, JSON.stringify(remark), {headers: headers}).map((res:Response) => res.json());
     }
 }

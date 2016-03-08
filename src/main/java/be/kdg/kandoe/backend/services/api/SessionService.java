@@ -21,6 +21,7 @@ public interface SessionService {
     Session findSession(int sessionId);
     Session addCardToSession(Session session, Card card);
     Session addUserToSession(Session session, String username) throws SessionServiceException;
+    Session addRemarkToSession(Session session, String username, String text);
     CardSession findCardSession(int cardSessionId);
     void makeMove(CardSession cardSession, int userId) throws SessionServiceException;
 }

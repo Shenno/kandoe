@@ -9,6 +9,7 @@ import be.kdg.kandoe.backend.services.api.SessionService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
 import be.kdg.kandoe.frontend.controllers.resources.sessions.CardSessionResource;
+import be.kdg.kandoe.frontend.controllers.resources.sessions.RemarkResource;
 import be.kdg.kandoe.frontend.controllers.resources.sessions.SessionResourceActive;
 import be.kdg.kandoe.frontend.controllers.resources.sessions.SessionResourcePost;
 import ma.glasnost.orika.MapperFacade;
@@ -19,6 +20,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.AbstractDocument;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -68,6 +70,14 @@ public class SessionRestController {
     public ResponseEntity<SessionResourceActive> findAsynchronousSession(@PathVariable int sessionId) {
         AsynchronousSession session = (AsynchronousSession) sessionService.findSession(sessionId);
         return new ResponseEntity<SessionResourceActive>(mapperFacade.map(session, SessionResourceActive.class), HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/{sessionId}", method = RequestMethod.POST)
+    public ResponseEntity<List<RemarkResource>> createRemark(@RequestBody RemarkResource remarkResource, @PathVariable int sessionId) {
+        Session session = sessionService.findSession(sessionId);
+        session = sessionService.addRemarkToSession(session, remarkResource.getUsername(), remarkResource.getText());
+        List<RemarkResource> remarkResourceList = session.getRemarks().stream().map(r -> mapperFacade.map(r, RemarkResource.class)).collect(Collectors.toList());
+        return new ResponseEntity<List<RemarkResource>>(remarkResourceList, HttpStatus.OK);
     }
 
     @RequestMapping(value="/{sessionId}", method = RequestMethod.POST)

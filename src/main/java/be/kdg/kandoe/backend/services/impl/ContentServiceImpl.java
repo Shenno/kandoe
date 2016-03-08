@@ -5,7 +5,6 @@ import be.kdg.kandoe.backend.dom.content.Remark;
 import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.Organisation;
-import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.persistence.api.CardRepository;
 import be.kdg.kandoe.backend.persistence.api.RemarkRepository;
 import be.kdg.kandoe.backend.persistence.api.TagRepository;
@@ -22,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service("contentService")
 @Transactional
@@ -215,6 +212,6 @@ public class ContentServiceImpl implements ContentService {
             throw new ContentServiceException("Empty card");
         else if (remark.getUser() == null)
             throw new ContentServiceException("Empty user");
-        return remarkRepository.addRemark(remark);
+        return remarkRepository.addRemarkToCard(remark);
     }
 }

@@ -2,6 +2,7 @@
 package be.kdg.kandoe.backend.services.impl;
 
 import be.kdg.kandoe.backend.dom.content.Card;
+import be.kdg.kandoe.backend.dom.content.Remark;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.session.CardSession;
 import be.kdg.kandoe.backend.dom.session.Session;
@@ -72,6 +73,18 @@ public class SessionServiceImpl implements SessionService {
             throw new SessionServiceException("Can't add unexisting user to session");
         }
         session.addUser(user);
+        return sessionRepository.save(session);
+    }
+
+    @Override
+    public Session addRemarkToSession(Session session, String username, String text) {
+        User user = userRepository.findUserByUsername(username);
+        if(user == null) {
+            throw new SessionServiceException("Invalid username");
+            //TODO: zorgen dat enkel users van de sessie remarks kunnen adden
+        }
+        Remark r = new Remark(text, user, session);
+        session.addRemark(r);
         return sessionRepository.save(session);
     }
 

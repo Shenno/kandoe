@@ -21,7 +21,7 @@ public class RemarkRepositoryImpl implements RemarkRepositoryCustom {
     private EntityManager em;
 
     @Override
-    public Remark addRemark(Remark remark) throws ContentServiceException {
+    public Remark addRemarkToCard(Remark remark) throws ContentServiceException {
         final TypedQuery<Remark> q = em.createNamedQuery("Remark.findByTextByCard", Remark.class);
         q.setParameter("text", remark.getText());
         q.setParameter("card",remark.getCard());

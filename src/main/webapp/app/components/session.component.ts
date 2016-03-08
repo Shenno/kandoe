@@ -14,14 +14,17 @@ import {SessionService} from "../service/sessionService";
 import {SessionActive} from "../entity/sessionActive";
 import {SessionCard} from "../entity/sessionCard";
 import {Subscription} from "../../node_modules/rxjs/Subscription";
+import {ChatComponent} from "./chat.component";
 
 @Component({
     selector: 'view-session',
+    directives: [ChatComponent],
     template: `<h1>Hallo, {{currentUser?.username}}!</h1>
         <h1 *ngIf="myTurn && !currentSession?.gameOver">Het is jouw beurt, {{currentUser?.username}}!</h1>
         <h1 *ngIf="!myTurn && !currentSession?.gameOver">Wacht even je beurt af!</h1>
         <h1 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h1>
         <template [ngIf]="currentSession">
+            <chatbox [remarks]="currentSession.remarks"></chatbox>
             <div *ngFor="#card of currentSession.cardSessionResources; #i = index">
                 <img src="{{card?.image}}" height="225px" width="200px">
                 {{card?.card}}, afstand tot centrum van de cirkel: {{card?.distanceToCenter}}

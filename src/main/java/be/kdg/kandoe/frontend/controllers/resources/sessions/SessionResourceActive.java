@@ -13,9 +13,11 @@ public class SessionResourceActive implements Serializable {
     private boolean problem;
     private boolean gameOver;
     private int amountOfCircles;
+    private List<RemarkResource> remarks;
 
     public SessionResourceActive() {
         this.cardSessionResources = new ArrayList<>();
+        this.remarks = new ArrayList<>();
     }
 
     public List<CardSessionResource> getCardSessionResources() {
@@ -24,6 +26,14 @@ public class SessionResourceActive implements Serializable {
 
     public void setCardSessionResources(List<CardSessionResource> cardSessionResources) {
         this.cardSessionResources = cardSessionResources;
+    }
+
+    public List<RemarkResource> getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(List<RemarkResource> remarks) {
+        this.remarks = remarks;
     }
 
     public Integer getCurrentUser() {

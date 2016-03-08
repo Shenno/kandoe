@@ -8,6 +8,7 @@ import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -111,6 +112,11 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
         }
     }
 
+    public void addRemark(Remark remark) {
+        remark.setTimeStamp(LocalDateTime.now());
+        this.remarks.add(remark);
+    }
+
     public boolean isGameOver() {
         return gameOver;
     }
@@ -177,6 +183,14 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
 
     public void addCardSession(CardSession cardSession) {
         this.cardSessions.add(cardSession);
+    }
+
+    public List<Remark> getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(List<Remark> remarks) {
+        this.remarks = remarks;
     }
 
     public void updateCurrentUser() {
