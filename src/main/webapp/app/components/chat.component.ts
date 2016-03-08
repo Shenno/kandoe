@@ -16,15 +16,38 @@ import {Remark} from "../entity/remark";
     selector: 'chatbox',
     template: `
         <h1>HIER KOMT DE CHAT</h1>
+        <div *ngFor="#remark of remarks">
+            {{remark.text}} {{remark.timeStamp}}
+        </div>
+        <input type="textarea" [(ngModel)]="currentMessage">
+        <button (click)="processRemark()">Chat!</button>
     `,
     encapsulation: ViewEncapsulation.None
 })
 
 export class ChatComponent {
 
+    private sessionService: SessionService;
+
     @Input()
     private remarks: Remark[];
 
-    public constructor() {
+    private currentMessage:string = "";
+
+    @Input()
+    private currentSessionId:string;
+
+    public processRemark() {
+        alert("Remarks were made: " + this.currentMessage);
+        var mes = this.currentMessage;
+        this.sessionService.addRemark(new Remark(null, null, mes), this.currentSessionId).subscribe((remarks:Remark[]) => {
+            this.remarks = remarks;
+        });
+        this.currentMessage = "";
+        alert(this.currentMessage);
+    }
+
+    public constructor(sessionService: SessionService) {
+        this.sessionService = sessionService;
     }
 }

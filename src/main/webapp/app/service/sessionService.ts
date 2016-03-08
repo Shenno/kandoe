@@ -58,8 +58,8 @@ export class SessionService {
         return this.http.post(url, JSON.stringify(sessionCard), {headers: headers}).map((res:Response) => res.json());
     }
 
-    public addRemark(remark:Remark, id:string) : Observable<Remark[]> {
-        var url = this.baseUrl + "api/sessions" + id + "/remarks";
+    public addRemark(remark: Remark, id:string) : Observable<Remark[]> {
+        var url = this.baseUrl + "/api/sessions/" + id + "/remarks";
         var headers = this.urlService.getHeaders(true);
         return this.http.post(url, JSON.stringify(remark), {headers: headers}).map((res:Response) => res.json());
     }
