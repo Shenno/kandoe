@@ -44,7 +44,7 @@ System.register(['angular2/core', 'angular2/router', '../entity/organisation', "
                     this.router.navigate(['/Organisations']);
                 };
                 DetailOrganisationComponent.prototype.detailTheme = function (id) {
-                    this.router.navigate(['/DetailTheme', { themeId: id }]);
+                    this.router.navigate(['/Theme', { themeId: id }]);
                 };
                 DetailOrganisationComponent.prototype.addTheme = function () {
                     this.router.navigate(['/CreateTheme', { organisationId: this.organisation.id }]);

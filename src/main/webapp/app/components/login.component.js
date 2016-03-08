@@ -36,7 +36,7 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                     this.userService.login(this.user)
                         .subscribe(function (res) {
                         localStorage.setItem("jwt", res.text());
-                        _this.router.navigate(['/Test']);
+                        _this.router.navigate(['/Home']);
                     }, function (error) {
                         console.log(error);
                     });

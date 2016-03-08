@@ -47,7 +47,7 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
                 };
                 UserService.prototype.onSuccesfulAddOrganisation = function (id, organisation) {
                     this.logger.log('Organisatie "' + organisation.name + '" is aangemaakt"');
-                    this.router.navigate(['/DetailOrganisation', { organisationId: id }]);
+                    this.router.navigate(['/Organisation', { organisationId: id }]);
                 };
                 UserService.prototype.getOrganisation = function (id) {
                     var url = this.baseUrl + "/api/organisations/" + id;

@@ -58,7 +58,7 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
                 };
                 CreateThemeComponent.prototype.onCancel = function (event) {
                     event.preventDefault();
-                    this.router.navigate(['/DetailOrganisation', { organisationId: this.theme.organisationId }]);
+                    this.router.navigate(['/Organisation', { organisationId: this.theme.organisationId }]);
                 };
                 CreateThemeComponent = __decorate([
                     core_1.Component({

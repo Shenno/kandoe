@@ -45,7 +45,7 @@ public class TestOrganisation {
         userService.deleteUser(user.getUserId());
     }
 
-    @Test
+    @Test(expected = UserServiceException.class)
     public void testAddOrganisationNoUser() {
         String name = "Organisation 1";
         Organisation organisation = new Organisation(name);

@@ -45,7 +45,7 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                     this.router.navigate(['/CreateOrganisation']);
                 };
                 OverviewOrganisationComponent.prototype.detailOrganisation = function (id) {
-                    this.router.navigate(['/DetailOrganisation', { organisationId: id }]);
+                    this.router.navigate(['/Organisation', { organisationId: id }]);
                 };
                 OverviewOrganisationComponent = __decorate([
                     core_1.Component({

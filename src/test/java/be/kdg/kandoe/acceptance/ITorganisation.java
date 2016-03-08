@@ -30,7 +30,7 @@ public class ITorganisation {
     }
 
     @Before
-    public void setup() {  //
+    public void setup() {
 
         driver.get("http://localhost:9966/kandoe/#/login");
 
@@ -88,6 +88,24 @@ public class ITorganisation {
         assertEquals("The organistation name must be correct", organisationName, element.getText());
     }
 
+    @Test
+    public void testCancelAddingOrganisation() {
+        SeleniumHelper.allowDomToLoad(); //allow time for login to complete
+
+        driver.get("http://localhost:9966/kandoe/#/createOrganisation");
+
+        SeleniumHelper.allowDomToLoad();
+
+        WebElement element = driver.findElement(By.id("app"));
+        element = element.findElement(By.tagName("create-organisation"));
+
+        element = element.findElement(By.name("btn_cancel"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Annuleren", element.getText());
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Organisaties"));
+    }
     @AfterClass
     public static void tearDownClass() {
         driver.close();

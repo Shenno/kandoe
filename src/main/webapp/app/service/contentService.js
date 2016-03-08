@@ -74,7 +74,7 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
                 };
                 ContentService.prototype.onSuccesfulAddTheme = function (id, theme) {
                     this.logger.log('Thema "' + theme.themeName + '" is aangemaakt"');
-                    this.router.navigate(['/DetailTheme', { themeId: id }]);
+                    this.router.navigate(['/Theme', { themeId: id }]);
                 };
                 ContentService.prototype.updateTheme = function (theme) {
                     var _this = this;
@@ -85,7 +85,7 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
                 };
                 ContentService.prototype.onSuccesfulUpdateTheme = function (id, theme) {
                     this.logger.log('Thema "' + theme.themeName + '" is bijgewerkt"');
-                    this.router.navigate(['/DetailTheme', { themeId: id }]);
+                    this.router.navigate(['/Theme', { themeId: id }]);
                 };
                 /*Tag*/
                 ContentService.prototype.addTag = function (tag) {
