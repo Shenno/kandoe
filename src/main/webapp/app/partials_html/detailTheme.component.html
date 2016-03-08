@@ -21,7 +21,7 @@
         </p>
     </div>
 
-    <button class="btn btn-default" id="btn_edit" (click)="onSubmit($event)">Wijzigen</button>
+    <button *ngIf="userId == theme.organisatorId" class="btn btn-default" id="btn_edit" (click)="onSubmit($event)">Wijzigen</button>
 
     <h2>Kaarten</h2>
     <div>
@@ -32,6 +32,6 @@
                 {{card.id}} | {{card.text}}
             </li>
         </ul>
-        <button class="btn btn-default" (click)="addCard($event)">Kaart toevoegen</button>
+        <button *ngIf="userId == theme.organisatorId" class="btn btn-default" (click)="addCard($event)">Kaart toevoegen</button>
     </div>
 </form>
