@@ -30,7 +30,7 @@ public class ITorganisation {
     }
 
     @Before
-    public void setup() {
+    public void setup() {  //
 
         driver.get("http://localhost:9966/kandoe/#/login");
 
