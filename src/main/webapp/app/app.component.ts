@@ -31,28 +31,30 @@ import {DetailCardComponent} from "./components/detailCard.component";
     encapsulation: ViewEncapsulation.None
 })
 @RouteConfig([
+    {path:'/',name:'Home',component:HomeComponent},
+    {path:'/home',name:'Home',component:HomeComponent},
+
+    {path:'/dashboard',name:'Dashboard',component:DashboardComponent},
+
+    {path:'/manageAccount',name:'ManageAccount',component:ManageAccountComponent},
     {path:'/login', name: 'Login', component: LoginComponent},
     {path:'/register', name: 'Register', component: RegisterComponent},
-    {path:'/test', name: 'Test', component: CirkelsessieComponent},
-    {path:'/organisation/:organisationId/createTheme',name:'CreateTheme',component: CreateThemeComponent},
-    {path:'/detailTheme/:themeId', name:'DetailTheme', component: DetailThemeComponent},
-    {path:'/editTheme/:themeId',name:'EditTheme',component:EditThemeComponent},
+    {path:'/logout',name:'Logout',component:LogoutComponent},
+
     {path:'/createOrganisation',name:'CreateOrganisation',component: CreateOrganisationComponent},
-    {path:'/createSession', name:'CreateSession', component: CreateSessionComponent},
-    {path:'/detailTheme/:themeId/createCard',name:'CreateCard',component:CreateCardComponent},
-    {path:'/detailCard/:cardId',name:'DetailCard',component: DetailCardComponent},
-    {path:'/detailOrganisation/:organisationId',name:'DetailOrganisation',component: DetailOrganisationComponent},
+    {path:'/organisation/:organisationId',name:'Organisation',component: DetailOrganisationComponent},
     {path:'/organisations',name:'Organisations',component:OverviewOrganisationComponent},
-    {path:'/themes',name:'Themes',component:OverviewThemeComponent},
+
+    {path:'/organisation/:organisationId/createTheme',name:'CreateTheme',component: CreateThemeComponent},
+    {path:'/theme/:themeId', name:'Theme', component: DetailThemeComponent},
+    {path:'/editTheme/:themeId',name:'EditTheme',component:EditThemeComponent},
+
+    {path:'/theme/:themeId/createCard',name:'CreateCard',component:CreateCardComponent},
+    {path:'/card/:cardId',name:'DetailCard',component: DetailCardComponent},
+
+    {path:'/createSession', name:'CreateSession', component: CreateSessionComponent},
     {path:'/session/:sessionId', name:'Session',component:SessionComponent},
-    {path:'/cards',name:'Cards',component:OverviewCardComponent},
-    {path:'/createCard',name:'CreateCard',component:CreateCardComponent},
-    {path:'/createTheme',name:'CreateTheme',component:CreateThemeComponent},
-    {path:'/home',name:'Home',component:HomeComponent},
-    {path:'/',name:'Home',component:HomeComponent},
-    {path:'/dashboard',name:'Dashboard',component:DashboardComponent},
-    {path:'/manageAccount',name:'ManageAccount',component:ManageAccountComponent},
-    {path:'/logout',name:'Logout',component:LogoutComponent}
+
 ])
 
 export class AppComponent {

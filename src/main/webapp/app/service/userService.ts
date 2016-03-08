@@ -38,7 +38,7 @@ export class UserService {
 
     private onSuccesfulAddOrganisation(id:number, organisation:Organisation): void {
         this.logger.log('Organisatie "' + organisation.name + '" is aangemaakt"');
-        this.router.navigate(['/DetailOrganisation',{organisationId:id}]);
+        this.router.navigate(['/Organisation',{organisationId:id}]);
     }
 
     public getOrganisation(id:string):Observable<Organisation>{

@@ -61,7 +61,7 @@ public class ITCard {
         SeleniumHelper.allowDomToLoad();
 
         JavascriptExecutor executor = (JavascriptExecutor) driver;
-        driver.get("http://localhost:9966/kandoe/#/detailTheme/1/createCard");
+        driver.get("http://localhost:9966/kandoe/#/theme/1/createCard");
 
         SeleniumHelper.allowDomToLoad();
 

@@ -53,6 +53,6 @@ export class CreateThemeComponent {
 
     public onCancel(event): void {
         event.preventDefault();
-        this.router.navigate(['/DetailOrganisation',{organisationId: this.theme.organisationId}]);
+        this.router.navigate(['/Organisation',{organisationId: this.theme.organisationId}]);
     }
 }

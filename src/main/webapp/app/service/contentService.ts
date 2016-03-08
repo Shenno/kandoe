@@ -66,7 +66,7 @@ export class ContentService {
 
     private onSuccesfulAddTheme(id:number, theme:Theme): void {
         this.logger.log('Thema "' + theme.themeName + '" is aangemaakt"');
-        this.router.navigate(['/DetailTheme', {themeId: id}]);
+        this.router.navigate(['/Theme', {themeId: id}]);
     }
 
     public updateTheme(theme:Theme): void {
@@ -81,7 +81,7 @@ export class ContentService {
 
     private onSuccesfulUpdateTheme(id:number, theme:Theme): void {
         this.logger.log('Thema "' + theme.themeName + '" is bijgewerkt"');
-        this.router.navigate(['/DetailTheme', {themeId: id}]);
+        this.router.navigate(['/Theme', {themeId: id}]);
     }
 
     /*Tag*/

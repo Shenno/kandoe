@@ -35,6 +35,6 @@ export class OverviewOrganisationComponent {
         this.router.navigate(['/CreateOrganisation']);
     }
     public detailOrganisation(id:string):void{
-        this.router.navigate(['/DetailOrganisation',{organisationId:id}]);
+        this.router.navigate(['/Organisation',{organisationId:id}]);
     }
 }

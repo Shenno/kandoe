@@ -36,7 +36,7 @@ export class DetailOrganisationComponent {
     }
 
     public detailTheme(id:string):void {
-        this.router.navigate(['/DetailTheme', {themeId: id}]);
+        this.router.navigate(['/Theme', {themeId: id}]);
     }
 
     public addTheme() : void{

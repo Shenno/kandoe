@@ -49,6 +49,8 @@ public class ITuser {
         assertEquals("Get lucky", element.getText());
 
         SeleniumHelper.clickOnElement(driver, element);
+
+        //TODO: Controleren dat naar Home page is genavigeerd
     }
 
     @AfterClass

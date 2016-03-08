@@ -182,7 +182,7 @@ public class ITtheme {
 
         SeleniumHelper.allowDomToLoad(); //allow time for login to complete
 
-        driver.get("http://localhost:9966/kandoe/#/detailTheme/1");
+        driver.get("http://localhost:9966/kandoe/#/theme/1");
 
         SeleniumHelper.allowDomToLoad();
 
@@ -298,7 +298,7 @@ public class ITtheme {
     public void testCancelEditingTheme() {
         SeleniumHelper.allowDomToLoad(); //allow time for login to complete
 
-        driver.get("http://localhost:9966/kandoe/#/detailTheme/1");
+        driver.get("http://localhost:9966/kandoe/#/theme/1");
 
         SeleniumHelper.allowDomToLoad();
 

@@ -45,6 +45,6 @@ export class EditThemeComponent {
 
     public onCancel(event): void {
         event.preventDefault();
-        this.router.navigate(['/DetailTheme',{themeId: this.theme.themeId}]);
+        this.router.navigate(['/Theme',{themeId: this.theme.themeId}]);
     }
 }

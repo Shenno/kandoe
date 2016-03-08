@@ -41,7 +41,7 @@ export class LoginComponent {
         this.userService.login(this.user)
             .subscribe((res: Response) => {
                     localStorage.setItem("jwt", res.text());
-                    this.router.navigate(['/Test']);
+                    this.router.navigate(['/Home']);
                 },
                 error => {
                     console.log(error);
