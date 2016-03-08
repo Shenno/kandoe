@@ -17,7 +17,10 @@ import {Remark} from "../entity/remark";
     template: `
         <h1>HIER KOMT DE CHAT</h1>
         <div *ngFor="#remark of remarks">
-            {{remark.text}} {{remark.timeStamp}}
+            [{{remark.timeStamp[2]}}/{{remark.timeStamp[1]}}/{{remark.timeStamp[0]}}
+            {{remark.timeStamp[3]}}:{{remark.timeStamp[4]}}:{{remark.timeStamp[5]}}]
+            <span class="text-success">{{remark.username}}:</span>
+            {{remark.text}}
         </div>
         <input type="textarea" [(ngModel)]="currentMessage">
         <button (click)="processRemark()">Chat!</button>
@@ -43,6 +46,7 @@ export class ChatComponent {
         this.sessionService.addRemark(new Remark(null, null, mes), this.currentSessionId).subscribe((remarks:Remark[]) => {
             this.remarks = remarks;
         });
+        console.log(this.remarks[0].timeStamp[0]);
         this.currentMessage = "";
         alert(this.currentMessage);
     }

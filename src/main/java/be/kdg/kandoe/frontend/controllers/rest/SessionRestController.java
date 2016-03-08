@@ -74,10 +74,12 @@ public class SessionRestController {
 
     @RequestMapping(value="/{sessionId}/remarks", method = RequestMethod.POST)
     public ResponseEntity<List<RemarkResource>> createRemark(@AuthenticationPrincipal User user, @RequestBody RemarkResource remarkResource, @PathVariable int sessionId) {
+        System.out.println(user.getUsername());
         System.out.println(remarkResource.getText());
         Session session = sessionService.findSession(sessionId);
         session = sessionService.addRemarkToSession(session, user.getUsername(), remarkResource.getText());
         List<RemarkResource> remarkResourceList = session.getRemarks().stream().map(r -> mapperFacade.map(r, RemarkResource.class)).collect(Collectors.toList());
+        remarkResourceList.forEach(r -> r.setUsername(user.getUsername()));
         return new ResponseEntity<List<RemarkResource>>(remarkResourceList, HttpStatus.OK);
     }
 
