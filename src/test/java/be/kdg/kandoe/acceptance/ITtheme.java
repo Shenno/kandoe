@@ -155,6 +155,26 @@ public class ITtheme {
     }
 
     @Test
+    public void testCancelAddingTheme() {
+        SeleniumHelper.allowDomToLoad(); //allow time for login to complete
+
+        driver.get("http://localhost:9966/kandoe/#/organisation/1/createTheme");
+
+        SeleniumHelper.allowDomToLoad();
+
+        WebElement element = driver.findElement(By.id("app"));
+        element = element.findElement(By.tagName("create-theme"));
+
+        element = element.findElement(By.name("btn_cancel"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Annuleren", element.getText());
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Organisatie: Orga1"));
+
+    }
+
+    @Test
     public void testEditTheme() {
 
         SeleniumHelper.allowDomToLoad(); //allow time for login to complete

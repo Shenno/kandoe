@@ -33,7 +33,7 @@ export class DetailThemeComponent {
     }
 
     public onSubmit(event): void {
-        event.preventDefault();
+        event.preventDefault(); //prevents weird ? URL bug
         this.router.navigate(['/EditTheme', {themeId: this.theme.themeId}]);
     }
 }
