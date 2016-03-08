@@ -14,8 +14,6 @@ import {OverviewOrganisationComponent} from "./components/overviewOrganisations.
 import {RegisterComponent} from "./components/register.component";
 import {ContentService} from "./service/contentService";
 import {CreateSessionComponent} from "./components/createSession.component";
-import {OverviewThemeComponent} from "./components/overviewThemes.component";
-import {OverviewCardComponent} from "./components/overviewCards.component";
 import {CreateCardComponent} from "./components/createCard.component";
 import {HomeComponent} from "./components/home.component";
 import {DashboardComponent} from "./components/dashboard.component";

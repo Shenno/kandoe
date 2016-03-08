@@ -72,7 +72,7 @@ public class SessionRestController {
         return new ResponseEntity<SessionResourceActive>(mapperFacade.map(session, SessionResourceActive.class), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/{sessionId}", method = RequestMethod.POST)
+    @RequestMapping(value="/{sessionId}/remarks", method = RequestMethod.POST)
     public ResponseEntity<List<RemarkResource>> createRemark(@RequestBody RemarkResource remarkResource, @PathVariable int sessionId) {
         Session session = sessionService.findSession(sessionId);
         session = sessionService.addRemarkToSession(session, remarkResource.getUsername(), remarkResource.getText());
