@@ -5,6 +5,8 @@ import {Http, Response, Headers} from "angular2/http";
 import {UrlService} from "../service/urlService";
 import {ContentService} from "../service/contentService";
 import {Theme} from "../entity/theme";
+import {UserService} from "../service/userService";
+import {User} from "../entity/user";
 
 @Component({
     selector: 'edit-theme',
@@ -16,17 +18,34 @@ export class EditThemeComponent {
     private router: Router;
 
     private contentService: ContentService;
+    private userService: UserService;
 
     //private tag: Tag = Tag.createEmptyTag();
     private theme: Theme = Theme.createEmptyTheme();
     private newTag: string = "";
 
-    public constructor(contentService: ContentService, router:Router, routeParam:RouteParams) {
+    private users: string[] = [];
+    private newOrganisator: string = "";
+
+    private currentUsername: string = "";
+
+    public constructor(contentService: ContentService, userService: UserService, router:Router, routeParam:RouteParams) {
         this.router = router;
         this.contentService = contentService;
+        this.userService = userService;
         this.contentService.getTheme(routeParam.params["themeId"]).subscribe((theme:Theme) => {
             this.theme = theme;
             document.title = 'Wijzig thema';
+        });
+        this.userService.getMyDetails().subscribe((user:User) => {
+            this.currentUsername = user.username;
+            this.userService.getAllUsernames().subscribe((users:string[]) => {
+                this.users = users;
+                var i = users.indexOf(this.currentUsername);
+                this.users.splice(i,1);
+                i = this.theme.organisatorNames.indexOf(this.currentUsername);
+                this.theme.organisatorNames.splice(i,1);
+            });
         });
     }
 
@@ -37,6 +56,14 @@ export class EditThemeComponent {
 
     public onRemoveTag(i: number): void {
         this.theme.tags.splice(i, 1);
+    }
+
+    public onAddOrganisator(): void {
+        this.theme.organisatorNames.push(this.newOrganisator);
+    }
+
+    public onRemoveOrganisator(i: number): void {
+        this.theme.organisatorNames.splice(i, 1);
     }
 
     public onSubmit(): void {

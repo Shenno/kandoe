@@ -37,6 +37,20 @@
         <button name="btn_addTag" (click)="onAddTag()">Voeg tag toe</button>
     </div>
 
+    <div id="organisators">
+        <p [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index">
+            <span *ngIf="organisator != currentUsername">{{organisator}}  <span [id]="'delete_organisator' + i" class="glyphicon glyphicon-remove" (click)="onRemoveOrganisator(i)"></span></span>
+        </p>
+    </div>
+
+    <select class="form-control" id="dd_users" [(ngModel)]="newOrganisator">
+        <option [id]="'opt_user' + i" *ngFor="#user of users;#i=index">
+            {{user}}
+        </option>
+    </select>
+    <button class="btn btn-default" name="btn_addOrganisator" (click)="onAddOrganisator()">Voeg organisator toe</button>
+    <br><br>
+
     <button class="btn btn-primary" name="btn_save" (click)="onSubmit()">Opslaan</button>
     <button class="btn btn-default" name="btn_cancel" (click)="onCancel($event)">Annuleren</button>
 </form>
