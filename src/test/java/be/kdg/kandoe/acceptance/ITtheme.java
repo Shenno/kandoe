@@ -314,6 +314,22 @@ public class ITtheme {
         assertEquals("p", element.getTagName());
         assertEquals("The right organisator must be shown", "clarence.ho@gmail.com", element.getText());
 
+        element = driver.findElement(By.id("delete_organisator0"));
+        assertEquals("span", element.getTagName());
+        assertEquals("glyphicon glyphicon-remove", element.getAttribute("class"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad(); //otherwise Selenium won't select the right element on dropdown below
+
+        element =  driver.findElement(By.id("dd_users"));
+        SeleniumHelper.selectOptionOnDropdown(element, "john.smith@live.com");
+
+        element = driver.findElement(By.name("btn_addOrganisator"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        element = driver.findElement(By.id("organisator0"));
+        assertEquals("The right organisator must be shown", "john.smith@live.com", element.getText());
+
         element = driver.findElement(By.name("btn_save"));
         assertEquals("button", element.getTagName());
         assertEquals("Opslaan", element.getText());
@@ -361,7 +377,7 @@ public class ITtheme {
 
         element = driver.findElement(By.id("organisator1"));
         assertEquals("p", element.getTagName());
-        assertEquals("The second organisator must be correct", "clarence.ho@gmail.com", element.getText());
+        assertEquals("The second organisator must be correct", "john.smith@live.com", element.getText());
     }
 
     @Test
