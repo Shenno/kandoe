@@ -53,6 +53,7 @@ import {DetailCardComponent} from "./components/detailCard.component";
     {path:'/createSession', name:'CreateSession', component: CreateSessionComponent},
     {path:'/session/:sessionId', name:'Session',component:SessionComponent},
 
+    {path:'/cirkelsessie', name:'Cirkelsessie',component:CirkelsessieComponent}
 ])
 
 export class AppComponent {
