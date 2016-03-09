@@ -2,32 +2,47 @@
 
 <h3>Beschrijving:</h3>
 <p id="p_description"> {{theme.description}}</p>
+<hr>
 <form>
     <div class="form-group">
-        <input type="checkbox" id="cb_commentaryAllowed" name="cb_commentaryAllowed" disabled
-               [(ngModel)]="theme.commentaryAllowed" class="form-control">
-        <label for="cb_commentaryAllowed">Commentaar op kaartjes toegelaten</label>
+        <div class="checkbox">
+            <input type="checkbox" id="cb_commentaryAllowed"
+                   name="cb_commentaryAllowed" disabled
+                   [(ngModel)]="theme.commentaryAllowed">
+            <label for="cb_commentaryAllowed">Commentaar op kaartjes toegelaten</label>
+        </div>
     </div>
 
     <div class="form-group">
-        <input type="checkbox" id="cb_addingAdmitted" name="cb_addingAdmitted" disabled
-               [(ngModel)]="theme.addingAdmitted" class="form-control">
-        <label for="cb_addingAdmitted">Toevoegen van kaartjes toegelaten</label>
+        <div class="checkbox">
+            <input type="checkbox" id="cb_addingAdmitted"
+                   name="cb_addingAdmitted" disabled
+                   [(ngModel)]="theme.addingAdmitted">
+            <label for="cb_addingAdmitted">Toevoegen van kaartjes toegelaten</label>
+        </div>
     </div>
+    <hr>
 
     <div id="tags">
+        <h3>Tags</h3>
         <p [id]="'tag' + i" *ngFor="#tag of theme.tags;#i=index">
             {{tag}}
         </p>
     </div>
+    <hr>
 
     <div id="organisators">
+        <h3>Organisatoren</h3>
         <p [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index">
             {{organisator}}
         </p>
     </div>
 
-    <button *ngIf="theme.organisatorNames.indexOf(currentUsername) != -1" class="btn btn-default" id="btn_edit" (click)="onSubmit($event)">Wijzigen</button>
+    <button *ngIf="theme.organisatorNames.indexOf(currentUsername) != -1"
+            class="btn btn-default" id="btn_edit"
+            (click)="onSubmit($event)">Wijzigen
+    </button>
+    <hr>
 
     <h2>Kaarten</h2>
     <div>
@@ -38,8 +53,11 @@
                 {{i+1}} | {{card.text}}
             </li>
         </ul>
-        <button *ngIf="theme.organisatorNames.indexOf(currentUsername) != -1" class="btn btn-default" (click)="addCard($event)">Kaart toevoegen</button>
+        <button *ngIf="theme.organisatorNames.indexOf(currentUsername) != -1"
+                class="btn btn-default"
+                (click)="addCard($event)">Kaart toevoegen
+        </button>
     </div>
-
+    <hr>
     <button class="btn btn-default" (click)="backToList($event)">Terug naar lijst</button>
 </form>

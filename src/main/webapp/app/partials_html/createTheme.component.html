@@ -27,7 +27,8 @@
 
     <div class="form-group">
         <div class="checkbox">
-            <input type="checkbox" id="cb_addingAdmitted" name="cb_addingAdmitted" [(ngModel)]="theme.addingAdmitted">
+            <input type="checkbox" id="cb_addingAdmitted"
+                   name="cb_addingAdmitted" [(ngModel)]="theme.addingAdmitted">
             <label for="cb_addingAdmitted">Toevoegen van kaartjes toegelaten</label>
         </div>
     </div>
@@ -49,14 +50,13 @@
         </p>
     </div>
 
-    <select id="dd_users" [(ngModel)]="newOrganisator">
+    <select class="form-control" id="dd_users" [(ngModel)]="newOrganisator">
         <option [id]="'opt_user' + i" *ngFor="#user of users;#i=index">
             {{user}}
         </option>
     </select>
-
     <button class="btn btn-default" name="btn_addOrganisator" (click)="onAddOrganisator()">Voeg organisator toe</button>
-
+    <br><br>
     <button class="btn btn-primary" name="btn_save" (click)="onSubmit()">Opslaan</button>
     <button class="btn btn-default" name="btn_cancel" (click)="onCancel($event)">Annuleren</button>
 </form>

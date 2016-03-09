@@ -1,14 +1,29 @@
 <h1>Aanmaken organisatie</h1>
 
-<form (submit)="onSubmit()">
+<form data-toggle="validator" role="form"
+      (submit)="onSubmit()" #orgForm="ngForm">
     <div class="form-group">
-        <label for="ib_new_organisation">Organisatie naam:</label>
-            <input id="ib_new_organisation" name="ib_new_organisation"
-                   [(ngModel)]="organisation.name" class="form-control">
-            <p>Organisatie naam is niet meer wijzigbaar</p>
-        <br>
+        <label for="ib_new_organisation" class="control-label">Organisatie naam:</label>
+        <input id="ib_new_organisation" name="ib_new_organisation"
+               [(ngModel)]="organisation.name" class="form-control"
+               type="text" required ngControl="name" #name="ngForm">
+        <div [hidden]="name.valid || name.pristine"
+             class="alert alert-danger" style="width: 20em; margin-top: 2px;"
+        >Naam is vereist.
+        </div>
     </div>
 
-    <button class="btn btn-primary" name="btn_add_organisation">Toevoegen</button>
-    <button class="btn btn-default" name="btn_cancel" (click)="onCancel($event)">Annuleren</button>
+    <br>
+    <div class="alert alert-warning" role="alert" style="width: 30em">
+        <b>Heads up!</b> Organisatie naam is niet meer wijzigbaar
+    </div>
+
+    <button class="btn btn-primary" type="submit"
+            name="btn_add_organisation"
+            [disabled]="!orgForm.form.valid"
+    >Toevoegen
+    </button>
+    <button class="btn btn-default" name="btn_cancel"
+            (click)="onCancel($event)">Annuleren
+    </button>
 </form>

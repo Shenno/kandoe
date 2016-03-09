@@ -1,9 +1,13 @@
 <h1>Kaart: <span id="span_cardName">{{card.text}}</span></h1>
 <img id="img_imageUrl" src="{{card.imageURL}}" alt="img_card">
+<hr>
+
 <h2>Remarks</h2>
 <div id="remarks">
     <!--<p *ngFor="#remark of card.remarks">
         {{tag}}
     </p>-->
 </div>
-<button class="btn btn-default" id="btn_backToTheme" (click)="backToTheme(card.themeId)">Terug naar thema</button>
+<hr>
+<button class="btn btn-default" id="btn_backToTheme"
+        (click)="backToTheme(card.themeId)">Terug naar thema</button>
