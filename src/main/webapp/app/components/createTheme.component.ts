@@ -56,6 +56,10 @@ export class CreateThemeComponent {
         this.theme.organisatorNames.push(this.newOrganisator);
     }
 
+    public onRemoveOrganisator(i: number): void {
+        this.theme.organisatorNames.splice(i, 1);
+    }
+
     public onSubmit(): void {
         this.contentService.addTheme(this.theme);
     }

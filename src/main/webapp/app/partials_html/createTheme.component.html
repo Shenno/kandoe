@@ -46,7 +46,7 @@
 
     <div id="organisators">
         <p [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index">
-            {{organisator}}
+            {{organisator}}  <span [id]="'delete_organisator' + i" class="glyphicon glyphicon-remove" (click)="onRemoveOrganisator(i)"></span>
         </p>
     </div>
 
