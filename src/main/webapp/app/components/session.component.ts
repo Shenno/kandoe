@@ -26,7 +26,7 @@ import {ChatComponent} from "./chat.component";
         <template [ngIf]="currentSession">
             <chatbox [currentSessionId]="currentSessionId" [remarks]="currentSession.remarks"></chatbox>
             <div *ngFor="#card of currentSession.cardSessionResources; #i = index">
-                <img src="{{card?.image}}" height="225px" width="200px">
+                <img src="{{card?.image}}" class="img-thumbnail card-image">
                 {{card?.card}}, afstand tot centrum van de cirkel: {{card?.distanceToCenter}}
                 <button [class.disabled]="!myTurn || currentSession?.gameOver" class="btn btn-success" (click)="makeMove(card)">Push!</button>
             </div>

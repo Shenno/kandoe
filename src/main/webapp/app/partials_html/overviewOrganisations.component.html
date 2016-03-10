@@ -2,8 +2,9 @@
 <ul class="list-group">
     <li *ngFor="#organisation of organisations"
         (click)="detailOrganisation(organisation.id)"
-        class="list-group-item">
+        class="list-group-item clickable-list">
         {{organisation.id}} | {{organisation.name}}
     </li>
 </ul>
+<hr>
 <button *ngIf="userId!=0" class="btn btn-primary" (click)="addOrganisation()">Organisatie Toevoegen</button>

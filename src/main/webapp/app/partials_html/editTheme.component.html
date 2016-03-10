@@ -31,10 +31,9 @@
             {{tag}} <span [id]="'delete_tag' + i" class="glyphicon glyphicon-remove" (click)="onRemoveTag(i)"></span>
         </p>
     </div>
-
     <div class="form-group">
-        <input name="ib_newTag" [(ngModel)]="newTag">
-        <button name="btn_addTag" (click)="onAddTag()">Voeg tag toe</button>
+        <input name="ib_newTag" class="form-control" [(ngModel)]="newTag">
+        <button name="btn_addTag" class="btn btn-default" (click)="onAddTag()">Voeg tag toe</button>
     </div>
 
     <div id="organisators">

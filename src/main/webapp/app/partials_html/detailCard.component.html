@@ -1,5 +1,9 @@
 <h1>Kaart: <span id="span_cardName">{{card.text}}</span></h1>
-<img id="img_imageUrl" src="{{card.imageURL}}" alt="img_card">
+
+<img id="img_imageUrl"
+     src="{{card.imageURL}}" alt="img_card"
+     class="img-thumbnail card-image">
+
 <hr>
 
 <h2>Remarks</h2>
@@ -10,4 +14,5 @@
 </div>
 <hr>
 <button class="btn btn-default" id="btn_backToTheme"
-        (click)="backToTheme(card.themeId)">Terug naar thema</button>
+        (click)="backToTheme(card.themeId)">Terug naar thema
+</button>

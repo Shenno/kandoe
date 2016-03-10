@@ -49,7 +49,7 @@
         <ul class="list-group">
             <li *ngFor="#card of cards; #i=index"
                 (click)="detailCard(card.id)"
-                class="list-group-item">
+                class="list-group-item clickable-list">
                 {{i+1}} | {{card.text}}
             </li>
         </ul>

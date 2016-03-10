@@ -38,25 +38,26 @@
             {{tag}} <span [id]="'delete_tag' + i" class="glyphicon glyphicon-remove" (click)="onRemoveTag(i)"></span>
         </p>
     </div>
-
     <div class="form-group">
         <input class="form-control" name="ib_newTag" [(ngModel)]="newTag">
-        <button class="btn btn-default" name="btn_addTag" (click)="onAddTag()">Voeg tag toe</button>
+        <button class="btn btn-default btn-sm" name="btn_addTag" (click)="onAddTag()">Voeg tag toe</button>
     </div>
 
     <div id="organisators">
         <p [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index">
-            {{organisator}}  <span [id]="'delete_organisator' + i" class="glyphicon glyphicon-remove" (click)="onRemoveOrganisator(i)"></span>
+            {{organisator}} <span [id]="'delete_organisator' + i" class="glyphicon glyphicon-remove"
+                                  (click)="onRemoveOrganisator(i)"></span>
         </p>
     </div>
-
     <select class="form-control" id="dd_users" [(ngModel)]="newOrganisator">
         <option [id]="'opt_user' + i" *ngFor="#user of users;#i=index">
             {{user}}
         </option>
     </select>
-    <button class="btn btn-default" name="btn_addOrganisator" (click)="onAddOrganisator()">Voeg organisator toe</button>
+    <button class="btn btn-default btn-sm" name="btn_addOrganisator" (click)="onAddOrganisator()">Voeg organisator toe
+    </button>
     <br><br>
+    <hr>
     <button class="btn btn-primary" name="btn_save" (click)="onSubmit()">Opslaan</button>
     <button class="btn btn-default" name="btn_cancel" (click)="onCancel($event)">Annuleren</button>
 </form>

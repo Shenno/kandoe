@@ -14,21 +14,7 @@ import {SessionService} from "../service/sessionService";
 
 @Component({
     selector: 'create-session',
-    template: `
-
-    <select #t (change)="onSelectTheme(t.value)">
-        <option [value]="0">Geen thema</option>
-        <option *ngFor="#th of themes" [value]="th.themeId">{{th.themeName}}</option>
-    </select>
-    <div *ngIf="cards">Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:
-        <div *ngFor="#card of cards">
-            <input (change)="changeCardSelectedStatus(card)" type="checkbox" [checked]="card.selected">
-            <img src="{{card.imageURL}}" height="225px" width="200px">{{card?.text}}
-        </div>
-    </div>
-    <button *ngIf="cards" class="btn btn-success" (click)="createSession()">Sessie aanmaken rond het thema {{theme.themeName}} </button>
-
-    `,
+    templateUrl: 'app/partials_html/createSession.component.html',
     encapsulation: ViewEncapsulation.None
 })
 /*<select [(ng-model)]="objValue1">
