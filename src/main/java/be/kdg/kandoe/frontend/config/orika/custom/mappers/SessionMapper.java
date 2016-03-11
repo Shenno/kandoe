@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
  * Created by Kevin on 5/03/2016.
  */
 @Component
-public class SessionMapper extends CustomMapper<AsynchronousSession, SessionResourceActive> {
+public class SessionMapper extends CustomMapper<Session, SessionResourceActive> {
     @Override
-    public void mapAtoB(AsynchronousSession asynchronousSession, SessionResourceActive sessionResourceActive, MappingContext context) {
+    public void mapAtoB(Session session, SessionResourceActive sessionResourceActive, MappingContext context) {
         //System.out.println("IN DE MAPPER" + asynchronousSession.getCardSessions().size());
-        List<CardSessionResource> cardSessionResources = asynchronousSession.getCardSessions().stream().map(cs -> mapperFacade.map(cs, CardSessionResource.class)).collect(Collectors.toList());
-        List<RemarkResource> remarkResources = asynchronousSession.getRemarks().stream().map(r -> mapperFacade.map(r, RemarkResource.class)).collect(Collectors.toList());
+        List<CardSessionResource> cardSessionResources = session.getCardSessions().stream().map(cs -> mapperFacade.map(cs, CardSessionResource.class)).collect(Collectors.toList());
+        List<RemarkResource> remarkResources = session.getRemarks().stream().map(r -> mapperFacade.map(r, RemarkResource.class)).collect(Collectors.toList());
         //mapperFacade.map(asynchronousSession.getCardSessions(), sessionResourceActive.getCardSessionResources());
         sessionResourceActive.setCardSessionResources(cardSessionResources);
         sessionResourceActive.setRemarks(remarkResources);
@@ -30,7 +30,7 @@ public class SessionMapper extends CustomMapper<AsynchronousSession, SessionReso
     }
 
     @Override
-    public void mapBtoA(SessionResourceActive sessionResourceActive, AsynchronousSession asynchronousSession, MappingContext context) {
-        mapperFacade.map(sessionResourceActive.getCardSessionResources(), asynchronousSession.getCardSessions(), context);
+    public void mapBtoA(SessionResourceActive sessionResourceActive, Session session, MappingContext context) {
+        mapperFacade.map(sessionResourceActive.getCardSessionResources(), session.getCardSessions(), context);
     }
 }

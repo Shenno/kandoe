@@ -2,6 +2,7 @@ package be.kdg.kandoe.backend.services.api;
 
 import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.session.AsynchronousSession;
 import be.kdg.kandoe.backend.dom.session.CardSession;
 import be.kdg.kandoe.backend.dom.session.Session;
 import be.kdg.kandoe.backend.dom.user.Organisation;
@@ -24,4 +25,5 @@ public interface SessionService {
     Session addRemarkToSession(Session session, String username, String text);
     CardSession findCardSession(int cardSessionId);
     void makeMove(CardSession cardSession, int userId) throws SessionServiceException;
+    List<Session> findSessionByUserId(int userId) throws SessionServiceException;
 }

@@ -21,6 +21,7 @@ import {ManageAccountComponent} from "./components/manageAccount.component";
 import {SessionComponent} from "./components/session.component";
 import {LogoutComponent} from "./components/logout.component";
 import {DetailCardComponent} from "./components/detailCard.component";
+import {OverviewSessionsComponent} from "./components/overviewSessions.component";
 @Component({
     selector: 'my-app',
     templateUrl: 'app/partials_html/app.component.html',
@@ -52,6 +53,7 @@ import {DetailCardComponent} from "./components/detailCard.component";
 
     {path:'/createSession', name:'CreateSession', component: CreateSessionComponent},
     {path:'/session/:sessionId', name:'Session',component:SessionComponent},
+    {path:'/sessions', name:'Sessions', component:OverviewSessionsComponent},
 
     {path:'/cirkelsessie', name:'Cirkelsessie',component:CirkelsessieComponent}
 ])

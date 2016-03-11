@@ -1,0 +1,8 @@
+<h1>Overzicht van jouw sessies:</h1>
+<p>{{userId}}</p>
+<ul class="list-group">
+    <li *ngFor="#session of sessions" class="list-group-item clickable-list">
+        {{session.currentUser}}
+    </li>
+</ul>
+<hr>

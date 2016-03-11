@@ -63,4 +63,9 @@ export class SessionService {
         var headers = this.urlService.getHeaders(true);
         return this.http.post(url, JSON.stringify(remark), {headers: headers}).map((res:Response) => res.json());
     }
+    public getSessionsByUserId(id:number):Observable<SessionActive[]>{
+        var url = this.baseUrl + "/api/sessions";
+        var headers =  this.urlService.getHeaders(true);
+        return this.http.get(url, {headers: headers}).map((res:Response) => res.json());
+    }
 }

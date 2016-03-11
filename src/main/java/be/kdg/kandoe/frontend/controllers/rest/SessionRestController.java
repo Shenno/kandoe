@@ -40,6 +40,13 @@ public class SessionRestController {
         this.mapperFacade = mapperFacade;
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<SessionResourceActive>> findThemesByOrganisatorId(@AuthenticationPrincipal User user) {
+        List<Session> foundSessions = sessionService.findSessionByUserId(user.getId());
+        List<SessionResourceActive> sessionResources = foundSessions.stream().map(s -> mapperFacade.map(s, SessionResourceActive.class)).collect(Collectors.toList());
+        return new ResponseEntity<List<SessionResourceActive>>(sessionResources, HttpStatus.OK);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Integer> createAsynchronousSession(@RequestBody SessionResourcePost sessionResourcePost)
     {

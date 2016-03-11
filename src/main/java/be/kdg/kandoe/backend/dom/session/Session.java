@@ -16,6 +16,10 @@ import java.util.List;
 @Entity
 @Table(name = "Session")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@NamedQueries(
+        {
+                @NamedQuery(name = "Session.findSessionsByUserId", query = "SELECT s FROM Session s join s.users u WHERE u.userId = :userId")
+        })
 @DiscriminatorColumn(name = "SessionType", discriminatorType = DiscriminatorType.STRING)
 public abstract class Session implements Serializable, Identifiable<Integer> {
     @Column(name = "SessionId", nullable = false)
@@ -203,4 +207,6 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     public Integer getId() {
         return sessionId;
     }
+
+
 }

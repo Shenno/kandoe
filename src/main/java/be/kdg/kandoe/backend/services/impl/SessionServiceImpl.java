@@ -4,6 +4,7 @@ package be.kdg.kandoe.backend.services.impl;
 import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Remark;
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.session.AsynchronousSession;
 import be.kdg.kandoe.backend.dom.session.CardSession;
 import be.kdg.kandoe.backend.dom.session.Session;
 import be.kdg.kandoe.backend.dom.user.User;
@@ -18,6 +19,8 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 /**
@@ -110,6 +113,15 @@ public class SessionServiceImpl implements SessionService {
             return;
         }
         throw new SessionServiceException("It's not user " + userId + "'s turn");
+    }
+
+    @Override
+    public List<Session> findSessionByUserId(int userId) throws SessionServiceException {
+        User user = userRepository.getOne(userId);
+        if (user == null){
+            throw new SessionServiceException("User doesn't exist");
+        }
+        return sessionRepository.findSessionByUserId(userId);
     }
 }
 

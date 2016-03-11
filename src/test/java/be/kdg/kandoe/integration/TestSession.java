@@ -35,6 +35,8 @@ import static org.junit.Assert.assertTrue;
 public class TestSession {
     Theme theme;
     User user;
+    User user2;
+    User user3;
     Organisation organisation;
 
     @Autowired
@@ -50,6 +52,11 @@ public class TestSession {
     public void setup() {
         user = new User("firstname.lastname@kandoe.be", "password");
         user = userService.addUser(user);
+
+        user2 = new User("gebruikertje2", "pass");
+        user2 = userService.addUser(user2);
+        user3 = new User("gebruikertje3", "pass");
+        user3 = userService.addUser(user3);
 
         organisation = new Organisation("organisation");
         organisation.setOrganisator(user);
@@ -69,16 +76,15 @@ public class TestSession {
     public void tearDown() {
         userService.deleteOrganisation(organisation.getId());
         userService.deleteUser(user.getId());
+        userService.deleteUser(user2.getId());
+        userService.deleteUser(user3.getId());
+
     }
 
     @Test
     public void testCreateAsyncSession() {
         // Create AsyncSession and add three users to it
         Session session = new AsynchronousSession(true, 60, 4);
-        User user2 = new User("gebruikertje2", "pass");
-        user2 = userService.addUser(user2);
-        User user3 = new User("gebruikertje3", "pass");
-        user3 = userService.addUser(user3);
 
         // Create cards and add to the session
         Card card1 = new Card("CardOne", theme);
@@ -185,6 +191,37 @@ public class TestSession {
     public void testMakeMoveCorrectUser() {
         //TODO split tests
 
+    }
+    @Test
+    public void testGetSessionByUserId(){
+        // Create AsyncSession and add three users to it
+        Session session = new AsynchronousSession(true, 60, 4);
+
+        // Create cards and add to the session
+        Card card1 = new Card("CardOne", theme);
+        Card card2 = new Card("CardTwo", theme);
+        Card card3 = new Card("CardThree", theme);
+        card1 = contentService.addCard(card1);
+        card2 = contentService.addCard(card2);
+        card3 = contentService.addCard(card3);
+
+        // Persist session
+        session = sessionService.addSession(session, theme.getId());
+
+        // Add users to session
+        session = sessionService.addUserToSession(session, user.getUsername());
+        session = sessionService.addUserToSession(session, user2.getUsername());
+        session = sessionService.addUserToSession(session, user3.getUsername());
+
+        // Add card to session
+        session = sessionService.addCardToSession(session, card1);
+        session = sessionService.addCardToSession(session, card2);
+        session = sessionService.addCardToSession(session, card3);
+
+        assertTrue("User moet in sessie zitten",session.getUsers().contains(user));
+
+        List<Session> sessions = sessionService.findSessionByUserId(user.getId());
+        assertEquals("Sessie moet in lijst bij user zitten ",sessions.get(0).getId(),session.getId());
     }
 }
 

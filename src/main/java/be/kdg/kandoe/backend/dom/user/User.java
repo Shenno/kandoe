@@ -1,6 +1,7 @@
 package be.kdg.kandoe.backend.dom.user;
 
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.session.Session;
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
 import org.springframework.hateoas.Identifiable;
 import org.springframework.security.core.GrantedAuthority;
@@ -56,6 +57,12 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
             inverseJoinColumns=@JoinColumn(name="ThemeId", referencedColumnName="ThemeId"),
             joinColumns=@JoinColumn(name="UserId", referencedColumnName="UserId"))
     private List<Theme> themes = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "UserSession",
+            inverseJoinColumns = @JoinColumn(name = "SessionId", referencedColumnName = "SessionId"),
+            joinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
+    private List<Session> sessions = new ArrayList<>();
 
 /*    @OneToMany(targetEntity = Participation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Participation> participations; */

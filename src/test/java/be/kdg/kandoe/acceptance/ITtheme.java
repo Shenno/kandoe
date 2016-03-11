@@ -148,6 +148,8 @@ public class ITtheme {
         element =  driver.findElement(By.id("dd_users"));
         SeleniumHelper.selectOptionOnDropdown(element, "john.smith@live.com");
 
+        SeleniumHelper.allowDomToLoad();
+
         element = driver.findElement(By.name("btn_addOrganisator"));
         SeleniumHelper.clickOnElement(driver, element);
 
