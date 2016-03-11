@@ -1,14 +1,16 @@
-System.register(['angular2/core', 'angular2/router', "./components/createTheme.component", "./components/editTheme.component", "./components/detailTheme.component", "./components/createOrganisation.component", "./components/detailOrganisation.component", "./components/login.component", "./service/userService", "./components/overviewOrganisations.component", "./components/register.component", "./components/createSession.component", "./components/createCard.component", "./components/home.component", "./components/dashboard.component", "./components/manageAccount.component", "./components/session.component", "./components/logout.component", "./components/detailCard.component"], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.component", "./components/createTheme.component", "./components/editTheme.component", "./components/detailTheme.component", "./components/createOrganisation.component", "./components/detailOrganisation.component", "./components/login.component", "./service/userService", "./components/overviewOrganisations.component", "./components/register.component", "./components/createSession.component", "./components/createCard.component", "./components/home.component", "./components/dashboard.component", "./components/manageAccount.component", "./components/session.component", "./components/logout.component", "./components/detailCard.component"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
+        switch (arguments.length) {
+            case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
+            case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
+            case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
+        }
     };
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, createTheme_component_1, editTheme_component_1, detailTheme_component_1, createOrganisation_component_1, detailOrganisation_component_1, login_component_1, userService_1, overviewOrganisations_component_1, register_component_1, createSession_component_1, createCard_component_1, home_component_1, dashboard_component_1, manageAccount_component_1, session_component_1, logout_component_1, detailCard_component_1;
+    var core_1, router_1, cirkelsessie_component_1, createTheme_component_1, editTheme_component_1, detailTheme_component_1, createOrganisation_component_1, detailOrganisation_component_1, login_component_1, userService_1, overviewOrganisations_component_1, register_component_1, createSession_component_1, createCard_component_1, home_component_1, dashboard_component_1, manageAccount_component_1, session_component_1, logout_component_1, detailCard_component_1;
     var AppComponent;
     return {
         setters:[
@@ -17,6 +19,9 @@ System.register(['angular2/core', 'angular2/router', "./components/createTheme.c
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (cirkelsessie_component_1_1) {
+                cirkelsessie_component_1 = cirkelsessie_component_1_1;
             },
             function (createTheme_component_1_1) {
                 createTheme_component_1 = createTheme_component_1_1;
@@ -103,6 +108,7 @@ System.register(['angular2/core', 'angular2/router', "./components/createTheme.c
                         { path: '/card/:cardId', name: 'DetailCard', component: detailCard_component_1.DetailCardComponent },
                         { path: '/createSession', name: 'CreateSession', component: createSession_component_1.CreateSessionComponent },
                         { path: '/session/:sessionId', name: 'Session', component: session_component_1.SessionComponent },
+                        { path: '/cirkelsessie', name: 'Cirkelsessie', component: cirkelsessie_component_1.CirkelsessieComponent }
                     ]), 
                     __metadata('design:paramtypes', [userService_1.UserService])
                 ], AppComponent);

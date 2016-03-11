@@ -1,9 +1,11 @@
 System.register(['angular2/core', 'angular2/router', "../service/userService", "../entity/theme", "../service/contentService", "../entity/createSession", "../service/sessionService"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
+        switch (arguments.length) {
+            case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
+            case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
+            case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
+        }
     };
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
@@ -110,7 +112,7 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                 CreateSessionComponent = __decorate([
                     core_1.Component({
                         selector: 'create-session',
-                        template: "\n\n    <select #t (change)=\"onSelectTheme(t.value)\">\n        <option [value]=\"0\">Geen thema</option>\n        <option *ngFor=\"#th of themes\" [value]=\"th.themeId\">{{th.themeName}}</option>\n    </select>\n    <div *ngIf=\"cards\">Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:\n        <div *ngFor=\"#card of cards\">\n            <input (change)=\"changeCardSelectedStatus(card)\" type=\"checkbox\" [checked]=\"card.selected\">\n            <img src=\"{{card.imageURL}}\" height=\"225px\" width=\"200px\">{{card?.text}}\n        </div>\n    </div>\n    <button *ngIf=\"cards\" class=\"btn btn-success\" (click)=\"createSession()\">Sessie aanmaken rond het thema {{theme.themeName}} </button>\n\n    ",
+                        templateUrl: 'app/partials_html/createSession.component.html',
                         encapsulation: core_1.ViewEncapsulation.None
                     }), 
                     __metadata('design:paramtypes', [userService_1.UserService, contentService_1.ContentService, sessionService_1.SessionService, router_1.Router])
