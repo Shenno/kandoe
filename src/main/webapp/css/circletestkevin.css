@@ -1,0 +1,100 @@
+#circle {
+    display: block;
+    width: 600px;
+    margin: 20px;
+    min-width: 400px;
+    position: relative;
+}
+
+#circle #board {
+    display: block;
+    padding-top: 100%;
+    position: relative;
+}
+
+.subcircle {
+    background: #e0e0e0 none repeat scroll 0 0;
+    border-radius: 50%;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.subcircle:nth-child(2n) {
+    background: dodgerblue none repeat scroll 0 0;
+}
+
+#board .subcircle:nth-child(10) {
+    background: #00cc99 none repeat scroll 0 0 !important;
+}
+
+.circle-card {
+    position:absolute;
+    width:20px;
+    height:20px;
+    top:0px;
+    left:0px;
+    background:#fefabc;
+    z-index:15;
+}
+
+.circle-card:hover {
+    width:80px;
+    height:80px;
+    z-index:20;
+}
+
+.circle-card:hover > .post-it-hover-text {
+    visibility: visible;
+    font-size:100%;
+    text-align: left !important;
+}
+
+.circle-card:hover > .post-it-number {
+    font-size: 0%;
+    visibility: hidden;
+}
+
+.post-it-number {
+    font-size:90%;
+    width:20px;
+    height:20px;
+    text-align: center;
+    visibility: visible;
+    font-weight: 600;
+}
+
+.post-it-hover-text {
+    visibility: hidden;
+}
+
+.post-it {
+    box-shadow: 0px 4px 6px #333;
+    -moz-box-shadow: 0px 4px 6px #333;
+    -webkit-box-shadow: 0px 4px 6px #333;
+    font-family: 'Helvetica', cursive;
+    text-align:center;
+}
+
+#x-axis {
+    position:absolute;
+    left:5%;
+    top:50%;
+    width:90%;
+    border-bottom: 2px dashed black;
+    z-index:12;
+    opacity:0.3;
+}
+
+#y-axis {
+    position:absolute;
+    left:50%;
+    top:5%;
+    height: 90%;
+    border-right: 2px dashed black;
+    z-index:12;
+    opacity:0.3;
+}
+
