@@ -120,6 +120,8 @@ public class TestSession {
         assertNotNull(session);
         assertNotNull(theme);
         assertNotNull(user);
+
+        //TODO prioriteit van kaart checken
         assertEquals("Card not removed", 2, contentService.findCardsByThemeId(theme.getId()).size());
         assertEquals("No 3 cardsessions found in session", 3, session.getCardSessions().size());
         assertEquals("Theme has more than 1 session", 1, theme.getSessions().size());

@@ -17,9 +17,6 @@ import {SessionService} from "../service/sessionService";
     templateUrl: 'app/partials_html/createSession.component.html',
     encapsulation: ViewEncapsulation.None
 })
-/*<select [(ng-model)]="objValue1">
- <option *ng-for="#o of objArray" [value]="o">{{o.name}}</option>
- </select>*/
 
 export class CreateSessionComponent {
 

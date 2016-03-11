@@ -15,15 +15,17 @@ import {SessionActive} from "../entity/sessionActive";
 import {SessionCard} from "../entity/sessionCard";
 import {Subscription} from "../../node_modules/rxjs/Subscription";
 import {ChatComponent} from "./chat.component";
+import {KandoeCircleComponent} from "./kandoeCircle.component";
 
 @Component({
     selector: 'view-session',
-    directives: [ChatComponent],
-    template: `<h1>Hallo, {{currentUser?.username}}!</h1>
+    directives: [ChatComponent, KandoeCircleComponent],
+    template: `
         <h1 *ngIf="myTurn && !currentSession?.gameOver">Het is jouw beurt, {{currentUser?.username}}!</h1>
         <h1 *ngIf="!myTurn && !currentSession?.gameOver">Wacht even je beurt af!</h1>
         <h1 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h1>
         <template [ngIf]="currentSession">
+            <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId" [amountOfCircles]="8" [circleCards]="currentSession.cardSessionResources"></kandoe-circle>
             <chatbox [currentSessionId]="currentSessionId" [remarks]="currentSession.remarks"></chatbox>
             <div *ngFor="#card of currentSession.cardSessionResources; #i = index">
                 <img src="{{card?.image}}" class="img-thumbnail card-image">
@@ -59,6 +61,8 @@ export class SessionComponent {
     private currentSessionId;
     private subscription;
 
+    private testerino: SessionCard[] = [];
+
     public constructor(routeParam:RouteParams, userService: UserService, contentService: ContentService, sessionService: SessionService, router: Router) {
         this.router = router;
         this.userService = userService;
@@ -70,14 +74,31 @@ export class SessionComponent {
             this.currentUser = user;
         });
 
+        //Testing purposes
+        /*var i;
+        for (i = 0; i < 12 ; i++) {
+            //var tmpcard:SessionCard = new SessionCard(i, 8, "test", "google.com", 290 + (290*Math.cos(pies[i])), 290 + (290*Math.sin(pies[i])));
+            var tmpcard:SessionCard = new SessionCard(i, 5, "test", "google.com", 1, 1);
+            this.testerino.push(tmpcard);
+        }*/
+
         this.currentSessionId = routeParam.params["sessionId"];
 
         //Get session once
         this.sessionService.getSession(this.currentSessionId).subscribe((sessionActive:SessionActive) => {
             this.updateView(sessionActive);
             //Start polling for updates
-            this.subscription  = this.sessionService.pollSession(routeParam.params["sessionId"], 2500).subscribe((sessionActive:SessionActive) => {
+            this.subscription  = this.sessionService.pollSession(routeParam.params["sessionId"], 5000).subscribe((sessionActive:SessionActive) => {
                 this.updateView(sessionActive);
+                this.currentSession.cardSessionResources = sessionActive.cardSessionResources;
+                this.currentSession.remarks = sessionActive.remarks;
+
+                //Testing purposes
+                /*
+                this.testerino[0].id = this.testerino[0].id + 1;
+               // var blabla = this.testerino.slice();
+                this.testerino = this.testerino.slice();
+                */
             });
         });
     }
@@ -86,6 +107,7 @@ export class SessionComponent {
         console.log("Updating view...");
         this.currentSession = sessionActive;
         if(sessionActive.gameOver) {
+            this.myTurn = false;
             this.subscription.unsubscribe();
         }
         if(sessionActive.currentUser == this.currentUser.id) {
@@ -95,9 +117,20 @@ export class SessionComponent {
         }
     }
 
-    public makeMove(card: SessionCard) {
+    public swapPlayer(movedCard:SessionCard) {
+        //alert('lol');
+        this.myTurn = false;
+        for(var i = 0; i < this.currentSession.cardSessionResources.length; i++ ) {
+            if(this.currentSession.cardSessionResources[i].id = movedCard.id) {
+                this.currentSession.cardSessionResources[i] = movedCard;
+            }
+        }
+        this.currentSession.cardSessionResources = this.currentSession.cardSessionResources.slice();
+    }
+
+   /* public makeMove(card: SessionCard) {
         this.sessionService.makeMove(card, this.currentSessionId).subscribe((session:SessionActive) => {
             this.updateView(session);
         });
-    }
+    }*/
 }

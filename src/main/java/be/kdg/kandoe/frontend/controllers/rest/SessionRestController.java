@@ -43,7 +43,7 @@ public class SessionRestController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Integer> createAsynchronousSession(@RequestBody SessionResourcePost sessionResourcePost)
     {
-        Session session = new AsynchronousSession(true, 60, 4);
+        Session session = new AsynchronousSession(true, 60, 8);
 
         Session persistedSession = sessionService.addSession(session, sessionResourcePost.getThemeId());
         //sessionResourcePost.getParticipantsEmails().forEach(e -> sessionService.addUserToSession(session, e));

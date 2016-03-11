@@ -61,7 +61,7 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public Session addCardToSession(Session session, Card card) {
-        CardSession cardsession = new CardSession(session.getAmountOfCircles(), card.getText(), card.getImageURL(), session);
+        CardSession cardsession = new CardSession(session.getAmountOfCircles()+1, card.getText(), card.getImageURL(), session);
         session.addCardSession(cardsession);
         return sessionRepository.save(session);
     }
