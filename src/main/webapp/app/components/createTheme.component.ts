@@ -29,6 +29,8 @@ export class CreateThemeComponent {
     private users: string[] = [];
     private newOrganisator: string = "";
 
+    private tagErrorMessage: string = "";
+
     public constructor(contentService: ContentService, userService: UserService, router:Router, routeParam: RouteParams) {
         document.title = 'Maak thema aan';
         this.router = router;
@@ -44,7 +46,16 @@ export class CreateThemeComponent {
     }
 
     public onAddTag(): void {
-        this.theme.tags[this.theme.tags.length] = this.newTag.toLowerCase();
+        var tags = this.newTag.split(" ");
+        for(var i in tags) {
+            var tag = tags[i].toLowerCase();
+            if (this.theme.tags.indexOf(tag) == -1) {
+                this.theme.tags[this.theme.tags.length] = tag;
+                this.tagErrorMessage = '';
+            } else {
+                this.tagErrorMessage = 'Tag "' + tag + '" already exists';
+            }
+        }
         this.newTag = "";
     }
 

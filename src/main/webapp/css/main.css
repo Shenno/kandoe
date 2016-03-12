@@ -112,6 +112,11 @@ h2 {
     overflow: hidden;
 
 }
+
+.error-message {
+    color: red;
+}
+
 .card-image {
     height: auto;
     width: 100%;

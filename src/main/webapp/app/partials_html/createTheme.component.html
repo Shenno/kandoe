@@ -41,6 +41,7 @@
     <div class="form-group">
         <input class="form-control" name="ib_newTag" [(ngModel)]="newTag">
         <button class="btn btn-default btn-sm" name="btn_addTag" (click)="onAddTag()">Voeg tag toe</button>
+        <span id="err_tag" class="error-message">{{tagErrorMessage}}</span>
     </div>
 
     <div id="organisators">
