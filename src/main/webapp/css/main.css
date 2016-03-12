@@ -94,7 +94,7 @@ h2 {
 }
 
 .wooden-row {
-    background: url("../img/Melamine-wood-004.png");
+    /*background: url("../img/Melamine-wood-004.png");*/
     border-radius: 10px;
     padding: 4em;
     text-align: center;
@@ -129,15 +129,13 @@ h2 {
     background-color: #fefabc;
     border-radius: 3px;
     padding: 4px;
-    box-shadow: 10px 10px 5px black;
+    box-shadow: 2px 2px 2px #4985B9;
 }
 
 .chatbox {
     background-color: whitesmoke;
     border-radius: 3px;
-    box-shadow: 10px 10px 5px black;
-    /*height: 40em;
-    overflow: auto;*/
+    box-shadow: 2px 2px 2px #4985B9;
 }
 .chat-component {
     text-align: left;
