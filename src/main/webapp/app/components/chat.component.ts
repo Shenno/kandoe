@@ -15,7 +15,7 @@ import {Remark} from "../entity/remark";
 @Component({
     selector: 'chatbox',
     template: `
-        <h1>HIER KOMT DE CHAT</h1>
+        <h1>Chat</h1>
         <div *ngFor="#remark of remarks">
             [{{remark.timeStamp[2]}}/{{remark.timeStamp[1]}}/{{remark.timeStamp[0]}}
             {{remark.timeStamp[3]}}:{{remark.timeStamp[4]}}:{{remark.timeStamp[5]}}]
@@ -41,7 +41,6 @@ export class ChatComponent {
     private currentSessionId:string;
 
     public processRemark() {
-        alert("Remarks were made: " + this.currentMessage);
         var mes = this.currentMessage;
         this.sessionService.addRemark(new Remark(null, null, mes), this.currentSessionId).subscribe((remarks:Remark[]) => {
             this.remarks = remarks;

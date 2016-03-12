@@ -21,18 +21,30 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
     selector: 'view-session',
     directives: [ChatComponent, KandoeCircleComponent],
     template: `
-        <h1 *ngIf="myTurn && !currentSession?.gameOver">Het is jouw beurt, {{currentUser?.username}}!</h1>
+
+        <h1 *ngIf="myTurn && !currentSession?.gameOver">Jij bent aan de beurt, {{currentUser?.firstName}}!</h1>
         <h1 *ngIf="!myTurn && !currentSession?.gameOver">Wacht even je beurt af!</h1>
         <h1 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h1>
         <template [ngIf]="currentSession">
-            <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId" [amountOfCircles]="8" [circleCards]="currentSession.cardSessionResources"></kandoe-circle>
-            <chatbox [currentSessionId]="currentSessionId" [remarks]="currentSession.remarks"></chatbox>
-            <div *ngFor="#card of currentSession.cardSessionResources; #i = index">
+        <div class="container-fluid">
+            <div class="row">
+            <div class="col-md-6">
+                <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId" [amountOfCircles]="8" [circleCards]="currentSession.cardSessionResources"></kandoe-circle>
+            </div>
+
+
+            <div class="col-md-3" *ngFor="#card of currentSession.cardSessionResources; #i = index">
                 <img src="{{card?.image}}" class="img-thumbnail card-image">
-                {{card?.card}}, afstand tot centrum van de cirkel: {{card?.distanceToCenter}}
-                <button [class.disabled]="!myTurn || currentSession?.gameOver" class="btn btn-success" (click)="makeMove(card)">Push!</button>
+                <span class="badge">{{i}}</span>
+                {{card?.card}}
+            </div>
+            </div>
+            <div class="col-lg-3 hidden-md">
+                <chatbox [currentSessionId]="currentSessionId" [remarks]="currentSession.remarks"></chatbox>
+            </div>
             </div>
         </template>
+
     `,
     encapsulation: ViewEncapsulation.None
 })
