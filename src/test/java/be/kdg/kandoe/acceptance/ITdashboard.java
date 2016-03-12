@@ -1,6 +1,7 @@
 package be.kdg.kandoe.acceptance;
 
 import be.kdg.kandoe.util.SeleniumHelper;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -34,5 +35,10 @@ public class ITdashboard {
         element = element.findElement(By.tagName("dashboard"));
 
         element = driver.findElement(By.tagName("apriori")); */
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+        driver.close();
     }
 }

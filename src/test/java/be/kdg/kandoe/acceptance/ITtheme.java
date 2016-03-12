@@ -125,7 +125,7 @@ public class ITtheme {
         element = driver.findElement(By.id("organisators"));
         assertEquals("div", element.getTagName());
 
-        element =  driver.findElement(By.id("dd_users"));
+        element = driver.findElement(By.id("dd_users"));
         assertEquals("select", element.getTagName());
         SeleniumHelper.selectOptionOnDropdown(element, "clarence.ho@gmail.com");
 
@@ -145,7 +145,7 @@ public class ITtheme {
 
         SeleniumHelper.allowDomToLoad(); //otherwise Selenium won't select the right element on dropdown below
 
-        element =  driver.findElement(By.id("dd_users"));
+        element = driver.findElement(By.id("dd_users"));
         SeleniumHelper.selectOptionOnDropdown(element, "john.smith@live.com");
 
         SeleniumHelper.allowDomToLoad();
@@ -186,12 +186,20 @@ public class ITtheme {
         element = driver.findElement(By.id("tags"));
         assertEquals("div", element.getTagName());
 
+        element = driver.findElement(By.id("collapse_tags"));
+        SeleniumHelper.clickOnElement(driver, element);
+        SeleniumHelper.allowDomToLoad(); //allow time to expand panel
+
         element = driver.findElement(By.id("tag0"));
         assertEquals("p", element.getTagName());
         assertEquals("Content of tag must be correct", "my tag1", element.getText());
 
         element = driver.findElement(By.id("organisators"));
         assertEquals("div", element.getTagName());
+
+        element = driver.findElement(By.id("collapse_organisators"));
+        SeleniumHelper.clickOnElement(driver, element);
+        SeleniumHelper.allowDomToLoad(); //allow time to expand panel
 
         element = driver.findElement(By.id("organisator0"));
         assertEquals("p", element.getTagName());
@@ -303,7 +311,7 @@ public class ITtheme {
         element = driver.findElement(By.id("organisators"));
         assertEquals("div", element.getTagName());
 
-        element =  driver.findElement(By.id("dd_users"));
+        element = driver.findElement(By.id("dd_users"));
         assertEquals("select", element.getTagName());
         SeleniumHelper.selectOptionOnDropdown(element, "clarence.ho@gmail.com");
 
@@ -323,7 +331,7 @@ public class ITtheme {
 
         SeleniumHelper.allowDomToLoad(); //otherwise Selenium won't select the right element on dropdown below
 
-        element =  driver.findElement(By.id("dd_users"));
+        element = driver.findElement(By.id("dd_users"));
         SeleniumHelper.selectOptionOnDropdown(element, "john.smith@live.com");
 
         element = driver.findElement(By.name("btn_addOrganisator"));
@@ -362,6 +370,10 @@ public class ITtheme {
         element = driver.findElement(By.id("tags"));
         assertEquals("div", element.getTagName());
 
+        element = driver.findElement(By.id("collapse_tags"));
+        SeleniumHelper.clickOnElement(driver, element);
+        SeleniumHelper.allowDomToLoad(); //allow time to expand panel
+
         element = driver.findElement(By.id("tag0"));
         assertEquals("p", element.getTagName());
         assertEquals("Content of tag must be correct", "my tag0", element.getText());
@@ -372,6 +384,10 @@ public class ITtheme {
 
         element = driver.findElement(By.id("organisators"));
         assertEquals("div", element.getTagName());
+
+        element = driver.findElement(By.id("collapse_organisators"));
+        SeleniumHelper.clickOnElement(driver, element);
+        SeleniumHelper.allowDomToLoad(); //allow time to expand panel
 
         element = driver.findElement(By.id("organisator0"));
         assertEquals("p", element.getTagName());
