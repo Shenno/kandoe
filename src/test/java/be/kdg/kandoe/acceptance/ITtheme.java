@@ -113,6 +113,12 @@ public class ITtheme {
         assertEquals("glyphicon glyphicon-remove", element.getAttribute("class"));
         SeleniumHelper.clickOnElement(driver, element);
 
+        element = driver.findElement(By.name("btn_addTag"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        element = driver.findElement(By.id("err_tag"));
+        assertEquals("Tag error message must be filled in", "Tag cannot be empty", element.getText());
+
         element = driver.findElement(By.name("ib_newTag"));
         SeleniumHelper.fillTextIntoElement(element, "mytag1");
 

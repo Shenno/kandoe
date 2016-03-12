@@ -46,17 +46,21 @@ export class CreateThemeComponent {
     }
 
     public onAddTag(): void {
-        var tags = this.newTag.split(" ");
-        for(var i in tags) {
-            var tag = tags[i].toLowerCase();
-            if (this.theme.tags.indexOf(tag) == -1) {
-                this.theme.tags[this.theme.tags.length] = tag;
-                this.tagErrorMessage = '';
-            } else {
-                this.tagErrorMessage = 'Tag "' + tag + '" already exists';
+        if (this.newTag != '') {
+            var tags = this.newTag.split(" ");
+            for (var i in tags) {
+                var tag = tags[i].toLowerCase();
+                if (this.theme.tags.indexOf(tag) == -1) {
+                    this.theme.tags[this.theme.tags.length] = tag;
+                    this.tagErrorMessage = '';
+                } else {
+                    this.tagErrorMessage = 'Tag "' + tag + '" already exists';
+                }
             }
+            this.newTag = "";
+        } else {
+            this.tagErrorMessage = 'Tag cannot be empty';
         }
-        this.newTag = "";
     }
 
     public onRemoveTag(i: number): void {
