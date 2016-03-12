@@ -24,12 +24,12 @@
                 <li><a href="#/login" *ngIf="currentUserDetails">Inloggen</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Mijn account <span class="caret"></span></a>
+                       aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Mijn account <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#/dashboard">Dashboard</a></li>
-                        <li><a href="#/manageAccount">Beheer</a></li>
+                        <li><a href="#/dashboard"><span class="glyphicon glyphicon-th-large"></span> Dashboard</a></li>
+                        <li><a href="#/manageAccount"><span class="glyphicon glyphicon-cog"></span> Beheer</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#/logout" (click)="userService.logout()">Uitloggen</a></li>
+                        <li><a href="#/logout" (click)="userService.logout()"><span class="glyphicon glyphicon-off"></span> Uitloggen</a></li>
                     </ul>
                 </li>
             </ul>

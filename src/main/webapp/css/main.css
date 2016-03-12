@@ -93,10 +93,77 @@ h2 {
     color: white;
 }
 
-.card-image {
-    height: 10em;
-    width: auto;
+.wooden-row {
+    background: url("../img/Melamine-wood-004.png");
+    border-radius: 10px;
+    padding: 4em;
+    text-align: center;
 }
+
+.center-content {
+    display: table;
+    margin: 0 auto;
+}
+
+.image-sizing {
+    position: relative;
+    height: 10em;
+    width: 100%;
+    overflow: hidden;
+
+}
+.card-image {
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top:0;
+    bottom: 0;
+    margin: auto;
+}
+
+.card {
+    margin: 0 10px 20px;
+    background-color: #fefabc;
+    border-radius: 3px;
+    padding: 4px;
+    box-shadow: 10px 10px 5px black;
+}
+
+.chatbox {
+    background-color: whitesmoke;
+    border-radius: 3px;
+    box-shadow: 10px 10px 5px black;
+    /*height: 40em;
+    overflow: auto;*/
+}
+.chat-component {
+    text-align: left;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-bottom: 1px solid lightgrey;
+}
+
+.card-thumbnail {
+    height: auto;
+    max-height: 6em;
+    width: 7em;
+}
+
+.card-list > li {
+    height: 7em;
+    overflow: hidden;
+}
+.card-list > li > img {
+    border: none;
+}
+.card-text {
+    height: 7em;
+}
+
+
 
 /*----------------Sticky footer----------------------------------*/
 .footer {

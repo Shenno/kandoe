@@ -16,14 +16,22 @@ import {Remark} from "../entity/remark";
     selector: 'chatbox',
     template: `
         <h1>Chat</h1>
-        <div *ngFor="#remark of remarks">
-            [{{remark.timeStamp[2]}}/{{remark.timeStamp[1]}}/{{remark.timeStamp[0]}}
-            {{remark.timeStamp[3]}}:{{remark.timeStamp[4]}}:{{remark.timeStamp[5]}}]
-            <span class="text-success">{{remark.username}}:</span>
-            {{remark.text}}
+        <div style="overflow: auto; height: 40em">
+            <div *ngFor="#remark of remarks" class="chat-component">
+                <div style="font-style: italic">
+                    [{{remark.timeStamp[2]}}/{{remark.timeStamp[1]}}/{{remark.timeStamp[0]}}
+                    {{remark.timeStamp[3]}}:{{remark.timeStamp[4]}}:{{remark.timeStamp[5]}}]
+                </div>
+                <span class="text-success" style="font-weight: bold">{{remark.username}}:</span>
+                <p>{{remark.text}}</p>
+            </div>
         </div>
-        <input type="textarea" [(ngModel)]="currentMessage">
-        <button (click)="processRemark()">Chat!</button>
+        <div class="input-group">
+            <input type="textarea" [(ngModel)]="currentMessage" class="form-control">
+            <span class="input-group-btn">
+                <button (click)="processRemark()" class="btn btn-default">Chat!</button>
+            </span>
+        </div>
     `,
     encapsulation: ViewEncapsulation.None
 })

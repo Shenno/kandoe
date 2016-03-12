@@ -1,11 +1,27 @@
+<h2 *ngIf="!cards">Kies een thema:</h2>
 <select class="form-control" #t (change)="onSelectTheme(t.value)">
     <option [value]="0">Geen thema</option>
     <option *ngFor="#th of themes" [value]="th.themeId">{{th.themeName}}</option>
 </select>
-<div *ngIf="cards">Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:
+<br>
+<div *ngIf="cards">
+    <div class="well" style="width: 50em">
+        Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:
+    </div>
+    <!--
     <div *ngFor="#card of cards">
         <input (change)="changeCardSelectedStatus(card)" type="checkbox" [checked]="card.selected">
-        <img src="{{card.imageURL}}" class="img-thumbnail card-image">{{card?.text}}
-    </div>
+        <img src="{{card.imageURL}}" class="img-thumbnail card-thumbnail">{{card?.text}}
+    </div>-->
+    <h2>Kies de kaartjes:</h2>
+    <ul class="list-group card-list">
+        <li class="list-group-item" *ngFor="#card of cards">
+            <input (change)="changeCardSelectedStatus(card)" type="checkbox" [checked]="card.selected">
+            <img src="{{card.imageURL}}" class="img-thumbnail card-thumbnail">
+            <span class="card-text">{{card?.text}}</span>
+        </li>
+    </ul>
 </div>
-<button *ngIf="cards" class="btn btn-success" (click)="createSession()">Sessie aanmaken rond het thema {{theme.themeName}} </button>
+<button *ngIf="cards" class="btn btn-success" (click)="createSession()">
+    <span class="glyphicon glyphicon-play"></span> Sessie aanmaken rond het thema {{theme.themeName}}
+</button>

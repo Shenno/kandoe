@@ -27,21 +27,36 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
         <h1 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h1>
         <template [ngIf]="currentSession">
         <div class="container-fluid">
+            <div class="row wooden-row">
+                <div class="col-md-5">
+                    <div class="center-content">
+                        <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId" [amountOfCircles]="8" [circleCards]="currentSession.cardSessionResources"></kandoe-circle>
+                        <h3 style="color: white" *ngIf="myTurn && !currentSession?.gameOver">Jij bent aan de beurt, {{currentUser?.firstName}}!</h3>
+                        <h3 style="color: white" *ngIf="!myTurn && !currentSession?.gameOver">Wacht even je beurt af!</h3>
+                        <h3 style="color: white" class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h3>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div *ngFor="#card of currentSession.cardSessionResources; #i = index">
+                            <div class="col-md-2 col-xs-3 card">
+                            <div class="image-sizing img-thumbnail"><img src="{{card?.image}}" class="card-image"></div>
+                                <span class="badge">{{i+1}}</span>
+                                {{card?.card}}
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    <div class="chatbox">
+                        <chatbox [currentSessionId]="currentSessionId" [remarks]="currentSession.remarks"></chatbox>
+                    </div>
+                </div>
+            </div>
+            <!--
             <div class="row">
-            <div class="col-md-6">
-                <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId" [amountOfCircles]="8" [circleCards]="currentSession.cardSessionResources"></kandoe-circle>
-            </div>
-
-
-            <div class="col-md-3" *ngFor="#card of currentSession.cardSessionResources; #i = index">
-                <img src="{{card?.image}}" class="img-thumbnail card-image">
-                <span class="badge">{{i}}</span>
-                {{card?.card}}
-            </div>
-            </div>
-            <div class="col-lg-3 hidden-md">
-                <chatbox [currentSessionId]="currentSessionId" [remarks]="currentSession.remarks"></chatbox>
-            </div>
+                <div class="col-lg-3 hidden-md">
+                    <chatbox [currentSessionId]="currentSessionId" [remarks]="currentSession.remarks"></chatbox>
+                </div>
+            </div>-->
             </div>
         </template>
 
@@ -63,19 +78,19 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
 
 export class SessionComponent {
 
-    private userService: UserService;
-    private contentService: ContentService;
-    private sessionService: SessionService;
-    private router: Router;
-    private currentUser: User = null;
-    private currentSession: SessionActive = null;
-    private myTurn: boolean = false;
+    private userService:UserService;
+    private contentService:ContentService;
+    private sessionService:SessionService;
+    private router:Router;
+    private currentUser:User = null;
+    private currentSession:SessionActive = null;
+    private myTurn:boolean = false;
     private currentSessionId;
     private subscription;
 
-    private testerino: SessionCard[] = [];
+    private testerino:SessionCard[] = [];
 
-    public constructor(routeParam:RouteParams, userService: UserService, contentService: ContentService, sessionService: SessionService, router: Router) {
+    public constructor(routeParam:RouteParams, userService:UserService, contentService:ContentService, sessionService:SessionService, router:Router) {
         this.router = router;
         this.userService = userService;
         this.contentService = contentService;
@@ -88,11 +103,11 @@ export class SessionComponent {
 
         //Testing purposes
         /*var i;
-        for (i = 0; i < 12 ; i++) {
-            //var tmpcard:SessionCard = new SessionCard(i, 8, "test", "google.com", 290 + (290*Math.cos(pies[i])), 290 + (290*Math.sin(pies[i])));
-            var tmpcard:SessionCard = new SessionCard(i, 5, "test", "google.com", 1, 1);
-            this.testerino.push(tmpcard);
-        }*/
+         for (i = 0; i < 12 ; i++) {
+         //var tmpcard:SessionCard = new SessionCard(i, 8, "test", "google.com", 290 + (290*Math.cos(pies[i])), 290 + (290*Math.sin(pies[i])));
+         var tmpcard:SessionCard = new SessionCard(i, 5, "test", "google.com", 1, 1);
+         this.testerino.push(tmpcard);
+         }*/
 
         this.currentSessionId = routeParam.params["sessionId"];
 
@@ -100,17 +115,17 @@ export class SessionComponent {
         this.sessionService.getSession(this.currentSessionId).subscribe((sessionActive:SessionActive) => {
             this.updateView(sessionActive);
             //Start polling for updates
-            this.subscription  = this.sessionService.pollSession(routeParam.params["sessionId"], 5000).subscribe((sessionActive:SessionActive) => {
+            this.subscription = this.sessionService.pollSession(routeParam.params["sessionId"], 5000).subscribe((sessionActive:SessionActive) => {
                 this.updateView(sessionActive);
                 this.currentSession.cardSessionResources = sessionActive.cardSessionResources;
                 this.currentSession.remarks = sessionActive.remarks;
 
                 //Testing purposes
                 /*
-                this.testerino[0].id = this.testerino[0].id + 1;
-               // var blabla = this.testerino.slice();
-                this.testerino = this.testerino.slice();
-                */
+                 this.testerino[0].id = this.testerino[0].id + 1;
+                 // var blabla = this.testerino.slice();
+                 this.testerino = this.testerino.slice();
+                 */
             });
         });
     }
@@ -118,11 +133,11 @@ export class SessionComponent {
     public updateView(sessionActive:SessionActive) {
         console.log("Updating view...");
         this.currentSession = sessionActive;
-        if(sessionActive.gameOver) {
+        if (sessionActive.gameOver) {
             this.myTurn = false;
             this.subscription.unsubscribe();
         }
-        if(sessionActive.currentUser == this.currentUser.id) {
+        if (sessionActive.currentUser == this.currentUser.id) {
             this.myTurn = true;
         } else {
             this.myTurn = false;
@@ -132,17 +147,17 @@ export class SessionComponent {
     public swapPlayer(movedCard:SessionCard) {
         //alert('lol');
         this.myTurn = false;
-        for(var i = 0; i < this.currentSession.cardSessionResources.length; i++ ) {
-            if(this.currentSession.cardSessionResources[i].id = movedCard.id) {
+        for (var i = 0; i < this.currentSession.cardSessionResources.length; i++) {
+            if (this.currentSession.cardSessionResources[i].id = movedCard.id) {
                 this.currentSession.cardSessionResources[i] = movedCard;
             }
         }
         this.currentSession.cardSessionResources = this.currentSession.cardSessionResources.slice();
     }
 
-   /* public makeMove(card: SessionCard) {
-        this.sessionService.makeMove(card, this.currentSessionId).subscribe((session:SessionActive) => {
-            this.updateView(session);
-        });
-    }*/
+    /* public makeMove(card: SessionCard) {
+     this.sessionService.makeMove(card, this.currentSessionId).subscribe((session:SessionActive) => {
+     this.updateView(session);
+     });
+     }*/
 }

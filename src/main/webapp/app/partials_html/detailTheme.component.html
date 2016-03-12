@@ -23,41 +23,74 @@
     </div>
     <hr>
 
-    <div id="tags">
-        <h3>Tags</h3>
-        <p [id]="'tag' + i" *ngFor="#tag of theme.tags;#i=index">
-            {{tag}}
-        </p>
+    <div class="panel panel-primary" style="width: 30em">
+        <div class="panel-heading" role="tab">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-target="#tags"
+                   aria-expanded="false" aria-controls="tags">
+                    <span class="glyphicon glyphicon-collapse-down"></span> Tags
+                </a>
+            </h4>
+        </div>
+        <div id="tags" class="collapse panel-collapse">
+            <div class="panel-body">
+                <p [id]="'tag' + i" *ngFor="#tag of theme.tags;#i=index">
+                    {{tag}}
+                </p>
+            </div>
+        </div>
     </div>
     <hr>
 
-    <div id="organisators">
-        <h3>Organisatoren</h3>
-        <p [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index">
-            {{organisator}}
-        </p>
+    <div class="panel panel-primary" style="width: 30em">
+        <div class="panel-heading" role="tab">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-target="#organisators"
+                   aria-expanded="false" aria-controls="organisators">
+                    <span class="glyphicon glyphicon-collapse-down"></span> Organisatoren
+                </a>
+            </h4>
+        </div>
+        <div id="organisators" class="collapse panel-collapse">
+            <div class="panel-body">
+                <p [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index">
+                    {{organisator}}
+                </p>
+            </div>
+        </div>
     </div>
+    <hr>
+
+    <div class="panel panel-primary" style="width: 30em">
+        <div class="panel-heading" role="tab">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-target="#cards"
+                   aria-expanded="false" aria-controls="cards">
+                    <span class="glyphicon glyphicon-collapse-down"></span> Kaarten
+                </a>
+            </h4>
+        </div>
+        <div id="cards" class="collapse panel-collapse">
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li *ngFor="#card of cards; #i=index"
+                        (click)="detailCard(card.id)"
+                        class="list-group-item clickable-list">
+                        {{i+1}} | {{card.text}}
+                    </li>
+                </ul>
+                <button *ngIf="theme.organisatorNames.indexOf(currentUsername) != -1"
+                        class="btn btn-default"
+                        (click)="addCard($event)">Kaart toevoegen
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
 
     <button *ngIf="theme.organisatorNames.indexOf(currentUsername) != -1"
-            class="btn btn-default" id="btn_edit"
-            (click)="onSubmit($event)">Wijzigen
+            class="btn btn-primary" id="btn_edit"
+            (click)="onSubmit($event)"><span class="glyphicon glyphicon-pencil"></span> Thema Wijzigen
     </button>
-    <hr>
-
-    <h2>Kaarten</h2>
-    <div>
-        <ul class="list-group">
-            <li *ngFor="#card of cards; #i=index"
-                (click)="detailCard(card.id)"
-                class="list-group-item clickable-list">
-                {{i+1}} | {{card.text}}
-            </li>
-        </ul>
-        <button *ngIf="theme.organisatorNames.indexOf(currentUsername) != -1"
-                class="btn btn-default"
-                (click)="addCard($event)">Kaart toevoegen
-        </button>
-    </div>
-    <hr>
     <button class="btn btn-default" (click)="backToList($event)">Terug naar lijst</button>
 </form>
