@@ -29,6 +29,8 @@ export class EditThemeComponent {
 
     private currentUsername: string = "";
 
+    private tagErrorMessage: string = "";
+
     public constructor(contentService: ContentService, userService: UserService, router:Router, routeParam:RouteParams) {
         this.router = router;
         this.contentService = contentService;
@@ -50,8 +52,21 @@ export class EditThemeComponent {
     }
 
     public onAddTag(): void {
-        this.theme.tags[this.theme.tags.length] = this.newTag.toLowerCase();
-        this.newTag = "";
+        if (this.newTag != '') {
+            var tags = this.newTag.split(" ");
+            for (var i in tags) {
+                var tag = tags[i].toLowerCase();
+                if (this.theme.tags.indexOf(tag) == -1) {
+                    this.theme.tags[this.theme.tags.length] = tag;
+                    this.tagErrorMessage = '';
+                } else {
+                    this.tagErrorMessage = 'Tag "' + tag + '" already exists';
+                }
+            }
+            this.newTag = "";
+        } else {
+            this.tagErrorMessage = 'Tag cannot be empty';
+        }
     }
 
     public onRemoveTag(i: number): void {

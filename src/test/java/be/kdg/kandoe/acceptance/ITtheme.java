@@ -117,6 +117,7 @@ public class ITtheme {
         SeleniumHelper.clickOnElement(driver, element);
 
         element = driver.findElement(By.id("err_tag"));
+        assertEquals("span", element.getTagName());
         assertEquals("Tag error message must be filled in", "Tag cannot be empty", element.getText());
 
         element = driver.findElement(By.name("ib_newTag"));
@@ -129,7 +130,6 @@ public class ITtheme {
         assertEquals("Content of tag must be correct", "mytag1", element.getText());
 
         element = driver.findElement(By.id("err_tag"));
-        assertEquals("span", element.getTagName());
         assertEquals("Tag error message must be empty", "", element.getText());
 
         element = driver.findElement(By.name("ib_newTag"));
@@ -329,7 +329,7 @@ public class ITtheme {
         element = driver.findElement(By.name("ib_newTag"));
         assertEquals("input", element.getTagName());
         assertEquals("text", element.getAttribute("type"));
-        SeleniumHelper.fillTextIntoElement(element, "my tag0");
+        SeleniumHelper.fillTextIntoElement(element, "mytag0");
 
         element = driver.findElement(By.name("btn_addTag"));
         assertEquals("button", element.getTagName());
@@ -338,17 +338,55 @@ public class ITtheme {
 
         element = driver.findElement(By.id("tag0"));
         assertEquals("p", element.getTagName());
-        assertEquals("Content of tag must be correct", "my tag0", element.getText());
+        assertEquals("Content of tag must be correct", "mytag0", element.getText());
 
-        element = driver.findElement(By.name("ib_newTag"));
-        SeleniumHelper.fillTextIntoElement(element, "my tag1");
+        element = driver.findElement(By.id("delete_tag0"));
+        assertEquals("span", element.getTagName());
+        assertEquals("glyphicon glyphicon-remove", element.getAttribute("class"));
+        SeleniumHelper.clickOnElement(driver, element);
 
         element = driver.findElement(By.name("btn_addTag"));
         SeleniumHelper.clickOnElement(driver, element);
 
+        element = driver.findElement(By.id("err_tag"));
+        assertEquals("span", element.getTagName());
+        assertEquals("Tag error message must be filled in", "Tag cannot be empty", element.getText());
+
+        element = driver.findElement(By.name("ib_newTag"));
+        SeleniumHelper.fillTextIntoElement(element, "mytag1");
+
+        element = driver.findElement(By.name("btn_addTag"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        element = driver.findElement(By.id("tag0"));
+        assertEquals("Content of tag must be correct", "mytag1", element.getText());
+
+        element = driver.findElement(By.id("err_tag"));
+        assertEquals("Tag error message must be empty", "", element.getText());
+
+        element = driver.findElement(By.name("ib_newTag"));
+        SeleniumHelper.fillTextIntoElement(element, "mytag1");
+
+        element = driver.findElement(By.name("btn_addTag"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        element = driver.findElement(By.id("err_tag"));
+        assertEquals("Tag error message must be filled in", "Tag \"mytag1\" already exists", element.getText());
+
+        element = driver.findElement(By.name("ib_newTag"));
+        SeleniumHelper.fillTextIntoElement(element, "mytag2 mytag3");
+
+        element = driver.findElement(By.name("btn_addTag"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        element = driver.findElement(By.id("err_tag"));
+        assertEquals("Tag error message must be empty", "", element.getText());
+
         element = driver.findElement(By.id("tag1"));
-        assertEquals("p", element.getTagName());
-        assertEquals("Content of tag must be correct", "my tag1", element.getText());
+        assertEquals("Content of tag must be correct", "mytag2", element.getText());
+
+        element = driver.findElement(By.id("tag2"));
+        assertEquals("Content of tag must be correct", "mytag3", element.getText());
 
         element = driver.findElement(By.id("organisators"));
         assertEquals("div", element.getTagName());
@@ -418,11 +456,15 @@ public class ITtheme {
 
         element = driver.findElement(By.id("tag0"));
         assertEquals("p", element.getTagName());
-        assertEquals("Content of tag must be correct", "my tag0", element.getText());
+        assertEquals("Content of tag must be correct", "mytag1", element.getText());
 
         element = driver.findElement(By.id("tag1"));
         assertEquals("p", element.getTagName());
-        assertEquals("Content of tag must be correct", "my tag1", element.getText());
+        assertEquals("Content of tag must be correct", "mytag2", element.getText());
+
+        element = driver.findElement(By.id("tag2"));
+        assertEquals("p", element.getTagName());
+        assertEquals("Content of tag must be correct", "mytag3", element.getText());
 
         element = driver.findElement(By.id("organisators"));
         assertEquals("div", element.getTagName());
