@@ -206,9 +206,8 @@ public class TestTheme {
         assertNotNull(theme2);
 
         List<Theme> themes = contentService.findThemes();
-        assertEquals(themes.size(),3);
-        assertEquals(themes.get(1).getThemeName(),theme.getThemeName());
-        assertEquals(themes.get(2).getThemeName(),theme2.getThemeName());
+        assertEquals(themes.get(2).getThemeName(),theme.getThemeName());
+        assertEquals(themes.get(3).getThemeName(),theme2.getThemeName());
 
     }
 

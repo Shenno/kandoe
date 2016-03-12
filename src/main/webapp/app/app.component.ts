@@ -33,7 +33,7 @@ import {OverviewSessionsComponent} from "./components/overviewSessions.component
     {path:'/',name:'Home',component:HomeComponent},
     {path:'/home',name:'Home',component:HomeComponent},
 
-    {path:'/dashboard',name:'Dashboard',component:DashboardComponent},
+    {path:'/theme/:themeId/dashboard',name:'Dashboard',component:DashboardComponent},
 
     {path:'/manageAccount',name:'ManageAccount',component:ManageAccountComponent},
     {path:'/login', name: 'Login', component: LoginComponent},

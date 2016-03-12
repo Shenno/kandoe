@@ -18,7 +18,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -103,6 +105,19 @@ public class ContentRestController {
         List<Card> cards = contentService.findCardsByThemeId(themeId);
         List<CardResource> cardResources = cards.stream().map(c -> mapperFacade.map(c, CardResource.class)).collect(Collectors.toList());
         return new ResponseEntity<List<CardResource>>(cardResources, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "{themeId}/cardCombinations", method = RequestMethod.GET)
+    public ResponseEntity<List<String>> findMostFrequentCardCombinations(@PathVariable int themeId) {
+
+        List<Set<String>> cardCombinationSets = contentService.findMostFrequentCardCombinations(themeId);
+        List<String> cardCombinations = new ArrayList<>();
+
+        for (Set cardCombinationSet: cardCombinationSets) {
+            cardCombinations.add(cardCombinationSet.toString());
+        }
+
+        return new ResponseEntity<>(cardCombinations, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/cards/{cardId}", method = RequestMethod.GET)

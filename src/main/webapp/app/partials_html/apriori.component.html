@@ -1,0 +1,5 @@
+<h2>Vaakst voorkomende kaartjes</h2>
+
+<p [id]="'cardCombination' + (i+1)" *ngFor="#cardCombination of cardCombinations;#i = index">
+    {{i+1}} | {{cardCombination}}
+</p>

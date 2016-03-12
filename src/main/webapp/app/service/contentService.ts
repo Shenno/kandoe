@@ -46,6 +46,12 @@ export class ContentService {
         return this.http.get(url, {headers:headers}).map((res:Response) => res.json());
     }
 
+    public getMostFrequentCardCombinations(themeId: string): Observable<string[]> {
+        var url = this.baseUrl + "/api/themes/" + themeId + "/cardCombinations";
+        var headers = this.urlService.getHeaders(false);
+        return this.http.get(url, {headers:headers}).map((res:Response) => res.json());
+    }
+
     public pollCardsByThemeId(id:string, interval:number): Observable<Theme[]> {
         var url = this.baseUrl + "/api/themes/" + id + "/cards";
         var headers = this.urlService.getHeaders(true);

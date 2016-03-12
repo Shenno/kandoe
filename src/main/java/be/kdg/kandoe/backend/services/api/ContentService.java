@@ -7,6 +7,7 @@ import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ContentService {
     /*Theme*/
@@ -31,6 +32,8 @@ public interface ContentService {
     Card addCard (Card card);
 
     List<Card> findCardsByThemeId(int themeId);
+
+    List<Set<String>> findMostFrequentCardCombinations(Integer themeId);
 
     Card addCardWithTheme(Card card, int themeId);
 

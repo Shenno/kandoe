@@ -1,9 +1,13 @@
 package be.kdg.kandoe.backend.services.impl;
 
+import be.kdg.kandoe.backend.analysis.AprioriFrequentItemsetGenerator;
+import be.kdg.kandoe.backend.analysis.FrequentItemsetData;
 import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Remark;
 import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.session.CardSession;
+import be.kdg.kandoe.backend.dom.session.Session;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.persistence.api.CardRepository;
 import be.kdg.kandoe.backend.persistence.api.RemarkRepository;
@@ -17,8 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,11 +71,6 @@ public class ContentServiceImpl implements ContentService {
         Theme foundTheme = themeRepository.findOne(themeId);
         Hibernate.initialize(foundTheme.getTags());
         return foundTheme;
-    }
-
-    @Override
-    public List<Card> findCardsByThemeId(int themeId) {
-        return cardRepository.getCardsByThemeId(themeId);
     }
 
     @Override
@@ -146,6 +144,38 @@ public class ContentServiceImpl implements ContentService {
     }
 
     /*Card*/
+
+    @Override
+    public List<Card> findCardsByThemeId(int themeId) {
+        return cardRepository.getCardsByThemeId(themeId);
+    }
+
+    @Override
+    public List<Set<String>> findMostFrequentCardCombinations(Integer themeId) {
+        Theme theme = getTheme(themeId);
+
+        AprioriFrequentItemsetGenerator<String> generator = new AprioriFrequentItemsetGenerator<>();
+
+        List<Set<String>> itemsetList = new ArrayList<>();
+
+        for(Session session: theme.getSessions()) {
+            List<String> cardsOfSession = new ArrayList<>();
+
+            for (CardSession cardSession: session.getCardSessions()) {
+                cardsOfSession.add(cardSession.getCard());
+            }
+
+            itemsetList.add(new HashSet<>(cardsOfSession));
+
+        }
+
+        FrequentItemsetData<String> data = generator.generate(itemsetList, 0.2);
+
+        List<Set<String>> frequentItemsetList = data.getFrequentItemsetList();
+
+        return frequentItemsetList;
+    }
+
     @Override
     public Card addCard(Card card) {
 
