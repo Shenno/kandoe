@@ -30,6 +30,7 @@ export class CreateThemeComponent {
     private newOrganisator: string = "";
 
     private tagErrorMessage: string = "";
+    private organisatorErrorMessage: string = "";
 
     public constructor(contentService: ContentService, userService: UserService, router:Router, routeParam: RouteParams) {
         document.title = 'Maak thema aan';
@@ -54,12 +55,12 @@ export class CreateThemeComponent {
                     this.theme.tags[this.theme.tags.length] = tag;
                     this.tagErrorMessage = '';
                 } else {
-                    this.tagErrorMessage = 'Tag "' + tag + '" already exists';
+                    this.tagErrorMessage = 'Tag "' + tag + '" bestaat al';
                 }
             }
             this.newTag = "";
         } else {
-            this.tagErrorMessage = 'Tag cannot be empty';
+            this.tagErrorMessage = 'Tag mag niet leeg zijn';
         }
     }
 
@@ -68,7 +69,18 @@ export class CreateThemeComponent {
     }
 
     public onAddOrganisator(): void {
-        this.theme.organisatorNames.push(this.newOrganisator);
+        if (this.newOrganisator != '') {
+            if (this.theme.organisatorNames.indexOf(this.newOrganisator) == -1) {
+                this.theme.organisatorNames.push(this.newOrganisator);
+                this.organisatorErrorMessage = '';
+            } else {
+                this.organisatorErrorMessage = 'Gebruiker "' + this.newOrganisator + '" is reeds toegevoegd als organisator';
+            }
+
+            this.newOrganisator = "";
+        } else {
+            this.organisatorErrorMessage = 'Gekozen organisator mag niet leeg zijn';
+        }
     }
 
     public onRemoveOrganisator(i: number): void {
