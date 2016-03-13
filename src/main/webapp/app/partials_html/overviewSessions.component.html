@@ -1,8 +1,25 @@
 <h1>Overzicht van jouw sessies:</h1>
-<p>{{userId}}</p>
-<ul class="list-group">
-    <li *ngFor="#session of sessions" class="list-group-item clickable-list">
-        {{session.currentUser}}
-    </li>
-</ul>
-<hr>
+<div>
+    <table style="width:100%" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Naam sessie</th>
+                <th>Soort cirkel</th>
+                <th># cirkels</th>
+                <th># gebruikers</th>
+                <th>Huidige gebruiker</th>
+                <th>Actief</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="#session of sessions">
+                <td>naam</td>
+                <td>{{session.problem}}</td>
+                <td>{{session.amountOfCircles}}</td>
+                <td>Aantal users</td>
+                <td>{{session.currentUser}}</td>
+                <td>{{session.gameOver}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
