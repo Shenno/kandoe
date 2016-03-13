@@ -420,6 +420,17 @@ public class ITtheme {
         assertEquals("glyphicon glyphicon-remove", element.getAttribute("class"));
         SeleniumHelper.clickOnElement(driver, element);
 
+        element = driver.findElement(By.id("err_organisator"));
+        assertEquals("span", element.getTagName());
+        assertEquals("Organisator error message must be empty", "", element.getText());
+
+        element = driver.findElement(By.name("btn_addOrganisator"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        element = driver.findElement(By.id("err_organisator"));
+        assertEquals("span", element.getTagName());
+        assertEquals("Organisator error message must be filled in", "Gekozen organisator mag niet leeg zijn", element.getText());
+
         SeleniumHelper.allowDomToLoad(); //otherwise Selenium won't select the right element on dropdown below
 
         element = driver.findElement(By.id("dd_users"));

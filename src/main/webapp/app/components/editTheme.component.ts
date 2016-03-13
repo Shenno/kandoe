@@ -27,9 +27,10 @@ export class EditThemeComponent {
     private users: string[] = [];
     private newOrganisator: string = "";
 
-    private currentUsername: string = "";
+    private currentUser: User = User.createEmptyUser();
 
     private tagErrorMessage: string = "";
+    private organisatorErrorMessage:string = "";
 
     public constructor(contentService: ContentService, userService: UserService, router:Router, routeParam:RouteParams) {
         this.router = router;
@@ -40,13 +41,13 @@ export class EditThemeComponent {
             document.title = 'Wijzig thema';
         });
         this.userService.getMyDetails().subscribe((user:User) => {
-            this.currentUsername = user.username;
+            this.currentUser = user;
             this.userService.getAllUsernames().subscribe((users:string[]) => {
+                var index = users.indexOf(this.currentUser.username);
+                users.splice(index, 1); //you can't add yourself as organisator
                 this.users = users;
-                var i = users.indexOf(this.currentUsername);
-                this.users.splice(i,1);
-                i = this.theme.organisatorNames.indexOf(this.currentUsername);
-                this.theme.organisatorNames.splice(i,1);
+                index = this.theme.organisatorNames.indexOf(this.currentUser.username);
+                this.theme.organisatorNames.splice(index,1);
             });
         });
     }
@@ -73,13 +74,23 @@ export class EditThemeComponent {
         this.theme.tags.splice(i, 1);
     }
 
-    public onAddOrganisator(): void {
-        this.theme.organisatorNames.push(this.newOrganisator);
+    public onAddOrganisator():void {
+        if (this.newOrganisator != '') {
+            this.theme.organisatorNames.push(this.newOrganisator);
+            var index = this.users.indexOf(this.newOrganisator);
+            this.users.splice(index, 1);
+            this.organisatorErrorMessage = '';
+            this.newOrganisator = "";
+        } else {
+            this.organisatorErrorMessage = 'Gekozen organisator mag niet leeg zijn';
+        }
     }
 
-    public onRemoveOrganisator(i: number): void {
+    public onRemoveOrganisator(i:number):void {
+        this.users.push(this.theme.organisatorNames[i]);
         this.theme.organisatorNames.splice(i, 1);
     }
+
 
     public onSubmit(): void {
         this.contentService.updateTheme(this.theme);
