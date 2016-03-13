@@ -62,6 +62,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
     private List<Card> cards;
 
     @OneToMany(targetEntity = Session.class, mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<Session> sessions;
 
     @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = true)
