@@ -22,6 +22,7 @@ import {SessionComponent} from "./components/session.component";
 import {LogoutComponent} from "./components/logout.component";
 import {DetailCardComponent} from "./components/detailCard.component";
 import {OverviewSessionsComponent} from "./components/overviewSessions.component";
+import {CreateCsvComponent} from "./components/createCsv.component";
 @Component({
     selector: 'my-app',
     templateUrl: 'app/partials_html/app.component.html',
@@ -55,7 +56,9 @@ import {OverviewSessionsComponent} from "./components/overviewSessions.component
     {path:'/session/:sessionId', name:'Session',component:SessionComponent},
     {path:'/sessions', name:'Sessions', component:OverviewSessionsComponent},
 
-    {path:'/cirkelsessie', name:'Cirkelsessie',component:CirkelsessieComponent}
+    {path:'/cirkelsessie', name:'Cirkelsessie',component:CirkelsessieComponent},
+    {path:'/createCsv', name:'CreateCsv',component:CreateCsvComponent}
+
 ])
 
 export class AppComponent {
