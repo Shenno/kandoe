@@ -33,6 +33,7 @@ export class LoginComponent {
     private user: LoginUser = new LoginUser("", "");
 
     public constructor(router:Router, userService:UserService) {
+        document.title = 'Login';
         this.userService = userService;
         this.router = router;
     }
