@@ -201,20 +201,6 @@ public class ITtheme {
         element = driver.findElement(By.id("organisator0"));
         assertEquals("The right organisator must be shown", "john.smith@live.com", element.getText());
 
-        SeleniumHelper.allowDomToLoad(); //otherwise Selenium won't select the right element on dropdown below
-
-        element = driver.findElement(By.id("dd_users"));
-        SeleniumHelper.selectOptionOnDropdown(element, "john.smith@live.com");
-
-        SeleniumHelper.allowDomToLoad();
-
-        element = driver.findElement(By.name("btn_addOrganisator"));
-        SeleniumHelper.clickOnElement(driver, element);
-
-        element = driver.findElement(By.id("err_organisator"));
-        assertEquals("span", element.getTagName());
-        assertEquals("Organisator error message must be filled in", "Gebruiker \"john.smith@live.com\" is reeds toegevoegd als organisator", element.getText());
-
         element = driver.findElement(By.name("btn_save"));
         assertEquals("button", element.getTagName());
         assertEquals("Opslaan", element.getText());

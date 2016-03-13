@@ -18,35 +18,41 @@ import {FORM_DIRECTIVES} from "angular2/common";
 })
 export class CreateThemeComponent {
 
-    private router: Router;
+    private router:Router;
 
-    private contentService: ContentService;
-    private userService: UserService;
+    private contentService:ContentService;
+    private userService:UserService;
 
-    private theme: Theme = Theme.createEmptyTheme();
-    private newTag: string = "";
+    private theme:Theme = Theme.createEmptyTheme();
+    private newTag:string = "";
 
-    private users: string[] = [];
-    private newOrganisator: string = "";
+    private users:string[] = [];
+    private newOrganisator:string = "";
 
-    private tagErrorMessage: string = "";
-    private organisatorErrorMessage: string = "";
+    private tagErrorMessage:string = "";
+    private organisatorErrorMessage:string = "";
 
-    public constructor(contentService: ContentService, userService: UserService, router:Router, routeParam: RouteParams) {
+    private currentUser:User = User.createEmptyUser();
+
+    public constructor(contentService:ContentService, userService:UserService, router:Router, routeParam:RouteParams) {
         document.title = 'Maak thema aan';
         this.router = router;
         this.contentService = contentService;
         this.theme.organisationId = +routeParam.params["organisationId"];
         this.userService = userService;
         this.userService.getMyDetails().subscribe((user:User) => {
+            this.currentUser = user;
             this.theme.organisatorId = user.id;
-        });
-        this.userService.getAllUsernames().subscribe((users:string[]) => {
-            this.users = users;
+
+            this.userService.getAllUsernames().subscribe((users:string[]) => {
+                var index = users.indexOf(this.currentUser.username);
+                users.splice(index, 1); //you can't add yourself as organisator
+                this.users = users;
+            });
         });
     }
 
-    public onAddTag(): void {
+    public onAddTag():void {
         if (this.newTag != '') {
             var tags = this.newTag.split(" ");
             for (var i in tags) {
@@ -64,35 +70,33 @@ export class CreateThemeComponent {
         }
     }
 
-    public onRemoveTag(i: number): void {
+    public onRemoveTag(i:number):void {
         this.theme.tags.splice(i, 1);
     }
 
-    public onAddOrganisator(): void {
+    public onAddOrganisator():void {
         if (this.newOrganisator != '') {
-            if (this.theme.organisatorNames.indexOf(this.newOrganisator) == -1) {
-                this.theme.organisatorNames.push(this.newOrganisator);
-                this.organisatorErrorMessage = '';
-            } else {
-                this.organisatorErrorMessage = 'Gebruiker "' + this.newOrganisator + '" is reeds toegevoegd als organisator';
-            }
-
+            this.theme.organisatorNames.push(this.newOrganisator);
+            var index = this.users.indexOf(this.newOrganisator);
+            this.users.splice(index, 1);
+            this.organisatorErrorMessage = '';
             this.newOrganisator = "";
         } else {
             this.organisatorErrorMessage = 'Gekozen organisator mag niet leeg zijn';
         }
     }
 
-    public onRemoveOrganisator(i: number): void {
+    public onRemoveOrganisator(i:number):void {
+        this.users.push(this.theme.organisatorNames[i]);
         this.theme.organisatorNames.splice(i, 1);
     }
 
-    public onSubmit(): void {
+    public onSubmit():void {
         this.contentService.addTheme(this.theme);
     }
 
-    public onCancel(event): void {
+    public onCancel(event):void {
         event.preventDefault();
-        this.router.navigate(['/Organisation',{organisationId: this.theme.organisationId}]);
+        this.router.navigate(['/Organisation', {organisationId: this.theme.organisationId}]);
     }
 }
