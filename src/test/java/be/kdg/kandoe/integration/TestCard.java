@@ -26,10 +26,8 @@ import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:**/testcontext.xml"})
-
 public class TestCard {
 
-    //trolololo
     @Autowired
     private ContentService contentService;
 
