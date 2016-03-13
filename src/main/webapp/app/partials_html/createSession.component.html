@@ -5,8 +5,11 @@
 </select>
 <br>
 <div *ngIf="cards">
-    <div class="well" style="width: 50em">
-        Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:
+    <div class="form-group">
+        <label for="ib_name">Naam sessie:</label>
+        <input id="ib_name" name="ib_name"
+               [(ngModel)]="nameSession"
+               class="form-control">
     </div>
     <!--
     <div *ngFor="#card of cards">
@@ -14,6 +17,9 @@
         <img src="{{card.imageURL}}" class="img-thumbnail card-thumbnail">{{card?.text}}
     </div>-->
     <h2>Kies de kaartjes:</h2>
+    <div class="well" style="width: 50em">
+        Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:
+    </div>
     <ul class="list-group card-list">
         <li class="list-group-item" *ngFor="#card of cards">
             <input (change)="changeCardSelectedStatus(card)" type="checkbox" [checked]="card.selected">

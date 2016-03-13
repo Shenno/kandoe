@@ -48,7 +48,10 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public Session addSession(Session session, int themeId) {
+    public Session addSession(Session session, int themeId) throws SessionServiceException {
+        if (session.getNameSession().isEmpty()){
+            throw new SessionServiceException("Empty name for session");
+        }
         Theme theme = this.themeRepository.findOne(themeId);
         session.setTheme(theme);
         return this.sessionRepository.save(session);

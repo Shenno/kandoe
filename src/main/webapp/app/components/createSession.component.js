@@ -40,6 +40,7 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                     this.themes = [];
                     this.theme = theme_1.Theme.createEmptyTheme();
                     this.cards = null;
+                    this.nameSession = "";
                     this.currentUser = null;
                     //var cardids: number[] = [];
                     this.cardIds = [];
@@ -95,7 +96,7 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                                 cardids.push(card.id);
                             }
                         });
-                        var session = new createSession_1.createSession(emails, cardids, this.theme.themeId);
+                        var session = new createSession_1.createSession(emails, cardids, this.theme.themeId, this.nameSession);
                         //this.sessionService.post....
                         this.sessionService.addSession(session).subscribe(function (persistedSessionId) {
                             _this.router.navigate(['/Session', { sessionId: persistedSessionId }]);

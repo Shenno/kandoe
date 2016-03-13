@@ -4,10 +4,11 @@ System.register([], function(exports_1) {
         setters:[],
         execute: function() {
             createSession = (function () {
-                function createSession(participantsEmails, cardIds, themeId) {
+                function createSession(participantsEmails, cardIds, themeId, nameSession) {
                     this.participantsEmails = participantsEmails;
                     this.cardIds = cardIds;
                     this.themeId = themeId;
+                    this.nameSession = nameSession;
                 }
                 return createSession;
             })();

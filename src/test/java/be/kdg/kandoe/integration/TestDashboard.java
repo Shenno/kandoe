@@ -60,13 +60,13 @@ public class TestDashboard {
         theme = new Theme(name,description,isCommentaryAllowed,isAddingAdmited,user,organisation,tags);
         theme = contentService.addTheme(theme);
 
-        Session session1 = new AsynchronousSession(true, 60, 4);
+        Session session1 = new AsynchronousSession(true, 60, 4,"nameSession");
         session1 = sessionService.addSession(session1, theme.getId());
 
-        Session session2 = new AsynchronousSession(true, 60, 4);
+        Session session2 = new AsynchronousSession(true, 60, 4,"nameSession");
         session2 = sessionService.addSession(session2, theme.getId());
 
-        Session session3 = new AsynchronousSession(true, 60, 4);
+        Session session3 = new AsynchronousSession(true, 60, 4,"nameSession");
         session3 = sessionService.addSession(session3, theme.getId());
 
         String cardDescription="card1";

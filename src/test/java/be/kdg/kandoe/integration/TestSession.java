@@ -83,8 +83,10 @@ public class TestSession {
 
     @Test
     public void testCreateAsyncSession() {
+        String nameSession = "SessionName";
+
         // Create AsyncSession and add three users to it
-        Session session = new AsynchronousSession(true, 60, 4);
+        Session session = new AsynchronousSession(true, 60, 4, nameSession);
 
         // Create cards and add to the session
         Card card1 = new Card("CardOne", theme);
@@ -124,6 +126,7 @@ public class TestSession {
         theme = contentService.getTheme(theme.getId());
         user = userService.findUserById(user.getId());
         assertNotNull(session);
+        assertEquals("NameSession must be correct",session.getNameSession(),nameSession);
         assertNotNull(theme);
         assertNotNull(user);
 
@@ -169,8 +172,9 @@ public class TestSession {
 
     @Test
     public void testCreateTwoAsyncSessionsSameTheme() {
-        Session sessionOne = new AsynchronousSession(true, 60, 4);
-        Session sessionTwo = new AsynchronousSession(false, 50, 4);
+        String nameSession = "SessionName";
+        Session sessionOne = new AsynchronousSession(true, 60, 4,nameSession);
+        Session sessionTwo = new AsynchronousSession(false, 50, 4,nameSession);
         sessionOne = sessionService.addSession(sessionOne, theme.getId());
         sessionTwo = sessionService.addSession(sessionTwo, theme.getId());
         assertNotNull(sessionOne);
@@ -182,8 +186,9 @@ public class TestSession {
 
     @Test(expected = SessionServiceException.class)
     public void testAddSessionWithUnknownUser() {
+        String nameSession = "SessionName";
         // Create AsyncSession and add three users to it
-        Session session = new AsynchronousSession(true, 60, 4);
+        Session session = new AsynchronousSession(true, 60, 4, nameSession);
         session = sessionService.addUserToSession(session, "NonExistingUsername");
     }
 
@@ -192,10 +197,18 @@ public class TestSession {
         //TODO split tests
 
     }
+    @Test(expected = SessionServiceException.class)
+    public void testSessionNameNotNull(){
+        String nameSession = "";
+        Session session = new AsynchronousSession(true, 60, 4,nameSession);
+        sessionService.addSession(session, theme.getId());
+
+    }
     @Test
     public void testGetSessionByUserId(){
+        String nameSession = "SessionName";
         // Create AsyncSession and add three users to it
-        Session session = new AsynchronousSession(true, 60, 4);
+        Session session = new AsynchronousSession(true, 60, 4,nameSession);
 
         // Create cards and add to the session
         Card card1 = new Card("CardOne", theme);

@@ -14,18 +14,18 @@ public class AsynchronousSession extends Session implements Serializable{
     private int maxTimeRound; //in seconds
 
     public AsynchronousSession() {
-        super(false);
+        super(false,"sessionName");
         this.maxTimeRound = 60;
 
     }
 
-    public AsynchronousSession(boolean isProblem, int maxTimeRound, int amountOfCircles) {
-        super(isProblem, amountOfCircles);
+    public AsynchronousSession(boolean isProblem, int maxTimeRound, int amountOfCircles,String nameSession) {
+        super(isProblem, amountOfCircles,nameSession);
         this.maxTimeRound = maxTimeRound;
     }
 
-    public AsynchronousSession(boolean isProblem,int minCards, int maxCards, int maxTimeRound) {
-        super(isProblem,minCards, maxCards);
+    public AsynchronousSession(boolean isProblem,int minCards, int maxCards, int maxTimeRound, String nameSession) {
+        super(isProblem,minCards, maxCards, nameSession);
         this.maxTimeRound = maxTimeRound;
     }
 

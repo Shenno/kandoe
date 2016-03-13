@@ -15,6 +15,7 @@ public class SessionResourcePost implements Serializable {
     private List<String> participantsEmails;
     private List<Integer> cardIds;
     private Integer themeId;
+    private String nameSession;
 
     public SessionResourcePost() {
         this.participantsEmails = new ArrayList<>();
@@ -44,4 +45,13 @@ public class SessionResourcePost implements Serializable {
     public void setParticipantsEmails(List<String> participantsEmails) {
         this.participantsEmails = participantsEmails;
     }
+
+    public String getNameSession() {
+        return nameSession;
+    }
+
+    public void setNameSession(String nameSession) {
+        this.nameSession = nameSession;
+    }
 }
+

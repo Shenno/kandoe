@@ -29,6 +29,9 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @GeneratedValue
     private Integer sessionId;
 
+    @Column(name="NameSession",nullable = false)
+    private String nameSession;
+
     @Column(name="Problem",nullable= false)
     private boolean problem;
 
@@ -69,16 +72,16 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
                inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
     private List<User> users = new ArrayList<>();
 
-    public Session(boolean isProblem) {
-        this(isProblem,1,20);
+    public Session(boolean isProblem, String nameSession) {
+        this(isProblem,1,20,nameSession);
     }
 
-    public Session(boolean isProblem, int amountOfCircles) {
-        this(isProblem,1,20);
+    public Session(boolean isProblem, int amountOfCircles, String nameSession) {
+        this(isProblem,1,20,nameSession);
         this.amountOfCircles = amountOfCircles;
     }
 
-    public Session(boolean problem, int minCards, int maxCards) {
+    public Session(boolean problem, int minCards, int maxCards, String nameSession) {
         this.problem = problem;
         this.gameOver = false;
         this.currentRound = 1;
@@ -86,6 +89,7 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
         this.maxCards = maxCards;
         this.snapshotID = 1;
         this.currentUser = -1;
+        this.nameSession = nameSession;
     }
 
     public List<CardSession> getCardSessions() {
@@ -204,6 +208,14 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
         User current = users.remove(0);
         currentUser = users.get(0).getUserId();
         users.add(current);
+    }
+
+    public String getNameSession() {
+        return nameSession;
+    }
+
+    public void setNameSession(String nameSession) {
+        this.nameSession = nameSession;
     }
 
     @Override

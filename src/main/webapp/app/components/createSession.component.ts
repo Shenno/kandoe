@@ -25,9 +25,11 @@ export class CreateSessionComponent {
     private userService: UserService;
     private contentService: ContentService;
     private sessionService: SessionService;
+
     private themes : Theme[] = [];
     private theme: Theme = Theme.createEmptyTheme();
     private cards: Card[] = null;
+    private nameSession: string = "";
     private currentUser = null;
     //var cardids: number[] = [];
     private cardIds: number[] = [];
@@ -90,7 +92,7 @@ export class CreateSessionComponent {
                 }
             });
 
-            var session: createSession = new createSession(emails, cardids, this.theme.themeId);
+            var session: createSession = new createSession(emails, cardids, this.theme.themeId,this.nameSession);
             //this.sessionService.post....
             this.sessionService.addSession(session).subscribe((persistedSessionId:number) => {
                 this.router.navigate(['/Session', {sessionId:persistedSessionId}]);
