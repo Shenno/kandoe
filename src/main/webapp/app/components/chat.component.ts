@@ -15,7 +15,8 @@ import {Remark} from "../entity/remark";
 @Component({
     selector: 'chatbox',
     template: `
-        <h1>Chat</h1>
+        <h1 style="border-bottom: 2px solid #4985B9">Chat</h1>
+
         <div style="overflow: auto; height: 40em">
             <div *ngFor="#remark of remarks" class="chat-component">
                 <div style="font-style: italic">
@@ -29,7 +30,7 @@ import {Remark} from "../entity/remark";
         <div class="input-group">
             <input type="textarea" [(ngModel)]="currentMessage" class="form-control">
             <span class="input-group-btn">
-                <button (click)="processRemark()" class="btn btn-default">Chat!</button>
+                <button (click)="processRemark()" class="btn btn-default"><span class="glyphicon glyphicon-comment"></span> Chat!</button>
             </span>
         </div>
     `,

@@ -31,9 +31,9 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
                 <div class="col-md-5">
                     <div class="center-content">
                         <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId" [amountOfCircles]="8" [circleCards]="currentSession.cardSessionResources"></kandoe-circle>
-                        <h3 style="color: white" *ngIf="myTurn && !currentSession?.gameOver">Jij bent aan de beurt, {{currentUser?.firstName}}!</h3>
-                        <h3 style="color: white" *ngIf="!myTurn && !currentSession?.gameOver">Wacht even je beurt af!</h3>
-                        <h3 style="color: white" class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h3>
+                        <h3 *ngIf="myTurn && !currentSession?.gameOver">Jij bent aan de beurt, {{currentUser?.firstName}}!</h3>
+                        <h3 *ngIf="!myTurn && !currentSession?.gameOver">Wacht even je beurt af!</h3>
+                        <h3 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h3>
                     </div>
                 </div>
                 <div class="col-md-5">
