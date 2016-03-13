@@ -34,4 +34,10 @@ public class SeleniumHelper {
     public static void selectOptionOnDropdown(WebElement dropdown, String option) {
         dropdown.sendKeys(option);
     }
+
+    public static String getInnerHtmlOfElement(WebDriver driver, WebElement element) {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        String innerHtml = (String) executor.executeScript("return arguments[0].innerHTML;", element);
+        return innerHtml;
+    }
 }

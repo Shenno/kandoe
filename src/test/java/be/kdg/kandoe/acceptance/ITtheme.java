@@ -25,14 +25,12 @@ public class ITtheme {
 
     private static WebDriver driver;
 
+    private static String organisationId;
+
     @BeforeClass
     public static void setupClass() {
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
-    }
-
-    @Before
-    public void setup() {
 
         driver.get("http://localhost:9966/kandoe/#/login");
 
@@ -42,22 +40,36 @@ public class ITtheme {
         element = element.findElement(By.tagName("login"));
 
         element = element.findElement(By.id("ib_username"));
-        assertEquals("input", element.getTagName());
-        assertEquals("text", element.getAttribute("type"));
-
         SeleniumHelper.fillTextIntoElement(element, "scott.tiger@live.com");
 
         element = driver.findElement(By.id("ib_password"));
-        assertEquals("input", element.getTagName());
-        assertEquals("password", element.getAttribute("type"));
-
         SeleniumHelper.fillTextIntoElement(element, "scott");
 
         element = driver.findElement(By.name("btn_login"));
-        assertEquals("button", element.getTagName());
-        assertEquals("Get lucky", element.getText());
-
         SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Kandoe"));
+
+        element = driver.findElement(By.id("a_organisations"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Organisaties"));
+
+        element = driver.findElement(By.id("btn_addOrganisation"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Maak organisatie aan"));
+
+        element = driver.findElement(By.name("ib_new_organisation"));
+        SeleniumHelper.fillTextIntoElement(element, "MyOrganisation");
+
+        element = driver.findElement(By.name("btn_add_organisation"));
+        SeleniumHelper.clickOnElement(driver,element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Organisatie: MyOrganisation"));
+
+        element = driver.findElement(By.id("organisationId"));
+        organisationId = SeleniumHelper.getInnerHtmlOfElement(driver, element); //needed to access content of hidden div
     }
 
     @Test
@@ -65,7 +77,7 @@ public class ITtheme {
 
         SeleniumHelper.allowDomToLoad(); //allow time for login to complete
 
-        driver.get("http://localhost:9966/kandoe/#/organisation/1/createTheme");
+        driver.get("http://localhost:9966/kandoe/#/organisation/" + organisationId + "/createTheme");
 
         SeleniumHelper.allowDomToLoad();
 

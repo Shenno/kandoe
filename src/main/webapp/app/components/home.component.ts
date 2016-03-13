@@ -11,4 +11,7 @@ directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
 
 export class HomeComponent {
+    public constructor() {
+        document.title = 'Kandoe';
+    }
 }
