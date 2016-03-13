@@ -66,10 +66,11 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @Fetch(FetchMode.SELECT)
     private List<CardSession> cardSessions = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "UserSession",
                joinColumns = @JoinColumn(name = "Sessionid", referencedColumnName = "SessionId"),
                inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
+    @Fetch(FetchMode.SELECT)
     private List<User> users = new ArrayList<>();
 
     public Session(boolean isProblem, String nameSession) {

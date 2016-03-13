@@ -15,6 +15,7 @@ public class SessionResourceActive implements Serializable {
     private int amountOfCircles;
     private List<RemarkResource> remarks;
     private String nameSession;
+    private int amountOfUsers;
 
     public SessionResourceActive() {
         this.cardSessionResources = new ArrayList<>();
@@ -75,6 +76,14 @@ public class SessionResourceActive implements Serializable {
 
     public void setNameSession(String nameSession) {
         this.nameSession = nameSession;
+    }
+
+    public int getAmountOfUsers() {
+        return amountOfUsers;
+    }
+
+    public void setAmountOfUsers(int amountOfUsers) {
+        this.amountOfUsers = amountOfUsers;
     }
 }
 

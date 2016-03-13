@@ -14,11 +14,13 @@
         <tbody>
             <tr *ngFor="#session of sessions">
                 <td>{{session.nameSession}}</td>
-                <td>{{session.problem}}</td>
+                <td *ngIf="session.problem">Problemencirkel</td>
+                <td *ngIf!="session.problem">Kansencirkel</td>
                 <td>{{session.amountOfCircles}}</td>
-                <td>Aantal users</td>
+                <td>{{session.amountOfUsers}}</td>
                 <td>{{session.currentUser}}</td>
-                <td>{{session.gameOver}}</td>
+                <td *ngIf="session.gameOver">Afgelopen</td>
+                <td *ngIf!="session.gameOver">Actief</td>
             </tr>
         </tbody>
     </table>
