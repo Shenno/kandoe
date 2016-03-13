@@ -93,10 +93,13 @@ h2 {
     color: white;
 }
 
-.wooden-row {
-    border-radius: 10px;
-    padding: 4em;
+.custom-row {
     text-align: center;
+}
+
+.fixed-column {
+    width: 700px;
+    float: left;
 }
 
 .center-content {

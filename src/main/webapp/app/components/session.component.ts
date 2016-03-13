@@ -27,8 +27,8 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
         <h1 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h1>
         <template [ngIf]="currentSession">
         <div class="container-fluid">
-            <div class="row wooden-row">
-                <div class="col-md-5">
+            <div class="row custom-row">
+                <div class="col-md-5 fixed-column">
                     <div class="center-content">
                         <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId" [amountOfCircles]="8" [circleCards]="currentSession.cardSessionResources"></kandoe-circle>
                         <h3 *ngIf="myTurn && !currentSession?.gameOver">Jij bent aan de beurt, {{currentUser?.firstName}}!</h3>
@@ -45,7 +45,7 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
                             </div>
                     </div>
                 </div>
-                <div class="col-md-2 col-xs-3">
+                <div class="col-md-2 col-xs-4">
                     <div class="chatbox">
                         <chatbox [currentSessionId]="currentSessionId" [remarks]="currentSession.remarks"></chatbox>
                     </div>
