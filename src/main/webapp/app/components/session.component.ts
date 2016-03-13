@@ -27,20 +27,21 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
         <h1 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h1>
         <template [ngIf]="currentSession">
         <div class="container-fluid">
-            <div class="row custom-row">
-                <div class="col-md-5 fixed-column">
+            <div class="row custom-rw">
+                <div class="col-md-4 fixed-column">
                     <div class="center-content">
                         <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId" [amountOfCircles]="8" [circleCards]="currentSession.cardSessionResources"></kandoe-circle>
-                        <h3 *ngIf="myTurn && !currentSession?.gameOver">Jij bent aan de beurt, {{currentUser?.firstName}}!</h3>
+                        <!--<h3 *ngIf="myTurn && !currentSession?.gameOver">Jij bent aan de beurt, {{currentUser?.firstName}}!</h3>
                         <h3 *ngIf="!myTurn && !currentSession?.gameOver">Wacht even je beurt af!</h3>
-                        <h3 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h3>
+                        <h3 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h3>-->
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div *ngFor="#card of currentSession.cardSessionResources; #i = index">
                             <div class="col-md-2 col-xs-3 card">
+                            <span class="badge alert-danger center-content">{{i+1}}</span>
                             <div class="image-sizing img-thumbnail"><img src="{{card?.image}}" class="card-image"></div>
-                                <span class="badge">{{i+1}}</span>
+
                                 {{card?.card}}
                             </div>
                     </div>

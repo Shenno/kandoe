@@ -64,9 +64,9 @@ export class KandoeCircleComponent implements OnChanges {
     //Testing purposes
     //private radians = [Math.PI/2 ,(5*Math.PI)/12, Math.PI/3, Math.PI/4, Math.PI/6, Math.PI/12, 2*Math.PI, (23*Math.PI)/12, (11*Math.PI)/6, (7*Math.PI)/4, (5*Math.PI)/3, (19*Math.PI)/12, (3*Math.PI)/2, (17*Math.PI)/12, (4*Math.PI)/3, (5*Math.PI)/4, (7*Math.PI)/6, (13*Math.PI)/12, Math.PI, (11*Math.PI)/12, (5*Math.PI)/6, (3*Math.PI)/4, (2*Math.PI)/3, (7*Math.PI)/12];
 
-    private cardThickness = 10;
-    private circleThickness = 30;
-    private circleRadius = 300;
+    private cardThickness = 8;
+    private circleThickness = 22.5;
+    private circleRadius = 225;
 
     public constructor(sessionService:SessionService) {
         this.sessionService = sessionService;

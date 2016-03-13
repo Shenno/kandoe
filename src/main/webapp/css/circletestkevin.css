@@ -1,14 +1,14 @@
 #circle {
     display: block;
-    width: 600px;
-    margin: 20px;
-    min-width: 600px;
+    width: 450px;
+    min-width: 450px;
     position: relative;
+    margin: 20px;
 }
 
 #circle #board {
     display: block;
-    padding-top: 100%;
+    padding-top:100%;
     position: relative;
 }
 
@@ -59,8 +59,8 @@
 
 .post-it-number {
     font-size:90%;
-    width:20px;
-    height:20px;
+    width:16px;
+    height:16px;
     text-align: center;
     visibility: visible;
     font-weight: 600;

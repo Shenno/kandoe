@@ -98,7 +98,7 @@ h2 {
 }
 
 .fixed-column {
-    width: 700px;
+    width: 500px;
     float: left;
 }
 
@@ -109,7 +109,7 @@ h2 {
 
 .image-sizing {
     position: relative;
-    height: 10em;
+    height: 75px;
     width: 100%;
     overflow: hidden;
 

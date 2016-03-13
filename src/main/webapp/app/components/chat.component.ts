@@ -17,7 +17,7 @@ import {Remark} from "../entity/remark";
     template: `
         <h1 style="border-bottom: 2px solid #4985B9">Chat</h1>
 
-        <div style="overflow: auto; height: 40em">
+        <div style="overflow: auto; height: 275px">
             <div *ngFor="#remark of remarks" class="chat-component">
                 <div style="font-style: italic">
                     [{{remark.timeStamp[2]}}/{{remark.timeStamp[1]}}/{{remark.timeStamp[0]}}
