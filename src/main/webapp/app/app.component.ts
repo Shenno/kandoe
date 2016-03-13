@@ -67,7 +67,7 @@ export class AppComponent {
     currentUserDetails: User;
 
     public constructor(userService:UserService) {
-       /* this.userService = userService;
+       /*  this.userService = userService;
         userService.getMyDetails().subscribe(
             (user:User) => this.currentUserDetails = user,
             err => alert(localStorage.getItem("jwt") + err))*/
