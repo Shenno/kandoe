@@ -87,4 +87,10 @@ export class UserService {
         return this.http.get(this.baseUrl + "/api/users/me", {headers: headers}).map((res:Response) => res.json());
     }
 
+    public getUserById(id: number) : Observable<User>{
+        var url = this.baseUrl + "/api/users/" + id;
+        var headers =  this.urlService.getHeaders(false);
+        return this.http.get(url, {headers: headers}).map((res:Response) => res.json());
+    }
+
 }

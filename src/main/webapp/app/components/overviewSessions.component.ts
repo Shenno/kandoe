@@ -32,9 +32,20 @@ export class OverviewSessionsComponent {
         this.userService.getMyDetails().subscribe((user:User) => {
             this.userId = user.id;
         });
-        sessionService.getSessionsByUserId(this.userId).subscribe((sessions:SessionActive[]) => {
-            this.sessions = sessions;
+        this.sessionService.getSessionsByUserId(this.userId).subscribe((sessions:SessionActive[]) => {
             document.title = 'Jouw sessies';
+            var index = 0;
+            for (index; index < sessions.length; index++) {
+                var i = index;
+                this.userService.getUserById(sessions[i].currentUser).subscribe((user:User) => {
+                    sessions[i].currentUserName = user.username;
+                });
+            }
+            this.sessions = sessions;
+
         });
+    }
+    public onClickSession(id:string):void{
+        this.router.navigate(['/Session',{sessionId:id}]);
     }
 }

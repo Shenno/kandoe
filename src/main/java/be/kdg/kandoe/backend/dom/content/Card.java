@@ -27,9 +27,7 @@ public class Card implements Serializable, Identifiable<Integer> {
     @GeneratedValue
     private Integer cardId;
 
-    //TODO nullables checken
-
-    @Column(name = "Text", nullable = true)
+    @Column(name = "Text", nullable = false)
     private String text;
 
     @Column(name = "ImageURL", nullable = true)

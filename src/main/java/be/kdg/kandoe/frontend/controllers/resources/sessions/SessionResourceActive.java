@@ -8,6 +8,7 @@ import java.util.List;
  * Created by Kevin on 5/03/2016.
  */
 public class SessionResourceActive implements Serializable {
+    private Integer id;
     private Integer currentUser;
     private List<CardSessionResource> cardSessionResources;
     private boolean problem;
@@ -16,6 +17,7 @@ public class SessionResourceActive implements Serializable {
     private List<RemarkResource> remarks;
     private String nameSession;
     private int amountOfUsers;
+    private String themeName;
 
     public SessionResourceActive() {
         this.cardSessionResources = new ArrayList<>();
@@ -84,6 +86,22 @@ public class SessionResourceActive implements Serializable {
 
     public void setAmountOfUsers(int amountOfUsers) {
         this.amountOfUsers = amountOfUsers;
+    }
+
+    public String getThemeName() {
+        return themeName;
+    }
+
+    public void setThemeName(String themeName) {
+        this.themeName = themeName;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
 

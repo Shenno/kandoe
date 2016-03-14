@@ -4,6 +4,7 @@
         <thead>
             <tr>
                 <th>Naam sessie</th>
+                <th>Thema Naam</th>
                 <th>Soort cirkel</th>
                 <th># cirkels</th>
                 <th># gebruikers</th>
@@ -12,13 +13,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="#session of sessions">
+            <tr *ngFor="#session of sessions" (click)="onClickSession(session.id)">
                 <td>{{session.nameSession}}</td>
+                <td>{{session.themeName}}</td>
                 <td *ngIf="session.problem">Problemencirkel</td>
                 <td *ngIf!="session.problem">Kansencirkel</td>
                 <td>{{session.amountOfCircles}}</td>
                 <td>{{session.amountOfUsers}}</td>
-                <td>{{session.currentUser}}</td>
+                <td *ngIf="session.gameOver"></td>
+                <td *ngIf!="session.gameOver">{{session.currentUserName}}</td>
                 <td *ngIf="session.gameOver">Afgelopen</td>
                 <td *ngIf!="session.gameOver">Actief</td>
             </tr>
