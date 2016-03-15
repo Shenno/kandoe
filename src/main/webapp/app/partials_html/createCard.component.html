@@ -1,26 +1,47 @@
 <h1>Maak een kaartje aan</h1>
 
-<form>
-    <div class="alert alert-warning" role="alert" style="width: 20em">
-        <b>Heads up!</b> Tekst & afbeelding zijn niet meer wijzigbaar.
-    </div>
+<form data-toggle="validator" role="form" #cardForm="ngForm">
+
     <div class="form-group">
-        <label for="ib_text">Tekst </label>
+        <label for="ib_text">Tekst <span style="color: red">*</span></label>
         <input id="ib_text" class="form-control"
-               name="ib_text" [(ngModel)]="card.text">
+               name="ib_text" [(ngModel)]="card.text"
+               required #text="ngForm" ngControl="text">
+        <div [hidden]="text.valid || text.pristine"
+             class="alert alert-danger" style="width: 20em; margin-top: 2px;"
+        >Tekst is vereist.
+        </div>
     </div>
     <br>
+
     <div class="form-group">
-        <label for="ib_imageURL">Afbeelding: </label>
+        <label for="ib_imageURL">Afbeelding: <span style="color: red">*</span></label>
         <!--<input id="ib_imageURL" type="file"
                name="ib_imageURL" accept="image/*"
                [(ngModel)]="card.imageURL">-->
-        <input class="form-control"
-               id="ib_imageURL" type="text"
-               name="ib_imageURL" [(ngModel)]="card.imageURL">
+
+        <div class="input-group" style="width: 30em">
+            <span class="input-group-addon" id="url-addon">URL</span>
+            <input class="form-control"
+                   id="ib_imageURL" type="text"
+                   name="ib_imageURL" [(ngModel)]="card.imageURL"
+                   required #image="ngForm" ngControl="image"
+                   aria-describedby="url-addon">
+        </div>
+        <div [hidden]="image.valid || image.pristine"
+             class="alert alert-danger" style="width: 20em; margin-top: 2px;"
+        >Afbeelding is vereist.
+        </div>
     </div>
 
     <br>
-    <button class="btn btn-primary" name="btn_save" (click)="onSubmit()">Opslaan</button>
+    <div class="alert alert-warning" role="alert" style="width: 30em">
+        <b>Heads up!</b> Tekst & afbeelding zijn niet meer wijzigbaar.
+    </div>
+    <button class="btn btn-primary" name="btn_save"
+            (click)="onSubmit()"
+            [disabled]="!cardForm.form.valid">
+        Opslaan
+    </button>
     <button class="btn btn-default" name="btn_cancel" (click)="onCancel($event)">Annuleren</button>
 </form>

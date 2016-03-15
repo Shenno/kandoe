@@ -3,7 +3,7 @@
 <form data-toggle="validator" role="form"
       (submit)="onSubmit()" #orgForm="ngForm">
     <div class="form-group">
-        <label for="ib_new_organisation" class="control-label">Organisatie naam:</label>
+        <label for="ib_new_organisation" class="control-label">Organisatie naam: <span style="color: red">*</span></label>
         <input id="ib_new_organisation" name="ib_new_organisation"
                [(ngModel)]="organisation.name" class="form-control"
                type="text" required ngControl="name" #name="ngForm">

@@ -34,9 +34,12 @@
     </div>
 
     <div id="tags">
-        <p [id]="'tag' + i" *ngFor="#tag of theme.tags;#i=index">
-            {{tag}} <span [id]="'delete_tag' + i" class="glyphicon glyphicon-remove" (click)="onRemoveTag(i)"></span>
-        </p>
+        <ul class="tags">
+            <li [id]="'tag'+i" *ngFor="#tag of theme.tags;#i=index" class="custom-tag">
+                {{tag}}
+                <span [id]="'delete_tag' + i" class="glyphicon glyphicon-remove" (click)="onRemoveTag(i)"></span>
+            </li>
+        </ul>
     </div>
     <div class="form-group">
         <input class="form-control" name="ib_newTag" [(ngModel)]="newTag">

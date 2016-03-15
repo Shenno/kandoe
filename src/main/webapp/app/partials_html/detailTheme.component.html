@@ -35,9 +35,9 @@
         </div>
         <div id="tags" class="collapse panel-collapse">
             <div class="panel-body">
-                <p [id]="'tag' + i" *ngFor="#tag of theme.tags;#i=index">
-                    {{tag}}
-                </p>
+                <ul class="tags">
+                    <li [id]="'tag'+i" *ngFor="#tag of theme.tags;#i=index" class="custom-tag">{{tag}}</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
     <div class="panel panel-primary" style="width: 30em">
         <div class="panel-heading" role="tab">
             <h4 class="panel-title">
-                <a id="collapse_organisators"role="button" data-toggle="collapse" data-target="#organisators"
+                <a id="collapse_organisators" role="button" data-toggle="collapse" data-target="#organisators"
                    aria-expanded="false" aria-controls="organisators">
                     <span class="glyphicon glyphicon-collapse-down"></span> Organisatoren ({{theme.organisatorNames.length}})
                 </a>
@@ -73,7 +73,7 @@
         </div>
         <div id="cards" class="collapse panel-collapse">
             <div class="panel-body">
-                <ul class="list-group">
+                <ul class="list-group" style="height: 15em; width:25em; overflow-y: auto">
                     <li *ngFor="#card of cards; #i=index"
                         (click)="detailCard(card.id)"
                         class="list-group-item clickable-list">

@@ -19,7 +19,9 @@
                 <li><a id="a_organisations" href="#/organisations">Organisaties</a></li>
                 <li><a href="#/sessions">Sessies</a></li>
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
+                <p *ngIf="currentUserDetails" class="navbar-text">Welkom {{currentUserDetails.name}}! </p>
                 <li><a href="#/register" *ngIf="currentUserDetails">Registreren</a></li>
                 <li><a href="#/login" *ngIf="currentUserDetails">Inloggen</a></li>
                 <li class="dropdown">
