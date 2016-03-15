@@ -1,33 +1,82 @@
-<h2 *ngIf="!cards">Kies een thema:</h2>
-<select class="form-control" #t (change)="onSelectTheme(t.value)">
-    <option [value]="0">Geen thema</option>
-    <option *ngFor="#th of themes" [value]="th.themeId">{{th.themeName}}</option>
-</select>
-<br>
-<div *ngIf="cards">
-    <h3>Naam van de sessie:</h3>
-    <div class="form-group">
+<h1>Start een nieuwe Kandoe cirkelsessie!</h1>
+
+<form>
+    <div class="form-group ">
+        <div class="row">
+        <label>Geef de sessie een titel</label>
         <input id="ib_name" name="ib_name"
                [(ngModel)]="nameSession"
                class="form-control">
+        </div>
     </div>
-    <!--
-    <div *ngFor="#card of cards">
-        <input (change)="changeCardSelectedStatus(card)" type="checkbox" [checked]="card.selected">
-        <img src="{{card.imageURL}}" class="img-thumbnail card-thumbnail">{{card?.text}}
-    </div>-->
-    <h2>Kies de kaartjes:</h2>
-    <div class="well" style="width: 50em">
-        Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:
+
+    <div class="form-group">
+        <div class="row">
+            <label>Bepaal het aantal ringen van de Kandoe cirkel</label>
+        </div>
+        <div class="row">
+            <input type="number" [(ngModel)]="amountOfCircles" name="circles" min="3" max="8">
+        </div>
     </div>
-    <ul class="list-group card-list">
-        <li class="list-group-item" *ngFor="#card of cards">
-            <input (change)="changeCardSelectedStatus(card)" type="checkbox" [checked]="card.selected">
-            <img src="{{card.imageURL}}" class="img-thumbnail card-thumbnail">
-            <span class="card-text">{{card?.text}}</span>
-        </li>
-    </ul>
-</div>
+
+    <div class="form-group" id="participants">
+        <div class="row">
+        <label>Personen die zullen kunnen deelnemen aan de sessie</label>
+
+        <p *ngIf="participantEmails.length==0" class="text-danger">Momenteel nog niemand! Voeg snel iemand toe, alleen
+            spelen is niet leuk!</p>
+
+        <p [id]="'participant' + i" *ngFor="#participant of participantEmails;#i=index">
+            {{participant}} <span [id]="'delete_participant' + i" class="glyphicon glyphicon-remove"
+                                  (click)="onRemoveParticipant(i)"></span>
+        </p>
+        </div>
+    </div>
+
+    <div class="form-group">
+            <div class="row">
+                <select class="form-control col-md-6" id="dd_users" [(ngModel)]="newParticipant">
+                    <option [id]="'opt_user' + i" *ngFor="#user of users;#i=index">
+                        {{user}}
+                    </option>
+                </select>
+                <button class="btn btn-default" name="btn_addParticipant" (click)="onAddParticipant()">Voeg
+                    deelnemer toe
+                </button>
+            </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <label>Kies een thema waar je rond wil cirkelen</label>
+            <select class="form-control" #t (change)="onSelectTheme(t.value)">
+                <option [value]="0">Geen thema</option>
+                <option *ngFor="#th of themes" [value]="th.themeId">{{th.themeName}}</option>
+            </select>
+        </div>
+    </div>
+
+
+
+    <div *ngIf="cards">
+        <h2>Kies de kaartjes:</h2>
+
+        <div class="well" style="width: 50em">
+            Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:
+        </div>
+        <ul class="list-group card-list">
+            <li class="list-group-item" *ngFor="#card of cards">
+                <input (change)="changeCardSelectedStatus(card)" type="checkbox" [checked]="card.selected">
+                <img src="{{card.imageURL}}" class="img-thumbnail card-thumbnail">
+                <span class="card-text">{{card?.text}}</span>
+            </li>
+        </ul>
+    </div>
+
+</form>
 <button *ngIf="cards" class="btn btn-success" (click)="createSession()">
     <span class="glyphicon glyphicon-play"></span> Sessie aanmaken rond het thema {{theme.themeName}}
 </button>
+
+
+

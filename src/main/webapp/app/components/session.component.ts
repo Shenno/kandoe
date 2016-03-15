@@ -30,7 +30,7 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
             <div class="row custom-rw">
                 <div class="col-md-4 fixed-column">
                     <div class="center-content">
-                        <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId" [amountOfCircles]="8" [circleCards]="currentSession.cardSessionResources"></kandoe-circle>
+                        <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId" [amountOfCircles]="currentSession.amountOfCircles" [circleCards]="currentSession.cardSessionResources"></kandoe-circle>
                         <!--<h3 *ngIf="myTurn && !currentSession?.gameOver">Jij bent aan de beurt, {{currentUser?.firstName}}!</h3>
                         <h3 *ngIf="!myTurn && !currentSession?.gameOver">Wacht even je beurt af!</h3>
                         <h3 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h3>-->
@@ -132,7 +132,6 @@ export class SessionComponent {
     }
 
     public updateView(sessionActive:SessionActive) {
-        console.log("Updating view...");
         this.currentSession = sessionActive;
         if (sessionActive.gameOver) {
             this.myTurn = false;
@@ -146,7 +145,6 @@ export class SessionComponent {
     }
 
     public swapPlayer(movedCard:SessionCard) {
-        //alert('lol');
         this.myTurn = false;
         for (var i = 0; i < this.currentSession.cardSessionResources.length; i++) {
             if (this.currentSession.cardSessionResources[i].id = movedCard.id) {

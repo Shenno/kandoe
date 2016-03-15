@@ -22,11 +22,15 @@
     z-index: 1;
 }
 
+.subcircle.outerring {
+    background: #00cc99 none repeat scroll 0 0 !important;
+}
+
 .subcircle:nth-child(2n) {
     background: dodgerblue none repeat scroll 0 0;
 }
 
-#board .subcircle:nth-child(10) {
+#board .subcircle:last-child {
     background: #00cc99 none repeat scroll 0 0 !important;
 }
 

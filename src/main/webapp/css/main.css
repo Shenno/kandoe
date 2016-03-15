@@ -159,6 +159,7 @@ h2 {
 
 .card-list > li {
     height: 7em;
+    width: 7em;
     overflow: hidden;
 }
 .card-list > li > img {

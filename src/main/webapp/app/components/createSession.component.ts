@@ -31,8 +31,12 @@ export class CreateSessionComponent {
     private cards: Card[] = null;
     private nameSession: string = "";
     private currentUser = null;
+    private amountOfCircles = 8;
+    private newParticipant = '';
+    private participantEmails = [];
     //var cardids: number[] = [];
     private cardIds: number[] = [];
+    private users: string[] = [];
 
     public constructor(userService: UserService, contentService: ContentService, sessionService: SessionService, router: Router) {
         this.userService = userService;
@@ -41,8 +45,14 @@ export class CreateSessionComponent {
         this.router = router;
         document.title = 'Start een nieuwe Kandoe sessie!';
         this.userService.getMyDetails().subscribe((user:User) => {
+            this.participantEmails.push(user.username);
             this.contentService.getThemesByOrganisatorId(user.id.toString()).subscribe((theme:Theme[]) =>{ this.themes = theme});
             this.currentUser = user;
+            this.userService.getAllUsernames().subscribe((users:string[]) => {
+                var index = users.indexOf(this.currentUser.username);
+                users.splice(index, 1); //you can't add yourself as organisator
+                this.users = users;
+            });
         });
     }
 
@@ -64,6 +74,22 @@ export class CreateSessionComponent {
        // Observable.do .map(function(v) { return [1,2,3];}) .subscribe(console.log.bind(console))
     }
 
+    public onAddParticipant() {
+        if (this.newParticipant != '') {
+            this.participantEmails.push(this.newParticipant);
+            var index = this.users.indexOf(this.newParticipant);
+            this.users.splice(index, 1);
+            this.newParticipant = "";
+        } else {
+            alert('foutje');
+        }
+    }
+
+    public onRemoveParticipant(i) {
+        this.users.push(this.participantEmails[i]);
+        this.participantEmails.splice(i, 1);
+    }
+
     public changeCardSelectedStatus(card:Card) {
         if(card.selected) {
             card.selected = false;
@@ -75,15 +101,15 @@ export class CreateSessionComponent {
     public createSession() {
         //Checken of alles ingevuld is
         if(this.cards != null) {
-            var emails: string[] = [];
+           // var emails: string[] = [];
             var cardids: number[] = [];
 
             /* Organisator als deelnemer toevoegen? */
-            emails.push(this.currentUser.username);
-            alert(this.currentUser.username);
+          ///  emails.push(this.currentUser.username);
+            //alert(this.currentUser.username);
 
             /* Andere users toevoegen. TODO: dynamisch */
-            emails.push("clarence.ho@gmail.com");
+            //emails.push("clarence.ho@gmail.com");
 
             /* CardIds ophalen */
             this.cards.forEach( function (card) {
@@ -92,7 +118,7 @@ export class CreateSessionComponent {
                 }
             });
 
-            var session: createSession = new createSession(emails, cardids, this.theme.themeId,this.nameSession);
+            var session: createSession = new createSession(this.participantEmails, cardids, this.theme.themeId,this.nameSession, this.amountOfCircles);
             //this.sessionService.post....
             this.sessionService.addSession(session).subscribe((persistedSessionId:number) => {
                 this.router.navigate(['/Session', {sessionId:persistedSessionId}]);

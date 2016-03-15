@@ -16,6 +16,7 @@ public class SessionResourcePost implements Serializable {
     private List<Integer> cardIds;
     private Integer themeId;
     private String nameSession;
+    private Integer amountOfCircles;
 
     public SessionResourcePost() {
         this.participantsEmails = new ArrayList<>();
@@ -52,6 +53,14 @@ public class SessionResourcePost implements Serializable {
 
     public void setNameSession(String nameSession) {
         this.nameSession = nameSession;
+    }
+
+    public Integer getAmountOfCircles() {
+        return amountOfCircles;
+    }
+
+    public void setAmountOfCircles(Integer amountOfCircles) {
+        this.amountOfCircles = amountOfCircles;
     }
 }
 
