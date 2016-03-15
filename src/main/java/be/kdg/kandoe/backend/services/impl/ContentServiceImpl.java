@@ -58,7 +58,7 @@ public class ContentServiceImpl implements ContentService {
         } else if (theme.getOrganisators().size() == 0) {
             throw new ContentServiceException("There must be at least one organisator");
         }
-        theme.setTags(new ArrayList<>()); //TODO: Betere manier om bug op te lossen?
+        theme.setTags(new ArrayList<>());
         theme = themeRepository.addTheme(theme);
         /*Organisation organisation = userService.getOrganisationById(theme.getOrganisation().getId());
         organisation.getThemes().add(theme);

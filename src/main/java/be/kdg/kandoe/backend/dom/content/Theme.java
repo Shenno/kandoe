@@ -3,6 +3,7 @@ package be.kdg.kandoe.backend.dom.content;
 import be.kdg.kandoe.backend.dom.session.Session;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.dom.user.User;
+import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.hateoas.Identifiable;
@@ -138,7 +139,9 @@ public class Theme implements Serializable, Identifiable<Integer> {
 
     public void addOrganisator(User user) {
         if (user != null) {
-            organisators.add(user);
+            if (!organisators.contains(user)){
+                organisators.add(user);
+            }
         }
     }
 

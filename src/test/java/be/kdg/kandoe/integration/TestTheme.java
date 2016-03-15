@@ -168,6 +168,29 @@ public class TestTheme {
         contentService.addTheme(theme);
     }
 
+    @Test
+    public void addTestDuplicateOrganisators(){
+        String name = "theme name";
+        String description = "description of theme";
+        boolean isCommentaryAllowed = true;
+        boolean isAddingAdmited = true;
+        List<Tag> tags = new ArrayList<>();
+
+        Theme theme = new Theme(name,description,isCommentaryAllowed,isAddingAdmited,user,organisation,tags);
+        theme.addOrganisator(user);
+        theme = contentService.addTheme(theme);
+
+        assertNotNull(theme);
+        int i = 0;
+        for (User u: theme.getOrganisators()){
+            if (u.getUsername()== user.getUsername()){
+                System.out.println(u.getUsername());
+                i++;
+            }
+        }
+        assertEquals("Organisators are duplicate",i,1);
+
+    }
 
    /* @Test
     public void testDeleteTheme(){
