@@ -13,4 +13,5 @@ import java.util.List;
 public interface SessionRepositoyCustom {
 
     List<Session> findSessionByUserId(int userId);
+    Session updateSession(Session session);
 }

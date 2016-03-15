@@ -47,6 +47,23 @@ public class SessionRestController {
         return new ResponseEntity<List<SessionResourceActive>>(sessionResources, HttpStatus.OK);
     }
 
+    @RequestMapping(value="/{sessionId}/terminate", method = RequestMethod.POST)
+    public HttpStatus terminateSession(@AuthenticationPrincipal User user, @PathVariable Integer sessionId) {
+        Session session = sessionService.findSession(sessionId);
+        boolean match = false;
+        for(User u : session.getTheme().getOrganisators()) {
+            if(u.getUserId() == user.getUserId()) {
+                match = true;
+            }
+        }
+        if(match) {
+            session.setGameOver(true);
+            sessionService.updateSession(session);
+            return HttpStatus.OK;
+        }
+        return HttpStatus.UNAUTHORIZED;
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Integer> createAsynchronousSession(@RequestBody SessionResourcePost sessionResourcePost)
     {

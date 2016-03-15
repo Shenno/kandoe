@@ -26,4 +26,5 @@ public interface SessionService {
     CardSession findCardSession(int cardSessionId);
     void makeMove(CardSession cardSession, int userId) throws SessionServiceException;
     List<Session> findSessionByUserId(int userId) throws SessionServiceException;
+    Session updateSession(Session session);
 }

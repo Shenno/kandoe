@@ -83,6 +83,11 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
+    public Session updateSession(Session session) {
+        return sessionRepository.updateSession(session);
+    }
+
+    @Override
     public Session addRemarkToSession(Session session, String username, String text) {
         User user = userRepository.findUserByUsername(username);
         if(user == null) {
