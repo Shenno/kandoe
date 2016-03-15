@@ -50,7 +50,7 @@ public class Theme implements Serializable, Identifiable<Integer> {
             inverseJoinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
     private List<User> organisators = new ArrayList<>();
 
-    @ManyToOne/*(cascade = CascadeType.ALL)*/
+    @ManyToOne
     @JoinColumn(name = "organisation_id")
     private Organisation organisation;
 
@@ -64,13 +64,6 @@ public class Theme implements Serializable, Identifiable<Integer> {
     @OneToMany(targetEntity = Session.class, mappedBy = "theme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     private List<Session> sessions;
-
-    @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name = "ThemeId", insertable = false, updatable = false)
-    private Theme mainTheme;
-
-    @OneToMany(targetEntity = Theme.class, mappedBy = "mainTheme", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Theme> subthemes;
 
     public Theme() {
     }
@@ -90,8 +83,6 @@ public class Theme implements Serializable, Identifiable<Integer> {
         this.tags = tags;
         this.cards = new ArrayList<>();
         this.sessions = new ArrayList<>();
-        this.subthemes = new ArrayList<>();
-
     }
 
     public String getThemeName() {
@@ -159,8 +150,6 @@ public class Theme implements Serializable, Identifiable<Integer> {
         this.cards = cards;
     }
 
-    //todo delete
-
     public void setThemeId(Integer themeId) {
         this.themeId = themeId;
     }
@@ -193,19 +182,4 @@ public class Theme implements Serializable, Identifiable<Integer> {
         this.tags = tags;
     }
 
-    public Theme getMainTheme() {
-        return mainTheme;
-    }
-
-    public void setMainTheme(Theme mainTheme) {
-        this.mainTheme = mainTheme;
-    }
-
-    public List<Theme> getSubthemes() {
-        return subthemes;
-    }
-
-    public void setSubthemes(List<Theme> subthemes) {
-        this.subthemes = subthemes;
-    }
 }

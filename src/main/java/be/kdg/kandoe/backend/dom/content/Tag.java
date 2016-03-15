@@ -40,6 +40,11 @@ public class Tag implements Serializable, Identifiable<Integer>{
         this.theme = theme;
     }
 
+    @Override
+    public Integer getId() {
+        return tagId;
+    }
+
     public String getTagName() {
         return tagName;
     }
@@ -56,8 +61,4 @@ public class Tag implements Serializable, Identifiable<Integer>{
         this.theme = theme;
     }
 
-    @Override
-    public Integer getId() {
-        return tagId;
-    }
 }

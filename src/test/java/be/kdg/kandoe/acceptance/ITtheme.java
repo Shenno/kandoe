@@ -59,7 +59,7 @@ public class ITtheme {
 
         (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Organisaties"));
 
-        element = driver.findElement(By.id("btn_addOrganisation"));
+        element = driver.findElement(By.id("btn_add_Organisation"));
         SeleniumHelper.clickOnElement(driver, element);
 
         (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Maak organisatie aan"));

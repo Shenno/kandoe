@@ -9,7 +9,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
-
+/**
+ * A Remark for a {@link Session} -> Chat
+ * Or a Remark for a {@link Card} -> Remark
+ */
 @Entity
 @Table(name = "Remark")
 @NamedQueries(
@@ -56,7 +59,10 @@ public class Remark implements Serializable, Identifiable<Integer> {
         this.card = null;
         this.session = session;
     }
-
+    @Override
+    public Integer getId() {
+        return remarkId;
+    }
     public String getText() {
         return text;
     }
@@ -97,8 +103,5 @@ public class Remark implements Serializable, Identifiable<Integer> {
         this.card = card;
     }
 
-    @Override
-    public Integer getId() {
-        return remarkId;
-    }
+
 }

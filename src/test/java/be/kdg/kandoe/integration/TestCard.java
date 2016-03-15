@@ -89,7 +89,6 @@ public class TestCard {
             cards = csvReader.run(path, theme);
             for (Card card : cards) {
                 card = contentService.addCard(card);
-                System.out.println(card.getText() + " " + card.getImageURL());
                 assertNotNull(card);
             }
         }
