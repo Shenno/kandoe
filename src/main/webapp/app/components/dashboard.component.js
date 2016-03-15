@@ -1,14 +1,16 @@
-System.register(['angular2/core', "angular2/common"], function(exports_1) {
+System.register(['angular2/core', "angular2/common", "./apriori.component"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
+        switch (arguments.length) {
+            case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
+            case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
+            case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
+        }
     };
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, common_2;
+    var core_1, common_1, common_2, apriori_component_1;
     var DashboardComponent;
     return {
         setters:[
@@ -18,6 +20,9 @@ System.register(['angular2/core', "angular2/common"], function(exports_1) {
             function (common_1_1) {
                 common_1 = common_1_1;
                 common_2 = common_1_1;
+            },
+            function (apriori_component_1_1) {
+                apriori_component_1 = apriori_component_1_1;
             }],
         execute: function() {
             DashboardComponent = (function () {
@@ -26,9 +31,9 @@ System.register(['angular2/core', "angular2/common"], function(exports_1) {
                 DashboardComponent = __decorate([
                     core_1.Component({
                         selector: 'dashboard',
+                        directives: [common_1.CORE_DIRECTIVES, common_2.FORM_DIRECTIVES, apriori_component_1.AprioriComponent],
                         templateUrl: 'app/partials_html/dashboard.component.html',
                         encapsulation: core_1.ViewEncapsulation.None,
-                        directives: [common_1.CORE_DIRECTIVES, common_2.FORM_DIRECTIVES]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], DashboardComponent);

@@ -1,9 +1,11 @@
 System.register(['angular2/core', 'angular2/router', "../service/userService", "../entity/theme", "../service/contentService", "../entity/createSession", "../service/sessionService"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
+        switch (arguments.length) {
+            case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
+            case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
+            case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
+        }
     };
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
@@ -42,16 +44,26 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                     this.cards = null;
                     this.nameSession = "";
                     this.currentUser = null;
+                    this.amountOfCircles = 8;
+                    this.newParticipant = '';
+                    this.participantEmails = [];
                     //var cardids: number[] = [];
                     this.cardIds = [];
+                    this.users = [];
                     this.userService = userService;
                     this.contentService = contentService;
                     this.sessionService = sessionService;
                     this.router = router;
                     document.title = 'Start een nieuwe Kandoe sessie!';
                     this.userService.getMyDetails().subscribe(function (user) {
+                        _this.participantEmails.push(user.username);
                         _this.contentService.getThemesByOrganisatorId(user.id.toString()).subscribe(function (theme) { _this.themes = theme; });
                         _this.currentUser = user;
+                        _this.userService.getAllUsernames().subscribe(function (users) {
+                            var index = users.indexOf(_this.currentUser.username);
+                            users.splice(index, 1); //you can't add yourself as organisator
+                            _this.users = users;
+                        });
                     });
                 }
                 CreateSessionComponent.prototype.onSelectTheme = function (selectedThemeId) {
@@ -72,6 +84,21 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                     }
                     // Observable.do .map(function(v) { return [1,2,3];}) .subscribe(console.log.bind(console))
                 };
+                CreateSessionComponent.prototype.onAddParticipant = function () {
+                    if (this.newParticipant != '') {
+                        this.participantEmails.push(this.newParticipant);
+                        var index = this.users.indexOf(this.newParticipant);
+                        this.users.splice(index, 1);
+                        this.newParticipant = "";
+                    }
+                    else {
+                        alert('foutje');
+                    }
+                };
+                CreateSessionComponent.prototype.onRemoveParticipant = function (i) {
+                    this.users.push(this.participantEmails[i]);
+                    this.participantEmails.splice(i, 1);
+                };
                 CreateSessionComponent.prototype.changeCardSelectedStatus = function (card) {
                     if (card.selected) {
                         card.selected = false;
@@ -83,20 +110,20 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                     var _this = this;
                     //Checken of alles ingevuld is
                     if (this.cards != null) {
-                        var emails = [];
+                        // var emails: string[] = [];
                         var cardids = [];
                         /* Organisator als deelnemer toevoegen? */
-                        emails.push(this.currentUser.username);
-                        alert(this.currentUser.username);
+                        ///  emails.push(this.currentUser.username);
+                        //alert(this.currentUser.username);
                         /* Andere users toevoegen. TODO: dynamisch */
-                        emails.push("clarence.ho@gmail.com");
+                        //emails.push("clarence.ho@gmail.com");
                         /* CardIds ophalen */
                         this.cards.forEach(function (card) {
                             if (card.selected) {
                                 cardids.push(card.id);
                             }
                         });
-                        var session = new createSession_1.createSession(emails, cardids, this.theme.themeId, this.nameSession);
+                        var session = new createSession_1.createSession(this.participantEmails, cardids, this.theme.themeId, this.nameSession, this.amountOfCircles);
                         //this.sessionService.post....
                         this.sessionService.addSession(session).subscribe(function (persistedSessionId) {
                             _this.router.navigate(['/Session', { sessionId: persistedSessionId }]);

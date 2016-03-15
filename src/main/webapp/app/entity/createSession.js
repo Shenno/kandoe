@@ -3,12 +3,14 @@ System.register([], function(exports_1) {
     return {
         setters:[],
         execute: function() {
+            //test
             createSession = (function () {
-                function createSession(participantsEmails, cardIds, themeId, nameSession) {
+                function createSession(participantsEmails, cardIds, themeId, nameSession, amountOfCircles) {
                     this.participantsEmails = participantsEmails;
                     this.cardIds = cardIds;
                     this.themeId = themeId;
                     this.nameSession = nameSession;
+                    this.amountOfCircles = amountOfCircles;
                 }
                 return createSession;
             })();

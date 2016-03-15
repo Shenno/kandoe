@@ -4,12 +4,13 @@ System.register([], function(exports_1) {
         setters:[],
         execute: function() {
             User = (function () {
-                function User(id, username) {
+                function User(id, username, firstName) {
                     this.id = id;
                     this.username = username;
+                    this.firstName = firstName;
                 }
                 User.createEmptyUser = function () {
-                    return new User(0, "");
+                    return new User(0, "", "");
                 };
                 return User;
             })();
