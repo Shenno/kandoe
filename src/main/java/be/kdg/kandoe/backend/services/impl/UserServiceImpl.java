@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService
             throw new UserServiceException("Empty name for organisation");
         }
         if(getOrganisationByName(organisation.getName()) != null) {
-            throw new UserServiceException("Duplicate organisation");
+            throw new UserServiceException("Een organisatie met deze naam bestaat al");
         }
         if (organisation.getOrganisator() == null){
             throw new UserServiceException("Organisation must have an organisator");

@@ -119,10 +119,14 @@ public class UserRestController {
 
     @RequestMapping(value = "/organisations", method = RequestMethod.POST)
     public ResponseEntity<OrganisationResource> createOrganisation(@Valid @RequestBody OrganisationResource organisationResource) {
-
-            Organisation returnOrganisation = userService.addOrganisation(mapperFacade.map(organisationResource, Organisation.class));
-            return new ResponseEntity<>(mapperFacade.map(returnOrganisation, OrganisationResource.class), HttpStatus.OK);
-
+            try {
+                Organisation returnOrganisation = userService.addOrganisation(mapperFacade.map(organisationResource, Organisation.class));
+                return new ResponseEntity<>(mapperFacade.map(returnOrganisation, OrganisationResource.class), HttpStatus.OK);
+            } catch (UserServiceException ex) {
+                String errorMessage = ex.getMessage();
+                organisationResource.setErrorMessage(errorMessage);
+                return new ResponseEntity<>(organisationResource, HttpStatus.OK);
+            }
 
     }
 

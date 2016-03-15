@@ -21,6 +21,7 @@ public class OrganisationResource implements Serializable {
     //private UserResource organisator;
     private Integer organisatorId;
     private String organisatorName;
+    private String errorMessage;
     //PUSH
 
    /* public OrganisationResource(Organisation organisation) {
@@ -84,5 +85,13 @@ public class OrganisationResource implements Serializable {
 
     public void setOrganisatorName(String organisatorName) {
         this.organisatorName = organisatorName;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

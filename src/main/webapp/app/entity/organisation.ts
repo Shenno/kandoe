@@ -6,12 +6,13 @@ export class Organisation {
                 public name: string,
                 public organisatorId: number,
                 public organisatorName: string,
-                public themes : string[]
+                public themes : string[],
+                public errorMessage : string
                 ) {
 
     }
 
     public static createEmptyOrganisation(): Organisation {
-        return new Organisation(0, "", 0,"",[]);
+        return new Organisation(0, "", 0,"",[], "");
     }
 }

@@ -12,7 +12,7 @@ import {UserService} from "../service/userService";
     encapsulation: ViewEncapsulation.None
 })
 export class CreateOrganisationComponent {
-    private router: Router
+    private router: Router;
     private userService: UserService;
 
     private organisation: Organisation = Organisation.createEmptyOrganisation();

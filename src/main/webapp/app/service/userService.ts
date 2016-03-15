@@ -31,14 +31,18 @@ export class UserService {
         var organisationString = JSON.stringify(organisation);
         var headers =  this.urlService.getHeaders(true);
         this.http.post(url, organisationString, {headers: headers}).map((res:Response) => res.json()).subscribe(
-            (data) => this.onSuccesfulAddOrganisation(data.id, organisation),
+            (data) => this.onSuccesfulAddOrganisation(data.id, organisation, data.errorMessage),
             ((err:Error) => this.logger.log('Fout tijdens aanmaken van organisation: ' + err.message))
         );
     }
 
-    private onSuccesfulAddOrganisation(id:number, organisation:Organisation): void {
-        this.logger.log('Organisatie "' + organisation.name + '" is aangemaakt"');
-        this.router.navigate(['/Organisation',{organisationId:id}]);
+    private onSuccesfulAddOrganisation(id:number, organisation:Organisation, errorMessage: string): void {
+        if (errorMessage == null) {
+            this.logger.log('Organisatie "' + organisation.name + '" is aangemaakt"');
+            this.router.navigate(['/Organisation', {organisationId: id}]);
+        } else {
+            organisation.errorMessage = errorMessage;
+        }
     }
 
     public getOrganisation(id:string):Observable<Organisation>{
