@@ -59,7 +59,7 @@ public class TestRemark {
         contentService.addTheme(theme);
 
         String cardName = "card name";
-        card = new Card(cardName,theme);
+        card = new Card(cardName,"",theme);
         contentService.addCard(card);
     }
 
@@ -105,7 +105,7 @@ public class TestRemark {
 
     @Test
     public void addExistingRemarkDifferentCard(){
-        Card card2 = new Card("card2",theme);
+        Card card2 = new Card("card2","",theme);
         card2 = contentService.addCard(card2);
         assertNotNull(card2);
 

@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Len on 26-2-2016.
@@ -91,6 +92,36 @@ public class ITCard {
 
     }
 
+    @Test
+    public void testAddCardWithoutUrl(){
+        String kaartnaam = "kaartje3";
+        SeleniumHelper.allowDomToLoad();
+
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        driver.get("http://localhost:9966/kandoe/#/theme/1/createCard");
+
+        SeleniumHelper.allowDomToLoad();
+
+        WebElement element = driver.findElement(By.id("app"));
+        element = element.findElement(By.tagName("create-card"));
+
+        element = element.findElement(By.name("ib_text"));
+        assertEquals("input",element.getTagName());
+        SeleniumHelper.fillTextIntoElement(element,kaartnaam);
+
+        element = driver.findElement(By.name("btn_save"));
+        assertEquals(element.getText(),"Opslaan");
+        executor.executeScript("arguments[0].click();", element);
+
+        (new WebDriverWait(driver, 15)).until((WebDriver d) -> d.getTitle().equals("Kaart: "+kaartnaam));
+
+        element = driver.findElement(By.id("span_cardName"));
+        assertEquals("The cardText must be correct", kaartnaam, element.getText());
+        element = driver.findElement(By.id("img_imageUrl"));
+        String src = element.getAttribute("src");
+        assertNotNull("The imageURL must be correct",src);
+
+    }
     @AfterClass
     public static void tearDownClass() {
         driver.close();

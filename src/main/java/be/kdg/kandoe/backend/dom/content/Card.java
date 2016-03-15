@@ -1,6 +1,5 @@
 package be.kdg.kandoe.backend.dom.content;
 
-import be.kdg.kandoe.backend.dom.session.CardSession;
 import be.kdg.kandoe.backend.dom.session.Session;
 import org.springframework.hateoas.Identifiable;
 
@@ -8,6 +7,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * A Card for a {@link Theme}
+ */
 
 @Entity
 @Table(name = "Card")
@@ -19,9 +22,6 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Card implements Serializable, Identifiable<Integer> {
 
-    public Card() {
-    }
-
     @Column(name = "CardId", nullable = false)
     @Id
     @GeneratedValue
@@ -30,7 +30,7 @@ public class Card implements Serializable, Identifiable<Integer> {
     @Column(name = "Text", nullable = false)
     private String text;
 
-    @Column(name = "ImageURL", nullable = true)
+    @Column(name = "ImageURL", nullable = false)
     private String imageURL;
 
     @ManyToOne
@@ -38,12 +38,10 @@ public class Card implements Serializable, Identifiable<Integer> {
     private Theme theme;
 
     @OneToMany(targetEntity = Remark.class, mappedBy = "card", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    List<Remark> remarks; //TODO review
+    private List<Remark> remarks;
 
-    public Card(String text, Theme theme) {
-        this(text, "www.google.be", theme); //TODO good image
+    public Card() {
     }
-
     public Card(String text, String imageURL, Theme theme) {
         this.text = text;
         this.imageURL = imageURL;
@@ -51,12 +49,17 @@ public class Card implements Serializable, Identifiable<Integer> {
         this.remarks = new ArrayList<>();
     }
 
-    public Theme getTheme() {
-        return theme;
+    @Override
+    public Integer getId() {
+        return cardId;
     }
 
-    public void setTheme(Theme theme) {
-        this.theme = theme;
+    public Integer getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(Integer cardId) {
+        this.cardId = cardId;
     }
 
     public String getText() {
@@ -75,17 +78,12 @@ public class Card implements Serializable, Identifiable<Integer> {
         this.imageURL = imageURL;
     }
 
-    @Override
-    public Integer getId() {
-        return cardId;
+    public Theme getTheme() {
+        return theme;
     }
 
-    public Integer getCardId() {
-        return cardId;
-    }
-
-    public void setCardId(Integer cardId) {
-        this.cardId = cardId;
+    public void setTheme(Theme theme) {
+        this.theme = theme;
     }
 
     public List<Remark> getRemarks() {

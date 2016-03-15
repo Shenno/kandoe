@@ -185,6 +185,8 @@ public class ContentServiceImpl implements ContentService {
             throw new ContentServiceException("Empty Description");
         }else if (card.getTheme() == null) {
             throw new ContentServiceException("Empty themeID");
+        }else if (card.getImageURL().isEmpty()){
+            card.setImageURL("http://1.bp.blogspot.com/-TTxz7Nt7es0/Uxf7CoQJRUI/AAAAAAAAHg4/3XrVdDOIxIE/s1600/dummy.gif");
         }
 
         // Create a Pattern object

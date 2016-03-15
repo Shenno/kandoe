@@ -75,22 +75,27 @@ public class TestCard {
         assertEquals("URL must be correct",url,card.getImageURL());
 
     }
-
     @Test
     public void testAddCsvCards(){
         CsvReader csvReader= new CsvReader();
         ArrayList<Card> cards;
-        String csvFile="C:\\Users\\Len\\OneDrive\\Documenten\\kandoe\\src\\main\\java\\be\\kdg\\kandoe\\backend\\util\\test.csv";
+        String csvFile=".\\main\\java\\be\\kdg\\kandoe\\backend\\util\\test.csv";
         cards=csvReader.run(csvFile,theme);
         for (Card card:cards) {
             card=contentService.addCard(card);
             System.out.println(card.getText()+" "+card.getImageURL());
             assertNotNull(card);
-
         }
 
     }
-
+    @Test
+    public void testAddCardDefaultURL(){
+        String description="This is a card";
+        Card card= new Card(description,"",theme);
+        card=contentService.addCard(card);
+        assertNotNull(card);
+        assertNotNull("URL must be correct",card.getImageURL());
+    }
     @Test(expected = ContentServiceException.class)
     public void testAddCardEmptyName() {
         String description="";

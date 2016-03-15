@@ -89,9 +89,9 @@ public class TestSession {
         Session session = new AsynchronousSession(true, 60, 4, nameSession);
 
         // Create cards and add to the session
-        Card card1 = new Card("CardOne", theme);
-        Card card2 = new Card("CardTwo", theme);
-        Card card3 = new Card("CardThree", theme);
+        Card card1 = new Card("CardOne","", theme);
+        Card card2 = new Card("CardTwo","", theme);
+        Card card3 = new Card("CardThree","", theme);
         card1 = contentService.addCard(card1);
         card2 = contentService.addCard(card2);
         card3 = contentService.addCard(card3);
@@ -211,9 +211,9 @@ public class TestSession {
         Session session = new AsynchronousSession(true, 60, 4,nameSession);
 
         // Create cards and add to the session
-        Card card1 = new Card("CardOne", theme);
-        Card card2 = new Card("CardTwo", theme);
-        Card card3 = new Card("CardThree", theme);
+        Card card1 = new Card("CardOne","", theme);
+        Card card2 = new Card("CardTwo","", theme);
+        Card card3 = new Card("CardThree","", theme);
         card1 = contentService.addCard(card1);
         card2 = contentService.addCard(card2);
         card3 = contentService.addCard(card3);
