@@ -17,10 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -76,15 +79,24 @@ public class TestCard {
 
     }
     @Test
-    public void testAddCsvCards(){
+    public void testAddCsvCards() throws FileNotFoundException {
         CsvReader csvReader= new CsvReader();
         ArrayList<Card> cards;
-        String csvFile=".\\main\\java\\be\\kdg\\kandoe\\backend\\util\\test.csv";
-        cards=csvReader.run(csvFile,theme);
-        for (Card card:cards) {
-            card=contentService.addCard(card);
-            System.out.println(card.getText()+" "+card.getImageURL());
-            assertNotNull(card);
+        File csvFile = new File("src\\test\\resources\\test.csv");
+        String path= csvFile.getAbsolutePath();
+        assertNotNull(csvFile);
+        try {
+            cards = csvReader.run(path, theme);
+            for (Card card : cards) {
+                card = contentService.addCard(card);
+                System.out.println(card.getText() + " " + card.getImageURL());
+                assertNotNull(card);
+            }
+        }
+        catch (Exception e){
+            System.out.println(e+" file not found");
+            fail();
+
         }
 
     }
