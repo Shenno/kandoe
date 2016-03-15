@@ -10,12 +10,13 @@ import {RouteParams} from "angular2/router";
     encapsulation: ViewEncapsulation.None
 })
 export class CreateCardComponent {
-
+    private router:Router;
     private contentService: ContentService;
 
     private card: Card = Card.createEmptyCard();
 
     public constructor(contentService: ContentService, router: Router, routeParam: RouteParams) {
+        this.router = router;
         this.contentService = contentService;
         document.title = 'Maak kaartje aan';
         this.card.themeId = +routeParam.params["themeId"];
@@ -24,5 +25,8 @@ export class CreateCardComponent {
     public onSubmit(): void {
         this.contentService.addCard(this.card);
     }
-
+    public onCancel(event): void {
+        event.preventDefault();
+        this.router.navigate(['/Theme', {themeId: this.card.themeId}]);
+    }
 }
