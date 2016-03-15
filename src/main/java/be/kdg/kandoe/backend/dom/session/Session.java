@@ -56,6 +56,9 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @Column(name = "CurrentUser")
     private int currentUser;
 
+    @Column(name = "Organisator")
+    private int organisator;
+
     @ManyToOne(targetEntity = Theme.class, fetch = FetchType.EAGER, optional = false)
     private Theme theme;
 
@@ -115,6 +118,14 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
 
     public void setAmountOfCircles(int amountOfCircles) {
         this.amountOfCircles = amountOfCircles;
+    }
+
+    public int getOrganisator() {
+        return organisator;
+    }
+
+    public void setOrganisator(int organisator) {
+        this.organisator = organisator;
     }
 
     public void addUser(User user) {

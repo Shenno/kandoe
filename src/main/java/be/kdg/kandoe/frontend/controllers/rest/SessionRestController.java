@@ -50,13 +50,7 @@ public class SessionRestController {
     @RequestMapping(value="/{sessionId}/terminate", method = RequestMethod.POST)
     public HttpStatus terminateSession(@AuthenticationPrincipal User user, @PathVariable Integer sessionId) {
         Session session = sessionService.findSession(sessionId);
-        boolean match = false;
-        for(User u : session.getTheme().getOrganisators()) {
-            if(u.getUserId() == user.getUserId()) {
-                match = true;
-            }
-        }
-        if(match) {
+        if(session.getOrganisator() == user.getUserId()) {
             session.setGameOver(true);
             sessionService.updateSession(session);
             return HttpStatus.OK;
@@ -65,11 +59,11 @@ public class SessionRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Integer> createAsynchronousSession(@RequestBody SessionResourcePost sessionResourcePost)
+    public ResponseEntity<Integer> createAsynchronousSession(@RequestBody SessionResourcePost sessionResourcePost, @AuthenticationPrincipal User user)
     {
         String nameSession = sessionResourcePost.getNameSession();
         Session session = new AsynchronousSession(true, 60, sessionResourcePost.getAmountOfCircles(),nameSession);
-
+        session.setOrganisator(user.getUserId());
         Session persistedSession = sessionService.addSession(session, sessionResourcePost.getThemeId());
         //sessionResourcePost.getParticipantsEmails().forEach(e -> sessionService.addUserToSession(session, e));
 

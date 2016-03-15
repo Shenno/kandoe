@@ -44,6 +44,10 @@
     z-index:15;
 }
 
+.padding-top {
+    padding-top: 25px;
+}
+
 .circle-card:hover {
     width:80px;
     height:80px;

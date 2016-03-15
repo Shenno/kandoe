@@ -35,6 +35,9 @@ import {Axis} from "../entity/axis";
                     </div>
                 </template>
             </div>
+            <div class="text-center padding-top">
+                <button *ngIf="!gameOver && isOrganisator" class="btn btn-danger" (click)="terminateSession()">Stop deze sessie</button>
+            </div>
         </div>
     `,
     encapsulation: ViewEncapsulation.None,
@@ -55,13 +58,16 @@ export class KandoeCircleComponent implements OnChanges, OnInit {
     private amountOfCircles:number;
 
     @Input()
-    private currentSessionId:string;
-
-    @Input()
     private eligibleToMoveCard:boolean;
 
     @Input()
     private sessionId;
+
+    @Input()
+    private gameOver;
+
+    @Input()
+    private isOrganisator;
 
     private rings: Ring[] = [];
     private axis: Axis = null;
@@ -88,11 +94,18 @@ export class KandoeCircleComponent implements OnChanges, OnInit {
         var topleft = 100/((this.amountOfCircles+2)*2);
         var heightwidth = 100 - ((100/this.amountOfCircles)*2);
         this.axis = new Axis(topleft, topleft, heightwidth, heightwidth);
+        alert(this.isOrganisator);
     }
 
     ngOnChanges(changes:{[propName: string]: SimpleChange}) {
         this.changeCardCoordinates();
 
+    }
+
+    public terminateSession() {
+        this.sessionService.terminateSession(this.sessionId).subscribe();
+        this.gameOver = true;
+        this.eligibleToMoveCard = false;
     }
 
     public changeCardCoordinates() {

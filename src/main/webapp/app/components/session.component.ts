@@ -30,7 +30,11 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
             <div class="row custom-rw">
                 <div class="col-md-4 fixed-column">
                     <div class="center-content">
-                        <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId" [amountOfCircles]="currentSession.amountOfCircles" [circleCards]="currentSession.cardSessionResources"></kandoe-circle>
+                        <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" (gameOver)="currentSession.gameOver"
+                        [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId"
+                        [amountOfCircles]="currentSession.amountOfCircles" [circleCards]="currentSession.cardSessionResources"
+                        [isOrganisator]="currentSession.organisator == currentUser.id">
+                        </kandoe-circle>
                         <!--<h3 *ngIf="myTurn && !currentSession?.gameOver">Jij bent aan de beurt, {{currentUser?.firstName}}!</h3>
                         <h3 *ngIf="!myTurn && !currentSession?.gameOver">Wacht even je beurt af!</h3>
                         <h3 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h3>-->
@@ -129,6 +133,13 @@ export class SessionComponent {
                  */
             });
         });
+    }
+
+    public isOrganisator(): boolean {
+        if(this.currentUser.id == this.currentSession.organisator) {
+            return true;
+        }
+        return false;
     }
 
     public updateView(sessionActive:SessionActive) {

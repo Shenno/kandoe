@@ -18,6 +18,7 @@ public class SessionResourceActive implements Serializable {
     private String nameSession;
     private int amountOfUsers;
     private String themeName;
+    private int organisator;
 
     public SessionResourceActive() {
         this.cardSessionResources = new ArrayList<>();
@@ -26,6 +27,14 @@ public class SessionResourceActive implements Serializable {
 
     public List<CardSessionResource> getCardSessionResources() {
         return cardSessionResources;
+    }
+
+    public int getOrganisator() {
+        return organisator;
+    }
+
+    public void setOrganisator(int organisator) {
+        this.organisator = organisator;
     }
 
     public void setCardSessionResources(List<CardSessionResource> cardSessionResources) {
