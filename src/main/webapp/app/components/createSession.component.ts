@@ -74,6 +74,10 @@ export class CreateSessionComponent {
        // Observable.do .map(function(v) { return [1,2,3];}) .subscribe(console.log.bind(console))
     }
 
+    public changeValue(bloe) {
+        this.newParticipant = bloe;
+    }
+
     public onAddParticipant() {
         if (this.newParticipant != '') {
             this.participantEmails.push(this.newParticipant);
@@ -81,7 +85,7 @@ export class CreateSessionComponent {
             this.users.splice(index, 1);
             this.newParticipant = "";
         } else {
-            alert('foutje');
+            alert(this.newParticipant);
         }
     }
 

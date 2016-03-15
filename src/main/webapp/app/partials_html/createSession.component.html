@@ -38,7 +38,7 @@
 
     <div class="form-group">
             <div class="row">
-                <select class="form-control col-md-6" id="dd_users" [(ngModel)]="newParticipant">
+                <select (change)="changeValue($event.target.value)" class="form-control col-md-6" id="dd_users" [ngModel]="newParticipant">
                     <option [id]="'opt_user' + i" *ngFor="#user of users;#i=index">
                         {{user}}
                     </option>

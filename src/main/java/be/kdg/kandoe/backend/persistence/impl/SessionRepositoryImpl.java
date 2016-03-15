@@ -29,4 +29,10 @@ public class SessionRepositoryImpl implements SessionRepositoyCustom {
         return q.getResultList();
     }
 
+    @Override
+    public Session updateSession(Session session) {
+        final org.hibernate.Session hibernateSession = em.unwrap(org.hibernate.Session.class);
+        hibernateSession.update(session);
+        return session;
+    }
 }
