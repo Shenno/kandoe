@@ -231,13 +231,25 @@ h2 {
     border-left-color: #4985B9;
 }
 
-#tags {
+.tags-create {
     overflow: auto;
     height: 5em;
     width: 40em;
     margin-left: -1em;
     padding: 5px;
     margin-bottom: 5px;
+}
+.tags-detail {
+    overflow: auto;
+    height: 5em;
+    width: 29em;
+    margin-left: -2em;
+}
+.tags-organisators {
+    overflow: auto;
+    height: 5em;
+    width: 20em;
+    margin-left: -2em;
 }
 
 /*----------------Sticky footer----------------------------------*/

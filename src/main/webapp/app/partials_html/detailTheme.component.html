@@ -34,8 +34,8 @@
             </h4>
         </div>
         <div id="tags" class="collapse panel-collapse">
-            <div class="panel-body">
-                <ul class="tags">
+            <div class="panel-body" style="height: 7em;">
+                <ul class="tags-detail">
                     <li [id]="'tag'+i" *ngFor="#tag of theme.tags;#i=index" class="custom-tag">{{tag}}</li>
                 </ul>
             </div>
@@ -53,10 +53,12 @@
             </h4>
         </div>
         <div id="organisators" class="collapse panel-collapse">
-            <div class="panel-body">
-                <p [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index">
-                    {{organisator}}
-                </p>
+            <div class="panel-body" style="height: 7em">
+                <ul class="tags-organisators">
+                    <li [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index" class="custom-tag">
+                        {{organisator}}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

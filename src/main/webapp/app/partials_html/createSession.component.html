@@ -15,7 +15,7 @@
             <label>Bepaal het aantal ringen van de Kandoe cirkel</label>
         </div>
         <div class="row">
-            <input type="number" [(ngModel)]="amountOfCircles" name="circles" min="3" max="8">
+            <input class="form-control" type="number" [(ngModel)]="amountOfCircles" name="circles" min="3" max="8">
         </div>
     </div>
 
@@ -26,10 +26,13 @@
         <p *ngIf="participantEmails.length==0" class="text-danger">Momenteel nog niemand! Voeg snel iemand toe, alleen
             spelen is niet leuk!</p>
 
-        <p [id]="'participant' + i" *ngFor="#participant of participantEmails;#i=index">
-            {{participant}} <span [id]="'delete_participant' + i" class="glyphicon glyphicon-remove"
-                                  (click)="onRemoveParticipant(i)"></span>
-        </p>
+            <ul class="tags-organisators">
+                <li [id]="'participant' + i" *ngFor="#participant of participantEmails;#i=index" class="custom-tag">
+                    {{participant}} <span [id]="'delete_participant' + i" class="glyphicon glyphicon-remove"
+                                          (click)="onRemoveParticipant(i)"></span>
+                </li>
+            </ul>
+
         </div>
     </div>
 
