@@ -1,6 +1,6 @@
 <div id="organisationId" hidden>{{organisation.id}}</div>
 <h1>Organisatie: <span id="span_organisationname">{{organisation.name}}</span></h1>
-<div class="well" style="width: 50em">Organisator: {{organisation.organisatorName}}</div>
+<div class="well">Organisator: {{organisation.organisatorName}}</div>
 
 <div>
     <h2>Thema's</h2>
@@ -11,10 +11,9 @@
             {{i+1}} | {{theme}}
         </li>
     </ul>
-    <button class="btn btn-default" (click)="addTheme()">
-        <span class="glyphicon glyphicon-plus"></span> Thema toevoegen
+    <button class="btn btn-primary" (click)="addTheme()">
+        <span class="glyphicon glyphicon-plus-sign"></span> Thema toevoegen
     </button>
 </div>
-<br>
 <hr>
 <button class="btn btn-default" (click)="backToList()">Terug naar lijst</button>
