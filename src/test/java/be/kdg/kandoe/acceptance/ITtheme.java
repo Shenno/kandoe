@@ -308,6 +308,23 @@ public class ITtheme {
         element = driver.findElement(By.id("organisator1"));
         assertEquals("li", element.getTagName());
         assertEquals("The second organisator must be correct", "john.smith@live.com", element.getText());
+
+        driver.get("http://localhost:9966/kandoe/#/organisation/" + organisationId + "/createTheme");
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.name("ib_name"));
+        SeleniumHelper.fillTextIntoElement(element, themeName);
+
+        element = driver.findElement(By.name("btn_save"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("err_theme"));
+        assertEquals("div", element.getTagName());
+        assertEquals("The correct error message must be shown", "Een thema met de naam '" + themeName + "' is reeds aangemaakt voor organisatie '" + organisationName + "'.", element.getText());
+
     }
 
     public void cancelAddTheme() {
@@ -547,11 +564,11 @@ public class ITtheme {
         SeleniumHelper.allowDomToLoad(); //allow time to expand panel
 
         element = driver.findElement(By.id("organisator0"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("The first organisator must be correct", "scott.tiger@live.com", element.getText());
 
         element = driver.findElement(By.id("organisator1"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("The second organisator must be correct", "clarence.ho@gmail.com", element.getText());
     }
 

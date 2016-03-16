@@ -36,6 +36,7 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
                     this.logger = logger;
                     this.baseUrl = urlService.getUrl();
                     this.urlService = urlService;
+                    this.authenticationEvent$ = new core_1.EventEmitter();
                 }
                 /*Organisation*/
                 UserService.prototype.addOrganisation = function (organisation) {
@@ -64,6 +65,9 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
                     var headers = this.urlService.getHeaders(true);
                     return this.http.get(url, { headers: headers }).map(function (res) { return res.json(); });
                 };
+                UserService.prototype.triggerLoginEvent = function () {
+                    this.authenticationEvent$.emit("log in");
+                };
                 /*Login/Logout*/
                 UserService.prototype.login = function (loginUser) {
                     var headers = this.urlService.getHeaders(false);
@@ -73,11 +77,26 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
                     var _this = this;
                     var content = JSON.stringify(registerUser);
                     var headers = this.urlService.getHeaders(false);
-                    this.http.post(this.baseUrl + "/api/users", content, { headers: headers }).map(function (res) { return res.json(); }).subscribe(function (data) { return alert(data); }, (function (err) { return _this.logger.log('Fout tijdens het registreren ' + err.message); }));
+                    this.http.post(this.baseUrl + "/api/users", content, { headers: headers }).map(function (res) { return res.json(); }).subscribe(function (data) {
+                        localStorage.setItem("jwt", data);
+                        _this.authenticationEvent$.emit("register");
+                    }, (function (err) { return _this.logger.log('Fout tijdens het registreren ' + err.message); }));
+                    /*this.userService.login(this.user)
+                     .subscribe((res: Response) => {
+                     localStorage.setItem("jwt", res.text());
+                     this.userService.triggerLoginEvent();
+                     //this.userService.getMyDetails().subscribe((user:User) => alert(user.firstName + "BANAAN"));
+                     this.router.navigate(['/Home']);
+                     },
+                     error => {
+                     console.log(error);
+                     });
+                     }*/
                 };
                 UserService.prototype.logout = function () {
                     if (localStorage.getItem("jwt")) {
                         localStorage.removeItem("jwt");
+                        this.authenticationEvent$.emit("logout");
                     }
                 };
                 /*Users*/

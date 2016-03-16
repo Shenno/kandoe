@@ -77,7 +77,6 @@ export class AppComponent {
     }
 
     public onAuthenticationEvent(eventType: string) {
-        alert("Hoi");
         this.getCurrentUserDetails();
     }
 

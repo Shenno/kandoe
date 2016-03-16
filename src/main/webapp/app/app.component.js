@@ -81,11 +81,25 @@ System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.
         execute: function() {
             AppComponent = (function () {
                 function AppComponent(userService) {
-                    /*  this.userService = userService;
-                     userService.getMyDetails().subscribe(
-                         (user:User) => this.currentUserDetails = user,
-                         err => alert(localStorage.getItem("jwt") + err))*/
+                    var _this = this;
+                    this.userService = userService;
+                    //this.userService.getMyDetails().subscribe((user:User) => this.curr)
+                    this.getCurrentUserDetails();
+                    userService.authenticationEvent$.subscribe(function (eventType) {
+                        _this.onAuthenticationEvent(eventType);
+                    });
                 }
+                AppComponent.prototype.onAuthenticationEvent = function (eventType) {
+                    this.getCurrentUserDetails();
+                };
+                AppComponent.prototype.getCurrentUserDetails = function () {
+                    var _this = this;
+                    this.userService.getMyDetails().subscribe(function (user) { return _this.currentUserDetails = user; }, function (err) { return _this.currentUserDetails = null; });
+                };
+                AppComponent.prototype.lol = function () {
+                    this.currentUserDetails = null;
+                    // alert("error");
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',

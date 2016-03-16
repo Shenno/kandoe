@@ -31,7 +31,7 @@ public class ThemeRepositoryImpl implements ThemeRepositoryCustom {
         q.setParameter("organisation",theme.getOrganisation());
         if (!q.getResultList().isEmpty())
         {
-            throw new ContentServiceException("Theme " + theme.getThemeName() + " already exists in organisation "+theme.getOrganisation());
+            throw new ContentServiceException("Een thema met de naam '" + theme.getThemeName() + "' is reeds aangemaakt voor organisatie '"+theme.getOrganisation().getName() + "'.");
         }
 
         final Session session = em.unwrap(Session.class);
