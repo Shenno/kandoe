@@ -260,7 +260,7 @@ public class ITtheme {
         themeName = element.getText();
 
         element = driver.findElement(By.id("p_description"));
-        assertEquals("p", element.getTagName());
+        assertEquals("span", element.getTagName());
         assertEquals("The description must be correct", "my description", element.getText());
 
         element = driver.findElement(By.name("cb_commentaryAllowed"));
@@ -324,6 +324,21 @@ public class ITtheme {
         element = driver.findElement(By.id("err_theme"));
         assertEquals("div", element.getTagName());
         assertEquals("The correct error message must be shown", "Een thema met de naam '" + themeName + "' is reeds aangemaakt voor organisatie '" + organisationName + "'.", element.getText());
+
+        driver.get("http://localhost:9966/kandoe/#/organisation/100/createTheme");
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.name("ib_name"));
+        SeleniumHelper.fillTextIntoElement(element, "x");
+
+        element = driver.findElement(By.name("btn_save"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("err_theme"));
+        assertEquals("The correct error message must be shown", "Je moet een thema aanmaken voor een bestaande organisatie.", element.getText());
 
     }
 
@@ -524,7 +539,7 @@ public class ITtheme {
         assertEquals("The themename must be correct", "New themename", element.getText());
 
         element = driver.findElement(By.id("p_description"));
-        assertEquals("p", element.getTagName());
+        assertEquals("span", element.getTagName());
         assertEquals("The description must be correct", "New description", element.getText());
 
         element = driver.findElement(By.name("cb_commentaryAllowed"));

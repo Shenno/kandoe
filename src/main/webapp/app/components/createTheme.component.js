@@ -48,8 +48,8 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
                     document.title = 'Maak thema aan';
                     this.router = router;
                     this.contentService = contentService;
-                    this.theme.organisationId = +routeParam.params["organisationId"];
                     this.userService = userService;
+                    this.theme.organisationId = +routeParam.params["organisationId"];
                     this.userService.getMyDetails().subscribe(function (user) {
                         _this.currentUser = user;
                         _this.theme.organisatorId = user.id;

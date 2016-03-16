@@ -38,8 +38,9 @@ export class CreateThemeComponent {
         document.title = 'Maak thema aan';
         this.router = router;
         this.contentService = contentService;
-        this.theme.organisationId = +routeParam.params["organisationId"];
         this.userService = userService;
+
+        this.theme.organisationId = +routeParam.params["organisationId"];
         this.userService.getMyDetails().subscribe((user:User) => {
             this.currentUser = user;
             this.theme.organisatorId = user.id;
