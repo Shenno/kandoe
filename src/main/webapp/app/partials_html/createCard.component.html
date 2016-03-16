@@ -25,7 +25,7 @@
             <input class="form-control"
                    id="ib_imageURL" type="text"
                    name="ib_imageURL" [(ngModel)]="card.imageURL"
-                   required #image="ngForm" ngControl="image"
+                   #image="ngForm" ngControl="image"
                    aria-describedby="url-addon">
         </div>
         <div [hidden]="image.valid || image.pristine"

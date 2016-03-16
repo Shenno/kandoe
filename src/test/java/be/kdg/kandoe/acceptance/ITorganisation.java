@@ -96,6 +96,8 @@ public class ITorganisation {
         element = driver.findElement(By.name("btn_add_organisation"));
         SeleniumHelper.clickOnElement(driver,element);
 
+        SeleniumHelper.allowDomToLoad();
+
         element = driver.findElement(By.id("err_organisation"));
         assertEquals("div", element.getTagName());
         assertEquals("The error message must be correct", "Een organisatie met deze naam bestaat al", element.getText());
