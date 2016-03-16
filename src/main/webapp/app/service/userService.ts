@@ -32,8 +32,8 @@ export class UserService {
         var headers =  this.urlService.getHeaders(true);
         this.http.post(url, organisationString, {headers: headers}).map((res:Response) => res.json()).subscribe(
             (data) => this.onSuccesfulAddOrganisation(data.id, organisation, data.errorMessage),
-            ((err:Error) => this.logger.log('Fout tijdens aanmaken van organisation: ' + err.message))
-        );
+            ((err: Error) => this.logger.log('Fout tijdens HTTP call voor aanmaken van organisation: ' + err.message)
+        ));
     }
 
     private onSuccesfulAddOrganisation(id:number, organisation:Organisation, errorMessage: string): void {
