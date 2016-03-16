@@ -94,7 +94,7 @@ public class ITCard {
 
     @Test
     public void testAddCardWithoutUrl(){
-        String kaartnaam = "kaartje3";
+        String kaartnaam = "kaartje4";
         SeleniumHelper.allowDomToLoad();
 
         JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -119,7 +119,7 @@ public class ITCard {
         assertEquals("The cardText must be correct", kaartnaam, element.getText());
         element = driver.findElement(By.id("img_imageUrl"));
         String src = element.getAttribute("src");
-        assertNotNull("The imageURL must be correct",src);
+        assertEquals("The imageURL must be correct", "http://1.bp.blogspot.com/-TTxz7Nt7es0/Uxf7CoQJRUI/AAAAAAAAHg4/3XrVdDOIxIE/s1600/dummy.gif", src);
 
     }
     @AfterClass

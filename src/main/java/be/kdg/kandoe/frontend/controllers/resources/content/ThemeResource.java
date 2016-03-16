@@ -22,6 +22,7 @@ public class ThemeResource implements Serializable {
 //    private OrganisationResource organisation;
     private List<String> tags;
     private List<String> organisatorNames;
+    private String errorMessage;
 
     public ThemeResource() {}
 
@@ -111,5 +112,13 @@ public class ThemeResource implements Serializable {
 
     public void setOrganisatorNames(List<String> organisatorNames) {
         this.organisatorNames = organisatorNames;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

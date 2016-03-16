@@ -86,6 +86,24 @@ public class ITtheme {
         editTheme();
     }
 
+    @Test
+    public void testAddEmptyThemename() {
+        driver.get("http://localhost:9966/kandoe/#/organisation/" + organisationId + "/createTheme");
+
+        SeleniumHelper.allowDomToLoad();
+
+        WebElement element = driver.findElement(By.name("btn_save"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("err_theme"));
+        assertEquals("div", element.getTagName());
+        assertEquals("The correct error message must be shown", "Themanaam mag niet leeg zijn", element.getText());
+
+    }
+
+
     public void addTheme() {
 
         SeleniumHelper.allowDomToLoad(); //allow time for login to complete
@@ -375,15 +393,15 @@ public class ITtheme {
         SeleniumHelper.clickOnElement(driver, element);
 
         element = driver.findElement(By.id("tag0"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("Content of tag must be correct", "mytag1", element.getText());
 
         element = driver.findElement(By.id("tag1"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("Content of tag must be correct", "mytag2", element.getText());
 
         element = driver.findElement(By.id("tag2"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("Content of tag must be correct", "mytag3", element.getText());
 
         element = driver.findElement(By.id("delete_tag3"));
@@ -510,15 +528,15 @@ public class ITtheme {
         SeleniumHelper.allowDomToLoad(); //allow time to expand panel
 
         element = driver.findElement(By.id("tag0"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("Content of tag must be correct", "mytag1", element.getText());
 
         element = driver.findElement(By.id("tag1"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("Content of tag must be correct", "mytag2", element.getText());
 
         element = driver.findElement(By.id("tag2"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("Content of tag must be correct", "mytag3", element.getText());
 
         element = driver.findElement(By.id("organisators"));

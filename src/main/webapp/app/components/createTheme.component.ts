@@ -52,6 +52,10 @@ export class CreateThemeComponent {
         });
     }
 
+    public onEditThemeName(): void {
+        this.theme.errorMessage = "";
+    }
+
     public onAddTag():void {
         if (this.newTag != '') {
             var tags = this.newTag.split(" ");

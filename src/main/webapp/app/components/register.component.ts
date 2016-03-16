@@ -46,28 +46,5 @@ export class RegisterComponent {
         var registerUser  = new RegisterUser(username, password, firstName, lastName);
 
         this.userService.register(registerUser);
-        /*this.userService.register()
-        fetch('http://localhost:3001/sessions/create', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username, password
-            })
-        })
-            .then(status)
-            .then(json)
-            .then((response) => {
-                // Once we get the JWT in the response, we save it into localStorage
-                localStorage.setItem('jwt', response.id_token);
-                // and then we redirect the user to the home
-                this.router.parent.navigate('/home');
-            })
-            .catch((error) => {
-                alert(error.message);
-                console.log(error.message);
-            });*/
     }
 }
