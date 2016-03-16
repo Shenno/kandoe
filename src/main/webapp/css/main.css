@@ -75,11 +75,14 @@ h2 {
 
 .content {
     margin: 2% 2%;
-    padding: 1% 20% 20%;
+    padding: 1%;
     background:rgba(255,255,255,0.9);
 }
+.content-center{
+    padding: 0% 24%;
+}
 .form-control {
-    width: 20em;
+    width: 300px;
 }
 .ng-valid[required] {
     border-left: 5px solid #42a948;
@@ -91,6 +94,7 @@ h2 {
     border: 1px solid #ccc;
 }
 
+/* List*/
 .list-group {
     min-width: 200px;
     width: 100%;
@@ -265,8 +269,15 @@ h2 {
     padding:10px;
     width: 35%;
 }
+.btn-center{
+    margin: 0% 3%;
+}
 .well{
     width: 100%
+}
+.alert{
+    min-width:300px;
+    width:100%;
 }
 .panel{
     width: 100%

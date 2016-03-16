@@ -1,32 +1,36 @@
-<h1>Aanmaken organisatie</h1>
-
-<form data-toggle="validator" role="form"
-      (submit)="onSubmit()" #orgForm="ngForm">
-    <div class="form-group">
-        <label for="ib_new_organisation" class="control-label">Organisatie naam: <span style="color: red">*</span></label>
-        <input id="ib_new_organisation" name="ib_new_organisation"
-               [(ngModel)]="organisation.name" class="form-control"
-               type="text" required ngControl="name" #name="ngForm">
-        <div [hidden]="name.valid || name.pristine"
-             class="alert alert-danger" style="width: 20em; margin-top: 2px;"
-        >Naam is vereist.
-        </div>
-        <div id="err_organisation" *ngIf="organisation.errorMessage != ''" class="alert alert-danger" style="width: 20em; margin-top: 2px;">
-            {{organisation.errorMessage}}
-        </div>
+<div class="content-center">
+    <h1>Aanmaken organisatie</h1>
+    <div class="alert alert-warning" role="alert">
+        <b>Opgepast!</b> Organisatie naam is niet meer wijzigbaar
     </div>
+    <form data-toggle="validator" role="form"
+          (submit)="onSubmit()" #orgForm="ngForm">
+        <div class="form-group">
+            <label for="ib_new_organisation" class="control-label">Organisatie naam: <span
+                    style="color: red">*</span></label>
+            <input id="ib_new_organisation" name="ib_new_organisation"
+                   [(ngModel)]="organisation.name" class="form-control"
+                   type="text" required ngControl="name" #name="ngForm">
+            <div [hidden]="name.valid || name.pristine"
+                 class="alert alert-danger" style="width: 20em; margin-top: 2px;"
+            >Naam is vereist.
+            </div>
+            <div id="err_organisation" *ngIf="organisation.errorMessage != ''" class="alert alert-danger"
+                 style="width: 20em; margin-top: 2px;">
+                {{organisation.errorMessage}}
+            </div>
+        </div>
 
-    <br>
-    <div class="alert alert-warning" role="alert" style="width: 30em">
-        <b>Heads up!</b> Organisatie naam is niet meer wijzigbaar
-    </div>
-
-    <button class="btn btn-primary" type="submit"
-            name="btn_add_organisation"
-            [disabled]="!orgForm.form.valid"
-    >Toevoegen
-    </button>
-    <button class="btn btn-default" name="btn_cancel"
-            (click)="onCancel($event)">Annuleren
-    </button>
-</form>
+        <br>
+        <div>
+            <button class="btn btn-primary" type="submit"
+                    name="btn_add_organisation"
+                    [disabled]="!orgForm.form.valid"
+            >Toevoegen
+            </button>
+            <button class="btn btn-default" name="btn_cancel"
+                    (click)="onCancel($event)">Annuleren
+            </button>
+        </div>
+    </form>
+</div>

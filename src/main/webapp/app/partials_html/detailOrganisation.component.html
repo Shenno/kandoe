@@ -1,19 +1,22 @@
-<div id="organisationId" hidden>{{organisation.id}}</div>
-<h1>Organisatie: <span id="span_organisationname">{{organisation.name}}</span></h1>
-<div class="well">Organisator: {{organisation.organisatorName}}</div>
-
-<div>
-    <h2>Thema's</h2>
-    <ul class="list-group">
-        <li *ngFor="#theme of organisation.themes; #i=index"
-            (click)="detailTheme(i+1)"
-            class="list-group-item clickable-list">
-            {{i+1}} | {{theme}}
-        </li>
-    </ul>
-    <button class="btn btn-primary" (click)="addTheme()">
-        <span class="glyphicon glyphicon-plus-sign"></span> Thema toevoegen
-    </button>
+<div class="content-center">
+    <div id="organisationId" hidden>{{organisation.id}}</div>
+    <h1>Organisatie: <span id="span_organisationname">{{organisation.name}}</span></h1>
+    <h3>Informatie:</h3>
+    <div class="well"><b>Organisator:</b> {{organisation.organisatorName}}</div>
+    <hr>
+    <div>
+        <h2>Thema's</h2>
+        <ul class="list-group">
+            <li *ngFor="#theme of organisation.themes; #i=index"
+                (click)="detailTheme(i+1)"
+                class="list-group-item clickable-list">
+                {{i+1}} | {{theme}}
+            </li>
+        </ul>
+        <button class="btn btn-primary" (click)="addTheme()">
+            <span class="glyphicon glyphicon-plus-sign"></span> Thema toevoegen
+        </button>
+    </div>
+    <hr>
+    <button class="btn btn-default" (click)="backToList()">Terug naar lijst</button>
 </div>
-<hr>
-<button class="btn btn-default" (click)="backToList()">Terug naar lijst</button>
