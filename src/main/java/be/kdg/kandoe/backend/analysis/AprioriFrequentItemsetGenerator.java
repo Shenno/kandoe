@@ -98,7 +98,11 @@ public class AprioriFrequentItemsetGenerator<I> {
         List<Set<I>> ret = new ArrayList<>();
 
         for (List<Set<I>> itemsetList : map.values()) {
-            ret.addAll(itemsetList);
+            for (Set<I> itemSet : itemsetList) {
+                if (itemSet.size() > 1) {
+                    ret.add(itemSet);
+                }
+            }
         }
 
         return ret;

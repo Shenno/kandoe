@@ -11,7 +11,7 @@
              class="alert alert-danger" style="width: 20em; margin-top: 2px;"
         >Naam is vereist.
         </div>
-        <div *ngIf="organisation.errorMessage != ''" class="alert alert-danger" style="width: 20em; margin-top: 2px;">
+        <div id="err_organisation" *ngIf="organisation.errorMessage != ''" class="alert alert-danger" style="width: 20em; margin-top: 2px;">
             {{organisation.errorMessage}}
         </div>
     </div>

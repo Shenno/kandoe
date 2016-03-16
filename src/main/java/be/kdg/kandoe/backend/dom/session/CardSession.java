@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 
 @Entity
-public class CardSession implements Serializable, Identifiable<Integer> {
+public class CardSession implements Serializable, Identifiable<Integer>, Comparable<CardSession> {
 
     @Id
     @Column(name = "CardSessionId", nullable = false)
@@ -80,5 +80,10 @@ public class CardSession implements Serializable, Identifiable<Integer> {
     @Override
     public Integer getId() {
         return cardSessionId;
+    }
+
+    @Override
+    public int compareTo(CardSession cs) {
+        return this.card.compareToIgnoreCase(cs.card);
     }
 }

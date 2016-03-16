@@ -1,5 +1,12 @@
 <h2>Vaakst voorkomende kaartjes</h2>
 
-<p [id]="'cardCombination' + (i+1)" *ngFor="#cardCombination of cardCombinations;#i = index">
-    {{i+1}} | {{cardCombination}}
-</p>
+<div [id]="'cardCombination' + (i+1)" *ngFor="#cardCombination of cardCombinations;#i = index">
+    {{i+1}} |
+    <div style="display:inline-block" *ngFor="#card of cardCombination.cards; #j = index">
+        <div class="card">
+            <span class="badge alert-danger center-content">{{j+1}}</span>
+            <div class="image-sizing img-thumbnail"><img src="{{card?.image}}" class="card-image"></div>
+            <p style="text-align: center">{{card?.card}}</p>
+        </div>
+    </div>
+</div>

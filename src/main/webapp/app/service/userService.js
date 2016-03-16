@@ -43,11 +43,16 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
                     var url = this.baseUrl + "/api/organisations";
                     var organisationString = JSON.stringify(organisation);
                     var headers = this.urlService.getHeaders(true);
-                    this.http.post(url, organisationString, { headers: headers }).map(function (res) { return res.json(); }).subscribe(function (data) { return _this.onSuccesfulAddOrganisation(data.id, organisation); }, (function (err) { return _this.logger.log('Fout tijdens aanmaken van organisation: ' + err.message); }));
+                    this.http.post(url, organisationString, { headers: headers }).map(function (res) { return res.json(); }).subscribe(function (data) { return _this.onSuccesfulAddOrganisation(data.id, organisation, data.errorMessage); }, (function (err) { return _this.logger.log('Fout tijdens HTTP call voor aanmaken van organisation: ' + err.message); }));
                 };
-                UserService.prototype.onSuccesfulAddOrganisation = function (id, organisation) {
-                    this.logger.log('Organisatie "' + organisation.name + '" is aangemaakt"');
-                    this.router.navigate(['/Organisation', { organisationId: id }]);
+                UserService.prototype.onSuccesfulAddOrganisation = function (id, organisation, errorMessage) {
+                    if (errorMessage == null) {
+                        this.logger.log('Organisatie "' + organisation.name + '" is aangemaakt"');
+                        this.router.navigate(['/Organisation', { organisationId: id }]);
+                    }
+                    else {
+                        organisation.errorMessage = errorMessage;
+                    }
                 };
                 UserService.prototype.getOrganisation = function (id) {
                     var url = this.baseUrl + "/api/organisations/" + id;

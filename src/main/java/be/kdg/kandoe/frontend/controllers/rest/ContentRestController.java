@@ -3,12 +3,15 @@ package be.kdg.kandoe.frontend.controllers.rest;
 import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Tag;
 import be.kdg.kandoe.backend.dom.content.Theme;
+import be.kdg.kandoe.backend.dom.session.CardSession;
 import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
+import be.kdg.kandoe.frontend.controllers.resources.content.CardCombinationResource;
 import be.kdg.kandoe.frontend.controllers.resources.content.CardResource;
 import be.kdg.kandoe.frontend.controllers.resources.content.TagResource;
 import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
+import be.kdg.kandoe.frontend.controllers.resources.sessions.CardSessionResource;
 import ma.glasnost.orika.MapperFacade;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +76,7 @@ public class ContentRestController {
             for (String tagName : themeResource.getTags()) {
                 try {
                     contentService.findTagByTagNameByTheme(tagName, updatedTheme);
-                } catch(ContentServiceException ex) {
+                } catch (ContentServiceException ex) {
                     Tag tag = contentService.addTag(new Tag(tagName, updatedTheme));
                     updatedTheme.addTag(tag);
                 }
@@ -108,13 +111,23 @@ public class ContentRestController {
     }
 
     @RequestMapping(value = "{themeId}/cardCombinations", method = RequestMethod.GET)
-    public ResponseEntity<List<String>> findMostFrequentCardCombinations(@PathVariable int themeId) {
+    public ResponseEntity<List<CardCombinationResource>> findMostFrequentCardCombinations(@PathVariable int themeId) {
 
-        List<Set<String>> cardCombinationSets = contentService.findMostFrequentCardCombinations(themeId);
-        List<String> cardCombinations = new ArrayList<>();
+        List<Set<CardSession>> cardCombinationSets = contentService.findMostFrequentCardCombinations(themeId);
 
-        for (Set cardCombinationSet: cardCombinationSets) {
-            cardCombinations.add(cardCombinationSet.toString());
+        List<CardCombinationResource> cardCombinations = new ArrayList<>();
+
+        for (Set<CardSession> cardCombinationSet : cardCombinationSets) {
+            List<CardSessionResource> cardResources = new ArrayList<>();
+
+            for (CardSession cardSession : cardCombinationSet) {
+                CardSessionResource cardResource = mapperFacade.map(cardSession, CardSessionResource.class);
+                cardResources.add(cardResource);
+            }
+
+            CardCombinationResource cardCombinationResource = new CardCombinationResource();
+            cardCombinationResource.setCards(cardResources);
+            cardCombinations.add(cardCombinationResource);
         }
 
         return new ResponseEntity<>(cardCombinations, HttpStatus.OK);

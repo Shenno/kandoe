@@ -86,6 +86,19 @@ public class ITorganisation {
         element = driver.findElement(By.id("span_organisationname"));
         assertEquals("span", element.getTagName());
         assertEquals("The organistation name must be correct", organisationName, element.getText());
+
+        driver.get("http://localhost:9966/kandoe/#/createOrganisation");
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.name("ib_new_organisation"));
+        SeleniumHelper.fillTextIntoElement(element,organisationName);
+
+        element = driver.findElement(By.name("btn_add_organisation"));
+        SeleniumHelper.clickOnElement(driver,element);
+
+        element = driver.findElement(By.id("err_organisation"));
+        assertEquals("div", element.getTagName());
+        assertEquals("The error message must be correct", "Een organisatie met deze naam bestaat al", element.getText());
     }
 
     @Test

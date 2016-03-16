@@ -4,6 +4,7 @@ import {FORM_DIRECTIVES} from "angular2/common";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {ContentService} from "../service/contentService";
 import {RouteParams} from "angular2/router";
+import {CardCombination} from "../entity/cardCombination";
 
 @Component({
     selector: 'apriori',
@@ -14,13 +15,14 @@ import {RouteParams} from "angular2/router";
 
 export class AprioriComponent {
     private contentService: ContentService;
-    private cardCombinations: string[] = [];
+    private cardCombinations: CardCombination[] = []; //a card combination is an array of cards
 
     public constructor(contentService: ContentService, routeParam: RouteParams) {
         document.title = 'Dashboard';
 
-        contentService.getMostFrequentCardCombinations(routeParam.params["themeId"]).subscribe((cardCombinations: string[]) => {
+        contentService.getMostFrequentCardCombinations(routeParam.params["themeId"]).subscribe((cardCombinations: CardCombination[]) => {
             this.cardCombinations = cardCombinations;
+            alert(this.cardCombinations[0].cards[0].card);
         });
     }
 }
