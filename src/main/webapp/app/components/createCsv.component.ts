@@ -9,7 +9,7 @@ import {RouteParams} from "angular2/router";
     encapsulation: ViewEncapsulation.None
 })
 export class CreateCsvComponent {
-    browserSupportFileUpload():boolean {
+   /* browserSupportFileUpload():boolean {
         var isCompatible = false;
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             isCompatible = true;
@@ -48,4 +48,5 @@ export class CreateCsvComponent {
             };
         }
     }
+    */
 }

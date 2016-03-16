@@ -393,15 +393,15 @@ public class ITtheme {
         SeleniumHelper.clickOnElement(driver, element);
 
         element = driver.findElement(By.id("tag0"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("Content of tag must be correct", "mytag1", element.getText());
 
         element = driver.findElement(By.id("tag1"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("Content of tag must be correct", "mytag2", element.getText());
 
         element = driver.findElement(By.id("tag2"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("Content of tag must be correct", "mytag3", element.getText());
 
         element = driver.findElement(By.id("delete_tag3"));
@@ -528,15 +528,15 @@ public class ITtheme {
         SeleniumHelper.allowDomToLoad(); //allow time to expand panel
 
         element = driver.findElement(By.id("tag0"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("Content of tag must be correct", "mytag1", element.getText());
 
         element = driver.findElement(By.id("tag1"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("Content of tag must be correct", "mytag2", element.getText());
 
         element = driver.findElement(By.id("tag2"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("Content of tag must be correct", "mytag3", element.getText());
 
         element = driver.findElement(By.id("organisators"));

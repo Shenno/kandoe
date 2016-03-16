@@ -7,6 +7,7 @@
         <label for="ib_name">Naam</label>
         <input id="ib_name" name="ib_name"
                [(ngModel)]="theme.themeName"
+               (change)="onEditThemeName()"
                class="form-control">
     </div>
     <div id="err_theme" *ngIf="theme.errorMessage != ''" class="alert alert-danger"
