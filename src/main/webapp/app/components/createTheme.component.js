@@ -60,6 +60,9 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
                         });
                     });
                 }
+                CreateThemeComponent.prototype.onEditThemeName = function () {
+                    this.theme.errorMessage = "";
+                };
                 CreateThemeComponent.prototype.onAddTag = function () {
                     if (this.newTag != '') {
                         var tags = this.newTag.split(" ");
