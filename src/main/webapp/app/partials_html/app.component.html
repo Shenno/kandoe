@@ -21,9 +21,14 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <p *ngIf="currentUserDetails" class="navbar-text">Welkom {{currentUserDetails.name}}! </p>
-                <li><a href="#/register" *ngIf="currentUserDetails">Registreren</a></li>
-                <li><a href="#/login" *ngIf="currentUserDetails">Inloggen</a></li>
+                <template [ngIf]="currentUserDetails">
+                    <li><a href="#">Welkom, {{currentUserDetails.firstName}}!</a></li>
+                </template>
+                <template [ngIf]="!currentUserDetails">
+                    <li><a href="#/register">Registreren</a></li>
+                    <li><a href="#/login">Inloggen</a></li>
+                </template>
+                <template [ngIf]="currentUserDetails">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Mijn account <span class="caret"></span></a>
@@ -34,6 +39,7 @@
                         <li><a href="#/logout" (click)="userService.logout()"><span class="glyphicon glyphicon-off"></span> Uitloggen</a></li>
                     </ul>
                 </li>
+                </template>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

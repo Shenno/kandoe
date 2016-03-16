@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from 'angular2/core';
+import {Component, ViewEncapsulation, ChangeDetectorRef, ChangeDetectionStrategy} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {CirkelsessieComponent} from "./components/cirkelsessie.component";
 import {CreateThemeComponent} from "./components/createTheme.component";
@@ -63,14 +63,32 @@ import {CreateCsvComponent} from "./components/createCsv.component";
 
 export class AppComponent {
 
-    userService:UserService;
-    currentUserDetails: User;
+    private userService: UserService;
+    private currentUserDetails: User;
+    private ref: ChangeDetectorRef;
 
     public constructor(userService:UserService) {
-       /*  this.userService = userService;
-        userService.getMyDetails().subscribe(
-            (user:User) => this.currentUserDetails = user,
-            err => alert(localStorage.getItem("jwt") + err))*/
+        this.userService = userService;
+        //this.userService.getMyDetails().subscribe((user:User) => this.curr)
+       this.getCurrentUserDetails();
+        userService.authenticationEvent$.subscribe((eventType: string) => {
+           this.onAuthenticationEvent(eventType);
+       })
     }
 
+    public onAuthenticationEvent(eventType: string) {
+        alert("Hoi");
+        this.getCurrentUserDetails();
+    }
+
+    public getCurrentUserDetails() {
+        this.userService.getMyDetails().subscribe(
+            (user: User) => this.currentUserDetails = user,
+            (err) => this.currentUserDetails = null);
+    }
+
+    public lol() {
+        this.currentUserDetails = null;
+       // alert("error");
+    }
 }

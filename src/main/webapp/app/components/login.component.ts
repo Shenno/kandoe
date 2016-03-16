@@ -5,6 +5,7 @@ import {Http, Response, Headers} from "angular2/http";
 import {UrlService} from "../service/urlService";
 import {UserService} from "../service/userService";
 import {LoginUser} from "../entity/loginUser";
+import {User} from "../entity/user";
 
 @Component({
     selector: 'login',
@@ -42,6 +43,8 @@ export class LoginComponent {
         this.userService.login(this.user)
             .subscribe((res: Response) => {
                     localStorage.setItem("jwt", res.text());
+                    this.userService.triggerLoginEvent();
+                    //this.userService.getMyDetails().subscribe((user:User) => alert(user.firstName + "BANAAN"));
                     this.router.navigate(['/Home']);
                 },
                 error => {
