@@ -103,12 +103,73 @@ public class TestDashboard {
     public void testGetMostFrequentCardCombinations() {
         List<Set<CardSession>> frequentItemsetList = contentService.findMostFrequentCardCombinations(theme.getThemeId());
 
-       /* assertEquals("The 1st frequent itemsetlist must be correct", "[card1]", frequentItemsetList.get(0).toString());
-        assertEquals("The 2nd frequent itemsetlist must be correct", "[card2]", frequentItemsetList.get(1).toString());
-        assertEquals("The 3rd frequent itemsetlist must be correct", "[card3]", frequentItemsetList.get(2).toString());
-        assertEquals("The 4th frequent itemsetlist must be correct", "[card1, card2]", frequentItemsetList.get(3).toString());
-        assertEquals("The 5th frequent itemsetlist must be correct", "[card1, card3]", frequentItemsetList.get(4).toString());
-        assertEquals("The 6th frequent itemsetlist must be correct", "[card2, card3]", frequentItemsetList.get(5).toString());
-        assertEquals("The 7th frequent itemsetlist must be correct", "[card1, card2, card3]", frequentItemsetList.get(6).toString());*/
+        String frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(0)).toString();
+        assertEquals("The 1st frequent itemsetlist must be correct", "[card1, card3]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(1)).toString();
+        assertEquals("The 2nd frequent itemsetlist must be correct", "[card1, card1]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(2)).toString();
+        assertEquals("The 3rd frequent itemsetlist must be correct", "[card2, card3]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(3)).toString();
+        assertEquals("The 4th frequent itemsetlist must be correct", "[card1, card2]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(4)).toString();
+        assertEquals("The 5th frequent itemsetlist must be correct", "[card1, card2]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(5)).toString();
+        assertEquals("The 6th frequent itemsetlist must be correct", "[card2, card2]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(6)).toString();
+        assertEquals("The 7th frequent itemsetlist must be correct", "[card2, card1]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(7)).toString();
+        assertEquals("The 8th frequent itemsetlist must be correct", "[card1, card2]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(8)).toString();
+        assertEquals("The 9th frequent itemsetlist must be correct", "[card1, card1]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(9)).toString();
+        assertEquals("The 10th frequent itemsetlist must be correct", "[card3, card1]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(10)).toString();
+        assertEquals("The 11th frequent itemsetlist must be correct", "[card1, card3]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(11)).toString();
+        assertEquals("The 12th frequent itemsetlist must be correct", "[card1, card3]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(12)).toString();
+        assertEquals("The 13th frequent itemsetlist must be correct", "[card2, card3]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(13)).toString();
+        assertEquals("The 14th frequent itemsetlist must be correct", "[card3, card1]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(14)).toString();
+        assertEquals("The 15th frequent itemsetlist must be correct", "[card1, card2]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(15)).toString();
+        assertEquals("The 16th frequent itemsetlist must be correct", "[card1, card1]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(16)).toString();
+        assertEquals("The 17th frequent itemsetlist must be correct", "[card1, card2]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(17)).toString();
+        assertEquals("The 18th frequent itemsetlist must be correct", "[card1, card1]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(18)).toString();
+        assertEquals("The 19th frequent itemsetlist must be correct", "[card1, card2]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(19)).toString();
+        assertEquals("The 20th frequent itemsetlist must be correct", "[card1, card1]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(20)).toString();
+        assertEquals("The 21st frequent itemsetlist must be correct", "[card2, card1]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(21)).toString();
+        assertEquals("The 22nd frequent itemsetlist must be correct", "[card1, card3, card1]", frequentItemsetListString);
+
+        frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(22)).toString();
+        assertEquals("The 23rd frequent itemsetlist must be correct", "[card1, card2, card3]", frequentItemsetListString);
     }
 }

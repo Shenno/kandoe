@@ -86,4 +86,9 @@ public class CardSession implements Serializable, Identifiable<Integer>, Compara
     public int compareTo(CardSession cs) {
         return this.card.compareToIgnoreCase(cs.card);
     }
+
+    @Override
+    public String toString() {
+        return card;
+    }
 }
