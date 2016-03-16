@@ -86,6 +86,24 @@ public class ITtheme {
         editTheme();
     }
 
+    @Test
+    public void testAddEmptyThemename() {
+        driver.get("http://localhost:9966/kandoe/#/organisation/" + organisationId + "/createTheme");
+
+        SeleniumHelper.allowDomToLoad();
+
+        WebElement element = driver.findElement(By.name("btn_save"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("err_theme"));
+        assertEquals("div", element.getTagName());
+        assertEquals("The correct error message must be shown", "Themanaam mag niet leeg zijn", element.getText());
+
+    }
+
+
     public void addTheme() {
 
         SeleniumHelper.allowDomToLoad(); //allow time for login to complete

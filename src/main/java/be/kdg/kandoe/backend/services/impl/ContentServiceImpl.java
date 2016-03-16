@@ -52,7 +52,7 @@ public class ContentServiceImpl implements ContentService {
         if (theme == null) {
             throw new ContentServiceException("Theme can not be empty");
         } else if (theme.getThemeName().isEmpty()) {
-            throw new ContentServiceException("Empty name for theme");
+            throw new ContentServiceException("Themanaam mag niet leeg zijn");
         } else if (theme.getOrganisation() == null) {
             throw new ContentServiceException("Organisation can not be empty");
         } else if (theme.getOrganisators().size() == 0) {

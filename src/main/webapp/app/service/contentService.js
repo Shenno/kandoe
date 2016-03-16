@@ -75,11 +75,16 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
                     var url = this.baseUrl + "/api/themes";
                     var themeString = JSON.stringify(theme);
                     var headers = this.urlService.getHeaders(true);
-                    this.http.post(url, themeString, { headers: headers }).map(function (res) { return res.json(); }).subscribe(function (data) { return _this.onSuccesfulAddTheme(data.themeId, theme); }, (function (err) { return _this.logger.log('Fout tijdens aanmaken van thema: ' + err.message); }));
+                    this.http.post(url, themeString, { headers: headers }).map(function (res) { return res.json(); }).subscribe(function (data) { return _this.onSuccesfulAddTheme(data.themeId, theme, data.errorMessage); }, (function (err) { return _this.logger.log('Fout tijdens aanmaken van thema: ' + err.message); }));
                 };
-                ContentService.prototype.onSuccesfulAddTheme = function (id, theme) {
-                    this.logger.log('Thema "' + theme.themeName + '" is aangemaakt"');
-                    this.router.navigate(['/Theme', { themeId: id }]);
+                ContentService.prototype.onSuccesfulAddTheme = function (id, theme, errorMessage) {
+                    if (errorMessage == null) {
+                        this.logger.log('Thema "' + theme.themeName + '" is aangemaakt"');
+                        this.router.navigate(['/Theme', { themeId: id }]);
+                    }
+                    else {
+                        theme.errorMessage = errorMessage;
+                    }
                 };
                 ContentService.prototype.updateTheme = function (theme) {
                     var _this = this;
