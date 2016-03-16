@@ -21,10 +21,10 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
     selector: 'view-session',
     directives: [ChatComponent, KandoeCircleComponent],
     template: `
-
-        <h1 *ngIf="myTurn && !currentSession?.gameOver">Jij bent aan de beurt, {{currentUser?.firstName}}!</h1>
-        <h1 *ngIf="!myTurn && !currentSession?.gameOver">Wacht even je beurt af!</h1>
-        <h1 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h1>
+        <h1>{{currentSession?.nameSession}}</h1>
+        <h2 *ngIf="myTurn && !currentSession?.gameOver">Jij bent aan de beurt, {{currentUser?.firstName}}!</h2>
+        <h2 *ngIf="!myTurn && !currentSession?.gameOver">Wacht even je beurt af!</h2>
+        <h2 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h2>
         <template [ngIf]="currentSession">
         <div class="container-fluid">
             <div class="row custom-rw">
@@ -35,9 +35,6 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
                         [amountOfCircles]="currentSession.amountOfCircles" [circleCards]="currentSession.cardSessionResources"
                         [isOrganisator]="currentSession.organisator == currentUser.id">
                         </kandoe-circle>
-                        <!--<h3 *ngIf="myTurn && !currentSession?.gameOver">Jij bent aan de beurt, {{currentUser?.firstName}}!</h3>
-                        <h3 *ngIf="!myTurn && !currentSession?.gameOver">Wacht even je beurt af!</h3>
-                        <h3 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h3>-->
                     </div>
                 </div>
                 <div class="col-md-5">

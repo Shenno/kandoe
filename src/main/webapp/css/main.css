@@ -18,8 +18,6 @@ h2 {
     color: #4AB1BF;
 }
 
-
-
 .navbar {
     background-color: #4E83B9;
     border-radius: 0;
@@ -64,13 +62,6 @@ h2 {
 }
 .navbar-default .navbar-toggle .icon-bar {
     background-color: #F8F8F8;
-}
-
-.banner {
-    background: url("../img/banner-trans.png") no-repeat;
-    background-size: 25%;
-    padding-bottom: 100px;
-    padding-top: 100px;
 }
 
 .content {
@@ -283,6 +274,35 @@ h2 {
     width: 100%
 }
 
+.detail-theme-left {
+    padding-left: 5%;
+    padding-right: 3%
+}
+
+.detail-theme-well {
+    min-width: 10%;
+}
+
+.blue-panel-heading {
+    background-color: #55a1de;
+    border-color: #55a1de
+}
+
+.buttons-detail-theme {
+    margin-bottom: 2em;
+}
+
+.detail-theme-right {
+    border-left: solid gray 2px;
+    padding-right: 5%;
+    padding-left: 3%;
+}
+
+.clickable-table > tbody > tr:hover {
+    background-color: #4E83B9;
+    cursor: pointer;
+    color: white;
+}
 
 /*----------------Sticky footer----------------------------------*/
 .footer {

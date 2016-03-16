@@ -23,15 +23,15 @@
 }
 
 .subcircle.outerring {
-    background: #00cc99 none repeat scroll 0 0 !important;
+    background: #4E83B9 none repeat scroll 0 0 !important;
 }
 
 .subcircle:nth-child(2n) {
-    background: dodgerblue none repeat scroll 0 0;
+    background: #55a1de none repeat scroll 0 0;
 }
 
 #board .subcircle:last-child {
-    background: #00cc99 none repeat scroll 0 0 !important;
+    background: #4E83B9 none repeat scroll 0 0 !important;
 }
 
 .circle-card {
@@ -91,7 +91,7 @@
     left:5%;
     top:50%;
     width:90%;
-    border-bottom: 2px dashed black;
+    border-bottom: 2px dashed white;
     z-index:12;
     opacity:0.3;
 }
@@ -101,7 +101,7 @@
     left:50%;
     top:5%;
     height: 90%;
-    border-right: 2px dashed black;
+    border-right: 2px dashed white;
     z-index:12;
     opacity:0.3;
 }
