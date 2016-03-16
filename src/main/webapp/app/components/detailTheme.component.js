@@ -63,6 +63,10 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
                     event.preventDefault();
                     this.router.navigate(['/CreateCard', { themeId: this.theme.themeId }]);
                 };
+                DetailThemeComponent.prototype.navigateToDashboard = function (event) {
+                    event.preventDefault();
+                    this.router.navigate(['/Dashboard', { themeId: this.theme.themeId }]);
+                };
                 DetailThemeComponent.prototype.backToList = function (event) {
                     event.preventDefault();
                     this.router.navigate(['/Organisation', { organisationId: this.theme.organisationId }]);

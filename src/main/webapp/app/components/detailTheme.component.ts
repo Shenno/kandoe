@@ -57,6 +57,11 @@ export class DetailThemeComponent {
         this.router.navigate(['/CreateCard',{themeId:this.theme.themeId}]);
     }
 
+    public navigateToDashboard(event): void {
+        event.preventDefault();
+        this.router.navigate(['/Dashboard', {themeId: this.theme.themeId}]);
+    }
+
     public backToList(event):void {
         event.preventDefault();
         this.router.navigate(['/Organisation',{organisationId: this.theme.organisationId}]);
