@@ -8,6 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Devi Bral
@@ -35,6 +37,19 @@ public class ITdashboard {
         element = element.findElement(By.tagName("dashboard"));
 
         element = driver.findElement(By.tagName("apriori")); */
+
+        driver.get("http://localhost:9966/kandoe/#/theme/1");
+        SeleniumHelper.allowDomToLoad();
+
+        WebElement element = driver.findElement(By.id("btn_dashboard"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Thema: Drankjes - Dashboard"));
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("no_sessions"));
+        assertEquals("The 'no sessions' message must be correct", "Er zijn nog geen sessies gespeeld voor dit thema!", element.getText());
     }
 
     @AfterClass
