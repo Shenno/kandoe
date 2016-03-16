@@ -154,19 +154,24 @@ public class ContentServiceImpl implements ContentService {
     public List<Set<CardSession>> findMostFrequentCardCombinations(Integer themeId) {
         Theme theme = getTheme(themeId);
 
-        AprioriFrequentItemsetGenerator<CardSession> generator = new AprioriFrequentItemsetGenerator<>();
+        if (theme.getSessions().size() > 0) {
 
-        List<Set<CardSession>> itemsetList = new ArrayList<>();
+            AprioriFrequentItemsetGenerator<CardSession> generator = new AprioriFrequentItemsetGenerator<>();
 
-        for(Session session: theme.getSessions()) {
-            itemsetList.add(new HashSet<>(session.getCardSessions()));
+            List<Set<CardSession>> itemsetList = new ArrayList<>();
+
+            for (Session session : theme.getSessions()) {
+                itemsetList.add(new HashSet<>(session.getCardSessions()));
+            }
+
+            FrequentItemsetData<CardSession> data = generator.generate(itemsetList, 0.0001);
+
+            List<Set<CardSession>> frequentItemsetList = data.getFrequentItemsetList();
+
+            return frequentItemsetList;
         }
 
-        FrequentItemsetData<CardSession> data = generator.generate(itemsetList, 0.0001);
-
-        List<Set<CardSession>> frequentItemsetList = data.getFrequentItemsetList();
-
-        return frequentItemsetList;
+        return null;
     }
 
     @Override

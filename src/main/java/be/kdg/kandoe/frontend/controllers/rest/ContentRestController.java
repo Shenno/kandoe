@@ -114,22 +114,23 @@ public class ContentRestController {
     public ResponseEntity<List<CardCombinationResource>> findMostFrequentCardCombinations(@PathVariable int themeId) {
 
         List<Set<CardSession>> cardCombinationSets = contentService.findMostFrequentCardCombinations(themeId);
-
         List<CardCombinationResource> cardCombinations = new ArrayList<>();
 
-        for (Set<CardSession> cardCombinationSet : cardCombinationSets) {
-            List<CardSessionResource> cardResources = new ArrayList<>();
+        if (cardCombinationSets != null) {
 
-            for (CardSession cardSession : cardCombinationSet) {
-                CardSessionResource cardResource = mapperFacade.map(cardSession, CardSessionResource.class);
-                cardResources.add(cardResource);
+            for (Set<CardSession> cardCombinationSet : cardCombinationSets) {
+                List<CardSessionResource> cardResources = new ArrayList<>();
+
+                for (CardSession cardSession : cardCombinationSet) {
+                    CardSessionResource cardResource = mapperFacade.map(cardSession, CardSessionResource.class);
+                    cardResources.add(cardResource);
+                }
+
+                CardCombinationResource cardCombinationResource = new CardCombinationResource();
+                cardCombinationResource.setCards(cardResources);
+                cardCombinations.add(cardCombinationResource);
             }
-
-            CardCombinationResource cardCombinationResource = new CardCombinationResource();
-            cardCombinationResource.setCards(cardResources);
-            cardCombinations.add(cardCombinationResource);
         }
-
         return new ResponseEntity<>(cardCombinations, HttpStatus.OK);
     }
 

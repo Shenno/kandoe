@@ -1,6 +1,6 @@
-<h2>Vaakst voorkomende kaartjes</h2>
+<h2>Vaakst voorkomende kaartjescombinaties in sessies</h2>
 
-<div [id]="'cardCombination' + (i+1)" *ngFor="#cardCombination of cardCombinations;#i = index">
+<div *ngIf="cardCombinations.length > 0"[id]="'cardCombination' + (i+1)" *ngFor="#cardCombination of cardCombinations;#i = index">
     {{i+1}} |
     <div style="display:inline-block" *ngFor="#card of cardCombination.cards; #j = index">
         <div class="card">
@@ -10,3 +10,5 @@
         </div>
     </div>
 </div>
+
+<p *ngIf="cardCombinations.length == 0">Er zijn nog geen sessies gespeeld voor dit thema!</p>

@@ -22,7 +22,6 @@ export class AprioriComponent {
 
         contentService.getMostFrequentCardCombinations(routeParam.params["themeId"]).subscribe((cardCombinations: CardCombination[]) => {
             this.cardCombinations = cardCombinations;
-            alert(this.cardCombinations[0].cards[0].card);
         });
     }
 }
