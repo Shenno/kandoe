@@ -43,7 +43,7 @@
                         {{user}}
                     </option>
                 </select>
-                <button class="btn btn-default" name="btn_addParticipant" (click)="onAddParticipant()">Voeg
+                <button class="btn wide-btn-default" name="btn_addParticipant" (click)="onAddParticipant()">Voeg
                     deelnemer toe
                 </button>
             </div>
@@ -71,7 +71,7 @@
             <li class="list-group-item" *ngFor="#card of cards">
                 <input (change)="changeCardSelectedStatus(card)" type="checkbox" [checked]="card.selected">
                 <img src="{{card.imageURL}}" class="img-thumbnail card-thumbnail">
-                <span class="card-text">{{card?.text}}</span>
+                {{card?.text}}
             </li>
         </ul>
     </div>

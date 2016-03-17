@@ -27,8 +27,8 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
         <h2 class="alert-danger" *ngIf="currentSession?.gameOver">Het spel is afgelopen!</h2>
         <template [ngIf]="currentSession">
         <div class="container-fluid">
-            <div class="row custom-rw">
-                <div class="col-md-4 fixed-column">
+            <div class="row">
+                <div class="col-md-4">
                     <div class="center-content">
                         <kandoe-circle (swapPlayer)="swapPlayer(movedCard)" (gameOver)="currentSession.gameOver"
                         [eligibleToMoveCard]="myTurn" [sessionId]="currentSessionId"
@@ -37,17 +37,18 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
                         </kandoe-circle>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-5" style="overflow-y: auto">
                     <div *ngFor="#card of currentSession.cardSessionResources; #i = index">
-                            <div class="col-md-2 col-xs-3 card">
-                            <span class="badge alert-danger center-content">{{i+1}}</span>
-                            <div class="image-sizing img-thumbnail"><img src="{{card?.image}}" class="card-image"></div>
-
-                                {{card?.card}}
+                        <div class="col-md-2 col-xs-3 card">
+                            <span class="badge alert-danger">{{i+1}}</span>
+                            <div class="card-image">
+                                <img src="{{card?.image}}">
                             </div>
+                            {{card?.card}}
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-2 col-xs-4">
+                <div class="col-md-3">
                     <div class="chatbox">
                         <chatbox [currentSessionId]="currentSessionId" [remarks]="currentSession.remarks"></chatbox>
                     </div>

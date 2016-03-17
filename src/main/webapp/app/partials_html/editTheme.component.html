@@ -36,7 +36,7 @@
     </div>
     <div class="form-group">
         <input name="ib_newTag" class="form-control" [(ngModel)]="newTag">
-        <button name="btn_addTag" class="btn btn-default" (click)="onAddTag()">
+        <button name="btn_addTag" class="btn wide-btn-default" (click)="onAddTag()">
             <span class="glyphicon glyphicon-tags"></span> Voeg tag toe
         </button>
         <span id="err_tag" class="error-message">{{tagErrorMessage}}</span>
@@ -53,10 +53,10 @@
             {{user}}
         </option>
     </select>
-    <button class="btn btn-default" name="btn_addOrganisator" (click)="onAddOrganisator()">Voeg organisator toe</button>
+    <button class="btn wide-btn-default" name="btn_addOrganisator" (click)="onAddOrganisator()">Voeg organisator toe</button>
     <span id="err_organisator" class="error-message">{{organisatorErrorMessage}}</span>
     <br><br>
 
     <button class="btn btn-primary" name="btn_save" (click)="onSubmit()">Opslaan</button>
-    <button class="btn btn-default" name="btn_cancel" (click)="onCancel($event)">Annuleren</button>
+    <button class="btn wide-btn-default" name="btn_cancel" (click)="onCancel($event)">Annuleren</button>
 </form>

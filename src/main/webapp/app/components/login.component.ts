@@ -21,7 +21,7 @@ import {User} from "../entity/user";
     </div>
     <br>
     <button class="btn btn-primary" name="btn_login" (click)="getLucky()" >Get lucky</button>
-    <button class="btn btn-default" name="btn_logout" (click)="getUnlucky()">Get unlucky</button>
+    <button class="btn wide-btn-default" name="btn_logout" (click)="getUnlucky()">Get unlucky</button>
 
     `,
     encapsulation: ViewEncapsulation.None

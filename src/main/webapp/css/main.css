@@ -9,15 +9,14 @@ body {
     color: #193b40;
     background: url("../img/banner-trans.png") no-repeat;
 }
-
 h1 {
     color: #55a1de;
 }
-
 h2 {
     color: #4AB1BF;
 }
 
+/*----------------Navbar----------------------------------*/
 .navbar {
     background-color: #4E83B9;
     border-radius: 0;
@@ -64,14 +63,17 @@ h2 {
     background-color: #F8F8F8;
 }
 
+/*----------------Content----------------------------------*/
 .content {
     margin: 2% 2%;
     padding: 1%;
     background:rgba(255,255,255,0.9);
 }
 .content-center{
-    padding: 0% 24%;
+    padding: 0 24%;
 }
+
+/*----------------Form styles----------------------------------*/
 .form-control {
     width: 300px;
 }
@@ -85,7 +87,7 @@ h2 {
     border: 1px solid #ccc;
 }
 
-/* List*/
+/*----------------List----------------------------------*/
 .list-group {
     min-width: 200px;
     width: 100%;
@@ -99,50 +101,10 @@ h2 {
     color: white;
 }
 
-.custom-row {
-    text-align: center;
-}
-
-.fixed-column {
-    width: 500px;
-    float: left;
-}
-
+/*----------------Session page----------------------------------*/
 .center-content {
     display: table;
     margin: 0 auto;
-}
-
-.image-sizing {
-    position: relative;
-    height: 75px;
-    width: 100%;
-    overflow: hidden;
-
-}
-
-.error-message {
-    color: red;
-}
-
-.card-image {
-    height: auto;
-    width: 100%;
-    overflow: hidden;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top:0;
-    bottom: 0;
-    margin: auto;
-}
-
-.card {
-    margin: 0 10px 20px;
-    background-color: #fefabc;
-    border-radius: 3px;
-    padding: 4px;
-    box-shadow: 2px 2px 2px #4985B9;
 }
 
 .chatbox {
@@ -157,28 +119,50 @@ h2 {
     border-bottom: 1px solid lightgrey;
 }
 
-.card-thumbnail {
-    height: auto;
-    max-height: 6em;
-    width: 7em;
+.card {
+    margin: 0 0.5em 1em;
+    background-color: whitesmoke;
+    border-radius: 3px;
+    padding: 0.5em;
+    box-shadow: 2px 2px 2px #4985B9;
+    max-width: 7em;
+    text-align: center;
+}
+.card-image {
+    height: 8em;
+    width: auto;
+    margin-top: 0.5em;
+}
+.card-image > img {
+    max-width: 100%;
+    background-color: #fff;
+    border-radius: 3px;
+    max-height: 7em;
 }
 
+
+/*----------------Cards----------------------------------*/
 .card-list {
-    height: 20em;
+    height: 30em;
+    width: 31.5em;
     overflow: auto;
+    margin-bottom: 3em;
 }
 .card-list > li {
-    height: 7em;
-    width: 7em;
-    overflow: hidden;
+    height: auto;
+    width: 30em;
 }
 .card-list > li > img {
     border: none;
-}
-.card-text {
-    height: 7em;
+    margin-left: 1em;
 }
 
+.card-thumbnail {
+    max-height: 100%;
+    width: 7em;
+}
+
+/*----------------Tags----------------------------------*/
 .tags {
     list-style: none;
     margin: 0;
@@ -250,7 +234,9 @@ h2 {
     width: 20em;
     margin-left: -2em;
 }
-.btn-default{
+
+/*----------------Buttons----------------------------------*/
+.wide-btn-default {
     min-width: 200px;
     padding:10px;
     width: 35%;
@@ -261,19 +247,10 @@ h2 {
     width: 35%;
 }
 .btn-center{
-    margin: 0% 3%;
-}
-.well{
-    width: 100%
-}
-.alert{
-    min-width:300px;
-    width:100%;
-}
-.panel{
-    width: 100%
+    margin: 0 3%;
 }
 
+/*----------------Theme page----------------------------------*/
 .detail-theme-left {
     padding-left: 5%;
     padding-right: 3%
@@ -281,11 +258,6 @@ h2 {
 
 .detail-theme-well {
     min-width: 10%;
-}
-
-.blue-panel-heading {
-    background-color: #55a1de;
-    border-color: #55a1de
 }
 
 .buttons-detail-theme {
@@ -298,10 +270,34 @@ h2 {
     padding-left: 3%;
 }
 
+/*----------------Table layout----------------------------------*/
 .clickable-table > tbody > tr:hover {
     background-color: #4E83B9;
     cursor: pointer;
     color: white;
+}
+
+/*----------------Misc----------------------------------*/
+.blue-panel-heading {
+    background-color: #55a1de;
+    border-color: #55a1de
+}
+
+.well{
+    width: 100%
+}
+
+.alert{
+    min-width:300px;
+    width:100%;
+}
+
+.panel{
+    width: 100%
+}
+
+.error-message {
+    color: red;
 }
 
 /*----------------Sticky footer----------------------------------*/
