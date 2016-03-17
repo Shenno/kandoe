@@ -46,8 +46,7 @@ public class TestCard {
         user = new User("firstname.lastname@kandoe.be", "password");
         user = userService.addUser(user);
 
-        organisation= new Organisation("organisation");
-        organisation.setOrganisator(user);
+        organisation= new Organisation("organisation",user);
         organisation = userService.addOrganisation(organisation);
 
         String name = "theme name";

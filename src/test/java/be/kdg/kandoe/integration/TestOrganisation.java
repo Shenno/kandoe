@@ -2,9 +2,9 @@ package be.kdg.kandoe.integration;
 
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.dom.user.User;
-import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.UserService;
 import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
+import org.apache.xpath.operations.Or;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,14 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by   Shenno Willaert
- * Date         22/02/2016
- * Project      kandoe
- * Package      be.kdg.kandoe.acceptance
- */
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:**/testcontext.xml"})
@@ -29,90 +25,84 @@ public class TestOrganisation {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private ContentService contentService;
-
-    User user;
+    private User user;
 
     @Before
     public void setup() {
-        user = new User("TestGebruiker", "pwd");
+        user = new User("firstname.lastname@kandoe.be", "password");
         user = userService.addUser(user);
     }
 
     @After
     public void tearDown() {
+        user = userService.findUserById(user.getId());
+        List<Organisation> organisations = user.getOrganisations();
+        for (Organisation o: organisations){
+            userService.deleteOrganisation(o.getId());
+        }
         userService.deleteUser(user.getUserId());
     }
 
-    @Test(expected = UserServiceException.class)
-    public void testAddOrganisationNoUser() {
-        String name = "Organisation 1";
-        Organisation organisation = new Organisation(name);
-        userService.addOrganisation(organisation);
-        assertNotNull(organisation);
-        assertEquals(organisation.getId(), userService.getOrganisationById(organisation.getId()).getId());
-    }
-
-    @Test(expected = UserServiceException.class)
-    public void testEmptyOrganisation() {
-        String name = "";
-        Organisation organisation = new Organisation(name);
-        userService.addOrganisation(organisation);
-    }
-
-    @Test(expected = UserServiceException.class)
-    public void testDuplicateNameOrganisation() {
-        String name = "Duplicate name";
-        Organisation organisation = new Organisation(name);
-        Organisation organisationDupl = new Organisation(name);
-        userService.addOrganisation(organisation);
-        userService.addOrganisation(organisationDupl);
-    }
-
-    @Test(expected = UserServiceException.class)
-    public void testDeleteOrganisationNoOrganisator(){
-        String name = "organisation name";
-        Organisation organisation = new Organisation(name);
-        organisation = userService.addOrganisation(organisation);
-        assertNotNull(organisation);
-        userService.deleteOrganisation(organisation.getId());
-        organisation = userService.getOrganisationById(organisation.getId());
-        assertNull(organisation);
-    }
-
     @Test
-    public void testAddOrganisationWithOrganisator() {
-        String name = "OrganisationOrg";
-        Organisation organisation = new Organisation(name);
-        organisation.setOrganisator(user);
+    public void testAddOrganisation() {
+        String name = "Organisation";
+        Organisation organisation = new Organisation(name, user);
         organisation = userService.addOrganisation(organisation);
         user = userService.findUserById(user.getId());
         assertNotNull(organisation);
-        assertEquals(organisation.getOrganisator(), user);
-        assertEquals(user.getOrganisations().size(), 1);
-        assertEquals(user.getOrganisations().get(0).getName(), organisation.getName());
-        assertEquals(user.getOrganisations().get(0).getId(), organisation.getId());
+        assertEquals("Number of Organisations must be correct", user.getOrganisations().size(), 1);
+        assertEquals("Name must be correct",user.getOrganisations().get(0).getName(), organisation.getName());
+        assertEquals("Organisator must be correct",user.getOrganisations().get(0).getId(), organisation.getId());
+    }
+
+    @Test (expected = UserServiceException.class)
+    public void testAddOrganisationNull(){
+        Organisation organisation = null;
+        userService.addOrganisation(organisation);
+    }
+
+    @Test(expected = UserServiceException.class)
+    public void testAddOrganisationEmptyName() {
+        String name = "";
+        Organisation organisation = new Organisation(name, user);
+        userService.addOrganisation(organisation);
+    }
+
+    @Test(expected = UserServiceException.class)
+    public void testAddOrganisationEmptyUser() {
+        String name = "Organisation";
+        Organisation organisation = new Organisation(name, null);
+        userService.addOrganisation(organisation);
+    }
+
+    @Test(expected = UserServiceException.class)
+    public void testAddOrganisationDuplicateName() {
+        String name = "Organisation";
+        Organisation organisation = new Organisation(name, user);
+        Organisation organisationDuplicate = new Organisation(name, user);
+        userService.addOrganisation(organisation);
+        userService.addOrganisation(organisationDuplicate);
+
         userService.deleteOrganisation(organisation.getId());
     }
 
     @Test
-    public void testRemoveOrganisationCheckOrganisator() {
-        String name = "RemoveOrganisation";
-        Organisation organisation = new Organisation(name);
-        organisation.setOrganisator(user);
-        //Bidirectional linking
+    public void testDeleteOrganisation(){
+        String name = "organisation name";
+        Organisation organisation = new Organisation(name, user);
         organisation = userService.addOrganisation(organisation);
+        assertNotNull("Organisation must be correct",organisation);
+
         user = userService.findUserById(user.getId());
         int size = user.getOrganisations().size();
 
-        //Bidirectional removing
         userService.deleteOrganisation(organisation.getId());
-
-        organisation = userService.getOrganisationById(organisation.getId());
+        Organisation organisationDeleted = userService.getOrganisationById(organisation.getId());
         user = userService.findUserById(user.getId());
-        assertNull(organisation); //Make sure organisation is removed
-        assertNotNull(user); // Make sure user is still alive
-        assertEquals(user.getOrganisations().size(), size-1); // Make sure organisation is removed TODO better check
+        assertNull("Organsation must be deleted",organisationDeleted);
+        assertNotNull("User must be correct",user);
+        assertEquals("Size organisations must be correct",user.getOrganisations().size(),size-1);
+        assertFalse("Organisation may not be in list", user.getOrganisations().contains(organisation));
     }
+
 }

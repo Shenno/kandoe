@@ -69,8 +69,6 @@ public class ITorganisation {
         WebElement element = driver.findElement(By.id("app"));
         element = element.findElement(By.tagName("create-organisation"));
 
-        //TODO Login stuff
-
         element = driver.findElement(By.name("ib_new_organisation"));
         assertEquals("input", element.getTagName());
         assertEquals("text", element.getAttribute("type"));

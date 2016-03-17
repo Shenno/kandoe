@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An Organisations is made by a {link: User} and has {link:Theme} objects
+ */
 @Entity
 @Table(name = "Organisation")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -35,24 +38,19 @@ public class Organisation implements Serializable, Identifiable<Integer> {
 
     @ManyToOne
     @JoinColumn(name = "user_id",nullable = false)
-    private User user; // Dit is de organisator maar moet user heten voor namingConvention hibernate TODO aanpassen!
+    private User user;
 
     public Organisation() {
 
     }
-
     public Organisation(String name) {
         organisationName = name;
         this.themes =  new ArrayList<>();
     }
-
-
-    public String getName() {
-        return organisationName;
-    }
-
-    public void setName(String name) {
+    public Organisation(String name, User user) {
         organisationName = name;
+        this.user = user;
+        this.themes =  new ArrayList<>();
     }
 
     @Override
@@ -62,6 +60,14 @@ public class Organisation implements Serializable, Identifiable<Integer> {
 
     public Integer getOrganisationId() {
         return getId();
+    }
+
+    public String getName() {
+        return organisationName;
+    }
+
+    public void setName(String name) {
+        organisationName = name;
     }
 
     public List<Theme> getThemes() {

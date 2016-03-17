@@ -65,7 +65,7 @@ public class ITtheme {
         (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Maak organisatie aan"));
 
         element = driver.findElement(By.name("ib_new_organisation"));
-        organisationName = "MyOrganisation";
+        organisationName = "MyOrganisationTheme";
         SeleniumHelper.fillTextIntoElement(element, organisationName);
 
         element = driver.findElement(By.name("btn_add_organisation"));

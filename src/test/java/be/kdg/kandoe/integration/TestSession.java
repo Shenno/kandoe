@@ -58,8 +58,7 @@ public class TestSession {
         user3 = new User("gebruikertje3", "pass");
         user3 = userService.addUser(user3);
 
-        organisation = new Organisation("organisation");
-        organisation.setOrganisator(user);
+        organisation = new Organisation("organisation", user);
         organisation = userService.addOrganisation(organisation);
 
         String name = "theme name";
