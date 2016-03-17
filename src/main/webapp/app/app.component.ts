@@ -23,6 +23,9 @@ import {LogoutComponent} from "./components/logout.component";
 import {DetailCardComponent} from "./components/detailCard.component";
 import {OverviewSessionsComponent} from "./components/overviewSessions.component";
 import {CreateCsvComponent} from "./components/createCsv.component";
+import {Router} from "angular2/router";
+import {Instruction} from "angular2/router";
+import {ErrorComponent} from "./components/error.component";
 @Component({
     selector: 'my-app',
     templateUrl: 'app/partials_html/app.component.html',
@@ -57,8 +60,9 @@ import {CreateCsvComponent} from "./components/createCsv.component";
     {path:'/sessions', name:'Sessions', component:OverviewSessionsComponent},
 
     {path:'/cirkelsessie', name:'Cirkelsessie',component:CirkelsessieComponent},
-    {path:'/createCsv', name:'CreateCsv',component:CreateCsvComponent}
+    {path:'/createCsv', name:'CreateCsv',component:CreateCsvComponent},
 
+    {path: '/*error', name: 'Error', component: ErrorComponent}
 ])
 
 export class AppComponent {
@@ -73,7 +77,7 @@ export class AppComponent {
        this.getCurrentUserDetails();
         userService.authenticationEvent$.subscribe((eventType: string) => {
            this.onAuthenticationEvent(eventType);
-       })
+       });
     }
 
     public onAuthenticationEvent(eventType: string) {
