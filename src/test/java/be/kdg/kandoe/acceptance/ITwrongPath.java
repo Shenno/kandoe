@@ -27,15 +27,26 @@ public class ITwrongPath {
     }
 
     @Test
-    public void testWrongPathAfterHashtag() {
+    public void testWrongPathWithoutHashtag() {
+        driver.get("http://localhost:9966/kandoe/#/home");
+        SeleniumHelper.allowDomToLoad();
+        WebElement element = driver.findElement(By.id("app"));
+        element = element.findElement(By.tagName("home"));
+
+        driver.get("http://localhost:9966/kandoe/wrongPath");
+        SeleniumHelper.allowDomToLoad();
+        element = driver.findElement(By.id("app"));
+        element = element.findElement(By.tagName("home"));
+    }
+
+    @Test
+    public void testWrongPathWithHashtag() {
 
         driver.get("http://localhost:9966/kandoe/#/home");
         SeleniumHelper.allowDomToLoad();
         String orginalUrl = driver.getCurrentUrl();
 
-        System.out.println(orginalUrl);
-
-        driver.get("http://localhost:9966/kandoe/#/wrongUrl");
+        driver.get("http://localhost:9966/kandoe/#/wrongPath");
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
