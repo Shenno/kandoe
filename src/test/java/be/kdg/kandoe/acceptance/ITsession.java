@@ -3,6 +3,7 @@ package be.kdg.kandoe.acceptance;
 import be.kdg.kandoe.util.SeleniumHelper;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,8 +19,8 @@ public class ITsession {
     private static WebDriver driver;
     private static String userName;
 
-    @Before
-    public void setup() {
+    @BeforeClass
+    public static void setup() {
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
 
@@ -168,7 +169,7 @@ public class ITsession {
         SeleniumHelper.allowDomToLoad();
 
         for (int i = 0; i < 3; i++) {
-            element = driver.findElement(By.id("cb_cardStatus0"));
+            element = driver.findElement(By.id("cb_cardStatus" + i));
             assertEquals("input", element.getTagName());
             assertEquals("checkbox", element.getAttribute("type"));
             assertEquals("true", element.getAttribute("checked"));
@@ -183,36 +184,278 @@ public class ITsession {
 
         (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Kandoe sessie"));
 
-        for (int i = 1; i < 3; i++) {
-            element = driver.findElement(By.id("card" + (i-1) + "_number"));
+        for (int i = 0; i < 2; i++) {
+            element = driver.findElement(By.id("card" + i + "_number"));
             assertEquals("span", element.getTagName());
-            assertEquals(Integer.toString(i), element.getText());
+            assertEquals(Integer.toString(i+1), element.getText());
 
-            element = driver.findElement(By.id("card" + (i-1) + "_image"));
+            element = driver.findElement(By.id("card" + i + "_image"));
             assertEquals("The image must be correct", "http://www.wired.com/wp-content/uploads/2015/09/google-logo.jpg", element.getAttribute("src"));
 
-            element = driver.findElement(By.id("card" + (i-1) + "_name"));
+            element = driver.findElement(By.id("card" + i + "_name"));
             assertEquals("span", element.getTagName());
             assertEquals("MyCardName" + i, element.getText());
 
-
-
-            element = driver.findElement(By.id("card" + (i-1)));
+            element = driver.findElement(By.id("card" + i));
             assertEquals("div", element.getTagName());
 
-            element = driver.findElement(By.id("card" + (i-1) + "_numberOnCircle"));
+            element = driver.findElement(By.id("card" + i + "_numberOnCircle"));
             assertEquals("span", element.getTagName());
-            assertEquals(Integer.toString(i), element.getText());
+            assertEquals(Integer.toString(i+1), element.getText());
 
-            element = driver.findElement(By.id("card" + (i-1) + "_text"));
+            element = driver.findElement(By.id("card" + i + "_text"));
             assertEquals("span", element.getTagName());
             assertEquals("MyCardName" + i, SeleniumHelper.getInnerHtmlOfElement(driver, element));
         }
 
     }
 
+    @Test
+    public void testAddEmptySessionName () {
+        driver.get("http://localhost:9966/kandoe/#/");
+
+        WebElement element = driver.findElement(By.id("a_createSession"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Start een nieuwe Kandoe sessie!"));
+
+        element = driver.findElement(By.id("dd_themes"));
+        assertEquals("select", element.getTagName());
+        SeleniumHelper.selectOptionOnDropdown(element, "SessionTheme");
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("btn_createSession"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Sessie aanmaken rond het thema SessionTheme", element.getText());
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("err_session"));
+        assertEquals("div", element.getTagName());
+        assertEquals("The content of the error must be correct", "De sessie moet een naam hebben.", element.getText());
+    }
+
+    @Test
+    public void testNotEnoughRings () {
+        driver.get("http://localhost:9966/kandoe/#/");
+
+        WebElement element = driver.findElement(By.id("a_createSession"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Start een nieuwe Kandoe sessie!"));
+
+        element = driver.findElement(By.id("ib_name"));
+        assertEquals("input", element.getTagName());
+        assertEquals("text", element.getAttribute("type"));
+        SeleniumHelper.fillTextIntoElement(element, "MySession");
+
+        element = driver.findElement(By.id("ib_amount"));
+        element.clear();
+        SeleniumHelper.fillTextIntoElement(element, "1");
+
+        element = driver.findElement(By.id("dd_themes"));
+        assertEquals("select", element.getTagName());
+        SeleniumHelper.selectOptionOnDropdown(element, "SessionTheme");
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("btn_createSession"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Sessie aanmaken rond het thema SessionTheme", element.getText());
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("err_session"));
+        assertEquals("div", element.getTagName());
+        assertEquals("The content of the error must be correct", "Een Kandoecirkel moet minimum 3 en maximum 8 schillen hebben.", element.getText());
+    }
+
+    @Test
+    public void testTooManyRings () {
+        driver.get("http://localhost:9966/kandoe/#/");
+
+        WebElement element = driver.findElement(By.id("a_createSession"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Start een nieuwe Kandoe sessie!"));
+
+        element = driver.findElement(By.id("ib_name"));
+        assertEquals("input", element.getTagName());
+        assertEquals("text", element.getAttribute("type"));
+        SeleniumHelper.fillTextIntoElement(element, "MySession");
+
+        element = driver.findElement(By.id("ib_amount"));
+        element.clear();
+        SeleniumHelper.fillTextIntoElement(element, "10");
+
+        element = driver.findElement(By.id("dd_themes"));
+        assertEquals("select", element.getTagName());
+        SeleniumHelper.selectOptionOnDropdown(element, "SessionTheme");
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("btn_createSession"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Sessie aanmaken rond het thema SessionTheme", element.getText());
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("err_session"));
+        assertEquals("div", element.getTagName());
+        assertEquals("The content of the error must be correct", "Een Kandoecirkel moet minimum 3 en maximum 8 schillen hebben.", element.getText());
+    }
+
+    @Test
+    public void testNoParticipants() {
+        driver.get("http://localhost:9966/kandoe/#/");
+
+        WebElement element = driver.findElement(By.id("a_createSession"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Start een nieuwe Kandoe sessie!"));
+
+        element = driver.findElement(By.id("ib_name"));
+        assertEquals("input", element.getTagName());
+        assertEquals("text", element.getAttribute("type"));
+        SeleniumHelper.fillTextIntoElement(element, "MySession");
+
+        element = driver.findElement(By.id("delete_participant0"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("err_noParticipants"));
+        assertEquals("p", element.getTagName());
+        assertEquals("The content of the error must be correct", "Momenteel nog niemand! Voeg snel iemand toe, alleen spelen is niet leuk!", element.getText());
+
+        element = driver.findElement(By.id("dd_themes"));
+        assertEquals("select", element.getTagName());
+        SeleniumHelper.selectOptionOnDropdown(element, "SessionTheme");
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("btn_createSession"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Sessie aanmaken rond het thema SessionTheme", element.getText());
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("err_session"));
+        assertEquals("div", element.getTagName());
+        assertEquals("The content of the error must be correct", "Een sessie moet minimaal 2 deelnemers hebben.", element.getText());
+
+    }
+
+    @Test
+    public void testOneParticipant() {
+        driver.get("http://localhost:9966/kandoe/#/");
+
+        WebElement element = driver.findElement(By.id("a_createSession"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Start een nieuwe Kandoe sessie!"));
+
+        element = driver.findElement(By.id("ib_name"));
+        assertEquals("input", element.getTagName());
+        assertEquals("text", element.getAttribute("type"));
+        SeleniumHelper.fillTextIntoElement(element, "MySession");
+
+        element = driver.findElement(By.id("dd_themes"));
+        assertEquals("select", element.getTagName());
+        SeleniumHelper.selectOptionOnDropdown(element, "SessionTheme");
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("btn_createSession"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Sessie aanmaken rond het thema SessionTheme", element.getText());
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("err_session"));
+        assertEquals("div", element.getTagName());
+        assertEquals("The content of the error must be correct", "Een sessie moet minimaal 2 deelnemers hebben.", element.getText());
+
+    }
+
+    @Test
+    public void testNoCards() {
+        driver.get("http://localhost:9966/kandoe/#/");
+
+        WebElement element = driver.findElement(By.id("a_createSession"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Start een nieuwe Kandoe sessie!"));
+
+        element = driver.findElement(By.id("ib_name"));
+        SeleniumHelper.fillTextIntoElement(element, "MySession");
+
+        element = driver.findElement(By.id("dd_themes"));
+        SeleniumHelper.selectOptionOnDropdown(element, "SessionTheme");
+
+        SeleniumHelper.allowDomToLoad();
+
+        for (int i = 0; i < 3; i++) {
+            element = driver.findElement(By.id("cb_cardStatus" + i));
+            SeleniumHelper.clickOnElement(driver, element);
+        }
+
+        element = driver.findElement(By.id("btn_createSession"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Sessie aanmaken rond het thema SessionTheme", element.getText());
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("err_session"));
+        assertEquals("div", element.getTagName());
+        assertEquals("The content of the error must be correct", "Een sessie moet minimum 2 en maximum 24 kaarten bevatten.", element.getText());
+
+    }
+
+    @Test
+    public void testOneCard() {
+        driver.get("http://localhost:9966/kandoe/#/");
+
+        WebElement element = driver.findElement(By.id("a_createSession"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Start een nieuwe Kandoe sessie!"));
+
+        element = driver.findElement(By.id("ib_name"));
+        SeleniumHelper.fillTextIntoElement(element, "MySession");
+
+        element = driver.findElement(By.id("dd_themes"));
+        SeleniumHelper.selectOptionOnDropdown(element, "SessionTheme");
+
+        SeleniumHelper.allowDomToLoad();
+
+        for (int i = 0; i < 2; i++) {
+            element = driver.findElement(By.id("cb_cardStatus" + i));
+            SeleniumHelper.clickOnElement(driver, element);
+        }
+
+        element = driver.findElement(By.id("btn_createSession"));
+        assertEquals("button", element.getTagName());
+        assertEquals("Sessie aanmaken rond het thema SessionTheme", element.getText());
+        SeleniumHelper.clickOnElement(driver, element);
+
+        SeleniumHelper.allowDomToLoad();
+
+        element = driver.findElement(By.id("err_session"));
+        assertEquals("div", element.getTagName());
+        assertEquals("The content of the error must be correct", "Een sessie moet minimum 2 en maximum 24 kaarten bevatten.", element.getText());
+
+    }
+
     @AfterClass
     public static void tearDownClass() {
-        //driver.close();
+        driver.close();
     }
 }

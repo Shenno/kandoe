@@ -1,7 +1,7 @@
 <h1>Start een nieuwe Kandoe cirkelsessie!</h1>
 
 <form>
-    <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+    <div id="err_session" class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
     <div class="form-group ">
         <div class="row">
         <label>Geef de sessie een titel</label>
@@ -24,7 +24,7 @@
         <div class="row">
         <label>Personen die zullen kunnen deelnemen aan de sessie</label>
 
-        <p *ngIf="participantEmails.length==0" class="text-danger">Momenteel nog niemand! Voeg snel iemand toe, alleen
+        <p id="err_noParticipants" *ngIf="participantEmails.length==0" class="text-danger">Momenteel nog niemand! Voeg snel iemand toe, alleen
             spelen is niet leuk!</p>
 
             <p *ngIf="participantEmails.length < 2" class="text-danger">Je hebt minstens 2 deelnemers nodig om een sessie te starten.</p>
