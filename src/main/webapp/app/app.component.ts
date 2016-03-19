@@ -90,8 +90,4 @@ export class AppComponent {
             (err) => this.currentUserDetails = null);
     }
 
-    public lol() {
-        this.currentUserDetails = null;
-       // alert("error");
-    }
 }

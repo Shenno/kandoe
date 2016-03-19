@@ -51,6 +51,20 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public Session addSession(Session session, int themeId, List<Card> cards, List<String> usernames) throws SessionServiceException {
+        Theme theme = this.themeRepository.findOne(themeId);
+        if (theme == null) {
+            throw new SessionServiceException("Ongeldig thema.");
+        }
+        boolean found = false;
+        for(User u : theme.getOrganisators()) {
+            if(u.getUserId() == session.getOrganisator()) {
+                found = true;
+            }
+        }
+        if(!found) {
+            throw new SessionServiceException("Je kan geen sessie starten van een thema waar je geen organisator van bent");
+        }
+        session.setTheme(theme);
         if (session.getNameSession() == null || session.getNameSession().isEmpty()){
             throw new SessionServiceException("De sessie moet een naam hebben.");
         }
@@ -69,21 +83,17 @@ public class SessionServiceImpl implements SessionService {
         if (usernames.size() < 2) {
             throw new SessionServiceException("Een sessie moet minimaal 2 deelnemers hebben.");
         }
-        try {
-            Theme theme = this.themeRepository.findOne(themeId);
-            session.setTheme(theme);
-        } catch (ContentServiceException cse) {
-            throw new SessionServiceException(cse.getMessage());
-        }
         for(Card c : cards) {
+            if(c.getTheme().getId() != themeId) {
+                throw new SessionServiceException("Een kaart van een ander thema dan het thema van de sessie kan niet worden toegevoegd.");
+            }
             CardSession cardSession = new CardSession(session.getAmountOfCircles()+1, c.getText(), c.getImageURL(), session);
             session.addCardSession(cardSession);
         }
         for(String username : usernames) {
             User user = null;
-            try {
-                user = userRepository.findUserByUsername(username);
-            } catch (UserServiceException use) {
+            user = userRepository.findUserByUsername(username);
+            if(user == null) {
                 throw new SessionServiceException("Deelnemer kon niet toegevoegd worden aan de sessie");
             }
             session.addUser(user);

@@ -76,17 +76,27 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     @Fetch(FetchMode.SELECT)
     private List<User> users = new ArrayList<>();
 
-    public Session(boolean isProblem, String nameSession) {
+    /*public Session(boolean isProblem, String nameSession) {
         this(isProblem,1,20,nameSession);
-    }
+    }*/
 
-    public Session(boolean isProblem, int amountOfCircles, String nameSession) {
-        this(isProblem,1,20,nameSession);
+    public Session() {}
+
+    public Session(int organisatorId, boolean isProblem, int amountOfCircles, String nameSession) {
+        this.organisator = organisatorId;
+        this.problem = isProblem;
         this.amountOfCircles = amountOfCircles;
+        this.gameOver = false;
+        this.currentRound = 1;
+        this.minCards = 2;
+        this.maxCards = 24;
+        this.snapshotID = 1;
+        this.currentUser = -1;
+        this.nameSession = nameSession;
         this.remarks = new ArrayList<>();
     }
 
-    public Session(boolean problem, int minCards, int maxCards, String nameSession) {
+   /* public Session(boolean problem, int minCards, int maxCards, String nameSession) {
         this.problem = problem;
         this.gameOver = false;
         this.currentRound = 1;
@@ -95,7 +105,7 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
         this.snapshotID = 1;
         this.currentUser = -1;
         this.nameSession = nameSession;
-    }
+    }*/
 
     public List<CardSession> getCardSessions() {
         return cardSessions;

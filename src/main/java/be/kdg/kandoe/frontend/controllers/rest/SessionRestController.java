@@ -64,10 +64,10 @@ public class SessionRestController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<SessionResourceActive> createAsynchronousSession(@RequestBody SessionResourcePost sessionResourcePost, @AuthenticationPrincipal User user)
     {
-        Session session = new AsynchronousSession(true, 60, sessionResourcePost.getAmountOfCircles(), sessionResourcePost.getNameSession());
+        Session session = new AsynchronousSession(user.getUserId(), true, 60, sessionResourcePost.getAmountOfCircles(), sessionResourcePost.getNameSession());
         Session persistedSession = null;
         List<Card> cards = new ArrayList<>();
-        session.setOrganisator(user.getUserId());
+       // session.setOrganisator(user.getUserId());
 
 
         //TODO: cards meegeven in resource OF exception opvangen als cardId niet gevonden is
@@ -82,7 +82,6 @@ public class SessionRestController {
             session.setTheme(contentService.getTheme(sessionResourcePost.getThemeId()));
             SessionResourceActive sessionResourceActive = mapperFacade.map(session, SessionResourceActive.class);
             sessionResourceActive.setErrorMessage(sse.getMessage());
-            System.out.println(sessionResourceActive.getErrorMessage());
             return new ResponseEntity<SessionResourceActive>(sessionResourceActive, HttpStatus.OK);
         }
         return new ResponseEntity<SessionResourceActive>(mapperFacade.map(persistedSession, SessionResourceActive.class), HttpStatus.OK);

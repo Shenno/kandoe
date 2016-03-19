@@ -15,7 +15,9 @@ public class SynchronousSession extends Session implements Serializable{
     @Column(name = "StartingTime")
     private LocalDateTime startingTime;
 
-    public SynchronousSession(boolean isProblem,LocalDateTime startingTime,String nameSession) {
+    public SynchronousSession() {}
+
+    /*public SynchronousSession(boolean isProblem,LocalDateTime startingTime,String nameSession) {
         super(isProblem, nameSession);
         this.startingTime = startingTime;
     }
@@ -23,7 +25,7 @@ public class SynchronousSession extends Session implements Serializable{
     public SynchronousSession(boolean isProblem, int minCards, int maxCards, LocalDateTime startingTime, String nameSession) {
         super(isProblem,minCards, maxCards, nameSession);
         this.startingTime = startingTime;
-    }
+    }*/
 
     public LocalDateTime getStartingTime() {
         return startingTime;

@@ -47,7 +47,7 @@ public class TestDashboard {
         user = new User("firstname.lastname@kandoe.be", "password");
         user = userService.addUser(user);
 
-        organisation = new Organisation("organisation", user);
+       /* organisation = new Organisation("organisation", user);
         organisation = userService.addOrganisation(organisation);
 
         String name = "theme name";
@@ -89,7 +89,7 @@ public class TestDashboard {
         card = new Card(cardDescription, url, theme);
         card = contentService.addCard(card);
         sessionService.addCardToSession(session1, card);
-        sessionService.addCardToSession(session3, card);
+        sessionService.addCardToSession(session3, card);*/
     }
 
     @After

@@ -66,18 +66,6 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
     `,
     encapsulation: ViewEncapsulation.None
 })
-/*<div *ngFor="#card of cards">{{card?.text}}
- <1img src="{{card.imageURL}}">
- </div>*/
-/*<h1 *ngIf="myTurn">Het is jouw beurt, {{currentUser?.username}}!</h1>
- <h1 *ngIf="!myTurn">Wacht even je beurt af!</h1>
- <div *ngIf="currentSession" *ngFor="#card of currentSession.cardSessionResources">
- {{card.card}}
- <img src="{{card.image}}">
- </div>*/
-/*<select [(ng-model)]="objValue1">
- <option *ng-for="#o of objArray" [value]="o">{{o.name}}</option>
- </select>*/
 
 export class SessionComponent {
 
@@ -104,33 +92,30 @@ export class SessionComponent {
             this.currentUser = user;
         });
 
-        //Testing purposes
-        /*var i;
-         for (i = 0; i < 12 ; i++) {
-         //var tmpcard:SessionCard = new SessionCard(i, 8, "test", "google.com", 290 + (290*Math.cos(pies[i])), 290 + (290*Math.sin(pies[i])));
-         var tmpcard:SessionCard = new SessionCard(i, 5, "test", "google.com", 1, 1);
-         this.testerino.push(tmpcard);
-         }*/
-
         this.currentSessionId = routeParam.params["sessionId"];
 
-        //Get session once
-        this.sessionService.getSession(this.currentSessionId).subscribe((sessionActive:SessionActive) => {
-            this.updateView(sessionActive);
-            //Start polling for updates
-            this.subscription = this.sessionService.pollSession(routeParam.params["sessionId"], 5000).subscribe((sessionActive:SessionActive) => {
-                this.updateView(sessionActive);
-                this.currentSession.cardSessionResources = sessionActive.cardSessionResources;
-                this.currentSession.remarks = sessionActive.remarks;
+        /*this.sessionService.addSession(session).subscribe(
+         (session:SessionActive) => {
+         if (session.errorMessage == '') {
+         this.router.navigate(['/Session', {sessionId: session.id}])
+         } else {
+         window.scrollTo(0, 0);
+         this.errorMessage = session.errorMessage;
+         }
+         },
+         (err) => this.errorMessage = "Oeps, er trad een onverwachte fout op!");*/
 
-                //Testing purposes
-                /*
-                 this.testerino[0].id = this.testerino[0].id + 1;
-                 // var blabla = this.testerino.slice();
-                 this.testerino = this.testerino.slice();
-                 */
-            });
-        });
+        //Get session once
+        this.sessionService.getSession(this.currentSessionId).subscribe(
+            (sessionActive:SessionActive) => {
+                this.updateView(sessionActive);
+                //Start polling for updates
+                this.subscription = this.sessionService.pollSession(routeParam.params["sessionId"], 5000).subscribe((sessionActive:SessionActive) => {
+                    this.updateView(sessionActive);
+                    this.currentSession.cardSessionResources = sessionActive.cardSessionResources;
+                    this.currentSession.remarks = sessionActive.remarks;
+                });
+        },  (err) => this.router.navigate(['/Error']));
     }
 
     public isOrganisator(): boolean {
