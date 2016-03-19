@@ -38,6 +38,9 @@ System.register(['angular2/core', 'angular2/router', '../entity/organisation', "
                     });
                     document.title = 'Maak organisatie aan';
                 }
+                CreateOrganisationComponent.prototype.onEditOrganisationName = function () {
+                    this.organisation.errorMessage = "";
+                };
                 CreateOrganisationComponent.prototype.onSubmit = function () {
                     this.userService.addOrganisation(this.organisation);
                 };

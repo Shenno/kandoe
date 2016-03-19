@@ -84,14 +84,18 @@ export class ContentService {
         var themeString = JSON.stringify(theme);
         var headers =  this.urlService.getHeaders(true);
         this.http.put(url, themeString, {headers: headers}).map((res:Response) => res.json()).subscribe(
-            (data) => this.onSuccesfulUpdateTheme(data.themeId, theme),
+            (data) => this.onSuccesfulUpdateTheme(data.themeId, theme, data.errorMessage),
             ((err:Error) => this.logger.log('Fout tijdens bewerken van thema: ' + err.message))
         );
     }
 
-    private onSuccesfulUpdateTheme(id:number, theme:Theme): void {
-        this.logger.log('Thema "' + theme.themeName + '" is bijgewerkt"');
-        this.router.navigate(['/Theme', {themeId: id}]);
+    private onSuccesfulUpdateTheme(id:number, theme:Theme, errorMessage: string): void {
+        if (errorMessage == null) {
+            this.logger.log('Thema "' + theme.themeName + '" is bijgewerkt"');
+            this.router.navigate(['/Theme', {themeId: id}]);
+        } else {
+            theme.errorMessage = errorMessage;
+        }
     }
 
     /*Tag*/

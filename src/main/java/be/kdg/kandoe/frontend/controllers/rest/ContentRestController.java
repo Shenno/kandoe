@@ -76,22 +76,28 @@ public class ContentRestController {
 
     @RequestMapping(value = "/{themeId}", method = RequestMethod.PUT)
     public ResponseEntity<ThemeResource> updateMainTheme(@PathVariable("themeId") Integer themeId, @RequestBody ThemeResource themeResource, @AuthenticationPrincipal User user) {
-        if (themeResource.getOrganisatorId().intValue() == user.getId()) {
-            Theme updatedTheme = contentService.updateTheme(mapperFacade.map(themeResource, Theme.class));
+        try {
+            if (themeResource.getOrganisatorId().intValue() == user.getId()) {
+                Theme updatedTheme = contentService.updateTheme(mapperFacade.map(themeResource, Theme.class));
 
-            for (String tagName : themeResource.getTags()) {
-                try {
-                    contentService.findTagByTagNameByTheme(tagName, updatedTheme);
-                } catch (ContentServiceException ex) {
-                    Tag tag = contentService.addTag(new Tag(tagName, updatedTheme));
-                    updatedTheme.addTag(tag);
+                for (String tagName : themeResource.getTags()) {
+                    try {
+                        contentService.findTagByTagNameByTheme(tagName, updatedTheme);
+                    } catch (ContentServiceException ex) {
+                        Tag tag = contentService.addTag(new Tag(tagName, updatedTheme));
+                        updatedTheme.addTag(tag);
+                    }
                 }
+
+                return new ResponseEntity<>(mapperFacade.map(updatedTheme, ThemeResource.class), HttpStatus.OK);
             }
 
-            return new ResponseEntity<>(mapperFacade.map(updatedTheme, ThemeResource.class), HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        } catch (ContentServiceException ex) {
+            String errorMessage = ex.getMessage();
+            themeResource.setErrorMessage(errorMessage);
+            return new ResponseEntity<>(themeResource, HttpStatus.OK);
         }
-
-        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
     @RequestMapping(value = "/{mainThemeId}/tags", method = RequestMethod.POST)

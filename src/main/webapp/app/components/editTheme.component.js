@@ -49,6 +49,7 @@ System.register(['angular2/core', 'angular2/router', "../service/contentService"
                     this.userService = userService;
                     this.contentService.getTheme(routeParam.params["themeId"]).subscribe(function (theme) {
                         _this.theme = theme;
+                        _this.theme.errorMessage = '';
                         document.title = 'Wijzig thema';
                     });
                     this.userService.getMyDetails().subscribe(function (user) {
@@ -62,6 +63,9 @@ System.register(['angular2/core', 'angular2/router', "../service/contentService"
                         });
                     });
                 }
+                EditThemeComponent.prototype.onEditThemeName = function () {
+                    this.theme.errorMessage = "";
+                };
                 EditThemeComponent.prototype.onAddTag = function () {
                     if (this.newTag != '') {
                         var tags = this.newTag.split(" ");

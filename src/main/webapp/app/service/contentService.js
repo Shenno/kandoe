@@ -93,11 +93,16 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
                     var url = this.baseUrl + "/api/themes/" + theme.themeId;
                     var themeString = JSON.stringify(theme);
                     var headers = this.urlService.getHeaders(true);
-                    this.http.put(url, themeString, { headers: headers }).map(function (res) { return res.json(); }).subscribe(function (data) { return _this.onSuccesfulUpdateTheme(data.themeId, theme); }, (function (err) { return _this.logger.log('Fout tijdens bewerken van thema: ' + err.message); }));
+                    this.http.put(url, themeString, { headers: headers }).map(function (res) { return res.json(); }).subscribe(function (data) { return _this.onSuccesfulUpdateTheme(data.themeId, theme, data.errorMessage); }, (function (err) { return _this.logger.log('Fout tijdens bewerken van thema: ' + err.message); }));
                 };
-                ContentService.prototype.onSuccesfulUpdateTheme = function (id, theme) {
-                    this.logger.log('Thema "' + theme.themeName + '" is bijgewerkt"');
-                    this.router.navigate(['/Theme', { themeId: id }]);
+                ContentService.prototype.onSuccesfulUpdateTheme = function (id, theme, errorMessage) {
+                    if (errorMessage == null) {
+                        this.logger.log('Thema "' + theme.themeName + '" is bijgewerkt"');
+                        this.router.navigate(['/Theme', { themeId: id }]);
+                    }
+                    else {
+                        theme.errorMessage = errorMessage;
+                    }
                 };
                 /*Tag*/
                 ContentService.prototype.addTag = function (tag) {

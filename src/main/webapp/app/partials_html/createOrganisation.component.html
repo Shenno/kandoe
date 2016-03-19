@@ -9,7 +9,7 @@
             <label for="ib_new_organisation" class="control-label">Organisatie naam: <span
                     style="color: red">*</span></label>
             <input id="ib_new_organisation" name="ib_new_organisation"
-                   [(ngModel)]="organisation.name" class="form-control"
+                   [(ngModel)]="organisation.name" class="form-control" (change)="onEditOrganisationName()"
                    type="text" required ngControl="name" #name="ngForm">
             <div [hidden]="name.valid || name.pristine"
                  class="alert alert-danger" style="width: 20em; margin-top: 2px;"

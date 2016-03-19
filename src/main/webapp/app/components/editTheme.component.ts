@@ -38,6 +38,7 @@ export class EditThemeComponent {
         this.userService = userService;
         this.contentService.getTheme(routeParam.params["themeId"]).subscribe((theme:Theme) => {
             this.theme = theme;
+            this.theme.errorMessage = '';
             document.title = 'Wijzig thema';
         });
         this.userService.getMyDetails().subscribe((user:User) => {
@@ -50,6 +51,10 @@ export class EditThemeComponent {
                 this.theme.organisatorNames.splice(index,1);
             });
         });
+    }
+
+    public onEditThemeName(): void {
+        this.theme.errorMessage = "";
     }
 
     public onAddTag(): void {

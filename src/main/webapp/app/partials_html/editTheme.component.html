@@ -1,62 +1,78 @@
-<form>
-    <div class="form-group">
-        <label for="ib_themeName">Naam</label>
-        <input id="ib_themeName" name="ib_themeName" [(ngModel)]="theme.themeName" ngValue="theme.themeName"
-               class="form-control">
-    </div>
+<div class="content-center">
 
-    <div class="form-group">
-        <label for="ib_description">Beschrijving</label>
+    <h1>Wijzig thema</h1>
+
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="ib_themeName">Naam</label>
+            <input id="ib_themeName" name="ib_themeName" [(ngModel)]="theme.themeName" ngValue="theme.themeName" (change)="onEditThemeName()"
+                   class="form-control">
+        </div>
+
+        <div id="err_theme" *ngIf="theme.errorMessage != ''" class="alert alert-danger"
+             style="width: 20em; margin-top: 2px;">
+            {{theme.errorMessage}}
+        </div>
+
+        <div class="form-group">
+            <label for="ib_description">Beschrijving</label>
         <textarea id="ib_description" name="ib_description" [(ngModel)]="theme.description"
                   class="form-control"></textarea>
-    </div>
-
-    <div class="form-group">
-        <div class="checkbox">
-            <input type="checkbox" id="cb_commentaryAllowed" name="cb_commentaryAllowed"
-                   [(ngModel)]="theme.commentaryAllowed">
-            <label for="cb_commentaryAllowed">Commentaar op kaartjes toegelaten</label>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="checkbox">
-            <input type="checkbox" id="cb_addingAdmitted" name="cb_addingAdmitted" [(ngModel)]="theme.addingAdmitted">
-            <label for="cb_addingAdmitted">Toevoegen van kaartjes toegelaten</label>
+        <div class="form-group">
+            <div class="checkbox">
+                <input type="checkbox" id="cb_commentaryAllowed" name="cb_commentaryAllowed"
+                       [(ngModel)]="theme.commentaryAllowed">
+                <label for="cb_commentaryAllowed">Commentaar op kaartjes toegelaten</label>
+            </div>
         </div>
-    </div>
 
-    <div id="tags" class="tags-create">
-        <ul class="tags">
-            <li [id]="'tag'+i" *ngFor="#tag of theme.tags;#i=index" class="custom-tag">
-                {{tag}}
-                <span [id]="'delete_tag' + i" class="glyphicon glyphicon-remove" (click)="onRemoveTag(i)"></span>
-            </li>
-        </ul>
-    </div>
-    <div class="form-group">
-        <input name="ib_newTag" class="form-control" [(ngModel)]="newTag">
-        <button name="btn_addTag" class="btn wide-btn-default" (click)="onAddTag()">
-            <span class="glyphicon glyphicon-tags"></span> Voeg tag toe
+        <div class="form-group">
+            <div class="checkbox">
+                <input type="checkbox" id="cb_addingAdmitted" name="cb_addingAdmitted"
+                       [(ngModel)]="theme.addingAdmitted">
+                <label for="cb_addingAdmitted">Toevoegen van kaartjes toegelaten</label>
+            </div>
+        </div>
+
+        <div id="tags" class="tags-create">
+            <ul class="tags">
+                <li [id]="'tag'+i" *ngFor="#tag of theme.tags;#i=index" class="custom-tag">
+                    {{tag}}
+                    <span [id]="'delete_tag' + i" class="glyphicon glyphicon-remove" (click)="onRemoveTag(i)"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="form-group">
+            <input name="ib_newTag" class="form-control" [(ngModel)]="newTag">
+            <button name="btn_addTag" class="btn wide-btn-default" (click)="onAddTag()">
+                <span class="glyphicon glyphicon-tags"></span> Voeg tag toe
+            </button>
+            <span id="err_tag" class="error-message">{{tagErrorMessage}}</span>
+        </div>
+
+        <div id="organisators">
+            <p [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index">
+                <span *ngIf="organisator != currentUser.username">{{organisator}}  <span [id]="'delete_organisator' + i"
+                                                                                         class="glyphicon glyphicon-remove"
+                                                                                         (click)="onRemoveOrganisator(i)"></span></span>
+            </p>
+        </div>
+
+        <select class="form-control" id="dd_users" [(ngModel)]="newOrganisator">
+            <option [id]="'opt_user' + i" *ngFor="#user of users;#i=index">
+                {{user}}
+            </option>
+        </select>
+        <button class="btn wide-btn-default" name="btn_addOrganisator" (click)="onAddOrganisator()">Voeg organisator
+            toe
         </button>
-        <span id="err_tag" class="error-message">{{tagErrorMessage}}</span>
-    </div>
+        <span id="err_organisator" class="error-message">{{organisatorErrorMessage}}</span>
+        <br><br>
 
-    <div id="organisators">
-        <p [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index">
-            <span *ngIf="organisator != currentUser.username">{{organisator}}  <span [id]="'delete_organisator' + i" class="glyphicon glyphicon-remove" (click)="onRemoveOrganisator(i)"></span></span>
-        </p>
-    </div>
-
-    <select class="form-control" id="dd_users" [(ngModel)]="newOrganisator">
-        <option [id]="'opt_user' + i" *ngFor="#user of users;#i=index">
-            {{user}}
-        </option>
-    </select>
-    <button class="btn wide-btn-default" name="btn_addOrganisator" (click)="onAddOrganisator()">Voeg organisator toe</button>
-    <span id="err_organisator" class="error-message">{{organisatorErrorMessage}}</span>
-    <br><br>
-
-    <button class="btn btn-primary" name="btn_save" (click)="onSubmit()">Opslaan</button>
-    <button class="btn wide-btn-default" name="btn_cancel" (click)="onCancel($event)">Annuleren</button>
-</form>
+        <button class="btn btn-primary" name="btn_save" (click)="onSubmit()">Opslaan</button>
+        <button class="btn wide-btn-default" name="btn_cancel" (click)="onCancel($event)">Annuleren</button>
+    </form>
+</div>

@@ -49,6 +49,16 @@ public class ContentServiceImpl implements ContentService {
     /*Theme*/
     @Override
     public Theme addTheme(Theme theme) throws ContentServiceException {
+        validateTheme(theme);
+        theme.setTags(new ArrayList<>());
+        theme = themeRepository.addTheme(theme);
+        /*Organisation organisation = userService.getOrganisationById(theme.getOrganisation().getId());
+        organisation.getThemes().add(theme);
+        userService.updateOrganisation(organisation);*/
+        return theme;
+    }
+
+    private void validateTheme(Theme theme) throws ContentServiceException{
         if (theme == null) {
             throw new ContentServiceException("Theme can not be empty");
         } else if (theme.getThemeName().isEmpty()) {
@@ -58,12 +68,6 @@ public class ContentServiceImpl implements ContentService {
         } else if (theme.getOrganisators().size() == 0) {
             throw new ContentServiceException("There must be at least one organisator");
         }
-        theme.setTags(new ArrayList<>());
-        theme = themeRepository.addTheme(theme);
-        /*Organisation organisation = userService.getOrganisationById(theme.getOrganisation().getId());
-        organisation.getThemes().add(theme);
-        userService.updateOrganisation(organisation);*/
-        return theme;
     }
 
     @Override
@@ -100,7 +104,8 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public Theme updateTheme(Theme theme) {
+    public Theme updateTheme(Theme theme) throws ContentServiceException {
+        validateTheme(theme);
         theme.setTags(new ArrayList<>()); //TODO: Betere manier om bug op te lossen?
         return themeRepository.updateTheme(theme);
     }

@@ -26,6 +26,11 @@ export class CreateOrganisationComponent {
         document.title = 'Maak organisatie aan';
     }
 
+    public onEditOrganisationName(): void {
+        this.organisation.errorMessage = "";
+    }
+
+
     public onSubmit(): void {
         this.userService.addOrganisation(this.organisation);
     }

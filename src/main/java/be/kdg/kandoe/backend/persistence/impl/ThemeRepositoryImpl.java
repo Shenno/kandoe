@@ -26,6 +26,14 @@ public class ThemeRepositoryImpl implements ThemeRepositoryCustom {
 
     @Override
     public Theme addTheme(Theme theme) throws ContentServiceException {
+        validateTheme(theme);
+
+        final Session session = em.unwrap(Session.class);
+        session.save(theme);
+        return theme;
+    }
+
+    private void validateTheme(Theme theme) {
         final TypedQuery<Theme> q = em.createNamedQuery("Theme.findByThemeNameByOrganisation", Theme.class);
         q.setParameter("themename", theme.getThemeName());
         q.setParameter("organisation",theme.getOrganisation());
@@ -33,14 +41,12 @@ public class ThemeRepositoryImpl implements ThemeRepositoryCustom {
         {
             throw new ContentServiceException("Een thema met de naam '" + theme.getThemeName() + "' is reeds aangemaakt voor organisatie '"+theme.getOrganisation().getName() + "'.");
         }
-
-        final Session session = em.unwrap(Session.class);
-        session.save(theme);
-        return theme;
     }
 
     @Override
     public Theme updateTheme(Theme theme) {
+        validateTheme(theme);
+
         final Session session = em.unwrap(Session.class);
         session.update(theme);
         return theme;

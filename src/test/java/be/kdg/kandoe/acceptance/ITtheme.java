@@ -2,15 +2,12 @@ package be.kdg.kandoe.acceptance;
 
 import be.kdg.kandoe.util.SeleniumHelper;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
@@ -87,7 +84,7 @@ public class ITtheme {
     }
 
     @Test
-    public void testAddEmptyThemename() {
+    public void addEmptyThemename() {
         driver.get("http://localhost:9966/kandoe/#/organisation/" + organisationId + "/createTheme");
 
         SeleniumHelper.allowDomToLoad();
