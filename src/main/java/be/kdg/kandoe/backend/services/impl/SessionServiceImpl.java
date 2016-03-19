@@ -135,8 +135,16 @@ public class SessionServiceImpl implements SessionService {
     public Session addRemarkToSession(Session session, String username, String text) {
         User user = userRepository.findUserByUsername(username);
         if(user == null) {
-            throw new SessionServiceException("Invalid username");
-            //TODO: zorgen dat enkel users van de sessie remarks kunnen adden
+            throw new SessionServiceException("Onbestaande gebruiker kan geen opmerkingen toevoegen.");
+        }
+        boolean isParticipant = false;
+        for(User participant : session.getUsers()) {
+            if((participant.getUserId().equals(user.getUserId())) || (user.getUserId().equals(session.getOrganisator()))) {
+                isParticipant = true;
+            }
+        }
+        if(!isParticipant) {
+            throw new SessionServiceException("Gebruiker die niet deelneemt aan de sessie of geen organisator is van de sessie mag geen opmerkingen plaatsen.");
         }
         Remark r = new Remark(text, user, session);
         session.addRemark(r);
@@ -149,10 +157,16 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public void makeMove(CardSession cardSession, int userId) throws SessionServiceException {
+    public Session makeMove(CardSession cardSession, int userId) throws SessionServiceException {
         Session session = findSession(cardSession.getSession().getId());
+        if(session.isGameOver()) {
+            throw new SessionServiceException("Zet kan niet uitgevoerd worden omdat de sessie gedaan is.");
+        }
         if(cardSession.getDistanceToCenter() == 0) {
-            throw new ServiceException("This card can't be pushed any further, it's already at the center.");
+            throw new SessionServiceException("Deze zet kan niet uitgevoerd worden. Kaart bevindt zich al in het centrum van de cirkel.");
+        }
+        if(userRepository.findOne(userId) == null) {
+            throw new SessionServiceException("Deze zet kan niet uitgevoerd worden omdat de gebruiker niet bestaat.");
         }
         if(session.getCurrentUser() == userId) {
             cardSession.setDistanceToCenter(cardSession.getDistanceToCenter() - 1);
@@ -161,10 +175,12 @@ public class SessionServiceImpl implements SessionService {
                 session.setGameOver(true);
             }
             cardSessionRepository.save(cardSession);
-            sessionRepository.save(session);
-            return;
+            return sessionRepository.save(session);
         }
-        throw new SessionServiceException("It's not user " + userId + "'s turn");
+        if(session.getCurrentUser() != userId) {
+            throw new SessionServiceException("Deze zet kan niet uitgevoerd worden omdat de gebruiker niet aan beurt is.");
+        }
+        return null;
     }
 
     @Override
