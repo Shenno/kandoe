@@ -67,10 +67,16 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public Theme getTheme(int themeId) {
-        Theme foundTheme = themeRepository.findOne(themeId);
-        Hibernate.initialize(foundTheme.getTags());
-        return foundTheme;
+    public Theme getTheme(int themeId) throws ContentServiceException {
+        Theme foundTheme = null;
+        try {
+            foundTheme = themeRepository.findOne(themeId);
+            Hibernate.initialize(foundTheme.getTags());
+            return foundTheme;
+        }
+        catch (Exception e) {
+            throw new ContentServiceException("Onbestaand thema");
+        }
     }
 
     @Override

@@ -19,10 +19,13 @@ public class SessionResourceActive implements Serializable {
     private int amountOfUsers;
     private String themeName;
     private int organisator;
+    private String errorMessage;
+
 
     public SessionResourceActive() {
         this.cardSessionResources = new ArrayList<>();
         this.remarks = new ArrayList<>();
+        this.errorMessage = "";
     }
 
     public List<CardSessionResource> getCardSessionResources() {
@@ -31,6 +34,14 @@ public class SessionResourceActive implements Serializable {
 
     public int getOrganisator() {
         return organisator;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
     public void setOrganisator(int organisator) {

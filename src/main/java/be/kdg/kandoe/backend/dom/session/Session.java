@@ -83,6 +83,7 @@ public abstract class Session implements Serializable, Identifiable<Integer> {
     public Session(boolean isProblem, int amountOfCircles, String nameSession) {
         this(isProblem,1,20,nameSession);
         this.amountOfCircles = amountOfCircles;
+        this.remarks = new ArrayList<>();
     }
 
     public Session(boolean problem, int minCards, int maxCards, String nameSession) {

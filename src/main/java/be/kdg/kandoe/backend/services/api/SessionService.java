@@ -18,7 +18,7 @@ import java.util.List;
  */
 public interface SessionService {
     // Session
-    Session addSession(Session session, int themeId);
+    Session addSession(Session session, int themeId, List<Card> cards, List<String> usernames);
     Session findSession(int sessionId);
     Session addCardToSession(Session session, Card card);
     Session addUserToSession(Session session, String username) throws SessionServiceException;

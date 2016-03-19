@@ -1,5 +1,6 @@
 package be.kdg.kandoe.frontend.controllers.rest;
 
+import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.session.AsynchronousSession;
 import be.kdg.kandoe.backend.dom.session.Session;
@@ -7,6 +8,7 @@ import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.ContentService;
 import be.kdg.kandoe.backend.services.api.SessionService;
 import be.kdg.kandoe.backend.services.api.UserService;
+import be.kdg.kandoe.backend.services.exceptions.SessionServiceException;
 import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
 import be.kdg.kandoe.frontend.controllers.resources.sessions.CardSessionResource;
 import be.kdg.kandoe.frontend.controllers.resources.sessions.RemarkResource;
@@ -20,6 +22,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.AbstractDocument;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,14 +62,34 @@ public class SessionRestController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Integer> createAsynchronousSession(@RequestBody SessionResourcePost sessionResourcePost, @AuthenticationPrincipal User user)
+    public ResponseEntity<SessionResourceActive> createAsynchronousSession(@RequestBody SessionResourcePost sessionResourcePost, @AuthenticationPrincipal User user)
     {
-        String nameSession = sessionResourcePost.getNameSession();
+        Session session = new AsynchronousSession(true, 60, sessionResourcePost.getAmountOfCircles(), sessionResourcePost.getNameSession());
+        Session persistedSession = null;
+        List<Card> cards = new ArrayList<>();
+        session.setOrganisator(user.getUserId());
+
+
+        //TODO: cards meegeven in resource OF exception opvangen als cardId niet gevonden is
+        for(Integer c : sessionResourcePost.getCardIds()) {
+            cards.add(contentService.getCard(c));
+        }
+
+        try {
+            persistedSession = sessionService.addSession(session, sessionResourcePost.getThemeId(), cards, sessionResourcePost.getParticipantsEmails());
+        } catch (SessionServiceException sse) {
+            //TODO: return resource errorMessage setten
+            session.setTheme(contentService.getTheme(sessionResourcePost.getThemeId()));
+            SessionResourceActive sessionResourceActive = mapperFacade.map(session, SessionResourceActive.class);
+            sessionResourceActive.setErrorMessage(sse.getMessage());
+            System.out.println(sessionResourceActive.getErrorMessage());
+            return new ResponseEntity<SessionResourceActive>(sessionResourceActive, HttpStatus.OK);
+        }
+        return new ResponseEntity<SessionResourceActive>(mapperFacade.map(persistedSession, SessionResourceActive.class), HttpStatus.OK);
+        /*String nameSession = sessionResourcePost.getNameSession();
         Session session = new AsynchronousSession(true, 60, sessionResourcePost.getAmountOfCircles(),nameSession);
         session.setOrganisator(user.getUserId());
         Session persistedSession = sessionService.addSession(session, sessionResourcePost.getThemeId());
-        //sessionResourcePost.getParticipantsEmails().forEach(e -> sessionService.addUserToSession(session, e));
-
         for(String s : sessionResourcePost.getParticipantsEmails()) {
             persistedSession = sessionService.addUserToSession(persistedSession, s);
         }
@@ -82,7 +105,7 @@ public class SessionRestController {
 
         System.out.println(sessionService.findSession(persistedSession.getId()).getCardSessions());
         //Do magic
-        return new ResponseEntity<Integer>(persistedSession.getId(), HttpStatus.OK);
+        return new ResponseEntity<Integer>(persistedSession.getId(), HttpStatus.OK);*/
     }
 
     @RequestMapping(value="/{sessionId}", method = RequestMethod.GET)

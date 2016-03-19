@@ -13,7 +13,9 @@ import be.kdg.kandoe.backend.persistence.api.SessionRepository;
 import be.kdg.kandoe.backend.persistence.api.ThemeRepository;
 import be.kdg.kandoe.backend.persistence.api.UserRepository;
 import be.kdg.kandoe.backend.services.api.SessionService;
+import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
 import be.kdg.kandoe.backend.services.exceptions.SessionServiceException;
+import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
 import org.hibernate.Hibernate;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +50,44 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public Session addSession(Session session, int themeId) throws SessionServiceException {
-        if (session.getNameSession().isEmpty()){
-            throw new SessionServiceException("Empty name for session");
+    public Session addSession(Session session, int themeId, List<Card> cards, List<String> usernames) throws SessionServiceException {
+        if (session.getNameSession() == null || session.getNameSession().isEmpty()){
+            throw new SessionServiceException("De sessie moet een naam hebben.");
         }
-        Theme theme = this.themeRepository.findOne(themeId);
-        session.setTheme(theme);
+        if (session.getAmountOfCircles() < 3 || session.getAmountOfCircles() > 8) {
+            throw new SessionServiceException("Een Kandoecirkel moet minimum 3 en maximum 8 schillen hebben.");
+        }
+        if(cards == null) {
+            throw new SessionServiceException("Een sessie moet kaarten bevatten.");
+        }
+        if (cards.size() < 2 || cards.size() > 24) {
+            throw new SessionServiceException("Een sessie moet minimum 2 en maximum 24 kaarten bevatten.");
+        }
+        if(usernames == null) {
+            throw new SessionServiceException("Een sessie moet deelnemers bevatten.");
+        }
+        if (usernames.size() < 2) {
+            throw new SessionServiceException("Een sessie moet minimaal 2 deelnemers hebben.");
+        }
+        try {
+            Theme theme = this.themeRepository.findOne(themeId);
+            session.setTheme(theme);
+        } catch (ContentServiceException cse) {
+            throw new SessionServiceException(cse.getMessage());
+        }
+        for(Card c : cards) {
+            CardSession cardSession = new CardSession(session.getAmountOfCircles()+1, c.getText(), c.getImageURL(), session);
+            session.addCardSession(cardSession);
+        }
+        for(String username : usernames) {
+            User user = null;
+            try {
+                user = userRepository.findUserByUsername(username);
+            } catch (UserServiceException use) {
+                throw new SessionServiceException("Deelnemer kon niet toegevoegd worden aan de sessie");
+            }
+            session.addUser(user);
+        }
         return this.sessionRepository.save(session);
     }
 
