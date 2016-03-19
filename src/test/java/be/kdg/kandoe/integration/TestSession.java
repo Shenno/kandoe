@@ -19,17 +19,15 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.test.annotation.SystemProfileValueSource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:**/testcontext.xml"})
@@ -38,8 +36,10 @@ public class TestSession {
     User user1;
     User user2;
     User user3;
+    Card card1;
     Organisation organisation;
     List<String> usernames;
+    List<Card> cards;
     Integer organisatorId;
 
     @Rule
@@ -80,6 +80,14 @@ public class TestSession {
 
         theme = new Theme(name, description, user1, organisation, tags);
         theme = contentService.addTheme(theme);
+
+        cards = new ArrayList<>();
+        Card card1 = new Card("CardOne","", theme);
+        Card card2 = new Card("CardTwo","", theme);
+        card1 = contentService.addCard(card1);
+        card2 = contentService.addCard(card2);
+        cards.add(card1);
+        cards.add(card2);
     }
 
     @After
@@ -88,7 +96,6 @@ public class TestSession {
         userService.deleteUser(user1.getId());
         userService.deleteUser(user2.getId());
         userService.deleteUser(user3.getId());
-
     }
 
     //Successcenario
@@ -98,18 +105,6 @@ public class TestSession {
 
         // Create AsyncSession and add three users to it
         Session session = new AsynchronousSession(organisatorId, true, 60, 4, nameSession);
-
-        // Create cards and add to the session
-        Card card1 = new Card("CardOne","", theme);
-        Card card2 = new Card("CardTwo","", theme);
-        Card card3 = new Card("CardThree","", theme);
-        card1 = contentService.addCard(card1);
-        card2 = contentService.addCard(card2);
-        card3 = contentService.addCard(card3);
-        List<Card> cards = new ArrayList<>();
-        cards.add(card1);
-        cards.add(card2);
-        cards.add(card3);
 
 
         // Persist session
@@ -200,6 +195,198 @@ public class TestSession {
         assertTrue(session.isGameOver());*/
     }
 
+    //Successcenario
+    @Test
+    public void testSimulateRealisticPlaySession() {
+        Session session = new AsynchronousSession(organisatorId, true, 60, 6, "a name");
+
+        List<Card> moreCards = new ArrayList<Card>(cards);
+        for(int i = 0; i < 7; i++) {
+            Card newCard = new Card("dummy" + i, "", theme);
+            contentService.addCard(newCard);
+            moreCards.add(newCard);
+        }
+
+        session = sessionService.addSession(session, theme.getId(), moreCards, usernames);
+        List<CardSession> cardsOfSession = session.getCardSessions();
+        int amountOfCards = cardsOfSession.size();
+        Random rng = new Random();
+
+        CardSession movedCard = null;
+        while(!session.isGameOver()) {
+            movedCard = cardsOfSession.get(rng.nextInt(amountOfCards));
+            int currentDistanceToCenter = movedCard.getDistanceToCenter();
+            session = sessionService.makeMove(movedCard, session.getCurrentUser());
+            assertEquals("Kaart moet 1 schil naar het midden verplaatst zijn", currentDistanceToCenter-1, movedCard.getDistanceToCenter());
+        }
+        assertEquals("Eén kaart moet in het centrum liggen van de cirkel",0, movedCard.getDistanceToCenter());
+    }
+
+    //Successcenario
+    @Test
+    public void testMoveCard() {
+        Session session = new AsynchronousSession(organisatorId, true, 60, 4, "a name");
+
+        session = sessionService.addSession(session, theme.getId(), cards, usernames);
+
+        List<CardSession> cardsOfSession = session.getCardSessions();
+        CardSession cardToMove = cardsOfSession.get(0);
+        int distanceToCenterOfCardBeforeMove = cardToMove.getDistanceToCenter();
+
+        Integer idOfNextPlayer = session.getUsers().get(1).getUserId();
+
+        sessionService.makeMove(cardToMove, session.getCurrentUser());
+        session = sessionService.findSession(session.getId());
+        int currentDistanceToCenterOfMovedCard = session.getCardSessions().get(0).getDistanceToCenter();
+
+        assertEquals("Kaart zou 1 schil dichter bij het centrum moeten liggen", distanceToCenterOfCardBeforeMove - 1, currentDistanceToCenterOfMovedCard);
+        assertEquals("Speler aan beurt zou naar de volgende speler moeten verschoven zijn", user2.getId(), idOfNextPlayer);
+        assertEquals("Sessie mag nog niet over zijn", false, session.isGameOver());
+    }
+
+    //Successcenario
+    @Test
+    public void testMoveCardEndGameCondition() {
+
+        int amountOfCircles = 4;
+
+        Session session = new AsynchronousSession(organisatorId, true, 60, amountOfCircles, "a name");
+
+        session = sessionService.addSession(session, theme.getId(), cards, usernames);
+
+        List<CardSession> cardsOfSession = session.getCardSessions();
+        CardSession cardToMove = cardsOfSession.get(0);
+
+
+        for(int i = 0; i < amountOfCircles; i++) {
+            session = sessionService.makeMove(cardToMove, session.getCurrentUser());
+            cardToMove = session.getCardSessions().get(0);
+            if(cardToMove.getDistanceToCenter() != 0) {
+                assertEquals("Session should not be over yet", false, session.isGameOver());
+            } else {
+                assertEquals("A card has reached the center of the circle. Session should be over", true, session.isGameOver());
+            }
+        }
+    }
+
+    @Test
+    public void testMoveCardWhenGameOver() {
+        expectedException.expect(SessionServiceException.class);
+        expectedException.expectMessage("Zet kan niet uitgevoerd worden omdat de sessie gedaan is.");
+
+        Session session = new AsynchronousSession(organisatorId, true, 60, 4, "a name");
+        session.setGameOver(true);
+        session = sessionService.addSession(session, theme.getId(), cards, usernames);
+
+        List<CardSession> cardsOfSession = session.getCardSessions();
+        CardSession cardToMove = cardsOfSession.get(0);
+
+        session = sessionService.makeMove(cardToMove, session.getCurrentUser());
+    }
+
+    @Test
+    public void testMoveCardTooFar() {
+        expectedException.expect(SessionServiceException.class);
+        expectedException.expectMessage("Deze zet kan niet uitgevoerd worden. Kaart bevindt zich al in het centrum van de cirkel.");
+
+        int amountOfCircles = 4;
+
+        Session session = new AsynchronousSession(organisatorId, true, 60, amountOfCircles, "a name");
+
+        session = sessionService.addSession(session, theme.getId(), cards, usernames);
+
+        List<CardSession> cardsOfSession = session.getCardSessions();
+        CardSession cardToMove = cardsOfSession.get(0);
+
+
+        for(int i = 0; i < amountOfCircles + 3; i++) {
+            session = sessionService.makeMove(cardToMove, session.getCurrentUser());
+            session.setGameOver(false);
+            sessionService.updateSession(session);
+        }
+    }
+
+    @Test
+    public void testMoveCardWrongUser() {
+        expectedException.expect(SessionServiceException.class);
+        expectedException.expectMessage("Deze zet kan niet uitgevoerd worden omdat de gebruiker niet aan beurt is.");
+
+        Session session = new AsynchronousSession(organisatorId, true, 60, 4, "a name");
+
+        session = sessionService.addSession(session, theme.getId(), cards, usernames);
+
+        List<CardSession> cardsOfSession = session.getCardSessions();
+        CardSession cardToMove = cardsOfSession.get(0);
+
+        session = sessionService.makeMove(cardToMove, session.getCurrentUser()+1);
+    }
+
+    //Successcenario
+    @Test
+    public void testAddRemarkToSession() {
+        Session session = new AsynchronousSession(organisatorId, true, 60, 4, "a name");
+
+        session = sessionService.addSession(session, theme.getId(), cards, usernames);
+
+        assertEquals("Lijst van opmerkingen moet leeg zijn bij het starten van een nieuwe sessie", 0, session.getRemarks().size());
+
+        String remarkToAddText = "Opmerking";
+
+        sessionService.addRemarkToSession(session, user1.getUsername(), remarkToAddText);
+
+        assertEquals("Opmerking moet staan tussen lijst van opmerkingen", 1, session.getRemarks().size());
+        assertEquals("Tekst van de opmerking moet juist zijn", remarkToAddText, session.getRemarks().get(0).getText());
+    }
+
+    @Test
+    public void testAddRemarkToSessionByNonParticipant() {
+        expectedException.expect(SessionServiceException.class);
+        expectedException.expectMessage("Gebruiker die niet deelneemt aan de sessie of geen organisator is van de sessie mag geen opmerkingen plaatsen.");
+
+        Session session = new AsynchronousSession(organisatorId, true, 60, 4, "a name");
+
+        List<String> notAllUsenames = new ArrayList<>();
+        notAllUsenames.add(user1.getUsername());
+        notAllUsenames.add(user2.getUsername());
+
+        session = sessionService.addSession(session, theme.getId(), cards, notAllUsenames);
+
+        String remarkToAddText = "Opmerking";
+
+        sessionService.addRemarkToSession(session, user3.getUsername(), remarkToAddText);
+    }
+
+    @Test
+    public void testAddRemarkToSessionByNonParticipatingOrganisator() {
+
+        Session session = new AsynchronousSession(organisatorId, true, 60, 4, "a name");
+
+        List<String> notAllUsenames = new ArrayList<>();
+        notAllUsenames.add(user3.getUsername());
+        notAllUsenames.add(user2.getUsername());
+
+        session = sessionService.addSession(session, theme.getId(), cards, notAllUsenames);
+
+        String remarkToAddText = "Opmerking";
+
+        session = sessionService.addRemarkToSession(session, user1.getUsername(), remarkToAddText);
+        assertEquals("Organisator van een sessie moet altijd een opmerking kunnen plaatsen.", 1, session.getRemarks().size());
+    }
+
+    @Test
+    public void testMoveCardWithUnexistingUser() {
+        expectedException.expect(SessionServiceException.class);
+        expectedException.expectMessage("Deze zet kan niet uitgevoerd worden omdat de gebruiker niet bestaat.");
+
+        Session session = new AsynchronousSession(organisatorId, true, 60, 4, "a name");
+
+        session = sessionService.addSession(session, theme.getId(), cards, usernames);
+
+        List<CardSession> cardsOfSession = session.getCardSessions();
+        CardSession cardToMove = cardsOfSession.get(0);
+
+        session = sessionService.makeMove(cardToMove, 0);
+    }
 
     @Test
     public void testCreateSessionNoCards() {
@@ -214,29 +401,17 @@ public class TestSession {
         expectedException.expect(SessionServiceException.class);
         expectedException.expectMessage("Een sessie moet minimum 2 en maximum 24 kaarten bevatten.");
 
-        Card card1 = new Card("CardOne","", theme);
-        card1 = contentService.addCard(card1);
-        List<Card> cards = new ArrayList<>();
-        cards.add(card1);
+        List<Card> tooFewCards = new ArrayList<>();
+        tooFewCards.add(card1);
 
         Session session = new AsynchronousSession(organisatorId, true, 60, 4, "SessionName");
-        sessionService.addSession(session, theme.getId(), cards, usernames);
+        sessionService.addSession(session, theme.getId(), tooFewCards, usernames);
     }
 
     @Test
     public void testCreateSessionNoParticipants() {
         expectedException.expect(SessionServiceException.class);
         expectedException.expectMessage("Een sessie moet deelnemers bevatten.");
-
-        Card card1 = new Card("CardOne","", theme);
-        card1 = contentService.addCard(card1);
-
-        Card card2 = new Card("CardTwo","", theme);
-        card2 = contentService.addCard(card2);
-
-        List<Card> cards = new ArrayList<>();
-        cards.add(card1);
-        cards.add(card2);
 
         Session session = new AsynchronousSession(organisatorId, true, 60, 4, "SessionName");
         sessionService.addSession(session, theme.getId(), cards, null);
@@ -246,16 +421,6 @@ public class TestSession {
     public void testCreateSessionOfThemeWithDifferentOrganisator() {
         expectedException.expect(SessionServiceException.class);
         expectedException.expectMessage("Je kan geen sessie starten van een thema waar je geen organisator van bent");
-
-        Card card1 = new Card("CardOne","", theme);
-        card1 = contentService.addCard(card1);
-
-        Card card2 = new Card("CardTwo","", theme);
-        card2 = contentService.addCard(card2);
-
-        List<Card> cards = new ArrayList<>();
-        cards.add(card1);
-        cards.add(card2);
 
         List<Tag> tags = new ArrayList<>();
 
@@ -270,16 +435,6 @@ public class TestSession {
     public void testCreateSessionCardOfDifferentTheme() {
         expectedException.expect(SessionServiceException.class);
         expectedException.expectMessage("Een kaart van een ander thema dan het thema van de sessie kan niet worden toegevoegd.");
-
-        Card card1 = new Card("CardOne","", theme);
-        card1 = contentService.addCard(card1);
-
-        Card card2 = new Card("CardTwo","", theme);
-        card2 = contentService.addCard(card2);
-
-        List<Card> cards = new ArrayList<>();
-        cards.add(card1);
-        cards.add(card2);
 
         List<Tag> tags = new ArrayList<>();
 
@@ -298,16 +453,6 @@ public class TestSession {
         expectedException.expect(SessionServiceException.class);
         expectedException.expectMessage("Een sessie moet minimaal 2 deelnemers hebben.");
 
-        Card card1 = new Card("CardOne","", theme);
-        card1 = contentService.addCard(card1);
-
-        Card card2 = new Card("CardTwo","", theme);
-        card2 = contentService.addCard(card2);
-
-        List<Card> cards = new ArrayList<>();
-        cards.add(card1);
-        cards.add(card2);
-
         List<String> tooFewUsernames = new ArrayList<>();
         tooFewUsernames.add(usernames.get(0));
 
@@ -321,7 +466,7 @@ public class TestSession {
         expectedException.expectMessage("De sessie moet een naam hebben.");
 
         Session session = new AsynchronousSession(organisatorId, true, 60, 4, null);
-        sessionService.addSession(session, theme.getId(), null, usernames);
+        sessionService.addSession(session, theme.getId(), cards, usernames);
     }
 
     @Test
@@ -330,7 +475,7 @@ public class TestSession {
         expectedException.expectMessage("De sessie moet een naam hebben.");
 
         Session session = new AsynchronousSession(organisatorId, true, 60, 4, "");
-        sessionService.addSession(session, theme.getId(), null, usernames);
+        sessionService.addSession(session, theme.getId(), cards, usernames);
     }
 
     @Test
@@ -339,7 +484,7 @@ public class TestSession {
         expectedException.expectMessage("Een Kandoecirkel moet minimum 3 en maximum 8 schillen hebben.");
 
         Session session = new AsynchronousSession(organisatorId, true, 60, 2, "Session");
-        sessionService.addSession(session, theme.getId(), null, usernames);
+        sessionService.addSession(session, theme.getId(), cards, usernames);
     }
 
     @Test
@@ -348,7 +493,7 @@ public class TestSession {
         expectedException.expectMessage("Een Kandoecirkel moet minimum 3 en maximum 8 schillen hebben.");
 
         Session session = new AsynchronousSession(organisatorId, true, 60, 9, "Session");
-        sessionService.addSession(session, theme.getId(), null, usernames);
+        sessionService.addSession(session, theme.getId(), cards, usernames);
     }
 
     @Test
@@ -357,23 +502,13 @@ public class TestSession {
         expectedException.expectMessage("Ongeldig thema.");
 
         Session session = new AsynchronousSession(organisatorId, true, 60, 8, "Session");
-        sessionService.addSession(session, 9999, null, usernames);
+        sessionService.addSession(session, 999999, cards, usernames);
     }
 
     @Test
     public void testCreateSessionUnexistingParticipant() {
         expectedException.expect(SessionServiceException.class);
         expectedException.expectMessage("Deelnemer kon niet toegevoegd worden aan de sessie");
-
-        Card card1 = new Card("CardOne","", theme);
-        card1 = contentService.addCard(card1);
-
-        Card card2 = new Card("CardTwo","", theme);
-        card2 = contentService.addCard(card2);
-
-        List<Card> cards = new ArrayList<>();
-        cards.add(card1);
-        cards.add(card2);
 
         List<String> unexistingParticipant = new ArrayList<String>(usernames);
         unexistingParticipant.add("ikbestaniet@kandoe.be");
@@ -387,17 +522,16 @@ public class TestSession {
         expectedException.expect(SessionServiceException.class);
         expectedException.expectMessage("Een sessie moet minimum 2 en maximum 24 kaarten bevatten.");
 
-        List<Card> cards = new ArrayList<>();
+        List<Card> tooManyCards = new ArrayList<>();
 
         for(int i = 0; i < 26; i++) {
             Card card = new Card("Card " + i,"", theme);
             card = contentService.addCard(card);
-            cards.add(card);
+            tooManyCards.add(card);
         }
 
-
         Session session = new AsynchronousSession(organisatorId, true, 60, 4, "SessionName");
-        sessionService.addSession(session, theme.getId(), cards, usernames);
+        sessionService.addSession(session, theme.getId(), tooManyCards, usernames);
     }
 
 
