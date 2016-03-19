@@ -1,4 +1,6 @@
-System.register([], function(exports_1) {
+System.register([], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var Theme;
     return {
         setters:[],
@@ -20,7 +22,7 @@ System.register([], function(exports_1) {
                     return new Theme(0, "", "", false, false, 0, 0, [], [], "");
                 };
                 return Theme;
-            })();
+            }());
             exports_1("Theme", Theme);
         }
     }

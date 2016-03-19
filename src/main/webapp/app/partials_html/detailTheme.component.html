@@ -94,7 +94,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <button *ngIf="theme.organisatorNames.indexOf(currentUsername) != -1"
+                        <button id="btn_addCard" *ngIf="theme.organisatorNames.indexOf(currentUsername) != -1"
                                 class="btn wide-btn-default" style="margin-top: 3%"
                                 (click)="addCard($event)">
                             <span class="glyphicon glyphicon-plus-sign"></span> Kaart toevoegen

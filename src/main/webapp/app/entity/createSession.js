@@ -1,4 +1,6 @@
-System.register([], function(exports_1) {
+System.register([], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var createSession;
     return {
         setters:[],
@@ -13,7 +15,7 @@ System.register([], function(exports_1) {
                     this.amountOfCircles = amountOfCircles;
                 }
                 return createSession;
-            })();
+            }());
             exports_1("createSession", createSession);
         }
     }

@@ -7,13 +7,13 @@
     <div>
         <h2>Thema's</h2>
         <ul class="list-group">
-            <li *ngFor="#theme of organisation.themes; #i=index"
+            <li id="'theme' + i"*ngFor="#theme of organisation.themes; #i=index"
                 (click)="detailTheme(i+1)"
                 class="list-group-item clickable-list">
                 {{i+1}} | {{theme}}
             </li>
         </ul>
-        <button class="btn btn-primary" (click)="addTheme()">
+        <button id="btn_addTheme" class="btn btn-primary" (click)="addTheme()">
             <span class="glyphicon glyphicon-plus-sign"></span> Thema toevoegen
         </button>
     </div>

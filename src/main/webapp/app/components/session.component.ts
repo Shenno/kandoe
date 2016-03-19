@@ -40,11 +40,11 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
                 <div class="col-md-5" style="overflow-y: auto">
                     <div *ngFor="#card of currentSession.cardSessionResources; #i = index">
                         <div class="col-md-2 col-xs-3 card">
-                            <span class="badge alert-danger">{{i+1}}</span>
+                            <span [id]="'card' + i + '_number'" class="badge alert-danger">{{i+1}}</span>
                             <div class="card-image">
-                                <img src="{{card?.image}}">
+                                <img [id]="'card' + i + '_image'" src="{{card?.image}}">
                             </div>
-                            {{card?.card}}
+                            <span [id]="'card' + i + '_name'">{{card?.card}}</span>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,6 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
             </div>-->
             </div>
         </template>
-
     `,
     encapsulation: ViewEncapsulation.None
 })

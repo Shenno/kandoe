@@ -24,9 +24,9 @@ import {Axis} from "../entity/axis";
                     <div id="x-axis" [style.left]="axis.left + '%'" [style.width]="axis.width + '%'"></div>
                     <div id="y-axis" [style.top]="axis.top + '%'" [style.height]="axis.height + '%'"></div>
                 </template>
-                <div class="post-it circle-card" [style.left]="card.x + 'px'" [style.top]="card.y + 'px'" (click)="moveCard(i, card)" *ngFor="#card of circleCards; #i = index">
-                    <span class="post-it-number">  {{i+1}}</span>
-                    <span class="post-it-hover-text">{{card.card}}</span>
+                <div [id]="'card' + i" class="post-it circle-card" [style.left]="card.x + 'px'" [style.top]="card.y + 'px'" (click)="moveCard(i, card)" *ngFor="#card of circleCards; #i = index">
+                    <span [id]="'card' + i + '_numberOnCircle'" class="post-it-number">  {{i+1}}</span>
+                    <span [id]="'card' + i + '_text'" class="post-it-hover-text">{{card.card}}</span>
                 </div>
                 <template [ngIf]="rings">
                     <div *ngFor="#ring of rings; #i = index" class="subcircle"
@@ -94,7 +94,6 @@ export class KandoeCircleComponent implements OnChanges, OnInit {
         var topleft = 100/((this.amountOfCircles+2)*2);
         var heightwidth = 100 - ((100/this.amountOfCircles)*2);
         this.axis = new Axis(topleft, topleft, heightwidth, heightwidth);
-        alert(this.isOrganisator);
     }
 
     ngOnChanges(changes:{[propName: string]: SimpleChange}) {

@@ -61,7 +61,6 @@ export class CreateSessionComponent {
     }
 
     public onSelectTheme(selectedThemeId:number) {
-        alert(selectedThemeId);
         if (selectedThemeId != 0) {
             this.contentService.getCardsByThemeId(selectedThemeId.toString()).subscribe((cards:Card[]) => {
                 this.cards = cards;
@@ -91,7 +90,7 @@ export class CreateSessionComponent {
             this.users.splice(index, 1);
             this.newParticipant = "";
         } else {
-            alert(this.newParticipant);
+
         }
     }
 

@@ -1,4 +1,6 @@
-System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.component", "./components/createTheme.component", "./components/editTheme.component", "./components/detailTheme.component", "./components/createOrganisation.component", "./components/detailOrganisation.component", "./components/login.component", "./service/userService", "./components/overviewOrganisations.component", "./components/register.component", "./components/createSession.component", "./components/createCard.component", "./components/home.component", "./components/dashboard.component", "./components/manageAccount.component", "./components/session.component", "./components/logout.component", "./components/detailCard.component", "./components/overviewSessions.component", "./components/createCsv.component", "./components/error.component"], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.component", "./components/createTheme.component", "./components/editTheme.component", "./components/detailTheme.component", "./components/createOrganisation.component", "./components/detailOrganisation.component", "./components/login.component", "./service/userService", "./components/overviewOrganisations.component", "./components/register.component", "./components/createSession.component", "./components/createCard.component", "./components/home.component", "./components/dashboard.component", "./components/manageAccount.component", "./components/session.component", "./components/logout.component", "./components/detailCard.component", "./components/overviewSessions.component", "./components/createCsv.component", "./components/error.component"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -99,10 +101,6 @@ System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.
                     var _this = this;
                     this.userService.getMyDetails().subscribe(function (user) { return _this.currentUserDetails = user; }, function (err) { return _this.currentUserDetails = null; });
                 };
-                AppComponent.prototype.lol = function () {
-                    this.currentUserDetails = null;
-                    // alert("error");
-                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
@@ -137,7 +135,7 @@ System.register(['angular2/core', 'angular2/router', "./components/cirkelsessie.
                     __metadata('design:paramtypes', [userService_1.UserService])
                 ], AppComponent);
                 return AppComponent;
-            })();
+            }());
             exports_1("AppComponent", AppComponent);
         }
     }
