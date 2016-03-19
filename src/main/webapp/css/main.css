@@ -140,6 +140,13 @@ h2 {
     max-height: 7em;
 }
 
+.cards-column {
+    overflow-y: auto;
+    max-height: 39em;
+    max-width: 45em;
+    padding-right: 0;
+}
+
 
 /*----------------Cards----------------------------------*/
 .card-list {

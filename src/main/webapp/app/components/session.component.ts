@@ -37,7 +37,7 @@ import {KandoeCircleComponent} from "./kandoeCircle.component";
                         </kandoe-circle>
                     </div>
                 </div>
-                <div class="col-md-5" style="overflow-y: auto">
+                <div class="col-md-5 cards-column">
                     <div *ngFor="#card of currentSession.cardSessionResources; #i = index">
                         <div class="col-md-2 col-xs-3 card">
                             <span [id]="'card' + i + '_number'" class="badge alert-danger">{{i+1}}</span>
