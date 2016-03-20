@@ -6,11 +6,12 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+/**
+ * A converter for LocalDateTime
+ */
 @Component
 public class LocalDateTimeConvertor extends BidirectionalConverter<LocalDateTime, LocalDateTime>
 {
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-frontend/presentation-layer/orika/
-
     @Override
     public LocalDateTime convertTo(LocalDateTime source, Type<LocalDateTime> destinationType)
     {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Kevin on 5/03/2016.
+ * SessionResource is a Resource object for {link: Session} when posted
  */
 public class SessionResourcePost implements Serializable {
     /*(public participantsEmails: string[],

@@ -26,7 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * RestController for everything with Session
+ */
 @RestController
 @RequestMapping("api/sessions")
 public class SessionRestController {

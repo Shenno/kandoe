@@ -27,12 +27,6 @@ import java.util.List;
 @Import(RestConfig.class)
 public class WebContextConfig extends WebMvcConfigurerAdapter
 {
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-frontend/web-context-config/
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-frontend/presentation-layer/
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/springs-integratie-met-webserver/
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-frontend/presentation-layer/validation-en-formatting/
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/testing/
-
     @Override
     public void addFormatters(FormatterRegistry registry)
     {

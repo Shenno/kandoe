@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Kevin on 29/02/2016.
+ * MyAuthenticationFailureHandler is a handler for if the authentication failed.
  */
 
 public class MyAuthenticationFailureHandler implements AuthenticationFailureHandler {

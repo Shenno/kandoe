@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * Created by Kevin on 29/02/2016.
+ * A JwtFilter is an GenericFilterBean
  */
 
 @Component

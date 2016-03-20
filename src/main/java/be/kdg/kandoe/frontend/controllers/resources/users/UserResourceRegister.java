@@ -3,7 +3,7 @@ package be.kdg.kandoe.frontend.controllers.resources.users;
 import java.io.Serializable;
 
 /**
- * Created by Kevin on 3/03/2016.
+ * UserResourceRegister is a Resource object for {link: User} when posted for register
  */
 
 public class UserResourceRegister implements Serializable {

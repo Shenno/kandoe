@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by Kevin on 28/02/2016.
+ * CardMapper is a Mapper to map {link: Card} to {link: CardResource} or in the other direction
  */
 @Component
 public class CardMapper extends CustomMapper<Card, CardResource> {

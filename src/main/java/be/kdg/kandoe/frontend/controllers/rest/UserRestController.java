@@ -26,7 +26,9 @@ import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * RestController for everything with User
+ */
 @RestController
 @RequestMapping("/api")
 @ExposesResourceFor(UserResource.class)
@@ -35,7 +37,6 @@ public class UserRestController {
     private final Logger logger = Logger.getLogger(UserRestController.class);
     private final UserService userService;
     private final MapperFacade mapperFacade;
-    //private final UserResourceAssembler userResourceAssembler;
 
     @Autowired
     public UserRestController(UserService userService,
@@ -44,7 +45,6 @@ public class UserRestController {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.mapperFacade = mapperFacade;
-        // this.userResourceAssembler = userResourceAssembler;
     }
 
     @RequestMapping(value = "/users/me", method = RequestMethod.GET)
@@ -57,28 +57,6 @@ public class UserRestController {
     public String test() {
         return "This is the API to handle UserController";
     }
-
-
-/*    @InitBinder("userResource")
-    public void initBinder(WebDataBinder webDataBinder)
-    {
-        webDataBinder.addValidators(new EmailValidator());
-    }
-    */
-
-
-    /*    @RequestMapping(method = RequestMethod.GET)
-        public ResponseEntity<List<UserResource>> findUsers()
-        {
-            List<User> users = userService.findUsers();
-            List<UserResource> resources = new ArrayList<>();
-            for(User u : users) {
-                UserResource userResource = new UserResource(u);
-                resources.add(userResource);
-            }
-            return new ResponseEntity<>(resources, HttpStatus.OK);
-        }
-    */
 
     @RequestMapping(value = "/usernames", method = RequestMethod.GET)
     public ResponseEntity<List<String>> findUsernames() {
@@ -103,10 +81,6 @@ public class UserRestController {
     @RequestMapping(value = "/organisations", method = RequestMethod.GET)
     public ResponseEntity<List<OrganisationResource>> findorganisations() {
         List<Organisation> organisations = this.userService.findOrganisations();
-      /*  List<OrganisationResource> organisationResources = new ArrayList<>();
-        for(Organisation o : organisations) {
-            organisationResources.add(new OrganisationResource(o));
-        }*/
         List<OrganisationResource> organisationResources = organisations.stream().map(o -> mapperFacade.map(o, OrganisationResource.class)).collect(Collectors.toList());
         return new ResponseEntity<>(organisationResources, HttpStatus.OK);
     }
@@ -129,41 +103,4 @@ public class UserRestController {
             }
 
     }
-
-    /*@RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-    public ResponseEntity<UserResource> updateUserById(@PathVariable int userId,
-                                                       @Valid @RequestBody PersonResource personResource)
-    {
-        logger.info(this.getClass().toString() + ":" + "updating user " + userId);
-
-        User user_in = userService.findUserById(userId);
-        mapperFacade.map(personResource, user_in.getPerson());
-        User user_out = userService.saveUser(user_in);
-
-        return new ResponseEntity<>(userResourceAssembler.toResource(user_out), HttpStatus.CREATED);
-    }*/
-
-   /* @RequestMapping(value = "/{userId}/password", method = RequestMethod.PUT)
-    public ResponseEntity<UserResource> updatePassword(@PathVariable int userId,
-                                                       @Valid @RequestBody UserResource userResource)
-
-    {
-
-        logger.info(this.getClass().toString() + ": updating user " + userId);
-        userService.updatePassword(userId, userResource.getOldPassword(), userResource.getPassword());
-        User user = userService.findUserById(userId);
-        return new ResponseEntity<>(userResourceAssembler.toResource(user), HttpStatus.CREATED);
-    }*/
-
-   /* @RequestMapping(value = "/{userId}/repairs", method = RequestMethod.GET)
-    public ResponseEntity<List<RepairResource>> getRepairsByUser(@PathVariable Integer userId)
-    {
-        logger.info(this.getClass().toString() + ":" + "returning for user:" + userId);
-
-        return new ResponseEntity<>(
-                repairResourceAssembler.toResources(repairService.findRepairsByUserId(userId)),
-                HttpStatus.OK);
-
-    }*/
-
 }

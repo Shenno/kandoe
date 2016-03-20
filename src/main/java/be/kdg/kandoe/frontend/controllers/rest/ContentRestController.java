@@ -26,6 +26,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * RestController for everything with Content
+ */
 @RestController
 @RequestMapping("/api/themes")
 public class ContentRestController {

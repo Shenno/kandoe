@@ -3,10 +3,7 @@ package be.kdg.kandoe.frontend.controllers.resources.users;
 import java.io.Serializable;
 
 /**
- * Created by   Shenno Willaert
- * Date         26/02/2016
- * Project      kandoe
- * Package      be.kdg.kandoe.frontend.controllers.resources.users
+ * UserResourcePost is a Resource object for {link: UserResource} when posted for login
  */
 public class UserResourcePost implements Serializable {
     public String username;

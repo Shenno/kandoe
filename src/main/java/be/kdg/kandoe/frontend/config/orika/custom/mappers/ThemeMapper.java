@@ -14,7 +14,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * ThemeMapper is a Mapper to map {link: Theme} to {link: ThemeResource} or in the other direction
+ */
 @Component
 public class ThemeMapper extends CustomMapper<Theme, ThemeResource> {
 

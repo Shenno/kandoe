@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Kevin on 26/02/2016.
+ * ThemeResource is a Resource object for {link: Theme}
  */
 public class ThemeResource implements Serializable {
 

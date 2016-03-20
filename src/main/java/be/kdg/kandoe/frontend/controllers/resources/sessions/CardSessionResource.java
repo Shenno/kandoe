@@ -3,7 +3,7 @@ package be.kdg.kandoe.frontend.controllers.resources.sessions;
 import java.io.Serializable;
 
 /**
- * Created by Kevin on 5/03/2016.
+ * CardSessionResource is a Resource object for {link: CardSession}
  */
 public class CardSessionResource implements Serializable {
 

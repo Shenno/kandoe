@@ -7,10 +7,6 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  */
 public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer
 {
-    // https://programmeren3-repaircafe.rhcloud.com/spring-concepten/spring-mvc/
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/springs-integratie-met-webserver/
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/testing/
-
     @Override
     protected Class<?>[] getRootConfigClasses()
     {

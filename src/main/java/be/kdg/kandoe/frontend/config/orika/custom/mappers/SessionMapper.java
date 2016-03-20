@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by Kevin on 5/03/2016.
+ * SessionMapper is a Mapper to map {link: Session} to {link: SessionResource} or in the other direction
  */
 @Component
 public class SessionMapper extends CustomMapper<Session, SessionResourceActive> {

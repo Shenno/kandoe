@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 /**
- * Created by Kevin on 8/03/2016.
+ * RemarkMapper is a Mapper to map {link: Remark} to {link: RemarkResource} or in the other direction
  */
 
 @Component

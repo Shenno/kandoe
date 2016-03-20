@@ -6,7 +6,7 @@ import org.springframework.hateoas.ResourceSupport;
 import java.io.Serializable;
 
 /**
- * Created by Kevin on 27/02/2016.
+ * TagResource is a Resource object for {link: Tag}
  */
 public class TagResource extends ResourceSupport implements Serializable {
 
