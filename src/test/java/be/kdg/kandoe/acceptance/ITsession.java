@@ -28,7 +28,6 @@ public class ITsession {
         element = element.findElement(By.tagName("login"));
 
         element = element.findElement(By.id("ib_username"));
-        userName = userName;
         SeleniumHelper.fillTextIntoElement(element, userName);
 
         element = driver.findElement(By.id("ib_password"));

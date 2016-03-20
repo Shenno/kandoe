@@ -82,17 +82,6 @@ export class UserService {
             },
             ((err:Error) => this.logger.log('Fout tijdens het registreren ' + err.message))
         );
-        /*this.userService.login(this.user)
-         .subscribe((res: Response) => {
-         localStorage.setItem("jwt", res.text());
-         this.userService.triggerLoginEvent();
-         //this.userService.getMyDetails().subscribe((user:User) => alert(user.firstName + "BANAAN"));
-         this.router.navigate(['/Home']);
-         },
-         error => {
-         console.log(error);
-         });
-         }*/
     }
 
     public logout() {

@@ -13,12 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by   Shenno Willaert
- * Date         23/02/2016
- * Project      kandoe
- * Package      be.kdg.kandoe.integration
- */
 public class ITorganisation {
 
     private static WebDriver driver;

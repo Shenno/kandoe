@@ -19,20 +19,11 @@ public class ThemeResource implements Serializable {
     private Integer themeId;
     private Integer organisationId;
     private Integer organisatorId;
-//    private OrganisationResource organisation;
     private List<String> tags;
     private List<String> organisatorNames;
     private String errorMessage;
 
     public ThemeResource() {}
-
-  /*  public ThemeResource(Theme theme) {
-        this.description = theme.getDescription();
-        this.name = theme.getThemeName();
-        this.commentaryAllowed = theme.isCommentaryAllowed();
-        this.addingAdmitted = theme.isAddingAdmitted();
-        this.themeId = theme.getId();
-    }*/
 
     public Integer getThemeId() {
         return themeId;
@@ -73,14 +64,6 @@ public class ThemeResource implements Serializable {
     public void setAddingAdmitted(boolean addingAdmitted) {
         this.addingAdmitted = addingAdmitted;
     }
-
-    /*public OrganisationResource getOrganisation() {
-        return organisation;
-    }
-
-    public void setOrganisation(OrganisationResource organisationResource) {
-        this.organisation = organisationResource;
-    }*/
 
     public Integer getOrganisationId() {
         return organisationId;

@@ -6,8 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
- * @author Devi Bral
- * @version 1.0 7/03/2016 14:05
+ * Helper class for the seleniumTests
  */
 public class SeleniumHelper {
 

@@ -24,13 +24,10 @@ public class SessionMapper extends CustomMapper<Session, SessionResourceActive> 
     public void mapAtoB(Session session, SessionResourceActive sessionResourceActive, MappingContext context) {
         sessionResourceActive.setAmountOfUsers(session.getUsers().size());
         sessionResourceActive.setThemeName(session.getTheme().getThemeName());
-        //System.out.println("IN DE MAPPER" + asynchronousSession.getCardSessions().size());
         List<CardSessionResource> cardSessionResources = session.getCardSessions().stream().map(cs -> mapperFacade.map(cs, CardSessionResource.class)).collect(Collectors.toList());
         List<RemarkResource> remarkResources = session.getRemarks().stream().map(r -> mapperFacade.map(r, RemarkResource.class)).collect(Collectors.toList());
-        //mapperFacade.map(asynchronousSession.getCardSessions(), sessionResourceActive.getCardSessionResources());
         sessionResourceActive.setCardSessionResources(cardSessionResources);
         sessionResourceActive.setRemarks(remarkResources);
-        //super.mapAtoB(asynchronousSession, sessionResourceActive, context);
     }
 
     @Override

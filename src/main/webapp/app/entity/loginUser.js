@@ -1,6 +1,4 @@
-System.register([], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register([], function(exports_1) {
     var LoginUser;
     return {
         setters:[],
@@ -14,7 +12,7 @@ System.register([], function(exports_1, context_1) {
                     this.password = password;
                 }
                 return LoginUser;
-            }());
+            })();
             exports_1("LoginUser", LoginUser);
         }
     }

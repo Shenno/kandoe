@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
 
-//test sfsdf
 public class ITuser {
     private static WebDriver driver;
 

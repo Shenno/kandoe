@@ -15,9 +15,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-/**
- * Created by Len on 26-2-2016.
- */
 public class ITCard {
 
     private static WebDriver driver;

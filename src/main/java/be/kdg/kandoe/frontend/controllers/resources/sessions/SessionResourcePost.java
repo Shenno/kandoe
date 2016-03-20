@@ -8,10 +8,6 @@ import java.util.List;
  * SessionResource is a Resource object for {link: Session} when posted
  */
 public class SessionResourcePost implements Serializable {
-    /*(public participantsEmails: string[],
-                public cardIds: number[],
-                public themeId: number)*/
-
     private List<String> participantsEmails;
     private List<Integer> cardIds;
     private Integer themeId;

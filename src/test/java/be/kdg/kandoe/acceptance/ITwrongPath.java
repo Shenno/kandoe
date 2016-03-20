@@ -13,10 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-/**
- * @author Devi Bral
- * @version 1.0 17/03/2016 22:01
- */
 public class ITwrongPath {
     private static WebDriver driver;
 

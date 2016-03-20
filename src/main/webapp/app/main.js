@@ -1,6 +1,4 @@
-System.register(['angular2/platform/browser', './app.component', 'angular2/router', 'angular2/core', 'rxjs/add/operator/map', "angular2/http", "./service/urlService", "./service/contentService", "./service/userService", "./util/logger", "./service/sessionService"], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/platform/browser', './app.component', 'angular2/router', 'angular2/core', 'rxjs/add/operator/map', "angular2/http", "./service/urlService", "./service/contentService", "./service/userService", "./util/logger", "./service/sessionService"], function(exports_1) {
     var browser_1, app_component_1, router_1, core_1, router_2, http_1, urlService_1, contentService_1, userService_1, logger_1, sessionService_1;
     return {
         setters:[

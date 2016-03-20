@@ -96,17 +96,6 @@ export class SessionComponent {
 
         this.currentSessionId = routeParam.params["sessionId"];
 
-        /*this.sessionService.addSession(session).subscribe(
-         (session:SessionActive) => {
-         if (session.errorMessage == '') {
-         this.router.navigate(['/Session', {sessionId: session.id}])
-         } else {
-         window.scrollTo(0, 0);
-         this.errorMessage = session.errorMessage;
-         }
-         },
-         (err) => this.errorMessage = "Oeps, er trad een onverwachte fout op!");*/
-
         //Get session once
         this.sessionService.getSession(this.currentSessionId).subscribe(
             (sessionActive:SessionActive) => {
@@ -149,10 +138,4 @@ export class SessionComponent {
         }
         this.currentSession.cardSessionResources = this.currentSession.cardSessionResources.slice();
     }
-
-    /* public makeMove(card: SessionCard) {
-     this.sessionService.makeMove(card, this.currentSessionId).subscribe((session:SessionActive) => {
-     this.updateView(session);
-     });
-     }*/
 }

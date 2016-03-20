@@ -60,7 +60,6 @@ public class ContentRestController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<ThemeResource> createMainTheme(@RequestBody ThemeResource themeResource) {
-        //Theme themeToAdd = new Theme(themeResource.getName(), themeResource.getDescription(), themeResource.isCommentaryAllowed(), themeResource.isAddingAdmitted(), null, null, null);
         try {
             Theme addedTheme = contentService.addTheme(mapperFacade.map(themeResource, Theme.class));
 
@@ -152,24 +151,6 @@ public class ContentRestController {
     @RequestMapping(value = "/cards/{cardId}", method = RequestMethod.GET)
     public ResponseEntity<CardResource> findCardById(@PathVariable int cardId) {
         Card card = contentService.getCard(cardId);
-        System.out.println(card.getTheme().getId() + " /// " + card.getTheme().getDescription());
         return new ResponseEntity<CardResource>(mapperFacade.map(card, CardResource.class), HttpStatus.OK);
     }
-
-   /* @RequestMapping(value = "/{mainThemeId}/tags", method = RequestMethod.GET)
-    public ResponseEntity<TagResource> findAllTagsByMainThemeId(@PathVariable int mainThemeId)
-    {
-        Theme foundTheme = contentService.getTag(themeId);
-        return new ResponseEntity<>(new ThemeResource(foundTheme), HttpStatus.OK);
-    }*/
-
-
-
-
-    /*@RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<UserResource> createUser(@Valid @RequestBody User user)
-    {
-        User u = userService.addUser(user);
-        return new ResponseEntity<>(userResourceAssembler.toResource(user), HttpStatus.OK);
-    }*/
 }

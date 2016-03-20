@@ -14,10 +14,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-/**
- * @author: Evelien
- * @versionon 1.0 23-2-201614:20
- */
 public class ITtheme {
 
     private static WebDriver driver;
@@ -71,7 +67,7 @@ public class ITtheme {
         (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Organisatie: " + organisationName));
 
         element = driver.findElement(By.id("organisationId"));
-        organisationId = SeleniumHelper.getInnerHtmlOfElement(driver, element); //needed to access content of hidden div
+        organisationId = SeleniumHelper.getInnerHtmlOfElement(driver, element);
     }
 
     @Test

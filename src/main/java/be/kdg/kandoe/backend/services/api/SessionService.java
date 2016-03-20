@@ -15,14 +15,16 @@ import java.util.List;
  * {link: Sessio}, {link: SynchronousSession}, {link: Asynchrounoussession}, {link: CardSession}, {link: EndingGameCondition}
  */
 public interface SessionService {
-    // Session
+    /* Session */
     Session addSession(Session session, int themeId, List<Card> cards, List<String> usernames);
     Session findSession(int sessionId);
     Session addCardToSession(Session session, Card card);
     Session addUserToSession(Session session, String username) throws SessionServiceException;
     Session addRemarkToSession(Session session, String username, String text);
-    CardSession findCardSession(int cardSessionId);
-    Session makeMove(CardSession cardSession, int userId) throws SessionServiceException;
     List<Session> findSessionByUserId(int userId) throws SessionServiceException;
     Session updateSession(Session session);
+    Session makeMove(CardSession cardSession, int userId) throws SessionServiceException;
+    /* Card Session */
+    CardSession findCardSession(int cardSessionId);
+
 }

@@ -24,11 +24,8 @@ public class OrikaBeanMapper extends ConfigurableMapper
     @Autowired
     public OrikaBeanMapper(ApplicationContext applicationContext)
     {
-        // false = delay init  of ConfigurableMapper
-        // because registering of convertors needs be done before init.
         super(false);
         this.applicationContext = applicationContext;
-        // init ConfigurableMapper
         this.init();
     }
 
@@ -36,28 +33,15 @@ public class OrikaBeanMapper extends ConfigurableMapper
     protected void configure(MapperFactory factory)
     {
         this.mapperFactory = factory;
-        // next line because of
-        // http://stackoverflow.com/questions/29867292/orika-not-able-to-map-when-the-application-is-running-on-jetty
-        // this.mapperFactory.getConverterFactory().registerConverter(new PassThroughConverter(DateTime.class));
         addCustomMapperAndConvertors();
     }
 
     @Override
     protected void configureFactoryBuilder(final DefaultMapperFactory.Builder factoryBuilder)
     {
-        // customize the factoryBuilder as needed
         factoryBuilder.mapNulls(false).build();
 
     }
-
-    //@Override
-    /*public void setApplicationContext(ApplicationContext applicationContext) throws BeansException
-    {
-        // search and add all Orika convertors annotated with @Component to the Orika Mapper Factory
-        this.applicationContext = applicationContext;
-        // init ConfigurableMapper
-        this.init();
-    }*/
 
     private void addCustomMapperAndConvertors()
     {

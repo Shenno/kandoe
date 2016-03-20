@@ -37,11 +37,6 @@ public class TestAprioriAlgorithm {
         FrequentItemsetData<String> data = generator.generate(itemsetList, 0.2);
 
         List<Set<String>> frequentItemsetList = data.getFrequentItemsetList();
-/*        assertEquals("The 1st frequent itemsetlist must be correct", "[card1]", frequentItemsetList.get(0).toString());
-        assertEquals("The 2nd frequent itemsetlist must be correct", "[card2]", frequentItemsetList.get(1).toString());
-        assertEquals("The 3rd frequent itemsetlist must be correct", "[card3]", frequentItemsetList.get(2).toString());
-        assertEquals("The 4th frequent itemsetlist must be correct", "[card4]", frequentItemsetList.get(3).toString());
-        assertEquals("The 5th frequent itemsetlist must be correct", "[card5]", frequentItemsetList.get(4).toString());*/
         assertEquals("The 1st frequent itemsetlist must be correct", "[card1, card2]", frequentItemsetList.get(0).toString());
         assertEquals("The 2nd frequent itemsetlist must be correct", "[card1, card3]", frequentItemsetList.get(1).toString());
         assertEquals("The 3rd frequent itemsetlist must be correct", "[card4, card1]", frequentItemsetList.get(2).toString());

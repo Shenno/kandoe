@@ -164,7 +164,6 @@ export class KandoeCircleComponent implements OnChanges, OnInit {
         movedCard.y = midpointY + (this.circleRadius);
 
         this.sessionService.makeMove(movedCard, this.sessionId).subscribe(
-           // () => this.swapPlayer.emit(movedCard)
         );
 
         if(movedCard.distanceToCenter == 1) {

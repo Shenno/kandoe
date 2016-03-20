@@ -80,33 +80,12 @@ public class SessionRestController {
         try {
             persistedSession = sessionService.addSession(session, sessionResourcePost.getThemeId(), cards, sessionResourcePost.getParticipantsEmails());
         } catch (SessionServiceException sse) {
-            //TODO: return resource errorMessage setten
             session.setTheme(contentService.getTheme(sessionResourcePost.getThemeId()));
             SessionResourceActive sessionResourceActive = mapperFacade.map(session, SessionResourceActive.class);
             sessionResourceActive.setErrorMessage(sse.getMessage());
             return new ResponseEntity<SessionResourceActive>(sessionResourceActive, HttpStatus.OK);
         }
         return new ResponseEntity<SessionResourceActive>(mapperFacade.map(persistedSession, SessionResourceActive.class), HttpStatus.OK);
-        /*String nameSession = sessionResourcePost.getNameSession();
-        Session session = new AsynchronousSession(true, 60, sessionResourcePost.getAmountOfCircles(),nameSession);
-        session.setOrganisator(user.getUserId());
-        Session persistedSession = sessionService.addSession(session, sessionResourcePost.getThemeId());
-        for(String s : sessionResourcePost.getParticipantsEmails()) {
-            persistedSession = sessionService.addUserToSession(persistedSession, s);
-        }
-
-        //Kan niet op deze manier..? Moet result session hebben
-
-         //sessionResourcePost.getCardIds().forEach(c -> sessionService.addCardToSession(session, contentService.getCard(c)));
-        for(Integer c : sessionResourcePost.getCardIds()) {
-            persistedSession =sessionService.addCardToSession(persistedSession, contentService.getCard(c));
-            System.out.println(c);
-        }
-
-
-        System.out.println(sessionService.findSession(persistedSession.getId()).getCardSessions());
-        //Do magic
-        return new ResponseEntity<Integer>(persistedSession.getId(), HttpStatus.OK);*/
     }
 
     @RequestMapping(value="/{sessionId}", method = RequestMethod.GET)
@@ -117,8 +96,6 @@ public class SessionRestController {
 
     @RequestMapping(value="/{sessionId}/remarks", method = RequestMethod.POST)
     public ResponseEntity<List<RemarkResource>> createRemark(@AuthenticationPrincipal User user, @RequestBody RemarkResource remarkResource, @PathVariable int sessionId) {
-        System.out.println(user.getUsername());
-        System.out.println(remarkResource.getText());
         Session session = sessionService.findSession(sessionId);
         session = sessionService.addRemarkToSession(session, user.getUsername(), remarkResource.getText());
         List<RemarkResource> remarkResourceList = session.getRemarks().stream().map(r -> mapperFacade.map(r, RemarkResource.class)).collect(Collectors.toList());
@@ -129,11 +106,8 @@ public class SessionRestController {
     @RequestMapping(value="/{sessionId}", method = RequestMethod.POST)
     public ResponseEntity<SessionResourceActive> updateAsynchronousSession(@PathVariable int sessionId, @RequestBody CardSessionResource cardSessionResource, @AuthenticationPrincipal User user) {
         Session session = sessionService.findSession(sessionId);
-        System.out.println(session.getCurrentUser());
         sessionService.makeMove(sessionService.findCardSession(cardSessionResource.getId()), user.getUserId());
-        System.out.println(user.getUserId());
         session = sessionService.findSession(sessionId);
-        System.out.println(session.getCurrentUser());
         return new ResponseEntity<SessionResourceActive>(mapperFacade.map(session, SessionResourceActive.class), HttpStatus.OK);
     }
 }

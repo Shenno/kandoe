@@ -58,15 +58,11 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
             joinColumns = @JoinColumn(name = "UserId", referencedColumnName = "UserId"))
     private List<Session> sessions = new ArrayList<>();
 
-/*    @OneToMany(targetEntity = Participation.class, mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Participation> participations; */
-
     @OneToMany(targetEntity = Organisation.class, mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH}, fetch = FetchType.EAGER)
     private List<Organisation> organisations;
 
     public User()
     {
-        //Deze constructor doet niet veel
     }
 
     public User(String username, String encryptedPassword)
@@ -74,7 +70,6 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
         this.username = username;
         this.encryptedPassword = encryptedPassword;
         this.organisations = new CopyOnWriteArrayList<>();
-     //   this.participations = new ArrayList<>();
     }
 
     public Integer getId()
@@ -112,14 +107,6 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
     {
         this.userId = userId;
     }
-
- /*   public List<Participation> getParticipations() {
-        return participations;
-    }
-
-    public void addParticipation(Participation participation) {
-        participations.add(participation);
-    }*/
 
     public List<Organisation> getOrganisations() {
         return organisations;
@@ -185,11 +172,6 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
         return getEncryptedPassword();
     }
 
-    /**
-     * Get username for this user
-     *
-     * @return
-     */
     public String getUsername()
     {
         return username;
@@ -228,12 +210,6 @@ public class User implements Serializable, UserDetails, Identifiable<Integer>
         return encryptedPassword;
     }
 
-    /**
-     * Change password for user
-     *
-     * @param encryptedPassword
-     * @throws UserServiceException
-     */
     public synchronized void setEncryptedPassword(String encryptedPassword)
     {
         this.encryptedPassword = encryptedPassword;

@@ -22,10 +22,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-/**
- * @author: Evelien
- * @versionon 1.0 29-2-201609:27
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:**/testcontext.xml"})
 public class TestRemark {

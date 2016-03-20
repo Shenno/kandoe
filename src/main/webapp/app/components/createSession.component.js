@@ -1,6 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "../service/userService", "../entity/theme", "../service/contentService", "../entity/createSession", "../service/sessionService"], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/core', 'angular2/router', "../service/userService", "../entity/theme", "../service/contentService", "../entity/createSession", "../service/sessionService"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -89,7 +87,6 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                         this.cards = null;
                         this.theme = null;
                     }
-                    // Observable.do .map(function(v) { return [1,2,3];}) .subscribe(console.log.bind(console))
                 };
                 CreateSessionComponent.prototype.changeValue = function (bloe) {
                     this.newParticipant = bloe;
@@ -117,13 +114,7 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                 };
                 CreateSessionComponent.prototype.createSession = function () {
                     var _this = this;
-                    // var emails: string[] = [];
                     var cardids = [];
-                    /* Organisator als deelnemer toevoegen? */
-                    ///  emails.push(this.currentUser.username);
-                    //alert(this.currentUser.username);
-                    /* Andere users toevoegen. TODO: dynamisch */
-                    //emails.push("clarence.ho@gmail.com");
                     /* CardIds ophalen */
                     this.cards.forEach(function (card) {
                         if (card.selected) {
@@ -131,21 +122,6 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                         }
                     });
                     var session = new createSession_1.createSession(this.participantEmails, cardids, this.theme.themeId, this.nameSession, this.amountOfCircles);
-                    //this.sessionService.post....
-                    /*this.userService.login(this.user)
-                     .subscribe((res: Response) => {
-                     localStorage.setItem("jwt", res.text());
-                     this.userService.triggerLoginEvent();
-                     //this.userService.getMyDetails().subscribe((user:User) => alert(user.firstName + "BANAAN"));
-                     this.router.navigate(['/Home']);
-                     },
-                     error => {
-                     console.log(error);
-                     });
-                     this.userService.getMyDetails().subscribe(
-                     (user: User) => this.currentUserDetails = user,
-                     (err) => this.currentUserDetails = null);
-                     }*/
                     this.sessionService.addSession(session).subscribe(function (session) {
                         if (session.errorMessage == '') {
                             _this.router.navigate(['/Session', { sessionId: session.id }]);
@@ -165,7 +141,7 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                     __metadata('design:paramtypes', [userService_1.UserService, contentService_1.ContentService, sessionService_1.SessionService, router_1.Router])
                 ], CreateSessionComponent);
                 return CreateSessionComponent;
-            }());
+            })();
             exports_1("CreateSessionComponent", CreateSessionComponent);
         }
     }

@@ -20,5 +20,4 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Import({DataSourceConfig.class, EntityTransactionManagerConfig.class})
 public class BackendContextConfig
 {
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-backend/
 }

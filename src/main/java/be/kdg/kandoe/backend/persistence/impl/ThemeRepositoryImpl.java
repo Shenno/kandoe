@@ -61,9 +61,7 @@ public class ThemeRepositoryImpl implements ThemeRepositoryCustom {
     @Override
     public List<Theme> getThemesByOrganisatorId(int organisatorId) {
         final TypedQuery<Theme> q = em.createNamedQuery("Theme.findThemesByOrganisatorId",Theme.class);
-        //final javax.persistence.Query q = em.createQuery("SELECT t.themeId FROM Theme t join t.organisators o WHERE o.userId = :organisatorId");
         q.setParameter("organisatorId", organisatorId);
-        //List<Integer> idList = (List<Integer>) q.getResultList();
         return q.getResultList();
     }
 }

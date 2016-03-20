@@ -10,8 +10,6 @@ import java.util.List;
  */
 public interface UserRepositoryCustom
 {
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-backend/backend-persistence-layer/
-
     Integer addUser(User user) throws UserServiceException;
     List<String> findAllUsernames();
 }

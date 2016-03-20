@@ -78,7 +78,7 @@ public class TestCard {
 
     }
     @Test
-    public void testAddCsvCards() throws FileNotFoundException {
+    public void testAddCsvCards() {
         CsvReader csvReader= new CsvReader();
         ArrayList<Card> cards;
         File csvFile = new File("src\\test\\resources\\test.csv");
@@ -92,9 +92,8 @@ public class TestCard {
             }
         }
         catch (Exception e){
-            System.out.println(e+" file not found");
             fail();
-
+            throw new ContentServiceException("File not found");
         }
 
     }

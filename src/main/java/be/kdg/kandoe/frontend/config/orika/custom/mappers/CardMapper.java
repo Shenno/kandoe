@@ -26,7 +26,6 @@ public class CardMapper extends CustomMapper<Card, CardResource> {
     @Override
     public void mapAtoB(Card card, CardResource cardResource, MappingContext context) {
         cardResource.setThemeId(card.getTheme().getId());
-        //super.mapAtoB(card, cardResource, context);
     }
 
     @Override

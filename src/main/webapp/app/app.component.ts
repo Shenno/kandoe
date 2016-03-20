@@ -75,7 +75,6 @@ export class AppComponent {
 
     public constructor(userService:UserService) {
         this.userService = userService;
-        //this.userService.getMyDetails().subscribe((user:User) => this.curr)
        this.getCurrentUserDetails();
         userService.authenticationEvent$.subscribe((eventType: string) => {
            this.onAuthenticationEvent(eventType);

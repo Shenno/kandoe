@@ -129,7 +129,7 @@ public class TestDashboard {
 
         assertEquals("The amount of cards in the combination must be correct", 3, frequentItemsetList.get(5).size());
 
-        //TODO: Geeft nu nog steeds op een willekeurige volgorde terug?
+        // Algoritme werkt nog niet volledig, kaartjes worden op willekeurige volgorde teruggegeven dus hier kan nog niet worden op getest
        /*
         String frequentItemsetListString = new ArrayList<>(frequentItemsetList.get(0)).toString();
         assertEquals("The 1st frequent itemsetlist must be correct", "[card3, card1]", frequentItemsetListString);

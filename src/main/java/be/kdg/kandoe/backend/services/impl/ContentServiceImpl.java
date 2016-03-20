@@ -32,17 +32,13 @@ import java.util.regex.Pattern;
 @Transactional
 public class ContentServiceImpl implements ContentService {
 
-    private final UserService userService;
-
     private final TagRepository tagRepository;
     private final CardRepository cardRepository;
     private final ThemeRepository themeRepository;
     private final RemarkRepository remarkRepository;
 
     @Autowired
-    public ContentServiceImpl(UserService userService, TagRepository tagRepository, CardRepository cardRepository, ThemeRepository themeRepository, RemarkRepository remarkRepository) {
-        this.userService = userService;
-
+    public ContentServiceImpl(TagRepository tagRepository, CardRepository cardRepository, ThemeRepository themeRepository, RemarkRepository remarkRepository) {
         this.tagRepository = tagRepository;
         this.cardRepository = cardRepository;
         this.themeRepository = themeRepository;
@@ -55,9 +51,6 @@ public class ContentServiceImpl implements ContentService {
         validateTheme(theme);
         theme.setTags(new ArrayList<>());
         theme = themeRepository.addTheme(theme);
-        /*Organisation organisation = userService.getOrganisationById(theme.getOrganisation().getId());
-        organisation.getThemes().add(theme);
-        userService.updateOrganisation(organisation);*/
         return theme;
     }
 
@@ -109,7 +102,7 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public Theme updateTheme(Theme theme) throws ContentServiceException {
         validateTheme(theme);
-        theme.setTags(new ArrayList<>()); //TODO: Betere manier om bug op te lossen?
+        theme.setTags(new ArrayList<>());
         return themeRepository.updateTheme(theme);
     }
 
@@ -201,13 +194,8 @@ public class ContentServiceImpl implements ContentService {
             card.setImageURL("http://1.bp.blogspot.com/-TTxz7Nt7es0/Uxf7CoQJRUI/AAAAAAAAHg4/3XrVdDOIxIE/s1600/dummy.gif");
         }
 
-        // Create a Pattern object
         Pattern r = Pattern.compile("(@)?(href=')?(HREF=')?(HREF=\")?(href=\")?(http://)?[a-zA-Z_0-9\\-]+(\\.\\w[a-zA-Z_0-9\\-]+)+(/[#&\\n\\-=?\\+\\%/\\.\\w]+)?");
-
-        // Now create matcher object.
         Matcher m = r.matcher(card.getImageURL());
-
-
         if (!m.find()) {
             throw new ContentServiceException("Wrong Image location");
         }

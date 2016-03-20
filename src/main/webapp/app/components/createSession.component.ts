@@ -78,7 +78,6 @@ export class CreateSessionComponent {
             this.cards = null;
             this.theme = null;
         }
-        // Observable.do .map(function(v) { return [1,2,3];}) .subscribe(console.log.bind(console))
     }
 
     public changeValue(bloe) {
@@ -110,15 +109,7 @@ export class CreateSessionComponent {
     }
 
     public createSession() {
-        // var emails: string[] = [];
         var cardids:number[] = [];
-
-        /* Organisator als deelnemer toevoegen? */
-        ///  emails.push(this.currentUser.username);
-        //alert(this.currentUser.username);
-
-        /* Andere users toevoegen. TODO: dynamisch */
-        //emails.push("clarence.ho@gmail.com");
 
         /* CardIds ophalen */
         this.cards.forEach(function (card) {
@@ -128,21 +119,6 @@ export class CreateSessionComponent {
         });
 
         var session:createSession = new createSession(this.participantEmails, cardids, this.theme.themeId, this.nameSession, this.amountOfCircles);
-        //this.sessionService.post....
-        /*this.userService.login(this.user)
-         .subscribe((res: Response) => {
-         localStorage.setItem("jwt", res.text());
-         this.userService.triggerLoginEvent();
-         //this.userService.getMyDetails().subscribe((user:User) => alert(user.firstName + "BANAAN"));
-         this.router.navigate(['/Home']);
-         },
-         error => {
-         console.log(error);
-         });
-         this.userService.getMyDetails().subscribe(
-         (user: User) => this.currentUserDetails = user,
-         (err) => this.currentUserDetails = null);
-         }*/
         this.sessionService.addSession(session).subscribe(
             (session:SessionActive) => {
                 if (session.errorMessage == '') {

@@ -11,11 +11,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
- * Userrepository is an Interface for accessing a {link: User} in the Database
+ * UserRepository is an Interface for accessing a {link: User} in the Database
  */
 public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User>, UserRepositoryCustom
 {
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-backend/backend-persistence-layer/
-
     User findUserByUsername(String username);
 }

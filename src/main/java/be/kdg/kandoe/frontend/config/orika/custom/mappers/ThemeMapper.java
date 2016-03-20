@@ -31,8 +31,6 @@ public class ThemeMapper extends CustomMapper<Theme, ThemeResource> {
 
     @Override
     public void mapAtoB(Theme theme, ThemeResource themeResource, MappingContext context) {
-      //  mapperFacade.map(theme.getOrganisation(), themeResource.getOrganisation());
-        // mapperFacade.map(organisation.getName(), organisationResource.getOrganisationName());
         themeResource.setOrganisationId(theme.getOrganisation().getId());
         if (theme.getOrganisators().size() == 0) themeResource.setOrganisatorId(1); //TODO: Slechts tijdelijk, zolang het default thema nog geen organisator heeft
         else themeResource.setOrganisatorId(theme.getOrganisators().get(0).getId());

@@ -30,6 +30,7 @@ import java.util.List;
 @Service("sessionService")
 @Transactional
 public class SessionServiceImpl implements SessionService {
+
     private final SessionRepository sessionRepository;
     private final ThemeRepository themeRepository;
     private final UserRepository userRepository;
@@ -44,6 +45,7 @@ public class SessionServiceImpl implements SessionService {
         this.cardSessionRepository = cardSessionRepository;
     }
 
+    /* Session */
     @Override
     public Session addSession(Session session, int themeId, List<Card> cards, List<String> usernames) throws SessionServiceException {
         Theme theme = this.themeRepository.findOne(themeId);
@@ -147,11 +149,6 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public CardSession findCardSession(int cardSessionId) {
-        return cardSessionRepository.findOne(cardSessionId);
-    }
-
-    @Override
     public Session makeMove(CardSession cardSession, int userId) throws SessionServiceException {
         Session session = findSession(cardSession.getSession().getId());
         if(session.isGameOver()) {
@@ -186,5 +183,11 @@ public class SessionServiceImpl implements SessionService {
         }
         return sessionRepository.findSessionByUserId(userId);
     }
+    @Override
+    public CardSession findCardSession(int cardSessionId) {
+        return cardSessionRepository.findOne(cardSessionId);
+    }
+
+
 }
 

@@ -47,7 +47,6 @@ export class LoginComponent {
             .subscribe((res: Response) => {
                     localStorage.setItem("jwt", res.text());
                     this.userService.triggerLoginEvent();
-                    //this.userService.getMyDetails().subscribe((user:User) => alert(user.firstName + "BANAAN"));
                     this.router.navigate(['/Home']);
                 },
                 error => {

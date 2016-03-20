@@ -1,6 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "../service/userService", "../entity/loginUser"], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/core', 'angular2/router', "../service/userService", "../entity/loginUser"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -43,7 +41,6 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                         .subscribe(function (res) {
                         localStorage.setItem("jwt", res.text());
                         _this.userService.triggerLoginEvent();
-                        //this.userService.getMyDetails().subscribe((user:User) => alert(user.firstName + "BANAAN"));
                         _this.router.navigate(['/Home']);
                     }, function (error) {
                         console.log(error);
@@ -61,7 +58,7 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                     __metadata('design:paramtypes', [router_1.Router, userService_1.UserService])
                 ], LoginComponent);
                 return LoginComponent;
-            }());
+            })();
             exports_1("LoginComponent", LoginComponent);
         }
     }

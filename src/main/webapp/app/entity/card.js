@@ -1,6 +1,4 @@
-System.register([], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register([], function(exports_1) {
     var Card;
     return {
         setters:[],
@@ -20,7 +18,7 @@ System.register([], function(exports_1, context_1) {
                     return new Card(0, "", "", 0);
                 };
                 return Card;
-            }());
+            })();
             exports_1("Card", Card);
         }
     }

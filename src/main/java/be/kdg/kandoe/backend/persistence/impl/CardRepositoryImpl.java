@@ -19,18 +19,15 @@ import java.util.List;
 @Repository("CardRepository")
 public class CardRepositoryImpl implements CardRepositoryCustom {
 
-        @PersistenceContext
-        private EntityManager em;
-
-
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public Card addCard(Card card) throws ContentServiceException {
         final TypedQuery<Card> q = em.createNamedQuery("Card.findByText", Card.class);
         q.setParameter("text", card.getText());
 
-        if (!q.getResultList().isEmpty())
-        {
+        if (!q.getResultList().isEmpty()) {
             throw new ContentServiceException("Card " + card.getText() + " already exists");
         }
         final Session session = em.unwrap(Session.class);

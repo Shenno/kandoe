@@ -29,12 +29,6 @@ export class SessionService {
         this.urlService = urlService;
     }
 
-   /* public getSession(id:string): Observable<Session> {
-        var url = this.baseUrl + "/api/sessions/" + id;
-        var headers =  this.urlService.getHeaders(true);
-        return this.http.get(url, {headers: headers}).map((res:Response) => res.json());
-    }*/
-
     public addSession(sessionToBeCreated:createSession): Observable<number> {
         var url = this.baseUrl + "/api/sessions";
         var headers = this.urlService.getHeaders(true);

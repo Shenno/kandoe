@@ -196,6 +196,4 @@ public class TestTag {
         assertEquals("Theme must have correct tag", persistedTag.getTagName(), theme.getTags().get(0).getTagName());
     }
 
-    //TODO: Subtheme
-
 }

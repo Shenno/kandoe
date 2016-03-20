@@ -13,10 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-/**
- * @author Devi Bral
- * @version 1.0 12/03/2016 18:04
- */
 public class ITdashboard {
 
     private static WebDriver driver;
