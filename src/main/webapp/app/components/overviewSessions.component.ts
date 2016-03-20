@@ -33,16 +33,18 @@ export class OverviewSessionsComponent {
             this.userId = user.id;
         });
         this.sessionService.getSessionsByUserId(this.userId).subscribe((sessions:SessionActive[]) => {
+            this.sessions = sessions;
             document.title = 'Jouw sessies';
             var index = 0;
             for (index; index < sessions.length; index++) {
-                var i = index;
-                this.userService.getUserById(sessions[i].currentUser).subscribe((user:User) => {
-                    sessions[i].currentUserName = user.username;
-                });
+                this.getUser(index);
             }
-            this.sessions = sessions;
-
+        });
+    }
+    public getUser(id:number):void{
+        var i = id;
+        this.userService.getUserById(this.sessions[i].currentUser).subscribe((user:User) => {
+            this.sessions[i].currentUserName = user.username;
         });
     }
     public onClickSession(id:string):void{

@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-
+/**
+ * RestController for everything with Login
+ */
 @RequestMapping("/api")
 @RestController
 public class LoginRestController {

@@ -6,7 +6,7 @@ import org.springframework.hateoas.ResourceSupport;
 import java.io.Serializable;
 
 /**
- * Created by Kevin on 28/02/2016.
+ * CardResource is a Resource object for a {link: Card}
  */
 public class CardResource  implements Serializable {
     private Integer id;

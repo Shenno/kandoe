@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 /**
- * Created by Kevin on 29/02/2016.
+ * UserAuthentication is a class that is responsible for the authentication of a {link: User}
  */
 public class UserAuthentication implements Authentication {
 

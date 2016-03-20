@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Kevin on 5/03/2016.
+ * SessionResourceActive is a Resource object for an active {link: Session}
  */
 public class SessionResourceActive implements Serializable {
     private Integer id;

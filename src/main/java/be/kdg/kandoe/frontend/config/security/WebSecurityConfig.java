@@ -17,7 +17,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- * Created by Kevin on 29/02/2016.
+ *  WebSecurityConfig is the configuration for websecurity
+ *  which URL's are permitted when you aren't logged in
  */
 
 @Configuration

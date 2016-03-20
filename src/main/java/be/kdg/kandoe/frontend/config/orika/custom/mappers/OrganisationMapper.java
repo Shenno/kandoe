@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Kevin on 28/02/2016.
+ * OrganisationMapper is a Mapper to map {link: Organisation} to {link: OrganisationResource} or in the other direction
  */
 @Component
 public class OrganisationMapper extends CustomMapper<Organisation, OrganisationResource> {

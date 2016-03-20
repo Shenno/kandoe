@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class UserResource implements Serializable
 {
-    // User properties
     private Integer id;
 
     private String username;
@@ -22,12 +21,6 @@ public class UserResource implements Serializable
     private String firstName;
 
     private String lastName;
-
-   /* public UserResource(User user)
-    {
-        this.userId = user.getUserId();
-        this.username = user.getUsername();
-    }*/
 
     public Integer getId() {
         return id;

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Kevin on 29/02/2016.
+ * MyAuthenticationSuccesHandler is a handler for if the authentication succeed.
  */
 
 public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {

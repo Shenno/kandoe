@@ -5,8 +5,7 @@ import be.kdg.kandoe.frontend.controllers.resources.sessions.CardSessionResource
 import java.util.List;
 
 /**
- * @author Devi Bral
- * @version 1.0 15/03/2016 14:08
+ * CardCominationResource is a Resource object for CardCombinations
  */
 public class CardCombinationResource {
     List<CardSessionResource> cards;

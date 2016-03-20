@@ -9,7 +9,7 @@ import ma.glasnost.orika.MappingContext;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by Kevin on 3/03/2016.
+ * UserRegisterMapper is a Mapper to map {link: UserRegister} to {link: UserRegisterResource} or in the other direction
  */
 @Component
 public class UserRegisterMapper extends CustomMapper<User, UserResourceRegister> {

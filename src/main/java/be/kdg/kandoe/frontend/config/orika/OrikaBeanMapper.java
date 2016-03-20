@@ -18,13 +18,6 @@ import java.util.Map;
 @Component
 public class OrikaBeanMapper extends ConfigurableMapper
 {
-    // see https://github.com/dlizarra/orika-spring-integration/blob/master/src/main/java/com/dlizarra/orika/mapper/OrikaBeanMapper.java
-    // see http://kenblair.net/orika-spring-easy-bean-mapping/
-
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-frontend/presentation-layer/orika/
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/maven-configuratie/
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-frontend/presentation-layer/resources-en-dto/
-
     private MapperFactory mapperFactory;
     private ApplicationContext applicationContext;
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * Created by Kevin on 8/03/2016.
+ * RemarkResource is a Resource object for {link: Remark}
  */
 public class RemarkResource implements Serializable {
     private String text;
