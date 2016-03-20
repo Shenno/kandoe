@@ -18,7 +18,8 @@ import {ChatComponent} from "./chat.component";
 import {KandoeCircleComponent} from "./kandoeCircle.component";
 
 /**
- * Component to view a session
+ * Responsable for polling Restful API resource of session
+ * Hands polled resource to child components: chatbox and circle
  */
 @Component({
     selector: 'view-session',
