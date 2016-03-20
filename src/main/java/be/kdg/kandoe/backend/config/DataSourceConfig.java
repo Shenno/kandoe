@@ -35,6 +35,16 @@ public class DataSourceConfig
     @Value("classpath:/be/kdg/kandoe/backend/datasources/themeorg.sql")
     private Resource themeorg;
 
+    //test
+    @Value("classpath:/be/kdg/kandoe/backend/datasources/session.sql")
+    private Resource session;
+
+    @Value("classpath:/be/kdg/kandoe/backend/datasources/usersession.sql")
+    private Resource usersession;
+
+    @Value("classpath:/be/kdg/kandoe/backend/datasources/cardsession.sql")
+    private Resource cardsession;
+
     // name of bean is superfluous in this case since method name is the same as bean name
     @Bean(name = "datasource")
     public DriverManagerDataSource datasource()
@@ -66,6 +76,10 @@ public class DataSourceConfig
         populator.addScript(theme);
         populator.addScript(card);
         populator.addScript(themeorg);
+        //test
+        populator.addScript(session);
+        populator.addScript(usersession);
+        populator.addScript(cardsession);
         final DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(dataSource);
         initializer.setDatabasePopulator(populator);
