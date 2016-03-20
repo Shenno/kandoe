@@ -123,76 +123,13 @@ public class TestSession {
         assertEquals("Incorrect user added to session", usernames.get(1), usersOfSession.get(1).getUsername());
         assertEquals("Incorrect user added to session", usernames.get(2), usersOfSession.get(2).getUsername());
 
+        List<CardSession> cardsOfSession = session.getCardSessions();
+        assertEquals("Two cards should be added to session", 2, cardsOfSession.size());
+        assertEquals("Incorrect card text", "CardOne", cardsOfSession.get(0).getCard());
+        assertEquals("Incorrect card text", "CardTwo", cardsOfSession.get(1).getCard());
 
-        //List<CardSession> cardsOfSession = session.getCardSessions();
-
-        /*
-        // Add users to session
-        session = sessionService.addUserToSession(session, user.getUsername());
-        session = sessionService.addUserToSession(session, user2.getUsername());
-        session = sessionService.addUserToSession(session, user3.getUsername());
-
-        // Add card to session
-        session = sessionService.addCardToSession(session, card1);
-        session = sessionService.addCardToSession(session, card2);
-        session = sessionService.addCardToSession(session, card3);
-
-        // Remove card to check the session will not break
-        contentService.deleteCard(card1.getId());
-
-        // Debugging feature*/
-/*
-        try {
-            Thread.sleep(50000000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        */
-
-        // Asserts
-       /* session = sessionService.findSession(session.getId());
-        theme = contentService.getTheme(theme.getId());
-        user = userService.findUserById(user.getId());
-        assertNotNull(session);
-        assertEquals("NameSession must be correct",session.getNameSession(),nameSession);
-        assertNotNull(theme);
-        assertNotNull(user);
-
-        //TODO prioriteit van kaart checken
-        assertEquals("Card not removed", 2, contentService.findCardsByThemeId(theme.getId()).size());
-        assertEquals("No 3 cardsessions found in session", 3, session.getCardSessions().size());
-        assertEquals("Theme has more than 1 session", 1, theme.getSessions().size());
-        assertEquals("Theme sessionId is not correct",theme.getSessions().get(0).getId(), session.getId());
-        assertEquals("Playerlist must contain 3 user(s)", session.getUsers().size(),3);
-        assertEquals("Current user must be user", user.getUserId(), session.getCurrentUser());
-        //TODO split in multiple tests
-        // Make move correct user
-        CardSession cardSessionOne = sessionService.findCardSession(session.getCardSessions().get(0).getId());
-        int distanceToCenter = cardSessionOne.getDistanceToCenter();
-        sessionService.makeMove(cardSessionOne, user.getId());
-        session = sessionService.findSession(session.getId());
-        assertEquals("Distance to center of card should be one less", distanceToCenter - 1, session.getCardSessions().get(0).getDistanceToCenter());
-        assertEquals("Current user must be user2", user2.getUserId(), session.getCurrentUser());
-
-        // Add remark
-        String remarkText = "Dit is een opmerking";
-        session = sessionService.addRemarkToSession(session, user.getUsername(), remarkText);
-        assertEquals("Remark should be added", 1, session.getRemarks().size());
-        assertEquals("Remark content should be correct", remarkText, session.getRemarks().get(0).getText());
-
-        // Make move incorrect user
-        exception.expect(SessionServiceException.class);
-        sessionService.makeMove(cardSessionOne, user.getId());
-
-
-
-        // Make moves 3 more moves on same card to check gameOver
-        assertTrue(!session.isGameOver());
-        sessionService.makeMove(cardSessionOne, user2.getId());
-        sessionService.makeMove(cardSessionOne, user3.getId());
-        sessionService.makeMove(cardSessionOne, user.getId());
-        session = sessionService.findSession(session.getId());
-        assertTrue(session.isGameOver());*/
+        assertEquals("Game should not be over", false, session.isGameOver());
+        assertEquals("Current player should be first player added", user1.getUserId(), session.getCurrentUser());
     }
 
     //Successcenario
@@ -535,13 +472,13 @@ public class TestSession {
     }
 
 
-   /* @Test
+    @Test
     public void testCreateTwoAsyncSessionsSameTheme() {
         String nameSession = "SessionName";
-        Session sessionOne = new AsynchronousSession(true, 60, 4,nameSession);
-        Session sessionTwo = new AsynchronousSession(false, 50, 4,nameSession);
-       //TODO: sessionOne = sessionService.addSession(sessionOne, theme.getId());
-        //TODO: sessionTwo = sessionService.addSession(sessionTwo, theme.getId());
+        Session sessionOne = new AsynchronousSession(organisatorId, true, 60, 4,nameSession);
+        Session sessionTwo = new AsynchronousSession(organisatorId, true, 50, 4,nameSession);
+        TODO: sessionOne = sessionService.addSession(sessionOne, theme.getId(), cards, usernames);
+        TODO: sessionTwo = sessionService.addSession(sessionTwo, theme.getId(), cards, usernames);
         assertNotNull(sessionOne);
         assertNotNull(sessionTwo);
         theme = contentService.getTheme(theme.getId());
@@ -549,57 +486,15 @@ public class TestSession {
         assertEquals(theme.getSessions().size(), 2);
     }
 
-    @Test(expected = SessionServiceException.class)
-    public void testAddSessionWithUnknownUser() {
-        String nameSession = "SessionName";
-        // Create AsyncSession and add three users to it
-        Session session = new AsynchronousSession(true, 60, 4, nameSession);
-        session = sessionService.addUserToSession(session, "NonExistingUsername");
-    }
-
-    @Test
-    public void testMakeMoveCorrectUser() {
-        //TODO split tests
-
-    }
-    @Test(expected = SessionServiceException.class)
-    public void testSessionNameNotNull(){
-        String nameSession = "";
-        Session session = new AsynchronousSession(true, 60, 4,nameSession);
-        //TODO: sessionService.addSession(session, theme.getId());
-
-    }
     @Test
     public void testGetSessionByUserId(){
         String nameSession = "SessionName";
-        // Create AsyncSession and add three users to it
-        Session session = new AsynchronousSession(true, 60, 4,nameSession);
+        Session session = new AsynchronousSession(organisatorId, true, 60, 4,nameSession);
 
-        // Create cards and add to the session
-        Card card1 = new Card("CardOne","", theme);
-        Card card2 = new Card("CardTwo","", theme);
-        Card card3 = new Card("CardThree","", theme);
-        card1 = contentService.addCard(card1);
-        card2 = contentService.addCard(card2);
-        card3 = contentService.addCard(card3);
+        session = sessionService.addSession(session, theme.getId(), cards, usernames);
 
-        // Persist session
-        //TODO: session = sessionService.addSession(session, theme.getId());
-
-        // Add users to session
-        session = sessionService.addUserToSession(session, user.getUsername());
-        session = sessionService.addUserToSession(session, user2.getUsername());
-        session = sessionService.addUserToSession(session, user3.getUsername());
-
-        // Add card to session
-        session = sessionService.addCardToSession(session, card1);
-        session = sessionService.addCardToSession(session, card2);
-        session = sessionService.addCardToSession(session, card3);
-
-        assertTrue("User moet in sessie zitten",session.getUsers().contains(user));
-
-        List<Session> sessions = sessionService.findSessionByUserId(user.getId());
+        List<Session> sessions = sessionService.findSessionByUserId(user1.getId());
         assertEquals("Sessie moet in lijst bij user zitten ",sessions.get(0).getId(),session.getId());
-    }*/
+    }
 }
 
