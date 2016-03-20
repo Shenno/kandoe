@@ -50,6 +50,7 @@ public class UserRestController {
     @RequestMapping(value = "/users/me", method = RequestMethod.GET)
     public ResponseEntity<UserResource> getCurrentUser(@AuthenticationPrincipal User user) {
         //No need to check for user being null, API call is authenticated
+        logger.info("User " + user.getUsername() + " has been retrieved.");
         return new ResponseEntity<UserResource>(mapperFacade.map(user, UserResource.class), HttpStatus.OK);
     }
 
@@ -61,6 +62,7 @@ public class UserRestController {
     @RequestMapping(value = "/usernames", method = RequestMethod.GET)
     public ResponseEntity<List<String>> findUsernames() {
         List<String> usernames = userService.findUsernames();
+        logger.info("All usernames have been retrieved.");
         return new ResponseEntity<>(usernames, HttpStatus.OK);
     }
 
@@ -69,12 +71,14 @@ public class UserRestController {
         List<User> users = userService.findUsers();
 
         List<UserResource> userResources = users.stream().map(u -> mapperFacade.map(u, UserResource.class)).collect(Collectors.toList());
+        logger.info("All users have been retrieved.");
         return new ResponseEntity<>(userResources, HttpStatus.OK);
     }
 
     @RequestMapping(value = "users/{userId}", method = RequestMethod.GET)
     public ResponseEntity<UserResource> findUserById(@PathVariable int userId) {
         User user = userService.findUserById(userId);
+        logger.info("User " + userId + " has been retrieved.");
         return new ResponseEntity<>(mapperFacade.map(user, UserResource.class), HttpStatus.OK);
     }
 
@@ -82,12 +86,14 @@ public class UserRestController {
     public ResponseEntity<List<OrganisationResource>> findorganisations() {
         List<Organisation> organisations = this.userService.findOrganisations();
         List<OrganisationResource> organisationResources = organisations.stream().map(o -> mapperFacade.map(o, OrganisationResource.class)).collect(Collectors.toList());
+        logger.info("All organisations have been retrieved.");
         return new ResponseEntity<>(organisationResources, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/organisations/{organisationId}", method = RequestMethod.GET)
     public ResponseEntity<OrganisationResource> findorganisation(@PathVariable int organisationId) {
         Organisation organisation = this.userService.getOrganisationById(organisationId);
+        logger.info("Organisation " + organisationId + " has been retrieved.");
         return new ResponseEntity<>(mapperFacade.map(organisation, OrganisationResource.class), HttpStatus.OK);
     }
 
@@ -95,10 +101,12 @@ public class UserRestController {
     public ResponseEntity<OrganisationResource> createOrganisation(@Valid @RequestBody OrganisationResource organisationResource) {
             try {
                 Organisation returnOrganisation = userService.addOrganisation(mapperFacade.map(organisationResource, Organisation.class));
+                logger.info("Organisation " + organisationResource.getName() + " has been created.");
                 return new ResponseEntity<>(mapperFacade.map(returnOrganisation, OrganisationResource.class), HttpStatus.OK);
             } catch (UserServiceException ex) {
                 String errorMessage = ex.getMessage();
                 organisationResource.setErrorMessage(errorMessage);
+                logger.info("Failed to create organisation because: " + errorMessage);
                 return new ResponseEntity<>(organisationResource, HttpStatus.OK);
             }
 

@@ -47,7 +47,7 @@ public class ContentRestController {
     public ResponseEntity<ThemeResource> findMainThemeById(@PathVariable int themeId) {
         Theme foundTheme = contentService.getTheme(themeId);
         ThemeResource themeResource = mapperFacade.map(foundTheme, ThemeResource.class);
-        logger.info("Theme " + themeId + " has been found.");
+        logger.info("Theme " + themeId + " has been retrieved");
         return new ResponseEntity<>(themeResource, HttpStatus.OK);
     }
 
@@ -55,6 +55,7 @@ public class ContentRestController {
     public ResponseEntity<List<ThemeResource>> findThemesByOrganisatorId(@PathVariable int organisatorId) {
         List<Theme> foundThemes = contentService.findThemesByOrganisatorId(organisatorId);
         List<ThemeResource> themeResources = foundThemes.stream().map(t -> mapperFacade.map(t, ThemeResource.class)).collect(Collectors.toList());
+        logger.info("All themes of user " + organisatorId + " have been retrieved");
         return new ResponseEntity<List<ThemeResource>>(themeResources, HttpStatus.OK);
     }
 
@@ -68,10 +69,12 @@ public class ContentRestController {
                 addedTheme.addTag(tag);
             }
 
+            logger.info("Theme" + themeResource.getThemeName() + " has been created.");
             return new ResponseEntity<>(mapperFacade.map(addedTheme, ThemeResource.class), HttpStatus.CREATED);
         } catch (ContentServiceException ex) {
             String errorMessage = ex.getMessage();
             themeResource.setErrorMessage(errorMessage);
+            logger.warn("Failed to create theme because: " + errorMessage);
             return new ResponseEntity<>(themeResource, HttpStatus.OK);
         }
     }
@@ -91,6 +94,7 @@ public class ContentRestController {
                     }
                 }
 
+                logger.info("Theme " + themeId + " has been updated");
                 return new ResponseEntity<>(mapperFacade.map(updatedTheme, ThemeResource.class), HttpStatus.OK);
             }
 
@@ -98,6 +102,7 @@ public class ContentRestController {
         } catch (ContentServiceException ex) {
             String errorMessage = ex.getMessage();
             themeResource.setErrorMessage(errorMessage);
+            logger.warn("Failed to update theme " + themeId + " because: " + errorMessage);
             return new ResponseEntity<>(themeResource, HttpStatus.OK);
         }
     }
@@ -107,12 +112,14 @@ public class ContentRestController {
         Tag t = tagResource.toDOM();
         t.setTheme(contentService.getTheme(mainThemeId));
         Tag tag = contentService.addTag(t);
+        logger.info("Tag " + tagResource.getTagName() + " has been added to theme " + mainThemeId);
         return new ResponseEntity<>(new TagResource(tag), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/cards", method = RequestMethod.POST)
     public ResponseEntity<CardResource> addCard(@RequestBody CardResource cardResource) {
         Card addedCard = contentService.addCard(mapperFacade.map(cardResource, Card.class));
+        logger.info("Card " + cardResource.getText() + " has been added.");
         return new ResponseEntity<>(mapperFacade.map(addedCard, CardResource.class), HttpStatus.CREATED);
     }
 
@@ -121,6 +128,7 @@ public class ContentRestController {
 
         List<Card> cards = contentService.findCardsByThemeId(themeId);
         List<CardResource> cardResources = cards.stream().map(c -> mapperFacade.map(c, CardResource.class)).collect(Collectors.toList());
+        logger.info("All cards of theme " + themeId + " have been found.");
         return new ResponseEntity<List<CardResource>>(cardResources, HttpStatus.OK);
     }
 
@@ -145,12 +153,15 @@ public class ContentRestController {
                 cardCombinations.add(cardCombinationResource);
             }
         }
+
+        logger.info("Most frequent card combinations of theme " + themeId + " have been found.");
         return new ResponseEntity<>(cardCombinations, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/cards/{cardId}", method = RequestMethod.GET)
     public ResponseEntity<CardResource> findCardById(@PathVariable int cardId) {
         Card card = contentService.getCard(cardId);
+        logger.info("Card " + cardId + " has been retrieved.");
         return new ResponseEntity<CardResource>(mapperFacade.map(card, CardResource.class), HttpStatus.OK);
     }
 }

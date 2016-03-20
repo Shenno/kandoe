@@ -15,6 +15,7 @@ import be.kdg.kandoe.frontend.controllers.resources.sessions.RemarkResource;
 import be.kdg.kandoe.frontend.controllers.resources.sessions.SessionResourceActive;
 import be.kdg.kandoe.frontend.controllers.resources.sessions.SessionResourcePost;
 import ma.glasnost.orika.MapperFacade;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,9 @@ public class SessionRestController {
 
     private SessionService sessionService;
     private ContentService contentService;
-    MapperFacade mapperFacade;
+    private MapperFacade mapperFacade;
+
+    private Logger logger = Logger.getLogger(SessionRestController.class);
 
     @Autowired
     public SessionRestController(SessionService sessionService, ContentService contentService, MapperFacade mapperFacade)
@@ -49,6 +52,7 @@ public class SessionRestController {
     public ResponseEntity<List<SessionResourceActive>> findThemesByOrganisatorId(@AuthenticationPrincipal User user) {
         List<Session> foundSessions = sessionService.findSessionByUserId(user.getId());
         List<SessionResourceActive> sessionResources = foundSessions.stream().map(s -> mapperFacade.map(s, SessionResourceActive.class)).collect(Collectors.toList());
+        logger.info("Sessions of organisator " + user.getId() + " have been retrieved");
         return new ResponseEntity<List<SessionResourceActive>>(sessionResources, HttpStatus.OK);
     }
 
@@ -58,8 +62,10 @@ public class SessionRestController {
         if(session.getOrganisator() == user.getUserId()) {
             session.setGameOver(true);
             sessionService.updateSession(session);
+            logger.info("Session " + sessionId + " has been succesfully terminated.");
             return HttpStatus.OK;
         }
+        logger.warn("Failed to terminate session " + sessionId);
         return HttpStatus.UNAUTHORIZED;
     }
 
@@ -80,14 +86,17 @@ public class SessionRestController {
             session.setTheme(contentService.getTheme(sessionResourcePost.getThemeId()));
             SessionResourceActive sessionResourceActive = mapperFacade.map(session, SessionResourceActive.class);
             sessionResourceActive.setErrorMessage(sse.getMessage());
+            logger.warn("Failed to create session because: " + sse.getMessage());
             return new ResponseEntity<SessionResourceActive>(sessionResourceActive, HttpStatus.OK);
         }
+        logger.info("Session " + persistedSession.getId() + " has been succesfully created.");
         return new ResponseEntity<SessionResourceActive>(mapperFacade.map(persistedSession, SessionResourceActive.class), HttpStatus.OK);
     }
 
     @RequestMapping(value="/{sessionId}", method = RequestMethod.GET)
     public ResponseEntity<SessionResourceActive> findAsynchronousSession(@PathVariable int sessionId) {
         AsynchronousSession session = (AsynchronousSession) sessionService.findSession(sessionId);
+        logger.info("Session " + sessionId + " has been retrieved.");
         return new ResponseEntity<SessionResourceActive>(mapperFacade.map(session, SessionResourceActive.class), HttpStatus.OK);
     }
 
@@ -97,6 +106,7 @@ public class SessionRestController {
         session = sessionService.addRemarkToSession(session, user.getUsername(), remarkResource.getText());
         List<RemarkResource> remarkResourceList = session.getRemarks().stream().map(r -> mapperFacade.map(r, RemarkResource.class)).collect(Collectors.toList());
         remarkResourceList.forEach(r -> r.setUsername(user.getUsername()));
+        logger.info("Remarks for session " + sessionId + " have been created.");
         return new ResponseEntity<List<RemarkResource>>(remarkResourceList, HttpStatus.OK);
     }
 
@@ -105,6 +115,7 @@ public class SessionRestController {
         Session session = sessionService.findSession(sessionId);
         sessionService.makeMove(sessionService.findCardSession(cardSessionResource.getId()), user.getUserId());
         session = sessionService.findSession(sessionId);
+        logger.info("Session " + sessionId + " has been updated.");
         return new ResponseEntity<SessionResourceActive>(mapperFacade.map(session, SessionResourceActive.class), HttpStatus.OK);
     }
 }

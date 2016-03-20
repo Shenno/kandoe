@@ -11,6 +11,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import ma.glasnost.orika.Mapper;
 import ma.glasnost.orika.MapperFacade;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,8 @@ public class LoginRestController {
     private final UserService userService;
     private final MapperFacade mapperFacade;
 
+    private Logger logger = Logger.getLogger(LoginRestController.class);
+
     @Autowired
     public LoginRestController(BCryptPasswordEncoder passwordEncoder, UserService userService, MapperFacade mapperFacade) {
         this.passwordEncoder = passwordEncoder;
@@ -45,6 +48,7 @@ public class LoginRestController {
         userService.addUser(u);
         String token = Jwts.builder().setSubject(u.getUsername())
                 .signWith(SignatureAlgorithm.HS256, "toomanysecrets").compact();
+        logger.info("User " + userResourceRegister.getUsername() + " has been created");
         return new ResponseEntity<>(token, HttpStatus.CREATED);
     }
 
@@ -55,11 +59,14 @@ public class LoginRestController {
             if (passwordEncoder.matches(userResourcePost.getPassword(), u.getEncryptedPassword())) {
                 String token = Jwts.builder().setSubject(u.getUsername())
                         .signWith(SignatureAlgorithm.HS256, "toomanysecrets").compact();
+                logger.info("User " + u.getUsername() + " has succesfully logged in");
                 return new ResponseEntity<>(token, HttpStatus.OK);
             } else {
+                logger.warn("Wrong username or password");
                 return new ResponseEntity<>("Wrong username or password", HttpStatus.UNAUTHORIZED);
             }
         } catch (UserServiceException e) {
+            logger.warn("Failed to login because: " + e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
         }
     }
