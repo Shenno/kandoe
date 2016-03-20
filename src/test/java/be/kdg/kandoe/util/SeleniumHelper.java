@@ -19,6 +19,14 @@ public class SeleniumHelper {
         }
     }
 
+    public static void allowResourcesToGetPolled() {
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void fillTextIntoElement(WebElement element, String text) {
         String[] splitText = text.split("");
         for (String s : splitText){

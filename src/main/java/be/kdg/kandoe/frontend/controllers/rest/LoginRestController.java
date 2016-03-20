@@ -37,39 +37,28 @@ public class LoginRestController {
         this.mapperFacade = mapperFacade;
     }
 
-    @RequestMapping(value = "/testerino", method=RequestMethod.GET)
-    public String test() {
-        return "hallo";
-    }
-
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity<String> createUser(@Valid @RequestBody UserResourceRegister userResourceRegister)
-    {
+    public ResponseEntity<String> createUser(@Valid @RequestBody UserResourceRegister userResourceRegister) {
         User u = mapperFacade.map(userResourceRegister, User.class);
         userService.addUser(u);
         String token = Jwts.builder().setSubject(u.getUsername())
                 .signWith(SignatureAlgorithm.HS256, "toomanysecrets").compact();
         return new ResponseEntity<>(token, HttpStatus.CREATED);
-        //return new ResponseEntity<>(mapperFacade.map(userResourceRegister, UserResource.class), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<String> login(@RequestBody UserResourcePost userResourcePost, @AuthenticationPrincipal User user){
-        if(user == null){
-            try{
-                User u = userService.findUserByUsername(userResourcePost.getUsername());
-                if(passwordEncoder.matches(userResourcePost.getPassword(), u.getEncryptedPassword())){
-                    String token = Jwts.builder().setSubject(u.getUsername())
-                            .signWith(SignatureAlgorithm.HS256, "toomanysecrets").compact();
-                    return new ResponseEntity<>(token, HttpStatus.OK);
-                } else {
-                    return new ResponseEntity<>("Wrong username or password", HttpStatus.UNAUTHORIZED);
-                }
+    public ResponseEntity<String> login(@RequestBody UserResourcePost userResourcePost, @AuthenticationPrincipal User user) {
+        try {
+            User u = userService.findUserByUsername(userResourcePost.getUsername());
+            if (passwordEncoder.matches(userResourcePost.getPassword(), u.getEncryptedPassword())) {
+                String token = Jwts.builder().setSubject(u.getUsername())
+                        .signWith(SignatureAlgorithm.HS256, "toomanysecrets").compact();
+                return new ResponseEntity<>(token, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Wrong username or password", HttpStatus.UNAUTHORIZED);
             }
-            catch (UserServiceException e){
-                return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
-            }
+        } catch (UserServiceException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<>("Already logged in", HttpStatus.I_AM_A_TEAPOT);
     }
 }

@@ -11,6 +11,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static junit.framework.Assert.assertEquals;
 
 
@@ -18,6 +21,27 @@ public class ITsession {
 
     private static WebDriver driver;
     private static String userName;
+
+    public void login(ChromeDriver driver, String userName, String password) {
+        driver.get("http://localhost:9966/kandoe/#/login");
+
+        SeleniumHelper.allowDomToLoad();
+
+        WebElement element = driver.findElement(By.id("app"));
+        element = element.findElement(By.tagName("login"));
+
+        element = element.findElement(By.id("ib_username"));
+        userName = userName;
+        SeleniumHelper.fillTextIntoElement(element, userName);
+
+        element = driver.findElement(By.id("ib_password"));
+        SeleniumHelper.fillTextIntoElement(element, password);
+
+        element = driver.findElement(By.name("btn_login"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Kandoe"));
+    }
 
     @BeforeClass
     public static void setup() {
@@ -103,8 +127,7 @@ public class ITsession {
         }
     }
 
-    @Test
-    public void testAddSession() {
+    public String addSession() {
         driver.get("http://localhost:9966/kandoe/#/");
 
         WebElement element = driver.findElement(By.id("a_createSession"));
@@ -184,6 +207,8 @@ public class ITsession {
 
         (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Kandoe sessie"));
 
+        String currentUrl = driver.getCurrentUrl();
+
         for (int i = 0; i < 2; i++) {
             element = driver.findElement(By.id("card" + i + "_number"));
             assertEquals("span", element.getTagName());
@@ -207,10 +232,46 @@ public class ITsession {
             assertEquals("span", element.getTagName());
             assertEquals("MyCardName" + i, SeleniumHelper.getInnerHtmlOfElement(driver, element));
         }
-
+        return currentUrl;
     }
 
     @Test
+    public void testAddSession() {
+        String url = addSession();
+        ChromeDriver scottDriver = new ChromeDriver();
+        ChromeDriver johnDriver = new ChromeDriver();
+        login(scottDriver, "scott.tiger@live.com", "scott");
+        login(johnDriver, "john.smith@live.com", "john");
+
+        scottDriver.get(url);
+        johnDriver.get(url);
+        SeleniumHelper.allowDomToLoad();
+
+        ChromeDriver currentDriver = null;
+        for(int i = 0; i < 7; i++) {
+            if(i%2 == 0) {
+                currentDriver = scottDriver;
+            } else {
+                currentDriver = johnDriver;
+            }
+            WebElement element = currentDriver.findElement(By.id("card" + 0));
+            SeleniumHelper.clickOnElement(currentDriver, element);
+            SeleniumHelper.allowResourcesToGetPolled();
+        }
+
+        WebElement element = currentDriver.findElement(By.id("game_over"));
+        assertEquals("h2", element.getTagName());
+
+
+
+    }
+
+   /* @Test
+    public void testPlaySession() {
+        String url = addSession();
+    }*/
+
+  /*  @Test
     public void testAddEmptySessionName () {
         driver.get("http://localhost:9966/kandoe/#/");
 
@@ -452,7 +513,7 @@ public class ITsession {
         assertEquals("div", element.getTagName());
         assertEquals("The content of the error must be correct", "Een sessie moet minimum 2 en maximum 24 kaarten bevatten.", element.getText());
 
-    }
+    }*/
 
     @AfterClass
     public static void tearDownClass() {
