@@ -1,4 +1,6 @@
-System.register(['angular2/core', 'angular2/router', "../service/userService", "../entity/loginUser"], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', "../service/userService", "../entity/loginUser"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -35,7 +37,7 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                     this.userService = userService;
                     this.router = router;
                 }
-                LoginComponent.prototype.getLucky = function () {
+                LoginComponent.prototype.login = function () {
                     var _this = this;
                     this.userService.login(this.user)
                         .subscribe(function (res) {
@@ -46,19 +48,16 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                         console.log(error);
                     });
                 };
-                LoginComponent.prototype.getUnlucky = function () {
-                    localStorage.removeItem("jwt");
-                };
                 LoginComponent = __decorate([
                     core_1.Component({
                         selector: 'login',
-                        template: "\n    <div>\n        <label for=\"ib_username\">E-mailadres</label>\n        <input class=\"form-control\" id=\"ib_username\" name=\"ib_username\" [(ngModel)]=\"user.username\"/>\n    </div>\n\n    <div>\n        <label for=\"ib_password\">Paswoord</label>\n        <input class=\"form-control\" type=\"password\" id=\"ib_password\" name=\"ib_password\" [(ngModel)]=\"user.password\"/>\n    </div>\n    <br>\n    <button class=\"btn btn-primary\" name=\"btn_login\" (click)=\"getLucky()\" >Get lucky</button>\n    <button class=\"btn wide-btn-default\" name=\"btn_logout\" (click)=\"getUnlucky()\">Get unlucky</button>\n\n    ",
+                        template: "\n    <div>\n        <label for=\"ib_username\">E-mailadres</label>\n        <input class=\"form-control\" id=\"ib_username\" name=\"ib_username\" [(ngModel)]=\"user.username\"/>\n    </div>\n\n    <div>\n        <label for=\"ib_password\">Paswoord</label>\n        <input class=\"form-control\" type=\"password\" id=\"ib_password\" name=\"ib_password\" [(ngModel)]=\"user.password\"/>\n    </div>\n    <br>\n    <button class=\"btn btn-primary\" name=\"btn_login\" (click)=\"login()\" >Login</button>\n\n    ",
                         encapsulation: core_1.ViewEncapsulation.None
                     }), 
                     __metadata('design:paramtypes', [router_1.Router, userService_1.UserService])
                 ], LoginComponent);
                 return LoginComponent;
-            })();
+            }());
             exports_1("LoginComponent", LoginComponent);
         }
     }

@@ -21,8 +21,6 @@ import {SessionComponent} from "./components/session.component";
 import {DetailCardComponent} from "./components/detailCard.component";
 import {OverviewSessionsComponent} from "./components/overviewSessions.component";
 import {CreateCsvComponent} from "./components/createCsv.component";
-import {Router} from "angular2/router";
-import {Instruction} from "angular2/router";
 import {ErrorComponent} from "./components/error.component";
 
 /**

@@ -33,7 +33,6 @@ public class DataSourceConfig
     @Value("classpath:/be/kdg/kandoe/backend/datasources/themeorg.sql")
     private Resource themeorg;
 
-    //test
     @Value("classpath:/be/kdg/kandoe/backend/datasources/session.sql")
     private Resource session;
 
@@ -69,7 +68,6 @@ public class DataSourceConfig
         populator.addScript(theme);
         populator.addScript(card);
         populator.addScript(themeorg);
-        //test
         populator.addScript(session);
         populator.addScript(usersession);
         populator.addScript(cardsession);

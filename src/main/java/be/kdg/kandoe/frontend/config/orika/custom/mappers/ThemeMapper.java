@@ -21,12 +21,10 @@ import java.util.List;
 public class ThemeMapper extends CustomMapper<Theme, ThemeResource> {
 
     private UserService userService;
-    private ContentService contentService;
 
     @Autowired
-    public ThemeMapper(UserService userService, ContentService contentService) {
+    public ThemeMapper(UserService userService) {
         this.userService = userService;
-        this.contentService = contentService;
     }
 
     @Override
