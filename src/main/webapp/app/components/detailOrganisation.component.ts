@@ -7,7 +7,9 @@ import {UserService} from "../service/userService";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {FORM_DIRECTIVES} from "angular2/common";
 
-
+/**
+ * Component for showing details about Organisation
+ */
 @Component({
     selector: 'detail-organisation',
     templateUrl: 'app/partials_html/detailOrganisation.component.html',

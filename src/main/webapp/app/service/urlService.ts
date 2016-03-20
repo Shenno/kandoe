@@ -1,6 +1,8 @@
 import {Injectable} from 'angular2/core';
 import {Headers} from "angular2/http";
-
+/**
+ * Service class to handle everything with Url
+ */
 @Injectable()
 export class UrlService {
     private host: string = "localhost";

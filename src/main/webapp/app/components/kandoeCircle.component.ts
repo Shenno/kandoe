@@ -15,6 +15,9 @@ import {Ring} from "../entity/ring";
 import {NgClass} from "angular2/common";
 import {Axis} from "../entity/axis";
 
+/**
+ * Component for the kandoe circle
+ */
 @Component({
     selector: 'kandoe-circle',
     template: `

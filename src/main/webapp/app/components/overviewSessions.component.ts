@@ -10,6 +10,9 @@ import {User} from "../entity/user";
 import {SessionActive} from "../entity/sessionActive";
 import {SessionService} from "../service/sessionService";
 
+/**
+ * Component for an overview of Sessions
+ */
 @Component({
     selector: 'overview-session',
     templateUrl: 'app/partials_html/overviewSessions.component.html',

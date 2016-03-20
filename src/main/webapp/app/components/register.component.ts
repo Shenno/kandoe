@@ -6,6 +6,9 @@ import {UrlService} from "../service/urlService";
 import {UserService} from "../service/userService";
 import {RegisterUser} from "../entity/registerUser";
 
+/**
+ * Component for register
+ */
 @Component({
     selector: 'login',
     template: `

@@ -11,7 +11,9 @@ import {SessionActive} from "../entity/sessionActive";
 import {SessionCard} from "../entity/sessionCard";
 import {Subscription} from "../../node_modules/rxjs/Subscription";
 import {Remark} from "../entity/remark";
-
+/**
+ * Component for chatbox
+ */
 @Component({
     selector: 'chatbox',
     template: `

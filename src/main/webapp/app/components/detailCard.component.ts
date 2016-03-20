@@ -7,6 +7,9 @@ import {ContentService} from "../service/contentService";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {FORM_DIRECTIVES} from "angular2/common";
 
+/**
+ * Component for showing details about a card
+ */
 
 @Component({
     selector: 'detail-card',

@@ -10,7 +10,9 @@ import {Card} from "../entity/card";
 import {User} from "../entity/user";
 import {UserService} from "../service/userService";
 
-
+/**
+ * Component for showing details about Theme
+ */
 @Component({
     selector: 'detail-theme',
     templateUrl: 'app/partials_html/detailTheme.component.html',

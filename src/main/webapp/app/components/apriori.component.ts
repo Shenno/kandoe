@@ -6,6 +6,9 @@ import {ContentService} from "../service/contentService";
 import {RouteParams} from "angular2/router";
 import {CardCombination} from "../entity/cardCombination";
 
+/**
+ * Component for showing most frequent card combinations
+ */
 @Component({
     selector: 'apriori',
     templateUrl: 'app/partials_html/apriori.component.html',

@@ -3,7 +3,9 @@ import {Router} from 'angular2/router';
 import {ContentService} from "../service/contentService";
 import {Card} from "../entity/card";
 import {RouteParams} from "angular2/router";
-
+/**
+ * Component for creating card
+ */
 @Component({
     selector: 'create-card',
     templateUrl: 'app/partials_html/createCard.component.html',

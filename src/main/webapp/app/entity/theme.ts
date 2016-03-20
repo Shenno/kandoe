@@ -1,4 +1,6 @@
-import {Organisation} from "./organisation";
+/**
+ * An object for showing and creating and editing a Theme
+ */
 export class Theme {
     constructor(public themeId: number,
                 public themeName: string,

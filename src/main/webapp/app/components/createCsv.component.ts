@@ -2,7 +2,9 @@ import {Component, ViewEncapsulation} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {ContentService} from "../service/contentService";
 import {RouteParams} from "angular2/router";
-
+/**
+ * Component for creating cards by csv
+ */
 @Component({
     selector: 'createCsv',
     templateUrl: 'app/partials_html/createCsv.component.html',

@@ -5,7 +5,9 @@ import {User} from "../entity/user";
 import {Http, Response, Headers} from "angular2/http";
 import {UrlService} from "../service/urlService";
 import {UserService} from "../service/userService";
-
+/**
+ * Component for creating organisation
+ */
 @Component({
     selector: 'create-organisation',
     templateUrl: 'app/partials_html/createOrganisation.component.html',

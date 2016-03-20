@@ -9,7 +9,9 @@ import {Router} from "angular2/router";
 import {Card} from "../entity/card";
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/switchMap';
-
+/**
+ * Service class to handle everything with Content
+ */
 @Injectable()
 export class ContentService {
     private http:Http = null;

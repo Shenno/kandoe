@@ -17,6 +17,9 @@ import {Subscription} from "../../node_modules/rxjs/Subscription";
 import {ChatComponent} from "./chat.component";
 import {KandoeCircleComponent} from "./kandoeCircle.component";
 
+/**
+ * Component to view a session
+ */
 @Component({
     selector: 'view-session',
     directives: [ChatComponent, KandoeCircleComponent],

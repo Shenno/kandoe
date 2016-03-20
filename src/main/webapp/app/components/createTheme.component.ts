@@ -9,7 +9,9 @@ import {User} from "../entity/user";
 import {UserService} from "../service/userService";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {FORM_DIRECTIVES} from "angular2/common";
-
+/**
+ * Component for creating Theme
+ */
 @Component({
     selector: 'create-theme',
     templateUrl: 'app/partials_html/createTheme.component.html',

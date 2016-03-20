@@ -1,6 +1,8 @@
 import {User} from "./user";
 import {Theme} from"./theme";
-
+/**
+ * An object for showing and creating an Organisation
+ */
 export class Organisation {
     constructor(public id: number,
                 public name: string,

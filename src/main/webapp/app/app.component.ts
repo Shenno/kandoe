@@ -1,6 +1,5 @@
 import {Component, ViewEncapsulation, ChangeDetectorRef, ChangeDetectionStrategy} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
-import {CirkelsessieComponent} from "./components/cirkelsessie.component";
 import {CreateThemeComponent} from "./components/createTheme.component";
 import {EditThemeComponent} from "./components/editTheme.component";
 import {bootstrap} from "angular2/bootstrap";
@@ -26,6 +25,10 @@ import {CreateCsvComponent} from "./components/createCsv.component";
 import {Router} from "angular2/router";
 import {Instruction} from "angular2/router";
 import {ErrorComponent} from "./components/error.component";
+
+/**
+ * Component for the app
+ */
 @Component({
     selector: 'my-app',
     templateUrl: 'app/partials_html/app.component.html',
@@ -59,7 +62,6 @@ import {ErrorComponent} from "./components/error.component";
     {path:'/session/:sessionId', name:'Session',component:SessionComponent},
     {path:'/sessions', name:'Sessions', component:OverviewSessionsComponent},
 
-    {path:'/cirkelsessie', name:'Cirkelsessie',component:CirkelsessieComponent},
     {path:'/createCsv', name:'CreateCsv',component:CreateCsvComponent},
 
     {path: '/*error', name: 'Error', component: ErrorComponent}

@@ -1,3 +1,6 @@
+/**
+ * An object for Cards for a Specific Session
+ */
 export class SessionCard {
     constructor(public id: number,
                 public distanceToCenter: number,

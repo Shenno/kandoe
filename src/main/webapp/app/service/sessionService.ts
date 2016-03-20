@@ -10,7 +10,9 @@ import {createSession} from "../entity/createSession";
 import {SessionActive} from "../entity/sessionActive";
 import {SessionCard} from "../entity/sessionCard";
 import {Remark} from "../entity/remark";
-
+/**
+ * Service class to handle everything with Session
+ */
 @Injectable()
 export class SessionService {
     private http:Http = null;

@@ -8,7 +8,9 @@ import {CORE_DIRECTIVES} from "angular2/common";
 import {FORM_DIRECTIVES} from "angular2/common";
 import {User} from "../entity/user";
 
-
+/**
+ * Component for an overview of organisations
+ */
 @Component({
     selector: 'overview-organisation',
     templateUrl: 'app/partials_html/overviewOrganisations.component.html',

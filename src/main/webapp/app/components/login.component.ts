@@ -7,6 +7,9 @@ import {UserService} from "../service/userService";
 import {LoginUser} from "../entity/loginUser";
 import {User} from "../entity/user";
 
+/**
+ * Component for the login page
+ */
 @Component({
     selector: 'login',
     template: `

@@ -12,7 +12,9 @@ import {Observable, } from "../../node_modules/rxjs/Observable";
 import {createSession} from "../entity/createSession";
 import {SessionService} from "../service/sessionService";
 import {SessionActive} from "../entity/sessionActive";
-
+/**
+ * Component for creating Session
+ */
 @Component({
     selector: 'create-session',
     templateUrl: 'app/partials_html/createSession.component.html',

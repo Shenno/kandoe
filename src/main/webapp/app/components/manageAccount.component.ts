@@ -3,6 +3,9 @@ import {Router} from 'angular2/router';
 import {CORE_DIRECTIVES} from "angular2/common";
 import {FORM_DIRECTIVES} from "angular2/common";
 
+/**
+ * Component for managing your profile
+ */
 @Component({
     selector: 'manage-account',
     templateUrl: 'app/partials_html/manageAccount.component.html',

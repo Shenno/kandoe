@@ -1,3 +1,6 @@
+/**
+ * An object for creating and showing a card
+ */
 export class Card {
 
     public selected: boolean;

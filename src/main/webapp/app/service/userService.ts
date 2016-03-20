@@ -8,7 +8,9 @@ import {Router} from "angular2/router";
 import {LoginUser} from "../entity/loginUser";
 import {User} from "../entity/user";
 import {RegisterUser} from "../entity/registerUser";
-
+/**
+ * Service class to handle everything with User
+ */
 @Injectable()
 export class UserService {
     private http:Http = null;

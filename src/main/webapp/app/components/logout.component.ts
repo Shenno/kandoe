@@ -3,6 +3,9 @@ import {Router} from 'angular2/router';
 import {CORE_DIRECTIVES} from "angular2/common";
 import {FORM_DIRECTIVES} from "angular2/common";
 
+/**
+ * Component for Logout
+ */
 @Component({
     selector: 'logout',
     templateUrl: 'app/partials_html/logout.component.html',

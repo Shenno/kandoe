@@ -1,3 +1,6 @@
+/**
+ * An object for a Tag
+ */
 export class Tag {
     constructor(public name: string)
                  {

@@ -6,7 +6,9 @@ import {FORM_DIRECTIVES} from "angular2/common";
 import {AprioriComponent} from "./apriori.component";
 import {Theme} from "../entity/theme";
 import {ContentService} from "../service/contentService";
-
+/**
+ * Component for DashboardPage for a theme
+ */
 @Component({
     selector: 'dashboard',
     templateUrl: 'app/partials_html/dashboard.component.html',

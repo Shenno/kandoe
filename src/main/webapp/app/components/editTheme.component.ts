@@ -8,6 +8,9 @@ import {Theme} from "../entity/theme";
 import {UserService} from "../service/userService";
 import {User} from "../entity/user";
 
+/**
+ * Component edit page for editing Theme
+ */
 @Component({
     selector: 'edit-theme',
     templateUrl: 'app/partials_html/editTheme.component.html',

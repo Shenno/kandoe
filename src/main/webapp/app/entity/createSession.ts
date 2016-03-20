@@ -1,4 +1,6 @@
-//test
+/**
+ * An object for creating a Session
+ */
 export class createSession {
     constructor(public participantsEmails: string[],
                 public cardIds: number[],
