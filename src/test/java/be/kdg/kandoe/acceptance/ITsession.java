@@ -11,9 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static junit.framework.Assert.assertEquals;
 
 
@@ -236,7 +233,7 @@ public class ITsession {
     }
 
     @Test
-    public void testAddSession() {
+    public void testAddSessionAndPlay() {
         String url = addSession();
         ChromeDriver scottDriver = new ChromeDriver();
         ChromeDriver johnDriver = new ChromeDriver();
@@ -261,17 +258,12 @@ public class ITsession {
 
         WebElement element = currentDriver.findElement(By.id("game_over"));
         assertEquals("h2", element.getTagName());
-
-
-
+        scottDriver.close();
+        johnDriver.close();
     }
 
-   /* @Test
-    public void testPlaySession() {
-        String url = addSession();
-    }*/
 
-  /*  @Test
+    @Test
     public void testAddEmptySessionName () {
         driver.get("http://localhost:9966/kandoe/#/");
 
@@ -513,7 +505,7 @@ public class ITsession {
         assertEquals("div", element.getTagName());
         assertEquals("The content of the error must be correct", "Een sessie moet minimum 2 en maximum 24 kaarten bevatten.", element.getText());
 
-    }*/
+    }
 
     @AfterClass
     public static void tearDownClass() {
