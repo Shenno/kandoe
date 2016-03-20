@@ -34,9 +34,9 @@ public class ITtheme {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("login"));
+        element = driver.findElement(By.tagName("login"));
 
-        element = element.findElement(By.id("ib_username"));
+        element = driver.findElement(By.id("ib_username"));
         SeleniumHelper.fillTextIntoElement(element, "scott.tiger@live.com");
 
         element = driver.findElement(By.id("ib_password"));
@@ -80,7 +80,7 @@ public class ITtheme {
     }
 
     @Test
-    public void addEmptyThemename() {
+    public void testAddEmptyThemename() {
         driver.get("http://localhost:9966/kandoe/#/organisation/" + organisationId + "/createTheme");
 
         SeleniumHelper.allowDomToLoad();
@@ -343,9 +343,9 @@ public class ITtheme {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("create-theme"));
+        element = driver.findElement(By.tagName("create-theme"));
 
-        element = element.findElement(By.name("btn_cancel"));
+        element = driver.findElement(By.name("btn_cancel"));
         assertEquals("button", element.getTagName());
         assertEquals("Annuleren", element.getText());
         SeleniumHelper.clickOnElement(driver, element);
@@ -363,7 +363,7 @@ public class ITtheme {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("detail-theme"));
+        element = driver.findElement(By.tagName("detail-theme"));
 
         element = driver.findElement(By.id("span_themename"));
         String themeName = element.getText();
@@ -588,7 +588,7 @@ public class ITtheme {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("detail-theme"));
+        element = driver.findElement(By.tagName("detail-theme"));
 
         element = driver.findElement(By.id("btn_edit"));
         SeleniumHelper.clickOnElement(driver, element);

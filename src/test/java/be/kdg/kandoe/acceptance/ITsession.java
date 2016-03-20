@@ -25,9 +25,9 @@ public class ITsession {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("login"));
+        element = driver.findElement(By.tagName("login"));
 
-        element = element.findElement(By.id("ib_username"));
+        element = driver.findElement(By.id("ib_username"));
         SeleniumHelper.fillTextIntoElement(element, userName);
 
         element = driver.findElement(By.id("ib_password"));
@@ -49,9 +49,9 @@ public class ITsession {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("login"));
+        element = driver.findElement(By.tagName("login"));
 
-        element = element.findElement(By.id("ib_username"));
+        element = driver.findElement(By.id("ib_username"));
         userName = "scott.tiger@live.com";
         SeleniumHelper.fillTextIntoElement(element, userName);
 

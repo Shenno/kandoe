@@ -31,23 +31,17 @@ public class ITorganisation {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("login"));
+        element = driver.findElement(By.tagName("login"));
 
-        element = element.findElement(By.id("ib_username"));
-        assertEquals("input", element.getTagName());
-        assertEquals("text", element.getAttribute("type"));
+        element = driver.findElement(By.id("ib_username"));
 
         SeleniumHelper.fillTextIntoElement(element, "clarence.ho@gmail.com");
 
         element = driver.findElement(By.id("ib_password"));
-        assertEquals("input", element.getTagName());
-        assertEquals("password", element.getAttribute("type"));
 
         SeleniumHelper.fillTextIntoElement(element, "scott");
 
         element = driver.findElement(By.name("btn_login"));
-        assertEquals("button", element.getTagName());
-        assertEquals("Get lucky", element.getText());
 
         SeleniumHelper.clickOnElement(driver, element);
     }
@@ -61,7 +55,7 @@ public class ITorganisation {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("create-organisation"));
+        element = driver.findElement(By.tagName("create-organisation"));
 
         element = driver.findElement(By.name("ib_new_organisation"));
         assertEquals("input", element.getTagName());
@@ -104,9 +98,9 @@ public class ITorganisation {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("create-organisation"));
+        element = driver.findElement(By.tagName("create-organisation"));
 
-        element = element.findElement(By.name("btn_cancel"));
+        element = driver.findElement(By.name("btn_cancel"));
         assertEquals("button", element.getTagName());
         assertEquals("Annuleren", element.getText());
         SeleniumHelper.clickOnElement(driver, element);

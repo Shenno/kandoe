@@ -27,12 +27,12 @@ public class ITwrongPath {
         driver.get("http://localhost:9966/kandoe/#/home");
         SeleniumHelper.allowDomToLoad();
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("home"));
+        element = driver.findElement(By.tagName("home"));
 
         driver.get("http://localhost:9966/kandoe/wrongPath");
         SeleniumHelper.allowDomToLoad();
         element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("home"));
+        element = driver.findElement(By.tagName("home"));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class ITwrongPath {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("error"));
+        element = driver.findElement(By.tagName("error"));
 
         element = driver.findElement(By.id("btn_back"));
         SeleniumHelper.clickOnElement(driver, element);

@@ -33,9 +33,9 @@ public class ITdashboard {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("login"));
+        element = driver.findElement(By.tagName("login"));
 
-        element = element.findElement(By.id("ib_username"));
+        element = driver.findElement(By.id("ib_username"));
         String userName = "scott.tiger@live.com";
         SeleniumHelper.fillTextIntoElement(element, userName);
 
@@ -183,7 +183,7 @@ public class ITdashboard {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("dashboard"));
+        element = driver.findElement(By.tagName("dashboard"));
 
         element = driver.findElement(By.tagName("apriori"));
 
@@ -260,6 +260,6 @@ public class ITdashboard {
 
     @AfterClass
     public static void tearDownClass() {
-        //driver.close();
+        driver.close();
     }
 }

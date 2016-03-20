@@ -30,7 +30,7 @@ public class ITuser {
         SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("app"));
-        element = element.findElement(By.tagName("login"));
+        element = driver.findElement(By.tagName("login"));
 
         element = element.findElement(By.id("ib_username"));
         assertEquals("input", element.getTagName());
@@ -46,7 +46,7 @@ public class ITuser {
 
         element = driver.findElement(By.name("btn_login"));
         assertEquals("button", element.getTagName());
-        assertEquals("Get lucky", element.getText());
+        assertEquals("Login", element.getText());
 
         SeleniumHelper.clickOnElement(driver, element);
 
