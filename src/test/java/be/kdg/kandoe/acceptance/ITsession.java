@@ -79,7 +79,7 @@ public class ITsession {
         element = driver.findElement(By.name("btn_add_organisation"));
         SeleniumHelper.clickOnElement(driver,element);
 
-        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Organisatie: SessionOrganisation"));
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Organisatie: SessionOrganisationTest"));
 
         element = driver.findElement(By.id("btn_addTheme"));
         SeleniumHelper.clickOnElement(driver, element);

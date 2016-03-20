@@ -23,8 +23,7 @@ import {User} from "../entity/user";
         <input class="form-control" type="password" id="ib_password" name="ib_password" [(ngModel)]="user.password"/>
     </div>
     <br>
-    <button class="btn btn-primary" name="btn_login" (click)="getLucky()" >Get lucky</button>
-    <button class="btn wide-btn-default" name="btn_logout" (click)="getUnlucky()">Get unlucky</button>
+    <button class="btn btn-primary" name="btn_login" (click)="login()" >Login</button>
 
     `,
     encapsulation: ViewEncapsulation.None
@@ -42,7 +41,7 @@ export class LoginComponent {
         this.router = router;
     }
 
-    public getLucky(): void {
+    public login(): void {
         this.userService.login(this.user)
             .subscribe((res: Response) => {
                     localStorage.setItem("jwt", res.text());
@@ -53,8 +52,4 @@ export class LoginComponent {
                     console.log(error);
                 });
         }
-
-    public getUnlucky(): void {
-        localStorage.removeItem("jwt");
-    }
 }
