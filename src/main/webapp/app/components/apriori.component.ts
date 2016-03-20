@@ -18,8 +18,8 @@ export class AprioriComponent {
     private cardCombinations: CardCombination[] = []; //a card combination is an array of cards
 
     public constructor(contentService: ContentService, routeParam: RouteParams) {
-
-        contentService.getMostFrequentCardCombinations(routeParam.params["themeId"]).subscribe((cardCombinations: CardCombination[]) => {
+        this.contentService = contentService;
+        this.contentService.getMostFrequentCardCombinations(routeParam.params["themeId"]).subscribe((cardCombinations: CardCombination[]) => {
             this.cardCombinations = cardCombinations;
         });
     }
