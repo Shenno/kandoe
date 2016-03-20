@@ -3,7 +3,9 @@ import {Router} from 'angular2/router';
 import {CORE_DIRECTIVES} from "angular2/common";
 import {FORM_DIRECTIVES} from "angular2/common";
 
-/** Component for Home page
+/**
+ * Component for Home page
+ */
 @Component({
 selector: 'home',
 templateUrl: 'app/partials_html/home.component.html',
