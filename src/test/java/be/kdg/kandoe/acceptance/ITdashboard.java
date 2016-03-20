@@ -110,8 +110,6 @@ public class ITdashboard {
             SeleniumHelper.clickOnElement(driver, element);
         }
 
-        //TODO: Nog een session aanmaken hier.
-
         element = driver.findElement(By.id("btn_backToList"));
         assertEquals("button", element.getTagName());
         assertEquals("Terug naar lijst", element.getText());
@@ -188,8 +186,6 @@ public class ITdashboard {
         element = element.findElement(By.tagName("dashboard"));
 
         element = driver.findElement(By.tagName("apriori"));
-
-        //TODO: Verder uitwerken
 
         element = driver.findElement(By.id("cardCombination0_id"));
         assertEquals("span", element.getTagName());

@@ -69,10 +69,7 @@ public class SessionRestController {
         Session session = new AsynchronousSession(user.getUserId(), true, 60, sessionResourcePost.getAmountOfCircles(), sessionResourcePost.getNameSession());
         Session persistedSession = null;
         List<Card> cards = new ArrayList<>();
-       // session.setOrganisator(user.getUserId());
 
-
-        //TODO: cards meegeven in resource OF exception opvangen als cardId niet gevonden is
         for(Integer c : sessionResourcePost.getCardIds()) {
             cards.add(contentService.getCard(c));
         }
