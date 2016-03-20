@@ -34,6 +34,9 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
                 userService_1 = userService_1_1;
             }],
         execute: function() {
+            /**
+             * Component for showing details about Theme
+             */
             DetailThemeComponent = (function () {
                 function DetailThemeComponent(contentService, userService, routeParam, router) {
                     var _this = this;

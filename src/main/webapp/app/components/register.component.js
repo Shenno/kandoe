@@ -24,6 +24,9 @@ System.register(['angular2/core', "../service/userService", "../entity/registerU
                 registerUser_1 = registerUser_1_1;
             }],
         execute: function() {
+            /**
+             * Component for register
+             */
             RegisterComponent = (function () {
                 function RegisterComponent(userService) {
                     this.userService = userService;

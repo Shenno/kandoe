@@ -31,6 +31,9 @@ System.register(['angular2/core', 'angular2/router', '../entity/organisation', "
                 common_2 = common_1_1;
             }],
         execute: function() {
+            /**
+             * Component for showing details about Organisation
+             */
             DetailOrganisationComponent = (function () {
                 function DetailOrganisationComponent(userService, routeParam, router) {
                     var _this = this;

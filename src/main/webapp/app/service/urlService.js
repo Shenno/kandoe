@@ -21,6 +21,9 @@ System.register(['angular2/core', "angular2/http"], function(exports_1, context_
                 http_1 = http_1_1;
             }],
         execute: function() {
+            /**
+             * Service class to handle everything with Url
+             */
             UrlService = (function () {
                 function UrlService() {
                     this.host = "localhost";

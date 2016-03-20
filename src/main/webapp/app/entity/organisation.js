@@ -5,6 +5,9 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
+            /**
+             * An object for showing and creating an Organisation
+             */
             Organisation = (function () {
                 function Organisation(id, name, organisatorId, organisatorName, themes, errorMessage) {
                     this.id = id;

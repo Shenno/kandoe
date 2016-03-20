@@ -5,6 +5,9 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
+            /**
+             * An object for a Tag
+             */
             Tag = (function () {
                 function Tag(name) {
                     this.name = name;

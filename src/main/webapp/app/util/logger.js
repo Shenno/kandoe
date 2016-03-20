@@ -5,6 +5,9 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
+            /**
+             * Class to log everything
+             */
             Logger = (function () {
                 function Logger() {
                 }

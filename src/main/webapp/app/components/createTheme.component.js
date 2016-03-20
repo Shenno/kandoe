@@ -37,6 +37,9 @@ System.register(['angular2/core', 'angular2/router', '../entity/theme', "../serv
                 common_2 = common_1_1;
             }],
         execute: function() {
+            /**
+             * Component for creating Theme
+             */
             CreateThemeComponent = (function () {
                 function CreateThemeComponent(contentService, userService, router, routeParam) {
                     var _this = this;

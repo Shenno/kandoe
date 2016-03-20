@@ -36,6 +36,9 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                 sessionService_1 = sessionService_1_1;
             }],
         execute: function() {
+            /**
+             * Component for creating Session
+             */
             CreateSessionComponent = (function () {
                 function CreateSessionComponent(userService, contentService, sessionService, router) {
                     var _this = this;

@@ -30,6 +30,9 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
                 router_1 = router_1_1;
             }],
         execute: function() {
+            /**
+             * Service class to handle everything with User
+             */
             UserService = (function () {
                 function UserService(http, urlService, logger, router) {
                     this.http = null;

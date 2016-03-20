@@ -5,6 +5,9 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
+            /**
+             * An object for creating and showing a card
+             */
             Card = (function () {
                 function Card(id, text, imageURL, themeId) {
                     this.id = id;

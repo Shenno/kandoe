@@ -5,6 +5,9 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
+            /**
+             * An object for a User
+             */
             User = (function () {
                 function User(id, username, firstName) {
                     this.id = id;

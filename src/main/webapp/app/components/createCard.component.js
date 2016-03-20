@@ -28,6 +28,9 @@ System.register(['angular2/core', 'angular2/router', "../service/contentService"
                 card_1 = card_1_1;
             }],
         execute: function() {
+            /**
+             * Component for creating card
+             */
             CreateCardComponent = (function () {
                 function CreateCardComponent(contentService, router, routeParam) {
                     this.card = card_1.Card.createEmptyCard();

@@ -5,6 +5,9 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
+            /**
+             * An object for register a User
+             */
             RegisterUser = (function () {
                 function RegisterUser(username, password, firstName, lastName) {
                     this.username = username;

@@ -35,6 +35,9 @@ System.register(['angular2/core', "angular2/http", "../service/urlService", "../
             function (_1) {},
             function (_2) {}],
         execute: function() {
+            /**
+             * Service class to handle everything with Content
+             */
             ContentService = (function () {
                 function ContentService(http, urlService, logger, router) {
                     this.http = null;

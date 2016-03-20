@@ -30,6 +30,8 @@ import static org.junit.Assert.*;
 public class TestDashboard {
 
     private User user;
+    private User user2;
+    private User user3;
     private Organisation organisation;
     private Theme theme;
 
@@ -47,10 +49,10 @@ public class TestDashboard {
         user = new User("firstname.lastname@kandoe.be", "password");
         user = userService.addUser(user);
 
-        User user2 = new User("firstname2.lastname2@kandoe.be", "password");
+        user2 = new User("firstname2.lastname2@kandoe.be", "password");
         user2 = userService.addUser(user2);
 
-        User user3 = new User("firstname3.lastname3@kandoe.be", "password");
+        user3 = new User("firstname3.lastname3@kandoe.be", "password");
         user3 = userService.addUser(user3);
 
         organisation = new Organisation("organisation", user);
@@ -111,6 +113,8 @@ public class TestDashboard {
     public void tearDown(){
         userService.deleteOrganisation(organisation.getId());
         userService.deleteUser(user.getId());
+        userService.deleteUser(user2.getId());
+        userService.deleteUser(user3.getId());
     }
 
     @Test

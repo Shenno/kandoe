@@ -27,6 +27,9 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                 loginUser_1 = loginUser_1_1;
             }],
         execute: function() {
+            /**
+             * Component for the login page
+             */
             LoginComponent = (function () {
                 function LoginComponent(router, userService) {
                     this.user = new loginUser_1.LoginUser("", "");

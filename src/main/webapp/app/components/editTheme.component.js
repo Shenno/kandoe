@@ -33,6 +33,9 @@ System.register(['angular2/core', 'angular2/router', "../service/contentService"
                 user_1 = user_1_1;
             }],
         execute: function() {
+            /**
+             * Component edit page for editing Theme
+             */
             EditThemeComponent = (function () {
                 function EditThemeComponent(contentService, userService, router, routeParam) {
                     var _this = this;

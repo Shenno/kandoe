@@ -34,6 +34,9 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./aprio
                 contentService_1 = contentService_1_1;
             }],
         execute: function() {
+            /**
+             * Component for DashboardPage for a theme
+             */
             DashboardComponent = (function () {
                 function DashboardComponent(contentService, router, routeParam) {
                     var _this = this;

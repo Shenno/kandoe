@@ -28,6 +28,9 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                 common_2 = common_1_1;
             }],
         execute: function() {
+            /**
+             * Component for an overview of organisations
+             */
             OverviewOrganisationComponent = (function () {
                 function OverviewOrganisationComponent(userService, routeParam, router) {
                     var _this = this;

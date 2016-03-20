@@ -27,6 +27,9 @@ System.register(['angular2/core', 'angular2/router', '../entity/organisation', "
                 userService_1 = userService_1_1;
             }],
         execute: function() {
+            /**
+             * Component for creating organisation
+             */
             CreateOrganisationComponent = (function () {
                 function CreateOrganisationComponent(userService, router) {
                     var _this = this;

@@ -5,7 +5,9 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
-            //test
+            /**
+             * An object for creating a Session
+             */
             createSession = (function () {
                 function createSession(participantsEmails, cardIds, themeId, nameSession, amountOfCircles) {
                     this.participantsEmails = participantsEmails;

@@ -5,6 +5,9 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
+            /**
+             * An object for showing and creating and editing a Theme
+             */
             Theme = (function () {
                 function Theme(themeId, themeName, description, commentaryAllowed, addingAdmitted, organisationId, organisatorId, organisatorNames, tags, errorMessage) {
                     this.themeId = themeId;
