@@ -56,13 +56,13 @@ public class ContentServiceImpl implements ContentService {
 
     private void validateTheme(Theme theme) throws ContentServiceException{
         if (theme == null) {
-            throw new ContentServiceException("Theme can not be empty");
+            throw new ContentServiceException("Thema mag niet leeg zijn");
         } else if (theme.getThemeName().isEmpty()) {
             throw new ContentServiceException("Themanaam mag niet leeg zijn");
         } else if (theme.getOrganisation() == null) {
             throw new ContentServiceException("Je moet een thema aanmaken voor een bestaande organisatie.");
         } else if (theme.getOrganisators().size() == 0) {
-            throw new ContentServiceException("There must be at least one organisator");
+            throw new ContentServiceException("Er moet tenminste één organisator zijn");
         }
     }
 
@@ -110,11 +110,11 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public Tag addTag(Tag tag) throws ContentServiceException {
         if (tag == null) {
-            throw new ContentServiceException("Tag can not be empty");
+            throw new ContentServiceException("Tag mag niet leeg zijn");
         } else if (tag.getTagName().isEmpty()) {
-            throw new ContentServiceException("Empty name for tag");
+            throw new ContentServiceException("Lege naam voor tag");
         } else if (tag.getTheme()==null) {
-            throw new ContentServiceException("Empty theme");
+            throw new ContentServiceException("Leeg thema");
         }
 
         tag.setTagName(tag.getTagName().toLowerCase());
@@ -141,7 +141,7 @@ public class ContentServiceImpl implements ContentService {
         try {
             return tagRepository.findTagByTagNameByTheme(tagname, theme).get(0);
         } catch (IndexOutOfBoundsException ex) {
-            throw new ContentServiceException("Tag '" + tagname + "' was not found for theme '" + theme.getThemeName() + "'");
+            throw new ContentServiceException("Tag '" + tagname + "' werd niet gevonden voor thema '" + theme.getThemeName() + "'");
         }
     }
 

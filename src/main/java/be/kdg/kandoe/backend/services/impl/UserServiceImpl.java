@@ -45,16 +45,16 @@ public class UserServiceImpl implements UserService
     @Override
     public Organisation addOrganisation(Organisation organisation) throws UserServiceException {
         if (organisation== null){
-            throw new UserServiceException("Organisation is null");
+            throw new UserServiceException("Organisatie is leeg");
         }
         else if(organisation.getName().isEmpty()) {
-            throw new UserServiceException("Empty name for organisation");
+            throw new UserServiceException("Lege naam voor organisatie");
         }
         else if(getOrganisationByName(organisation.getName()) != null) {
             throw new UserServiceException("Een organisatie met deze naam bestaat al");
         }
         else if (organisation.getOrganisator() == null){
-            throw new UserServiceException("Organisation must have an organisator");
+            throw new UserServiceException("Organisatie moet een organisator hebben");
         }
         return organisationRepository.save(organisation);
     }
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService
         User u = userRepository.findOne(userId);
 
         if (u == null)
-            throw new UserServiceException("User not found");
+            throw new UserServiceException("Gebruiker is niet gevonden");
 
         return u;
     }
@@ -145,7 +145,7 @@ public class UserServiceImpl implements UserService
         User user = userRepository.findUserByUsername(username);
 
         if (user == null)
-            throw new UserServiceException("User not found");
+            throw new UserServiceException("Gebruiker is niet gevonden");
 
         return user;
     }
@@ -154,7 +154,7 @@ public class UserServiceImpl implements UserService
     {
         User u = userRepository.save(user);
         if (u == null)
-            throw new UserServiceException("User not saved");
+            throw new UserServiceException("Gebruiker is niet opgeslagen");
         return u;
     }
 
@@ -194,7 +194,7 @@ public class UserServiceImpl implements UserService
     {
         User user = userRepository.findOne(userId);
         if (user == null)
-            throw new UserServiceException("User not found");
+            throw new UserServiceException("Gebruiker is niet gevonden");
 
         userRepository.delete(user);
     }
@@ -242,7 +242,7 @@ public class UserServiceImpl implements UserService
         try {
             u = userRepository.findOne(o.getOrganisator().getId());
         } catch (Exception e) {
-            throw new UserServiceException("No organisator found");
+            throw new UserServiceException("Geen organisator gevonden");
         }
         u.removeOrganisation(o);
         userRepository.saveAndFlush(u);
@@ -264,7 +264,7 @@ public class UserServiceImpl implements UserService
     {
         User u = userRepository.findUserByUsername(username);
 
-        if (u == null) throw new UsernameNotFoundException("No such user: " + username);
+        if (u == null) throw new UsernameNotFoundException("Geen dergelijke gebruiker: " + username);
 
         return u;
     }

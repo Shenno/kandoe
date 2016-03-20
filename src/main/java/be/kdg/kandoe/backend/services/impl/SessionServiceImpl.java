@@ -117,7 +117,7 @@ public class SessionServiceImpl implements SessionService {
     public Session addUserToSession(Session session, String username) throws SessionServiceException {
         User user = userRepository.findUserByUsername(username);
         if(user == null) {
-            throw new SessionServiceException("Can't add unexisting user to session");
+            throw new SessionServiceException("Kan onbestaande gebruiker niet toevoegen aan sessie");
         }
         session.addUser(user);
         return sessionRepository.save(session);
@@ -179,7 +179,7 @@ public class SessionServiceImpl implements SessionService {
     public List<Session> findSessionByUserId(int userId) throws SessionServiceException {
         User user = userRepository.getOne(userId);
         if (user == null){
-            throw new SessionServiceException("User doesn't exist");
+            throw new SessionServiceException("Gebruiker bestaat niet");
         }
         return sessionRepository.findSessionByUserId(userId);
     }
