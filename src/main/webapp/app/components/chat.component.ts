@@ -54,9 +54,7 @@ export class ChatComponent {
         this.sessionService.addRemark(new Remark(null, null, mes), this.currentSessionId).subscribe((remarks:Remark[]) => {
             this.remarks = remarks;
         });
-        console.log(this.remarks[0].timeStamp[0]);
         this.currentMessage = "";
-        alert(this.currentMessage);
     }
 
     public constructor(sessionService: SessionService) {
