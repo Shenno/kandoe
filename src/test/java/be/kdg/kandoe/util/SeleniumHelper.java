@@ -9,7 +9,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
  * Helper class for the seleniumTests
  */
 public class SeleniumHelper {
-
     public static void allowDomToLoad() {
         try {
             Thread.sleep(2000);
