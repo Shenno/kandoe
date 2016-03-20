@@ -54,7 +54,6 @@ public class ThemeMapper extends CustomMapper<Theme, ThemeResource> {
 
     @Override
     public void mapBtoA(ThemeResource themeResource, Theme theme, MappingContext context) {
-     //   mapperFacade.map(themeResource.getOrganisation(), theme.getOrganisation());
         Organisation organisation = userService.getOrganisationById(themeResource.getOrganisationId());
         theme.setOrganisation(organisation);
 
