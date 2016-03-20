@@ -5,8 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
- * @author: Evelien
- * @versionon 1.0 29-2-201609:43
+ * Remarkrepository is an Interface for accessing a {link: Remark} in the Database
  */
 public interface RemarkRepository extends JpaRepository<Remark, Integer>,JpaSpecificationExecutor<Remark>,RemarkRepositoryCustom {
 }

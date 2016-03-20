@@ -12,8 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
- * @author: Evelien
- * @versionon 1.0 29-2-201609:45
+ * Implementation for a {link: RemarkRepository}
  */
 @Repository("remarkRepository")
 public class RemarkRepositoryImpl implements RemarkRepositoryCustom {

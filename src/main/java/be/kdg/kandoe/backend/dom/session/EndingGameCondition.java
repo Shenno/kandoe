@@ -1,7 +1,7 @@
 package be.kdg.kandoe.backend.dom.session;
 
 /**
- * Created by Len on 10-2-2016.
+ *  A EndingGameCondition is an condition to end the Session
  */
 public class EndingGameCondition {
     private boolean reachConclusion;

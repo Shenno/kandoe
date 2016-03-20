@@ -15,7 +15,8 @@ import java.util.List;
 
 
 /**
- * @author wouter
+ * A UserService is an Interface for the following classes:
+ * {link: User}, {link: Organisation}
  */
 public interface UserService extends UserDetailsService
 {

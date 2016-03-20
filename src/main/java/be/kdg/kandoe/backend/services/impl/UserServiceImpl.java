@@ -22,10 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Users are stored in map with their unique usernames being keys.
- * A user can be Client or a Repairer.
- *
- * @author wouter
+ * An implementation for {link: UserService}
  */
 @Service("userService")
 @Transactional

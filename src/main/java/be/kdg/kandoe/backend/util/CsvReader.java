@@ -18,11 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Len on 8-3-2016.
+ * A util class for reading a csv
  */
 public class CsvReader {
-        //please werk nu wel!!!!
-
         public ArrayList<Card> run(String csvFile, Theme theme) {
             ArrayList<Card> cards = new ArrayList<>();
 

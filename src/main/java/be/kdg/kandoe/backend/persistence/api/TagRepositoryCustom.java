@@ -7,8 +7,7 @@ import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
 import java.util.List;
 
 /**
- * @author: Evelien
- * @versionon 1.0 23-2-201609:16
+ *  Extra interface to support customization of Spring's Data interfaces for {link: TagRepository}
  */
 public interface TagRepositoryCustom {
 

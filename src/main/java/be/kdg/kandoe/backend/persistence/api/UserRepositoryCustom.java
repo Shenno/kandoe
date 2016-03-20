@@ -6,7 +6,7 @@ import be.kdg.kandoe.backend.services.exceptions.UserServiceException;
 import java.util.List;
 
 /**
- * Extra interface to support customization of Spring's Data interfaces
+ * Extra interface to support customization of Spring's Data interfaces for {link: UserRepository}
  */
 public interface UserRepositoryCustom
 {

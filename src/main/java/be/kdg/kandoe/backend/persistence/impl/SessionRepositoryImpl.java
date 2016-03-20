@@ -12,8 +12,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * @author: Evelien
- * @versionon 1.0 11-3-201614:13
+ * Implementation for a {link: SessoinRepository}
  */
 
 @Repository("sessionRepository")

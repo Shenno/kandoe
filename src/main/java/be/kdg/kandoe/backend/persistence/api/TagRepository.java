@@ -5,8 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
- * @author Devi Bral
- * @version 1.0 19/02/2016 13:41
+ * Tagrepository is an Interface for accessing a {link: Tag} in the Database
  */
 public interface TagRepository extends JpaRepository<Tag, Integer>,JpaSpecificationExecutor<Tag>,TagRepositoryCustom {
 

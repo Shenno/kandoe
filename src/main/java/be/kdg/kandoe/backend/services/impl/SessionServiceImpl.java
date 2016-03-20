@@ -24,14 +24,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
 /**
- * Created by   Shenno Willaert
- * Date         28/02/2016
- * Project      kandoe
- * Package      be.kdg.kandoe.backend.services.impl
+ * An implementation for {link: SessionService}
  */
-
 @Service("sessionService")
 @Transactional
 public class SessionServiceImpl implements SessionService {

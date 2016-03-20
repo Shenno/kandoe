@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author: Evelien
- * @versionon 1.0 23-2-201611:14
+ * Implementation for a {link: ThemeRepository}
  */
 @Repository("themeRepository")
 public class ThemeRepositoryImpl implements ThemeRepositoryCustom {

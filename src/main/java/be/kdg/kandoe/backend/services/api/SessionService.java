@@ -11,10 +11,8 @@ import be.kdg.kandoe.backend.services.exceptions.SessionServiceException;
 import java.util.List;
 
 /**
- * Created by   Shenno Willaert
- * Date         28/02/2016
- * Project      kandoe
- * Package      be.kdg.kandoe.backend.services.api
+ * A SessionService is an Interface for the following classes:
+ * {link: Sessio}, {link: SynchronousSession}, {link: Asynchrounoussession}, {link: CardSession}, {link: EndingGameCondition}
  */
 public interface SessionService {
     // Session

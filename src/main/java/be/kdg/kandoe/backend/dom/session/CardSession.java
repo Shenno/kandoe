@@ -7,10 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by   Shenno Willaert
- * Date         1/03/2016
- * Project      kandoe
- * Package      be.kdg.kandoe.backend.dom.session
+ * A CardSession is a card for a {@link Session}
  */
 
 @Entity

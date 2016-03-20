@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
- * Created by Len on 22-2-2016.
+ * CardRepository is an Interface for accessing a {link: Card} in the Database
  */
 public interface CardRepository extends JpaRepository<Card, Integer>,JpaSpecificationExecutor<Card>, CardRepositoryCustom {
 }

@@ -1,23 +1,16 @@
 package be.kdg.kandoe.backend.persistence.impl;
 
-import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.persistence.api.OrganisationRepositoryCustom;
-import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * Created by   Shenno Willaert
- * Date         22/02/2016
- * Project      kandoe
- * Package      be.kdg.kandoe.backend.persistence.impl
+ * Implementation for a {link: OrganisationRepository}
  */
 @Repository("organisationRepository")
 public class OrganisationRepositoryImpl implements OrganisationRepositoryCustom {

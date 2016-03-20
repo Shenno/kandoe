@@ -7,8 +7,7 @@ import be.kdg.kandoe.backend.dom.user.User;
 import java.util.List;
 
 /**
- * @author: Evelien
- * @versionon 1.0 11-3-201614:12
+ * Extra interface to support customization of Spring's Data interfaces for {link: SessionRepository}
  */
 public interface SessionRepositoyCustom {
 

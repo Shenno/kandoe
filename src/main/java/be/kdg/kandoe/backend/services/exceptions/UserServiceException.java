@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package be.kdg.kandoe.backend.services.exceptions;
 
 /**
- * @author deketelw
+ * UserServiceException is an specific Exception for exceptions in the {link: SessionService}
  */
 public class UserServiceException extends RuntimeException
 {

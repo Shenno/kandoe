@@ -17,13 +17,12 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * @author wouter
+ * Implementation for a {link: UserRepository}
  */
 
 @Repository("userRepository")
 public class UserRepositoryImpl implements UserRepositoryCustom
 {
-    // https://programmeren3-repaircafe.rhcloud.com/repair-cafe-applicatie/repair-cafe-backend/backend-persistence-layer/
     @PersistenceContext
     private EntityManager em;
 

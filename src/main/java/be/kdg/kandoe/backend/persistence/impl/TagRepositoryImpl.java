@@ -14,8 +14,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * @author: Evelien
- * @versionon 1.0 23-2-201609:15
+ * Implementation for a {link: TagRepository}
  */
 @Repository("tagRepository")
 public class TagRepositoryImpl implements TagRepositoryCustom {

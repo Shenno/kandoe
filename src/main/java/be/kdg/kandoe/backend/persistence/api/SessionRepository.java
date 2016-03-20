@@ -8,10 +8,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import java.util.List;
 
 /**
- * Created by   Shenno Willaert
- * Date         3/03/2016
- * Project      kandoe
- * Package      be.kdg.kandoe.backend.persistence.api
+ * Sessionrepository is an Interface for accessing a {link: Session} in the Database
  */
 public interface SessionRepository extends JpaRepository<Session, Integer>, JpaSpecificationExecutor<Session>,SessionRepositoyCustom {
 }

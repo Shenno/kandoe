@@ -6,9 +6,9 @@ import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
 
 import java.util.List;
 
+
 /**
- * @author: Evelien
- * @versionon 1.0 23-2-201611:13
+ * Extra interface to support customization of Spring's Data interfaces for {link: ThemeRepository}
  */
 public interface ThemeRepositoryCustom {
     Theme addTheme(Theme theme) throws ContentServiceException;

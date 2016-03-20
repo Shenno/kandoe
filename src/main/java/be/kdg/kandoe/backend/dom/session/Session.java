@@ -1,6 +1,5 @@
 package be.kdg.kandoe.backend.dom.session;
 
-import be.kdg.kandoe.backend.dom.content.Card;
 import be.kdg.kandoe.backend.dom.content.Remark;
 import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.User;
@@ -12,9 +11,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * A Session is a Kandoe Game, you can play a Session for a {@link Theme}.
+ * A Session is an abstract class.
+ */
 @Entity
 @Table(name = "Session")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

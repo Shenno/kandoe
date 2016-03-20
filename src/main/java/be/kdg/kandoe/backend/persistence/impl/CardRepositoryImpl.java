@@ -14,7 +14,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * Created by Len on 23-2-2016.
+ * Implementation for a {link: CardRepository}
  */
 @Repository("CardRepository")
 public class CardRepositoryImpl implements CardRepositoryCustom {

@@ -16,13 +16,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**
- * Abstract class representing a user of the system. Every user is associated
- * with a Person. Every user has to have a unique username. This username takes
- * the form of an email address.
- *
- * Shenno.willaert okk
- *
- * @author wouter
+ * A User is a person that can make a {link: Organisation}, {link: Theme}, {link: Card}, {link: Session}, etc.
  */
 @Entity
 @Table(name = "`User`")

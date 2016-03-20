@@ -5,10 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
- * Created by   Shenno Willaert
- * Date         5/03/2016
- * Project      kandoe
- * Package      be.kdg.kandoe.backend.persistence.api
+ * CardSessionrepository is an Interface for accessing a {link: CardSession} in the Database
  */
 public interface CardSessionRepository extends JpaRepository<CardSession, Integer>, JpaSpecificationExecutor<CardSession> {
 }

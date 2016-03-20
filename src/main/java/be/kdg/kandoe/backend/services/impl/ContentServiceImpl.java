@@ -25,6 +25,9 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * An implementation for {link: ContentService}
+ */
 @Service("contentService")
 @Transactional
 public class ContentServiceImpl implements ContentService {

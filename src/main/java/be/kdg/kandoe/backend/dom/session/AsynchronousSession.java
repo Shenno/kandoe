@@ -4,7 +4,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
-
+/**
+ * A Asynchronous Session is an implementation of {@link Session},
+ * where everyone can pllay at the same time.
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("AsynchronousSession")

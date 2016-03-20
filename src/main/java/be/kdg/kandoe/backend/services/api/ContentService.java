@@ -9,7 +9,10 @@ import be.kdg.kandoe.backend.dom.user.Organisation;
 
 import java.util.List;
 import java.util.Set;
-
+/**
+ * A ContentService is an Interface for the following classes:
+ * {link: Theme}, {link: Tag}, {link: Card}, {link: Remark}
+ */
 public interface ContentService {
     /*Theme*/
     Theme addTheme(Theme theme);

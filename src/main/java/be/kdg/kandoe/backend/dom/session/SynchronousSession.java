@@ -1,12 +1,14 @@
 package be.kdg.kandoe.backend.dom.session;
 
-import org.springframework.cglib.core.Local;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
+/**
+ * A Synchronous Session is an implementation of {@link Session},
+ * where everyone plays turn by turn
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("SynchronousSession")

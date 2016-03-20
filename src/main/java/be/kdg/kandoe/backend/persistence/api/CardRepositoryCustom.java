@@ -7,7 +7,7 @@ import be.kdg.kandoe.backend.services.exceptions.ContentServiceException;
 import java.util.List;
 
 /**
- * Created by Len on 23-2-2016.
+ * Extra interface to support customization of Spring's Data interfaces for {link: CardRepository}
  */
 public interface CardRepositoryCustom {
 
