@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A Card for a {@link Theme}
+ ** A Card for a {@link Theme}
  */
 
 @Entity
