@@ -1,45 +1,26 @@
 <h1>Welkom bij Kandoe!</h1>
+<h2>Jouw sessies</h2>
 
-
-<h2>Huidige sessies</h2>
-<!--
-<div class="table-responsive">
-    <table style="width:40em;" class="table table-condensed clickable-table">
-        <thead>
-        <tr>
-            <th>Naam sessie</th>
-            <th>Thema naam</th>
-            <th>Gebruiker aan beurt</th>
-            <th>Actief</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="#session of sessions" (click)="onClickSession(session.id)">
-            <td>{{session.nameSession}}</td>
-            <td>{{session.themeName}}</td>
-            <td *ngIf="session.gameOver"></td>
-            <td *ngIf!="session.gameOver">{{session.currentUserName}}</td>
-            <td *ngIf="session.gameOver" style="color: darkred; font-weight: bold">Afgelopen</td>
-            <td *ngIf!="session.gameOver" style="color: forestgreen; font-weight: bold">Actief</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
--->
-<div style="width: 70em; margin-top: 2em">
-    <div *ngFor="#session of sessions" class="session-circle"
-         [ngClass]="{'green-border': !session.gameOver, 'red-border': session.gameOver}"
-         (click)="onClickSession(session.id)">
-        <div style="text-align: center;
+<div *ngIf="currentUserDetails">
+    <div style="width: 70em; margin-top: 2em">
+        <div *ngFor="#session of sessions" class="session-circle"
+             [ngClass]="{'green-border': !session.gameOver, 'red-border': session.gameOver}"
+             (click)="onClickSession(session.id)">
+            <div style="text-align: center;
         vertical-align: middle; transform: translateY(-50%);
         margin-top: 50%; word-wrap: break-word">
-            <b>{{session.nameSession}}</b><br><br>
-            Thema: {{session.themeName}}<br>
-            <i>{{session.currentUserName}}</i>
+                <b>{{session.nameSession}}</b><br><br>
+                Thema: {{session.themeName}}<br>
+                <i>{{session.currentUserName}}</i>
+            </div>
         </div>
     </div>
+    <br>
+    <a href="#/sessions" class="btn btn-primary" style="width: 10em">
+        Naar alle sessies <span class="glyphicon glyphicon-arrow-right"></span>
+    </a>
 </div>
-<br>
-<a href="#/sessions" class="btn btn-primary" style="width: 10em">
-    Naar alle sessies <span class="glyphicon glyphicon-arrow-right"></span>
-</a>
+
+<div *ngIf="!currentUserDetails">
+    <h3>Login/Registreer en neem deel aan sessies en bekijk ze dan hier</h3>
+</div>

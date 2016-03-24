@@ -23,6 +23,7 @@ export class HomeComponent {
     private sessionService:SessionService;
     private userId = 0;
     private sessions:SessionActive[] = [];
+    private currentUserDetails: User;
 
     public constructor(userService:UserService,sessionService:SessionService, routeParam:RouteParams, router:Router) {
         document.title = 'Kandoe';
@@ -39,15 +40,31 @@ export class HomeComponent {
             for (index; index < sessions.length; index++) {
                 this.getUser(index);
             }
+        });        
+        this.getCurrentUserDetails();
+        userService.authenticationEvent$.subscribe((eventType: string) => {
+            this.onAuthenticationEvent(eventType);
         });
     }
+    
     public getUser(id:number):void{
         var i = id;
         this.userService.getUserById(this.sessions[i].currentUser).subscribe((user:User) => {
             this.sessions[i].currentUserName = user.username;
         });
     }
+    
     public onClickSession(id:string):void{
         this.router.navigate(['/Session',{sessionId:id}]);
+    }
+
+    public onAuthenticationEvent(eventType: string) {
+        this.getCurrentUserDetails();
+    }
+
+    public getCurrentUserDetails() {
+        this.userService.getMyDetails().subscribe(
+            (user: User) => this.currentUserDetails = user,
+            (err) => this.currentUserDetails = null);
     }
 }
