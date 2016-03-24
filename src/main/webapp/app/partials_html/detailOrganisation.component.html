@@ -7,10 +7,10 @@
     <div>
         <h2>Thema's</h2>
         <ul class="list-group">
-            <li id="'theme' + i"*ngFor="#theme of organisation.themes; #i=index"
-                (click)="detailTheme(i+1)"
+            <li id="'theme' + i" *ngFor="#theme of organisation.themes; #i=index"
+                (click)="detailTheme(theme.themeId)"
                 class="list-group-item clickable-list">
-                {{i+1}} | {{theme}}
+                {{i+1}} | {{theme.themeName}}
             </li>
         </ul>
         <button id="btn_addTheme" class="btn btn-primary" (click)="addTheme()">

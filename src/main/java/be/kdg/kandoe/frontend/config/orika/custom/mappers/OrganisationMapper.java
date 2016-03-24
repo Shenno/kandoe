@@ -4,6 +4,7 @@ import be.kdg.kandoe.backend.dom.content.Theme;
 import be.kdg.kandoe.backend.dom.user.Organisation;
 import be.kdg.kandoe.backend.dom.user.User;
 import be.kdg.kandoe.backend.services.api.UserService;
+import be.kdg.kandoe.frontend.controllers.resources.content.ThemeResource;
 import be.kdg.kandoe.frontend.controllers.resources.users.OrganisationResource;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
@@ -29,11 +30,11 @@ public class OrganisationMapper extends CustomMapper<Organisation, OrganisationR
     public void mapAtoB(Organisation organisation, OrganisationResource organisationResource, MappingContext context) {
         organisationResource.setOrganisatorId(organisation.getOrganisator().getId());
         organisationResource.setOrganisatorName((organisation.getOrganisator().getFirstName())+" "+(organisation.getOrganisator().getLastName()));
-        List<String> themeNames = new ArrayList<>();
+        List<ThemeResource> themes = new ArrayList<>();
         for(Theme theme: organisation.getThemes()) {
-            themeNames.add(theme.getThemeName());
+            themes.add(mapperFacade.map(theme, ThemeResource.class));
         }
-        organisationResource.setThemes(themeNames);
+        organisationResource.setThemes(themes);
     }
 
     @Override

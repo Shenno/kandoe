@@ -8,7 +8,7 @@ export class Organisation {
                 public name: string,
                 public organisatorId: number,
                 public organisatorName: string,
-                public themes : string[],
+                public themes : Theme[],
                 public errorMessage : string
                 ) {
 
