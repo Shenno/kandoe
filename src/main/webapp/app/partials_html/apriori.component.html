@@ -1,16 +1,18 @@
 <h2>Vaakst voorkomende kaartjescombinaties in sessies</h2>
 
-<div *ngIf="cardCombinations.length > 0"[id]="'cardCombination' + (i+1)" *ngFor="#cardCombination of cardCombinations;#i = index">
-    <span [id]="'cardCombination' + i + '_id'">{{i+1}}</span> |
-    <div style="display:inline-block" *ngFor="#card of cardCombination.cards; #j = index">
-        <div class="card">
-            <span [id]="'card' + i + '_' + j + '_number'" class="badge alert-danger">{{j+1}}</span>
-            <div class="card-image">
-                <img [id]="'card' + i + '_' + j + '_image'" src="{{card?.image}}">
+<div style="overflow: auto; height: 40em; width: 60em; margin-bottom: 5em">
+    <div *ngIf="cardCombinations.length > 0" [id]="'cardCombination' + (i+1)"
+         *ngFor="#cardCombination of cardCombinations;#i = index">
+        <span [id]="'cardCombination' + i + '_id'">{{i+1}}</span> |
+        <div style="display:inline-block" *ngFor="#card of cardCombination.cards; #j = index">
+            <div class="card">
+                <span [id]="'card' + i + '_' + j + '_number'" class="badge alert-danger">{{j+1}}</span>
+                <div class="card-image">
+                    <img [id]="'card' + i + '_' + j + '_image'" src="{{card?.image}}">
+                </div>
+                <span [id]="'card' + i + '_' + j + '_name'">{{card?.card}}</span>
             </div>
-            <span [id]="'card' + i + '_' + j + '_name'">{{card?.card}}</span>
         </div>
     </div>
 </div>
-
 <p id="no_sessions" *ngIf="cardCombinations.length == 0">Er zijn nog geen sessies gespeeld voor dit thema!</p>

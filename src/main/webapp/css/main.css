@@ -238,7 +238,7 @@ h2 {
 .tags-organisators {
     overflow: auto;
     height: 5em;
-    width: 20em;
+    width: 25em;
     margin-left: -2em;
 }
 
@@ -435,3 +435,32 @@ h2 {
     opacity:0.3;
 }
 
+/*----------------------------------Homepage-----------------------*/
+.session-circle {
+    border-radius: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    background: #4E83B9;
+    height: 200px;
+    width: 200px;
+    box-shadow: 1px 1px 2px gray;
+    color: white;
+    margin-right: 2em;
+    margin-bottom: 2em;
+    transition-duration: 0.5s;
+    -webkit-transition-duration: 0.5s;
+}
+
+.session-circle:hover {
+    cursor: pointer;
+    transform: translateY(-0.5em);
+    -ms-transform: translateY(-0.5em);
+    -webkit-transform: translateY(-0.5em);
+}
+
+.green-border {
+    border: limegreen solid 3px;
+}
+.red-border {
+    border: red solid 3px;
+}

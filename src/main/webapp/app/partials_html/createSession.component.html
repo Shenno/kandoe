@@ -1,88 +1,77 @@
-<h1>Start een nieuwe Kandoe cirkelsessie!</h1>
+<div class="content-center">
+    <h1>Start een nieuwe Kandoe cirkelsessie!</h1>
 
-<form>
-    <div id="err_session" class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
-    <div class="form-group ">
-        <div class="row">
-        <label>Geef de sessie een titel</label>
-        <input id="ib_name" name="ib_name"
-               [(ngModel)]="nameSession"
-               class="form-control">
+    <form>
+        <div id="err_session" class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+        <div class="form-group ">
+            <label>Geef de sessie een titel</label>
+            <input id="ib_name" name="ib_name"
+                   [(ngModel)]="nameSession"
+                   class="form-control">
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="row">
+        <div class="form-group">
             <label>Bepaal het aantal ringen van de Kandoe cirkel</label>
+
+            <input id="ib_amount" class="form-control" type="number"
+                   [(ngModel)]="amountOfCircles" name="circles"
+                   min="3" max="8" style="width: 5em">
         </div>
-        <div class="row">
-            <input id="ib_amount" class="form-control" type="number" [(ngModel)]="amountOfCircles" name="circles" min="3" max="8">
-        </div>
-    </div>
 
-    <div class="form-group" id="participants">
-        <div class="row">
-        <label>Personen die zullen kunnen deelnemen aan de sessie</label>
+        <div class="form-group" id="participants">
+            <label>Personen die zullen kunnen deelnemen aan de sessie</label>
 
-        <p id="err_noParticipants" *ngIf="participantEmails.length==0" class="text-danger">Momenteel nog niemand! Voeg snel iemand toe, alleen
-            spelen is niet leuk!</p>
-
-            <p *ngIf="participantEmails.length < 2" class="text-danger">Je hebt minstens 2 deelnemers nodig om een sessie te starten.</p>
-
-            <ul class="tags-organisators">
+            <div id="err_noParticipants" *ngIf="participantEmails.length==0" class="alert alert-danger" style="width: 45em">
+                Momenteel nog niemand! Voeg snel iemand toe, alleen spelen is niet leuk!</div>
+            <div *ngIf="participantEmails.length < 2" class="alert alert-danger" style="width: 45em">
+                Je hebt minstens 2 deelnemers nodig om een sessie te starten.
+            </div>
+            <ul class="tags-organisators" style="margin-left: 0;">
                 <li [id]="'participant' + i" *ngFor="#participant of participantEmails;#i=index" class="custom-tag">
                     {{participant}} <span [id]="'delete_participant' + i" class="glyphicon glyphicon-remove"
                                           (click)="onRemoveParticipant(i)"></span>
                 </li>
             </ul>
-
         </div>
-    </div>
 
-    <div class="form-group">
-            <div class="row">
-                <select (change)="changeValue($event.target.value)" class="form-control col-md-6" id="dd_users" [ngModel]="newParticipant">
-                    <option [id]="'opt_user' + i" *ngFor="#user of users;#i=index">
-                        {{user}}
-                    </option>
-                </select>
-                <button class="btn wide-btn-default" name="btn_addParticipant" (click)="onAddParticipant()">Voeg
-                    deelnemer toe
-                </button>
-            </div>
-    </div>
+        <div class="form-group">
+            <select (change)="changeValue($event.target.value)" class="form-control col-md-6" id="dd_users"
+                    [ngModel]="newParticipant">
+                <option [id]="'opt_user' + i" *ngFor="#user of users;#i=index">
+                    {{user}}
+                </option>
+            </select>
+            <button class="btn wide-btn-default" name="btn_addParticipant" (click)="onAddParticipant()">
+                Voeg deelnemer toe
+            </button>
+        </div>
 
-    <div class="form-group">
-        <div class="row">
+        <div class="form-group">
             <label>Kies een thema waar je rond wil cirkelen</label>
             <select id="dd_themes" class="form-control" #t (change)="onSelectTheme(t.value)">
                 <option [value]="0">Geen thema</option>
                 <option *ngFor="#th of themes" [value]="th.themeId">{{th.themeName}}</option>
             </select>
         </div>
-    </div>
 
+        <div *ngIf="cards">
+            <h2>Kies de kaartjes:</h2>
 
-
-    <div *ngIf="cards">
-        <h2>Kies de kaartjes:</h2>
-
-        <div class="well" style="width: 50em">
-            Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:
+            <div class="well" style="width: 50em">
+                Dit zijn de kaartjes die we gevonden hebben van het thema {{theme.themeName}}:
+            </div>
+            <ul class="list-group card-list">
+                <li class="list-group-item" *ngFor="#card of cards;#i=index">
+                    <input [id]="'cb_cardStatus' + i" (change)="changeCardSelectedStatus(card)" type="checkbox"
+                           [checked]="card.selected">
+                    <img src="{{card.imageURL}}" class="img-thumbnail card-thumbnail">
+                    {{card?.text}}
+                </li>
+            </ul>
         </div>
-        <ul class="list-group card-list">
-            <li class="list-group-item" *ngFor="#card of cards;#i=index">
-                <input [id]="'cb_cardStatus' + i" (change)="changeCardSelectedStatus(card)" type="checkbox" [checked]="card.selected">
-                <img src="{{card.imageURL}}" class="img-thumbnail card-thumbnail">
-                {{card?.text}}
-            </li>
-        </ul>
-    </div>
-
-</form>
-<button id="btn_createSession" *ngIf="cards" class="btn btn-success" (click)="createSession()">
-    <span class="glyphicon glyphicon-play"></span> Sessie aanmaken rond het thema {{theme.themeName}}
-</button>
-
-
+    </form>
+    <button id="btn_createSession" *ngIf="cards" class="btn btn-success" (click)="createSession()">
+        <span class="glyphicon glyphicon-play"></span> Sessie aanmaken rond het thema {{theme.themeName}}
+    </button>
+</div>
 

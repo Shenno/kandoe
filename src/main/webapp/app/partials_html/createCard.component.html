@@ -13,13 +13,8 @@
         </div>
     </div>
     <br>
-
     <div class="form-group">
-        <label for="ib_imageURL">Afbeelding: <span style="color: red">*</span></label>
-        <!--<input id="ib_imageURL" type="file"
-               name="ib_imageURL" accept="image/*"
-               [(ngModel)]="card.imageURL">-->
-
+        <label for="ib_imageURL">Afbeelding:</label>
         <div class="input-group" style="width: 30em">
             <span class="input-group-addon" id="url-addon">URL</span>
             <input class="form-control"
@@ -28,12 +23,7 @@
                    #image="ngForm" ngControl="image"
                    aria-describedby="url-addon">
         </div>
-        <div [hidden]="image.valid || image.pristine"
-             class="alert alert-danger" style="width: 20em; margin-top: 2px;"
-        >Afbeelding is vereist.
-        </div>
     </div>
-
     <br>
     <div class="alert alert-warning" role="alert" style="width: 30em">
         <b>Heads up!</b> Tekst & afbeelding zijn niet meer wijzigbaar.
