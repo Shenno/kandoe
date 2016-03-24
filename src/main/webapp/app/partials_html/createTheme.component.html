@@ -2,7 +2,7 @@
 
 <h1>Maak een thema aan</h1>
 
-<form class="form-horizontal">
+<form>
     <div class="form-group">
         <label for="ib_name">Naam</label>
         <input id="ib_name" name="ib_name"
@@ -58,11 +58,13 @@
         <span id="err_tag" class="error-message">{{tagErrorMessage}}</span>
     </div>
 
-    <div id="organisators">
-        <p [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index">
-            {{organisator}} <span [id]="'delete_organisator' + i" class="glyphicon glyphicon-remove"
-                                  (click)="onRemoveOrganisator(i)"></span>
-        </p>
+    <div id="organisators" class="tags-create">
+        <ul class="tags">
+            <li [id]="'organisator' + i" *ngFor="#organisator of theme.organisatorNames;#i=index" class="custom-tag">
+                {{organisator}}
+                <span [id]="'delete_organisator' + i" class="glyphicon glyphicon-remove" (click)="onRemoveOrganisator(i)"></span>
+            </li>
+        </ul>
     </div>
     <select class="form-control" id="dd_users" [(ngModel)]="newOrganisator">
         <option [id]="'opt_user' + i" *ngFor="#user of users;#i=index">

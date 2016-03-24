@@ -1,7 +1,7 @@
 <h1>Welkom bij Kandoe!</h1>
-<h2>Jouw sessies</h2>
+<div *ngIf="currentUserDetails && !sessions.length==0">
+    <h2>Jouw sessies</h2>
 
-<div *ngIf="currentUserDetails">
     <div style="width: 70em; margin-top: 2em">
         <div *ngFor="#session of sessions" class="session-circle"
              [ngClass]="{'green-border': !session.gameOver, 'red-border': session.gameOver}"
@@ -19,6 +19,9 @@
     <a href="#/sessions" class="btn btn-primary" style="width: 10em">
         Naar alle sessies <span class="glyphicon glyphicon-arrow-right"></span>
     </a>
+</div>
+<div *ngIf="currentUserDetails && sessions.length==0">
+    <h3>Je hebt nog geen sessies, neem deel aan sessies en bekijk ze dan hier</h3>
 </div>
 
 <div *ngIf="!currentUserDetails">
