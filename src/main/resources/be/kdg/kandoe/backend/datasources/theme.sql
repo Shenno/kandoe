@@ -1,4 +1,4 @@
 INSERT INTO Theme (ThemeName, Description, CommentaryAllowed, AddingAdmited, organisation_id)
-VALUES ('Drankjes', 'Lekker drankje!', FALSE, FALSE, 1);
+VALUES ('Drankjes', 'Wat is jouw favoriete drankje?', FALSE, FALSE, 1);
 INSERT INTO Theme (ThemeName, Description, CommentaryAllowed, AddingAdmited, organisation_id)
-VALUES ('Volle cirkel', 'Test', FALSE, FALSE, 1);
+VALUES ('Sporten', 'Welke sport is de beste?', FALSE, FALSE, 1);
