@@ -46,7 +46,7 @@ public class ITuser {
 
         element = driver.findElement(By.name("btn_login"));
         assertEquals("button", element.getTagName());
-        assertEquals("Login", element.getText());
+        assertEquals("Inloggen", element.getText());
 
         SeleniumHelper.clickOnElement(driver, element);
 

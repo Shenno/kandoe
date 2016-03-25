@@ -41,9 +41,11 @@ import {RegisterUser} from "../entity/registerUser";
 export class RegisterComponent {
 
     public userService: UserService;
+    public router: Router;
 
-    public constructor(userService: UserService) {
+    public constructor(userService: UserService, router: Router) {
         this.userService = userService;
+        this.router = router;
     }
 
     register(event, username, password, firstName, lastName) {
@@ -52,5 +54,6 @@ export class RegisterComponent {
         var registerUser  = new RegisterUser(username, password, firstName, lastName);
 
         this.userService.register(registerUser);
+        this.router.navigate(['/Home'])
     }
 }
