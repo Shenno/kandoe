@@ -39,7 +39,6 @@ System.register(['angular2/core', 'angular2/router', "../service/contentService"
             EditThemeComponent = (function () {
                 function EditThemeComponent(contentService, userService, router, routeParam) {
                     var _this = this;
-                    //private tag: Tag = Tag.createEmptyTag();
                     this.theme = theme_1.Theme.createEmptyTheme();
                     this.newTag = "";
                     this.users = [];

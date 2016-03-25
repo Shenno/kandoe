@@ -51,7 +51,7 @@ System.register(['angular2/core', 'angular2/router', "../service/userService", "
                 LoginComponent = __decorate([
                     core_1.Component({
                         selector: 'login',
-                        template: "\n    <div>\n        <label for=\"ib_username\">E-mailadres</label>\n        <input class=\"form-control\" id=\"ib_username\" name=\"ib_username\" [(ngModel)]=\"user.username\"/>\n    </div>\n\n    <div>\n        <label for=\"ib_password\">Paswoord</label>\n        <input class=\"form-control\" type=\"password\" id=\"ib_password\" name=\"ib_password\" [(ngModel)]=\"user.password\"/>\n    </div>\n    <br>\n    <button class=\"btn btn-primary\" name=\"btn_login\" (click)=\"login()\" >Login</button>\n\n    ",
+                        template: "\n    <div class=\"content-center\">\n    <h1>Inloggen</h1>\n    <div>\n        <label for=\"ib_username\">E-mailadres</label>\n        <input class=\"form-control\" id=\"ib_username\" name=\"ib_username\" [(ngModel)]=\"user.username\"/>\n    </div>\n\n    <div>\n        <label for=\"ib_password\">Paswoord</label>\n        <input class=\"form-control\" type=\"password\" id=\"ib_password\" name=\"ib_password\" [(ngModel)]=\"user.password\"/>\n    </div>\n    <br>\n    <button class=\"btn btn-primary\" name=\"btn_login\" (click)=\"login()\" >Inloggen</button>\n    </div>\n    ",
                         encapsulation: core_1.ViewEncapsulation.None
                     }), 
                     __metadata('design:paramtypes', [router_1.Router, userService_1.UserService])
