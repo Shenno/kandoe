@@ -19,26 +19,6 @@ public class ITsession {
     private static WebDriver driver;
     private static String userName;
 
-    public void login(ChromeDriver driver, String userName, String password) {
-        driver.get("http://localhost:9966/kandoe/#/login");
-
-        SeleniumHelper.allowDomToLoad();
-
-        WebElement element = driver.findElement(By.id("app"));
-        element = driver.findElement(By.tagName("login"));
-
-        element = driver.findElement(By.id("ib_username"));
-        SeleniumHelper.fillTextIntoElement(element, userName);
-
-        element = driver.findElement(By.id("ib_password"));
-        SeleniumHelper.fillTextIntoElement(element, password);
-
-        element = driver.findElement(By.name("btn_login"));
-        SeleniumHelper.clickOnElement(driver, element);
-
-        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Kandoe"));
-    }
-
     @BeforeClass
     public static void setup() {
         System.setProperty("webdriver.chrome.driver", "./src/test/resources/chromedriver.exe");
@@ -61,7 +41,7 @@ public class ITsession {
         element = driver.findElement(By.name("btn_login"));
         SeleniumHelper.clickOnElement(driver, element);
 
-        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Kandoe"));
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Jouw sessies"));
 
         element = driver.findElement(By.id("a_organisations"));
         SeleniumHelper.clickOnElement(driver, element);
@@ -79,7 +59,7 @@ public class ITsession {
         element = driver.findElement(By.name("btn_add_organisation"));
         SeleniumHelper.clickOnElement(driver,element);
 
-        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Organisatie: SessionOrganisationTest"));
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Organisatie: SessionOrganisation"));
 
         element = driver.findElement(By.id("btn_addTheme"));
         SeleniumHelper.clickOnElement(driver, element);
@@ -92,7 +72,7 @@ public class ITsession {
         element = driver.findElement(By.name("btn_save"));
         SeleniumHelper.clickOnElement(driver, element);
 
-        String basicCardName = "MyCardName";
+        String basicCardName = "SessionCard";
 
         for(int i = 0; i < 3; i++){
             (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Thema: SessionTheme"));
@@ -123,8 +103,30 @@ public class ITsession {
         }
     }
 
+    public void login(ChromeDriver driver, String userName, String password) {
+        driver.get("http://localhost:9966/kandoe/#/login");
+
+        SeleniumHelper.allowDomToLoad();
+
+        WebElement element = driver.findElement(By.id("app"));
+        element = driver.findElement(By.tagName("login"));
+
+        element = driver.findElement(By.id("ib_username"));
+        SeleniumHelper.fillTextIntoElement(element, userName);
+
+        element = driver.findElement(By.id("ib_password"));
+        SeleniumHelper.fillTextIntoElement(element, password);
+
+        element = driver.findElement(By.name("btn_login"));
+        SeleniumHelper.clickOnElement(driver, element);
+
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Jouw sessies"));
+    }
+
     public String addSession() {
         driver.get("http://localhost:9966/kandoe/#/");
+
+        SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("a_createSession"));
         assertEquals("a", element.getTagName());
@@ -381,7 +383,7 @@ public class ITsession {
         SeleniumHelper.allowDomToLoad();
 
         element = driver.findElement(By.id("err_noParticipants"));
-        assertEquals("p", element.getTagName());
+        assertEquals("div", element.getTagName());
         assertEquals("The content of the error must be correct", "Momenteel nog niemand! Voeg snel iemand toe, alleen spelen is niet leuk!", element.getText());
 
         element = driver.findElement(By.id("dd_themes"));
@@ -439,6 +441,8 @@ public class ITsession {
     @Test
     public void testNoCards() {
         driver.get("http://localhost:9966/kandoe/#/");
+
+        SeleniumHelper.allowDomToLoad();
 
         WebElement element = driver.findElement(By.id("a_createSession"));
         SeleniumHelper.clickOnElement(driver, element);

@@ -50,7 +50,7 @@ public class ITuser {
 
         SeleniumHelper.clickOnElement(driver, element);
 
-        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Kandoe"));
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Jouw sessies"));
     }
 
     @AfterClass

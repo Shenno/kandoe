@@ -54,6 +54,10 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "../serv
                             _this.getUser(index);
                         }
                     });
+                    this.getCurrentUserDetails();
+                    userService.authenticationEvent$.subscribe(function (eventType) {
+                        _this.onAuthenticationEvent(eventType);
+                    });
                 }
                 HomeComponent.prototype.getUser = function (id) {
                     var _this = this;
@@ -64,6 +68,13 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "../serv
                 };
                 HomeComponent.prototype.onClickSession = function (id) {
                     this.router.navigate(['/Session', { sessionId: id }]);
+                };
+                HomeComponent.prototype.onAuthenticationEvent = function (eventType) {
+                    this.getCurrentUserDetails();
+                };
+                HomeComponent.prototype.getCurrentUserDetails = function () {
+                    var _this = this;
+                    this.userService.getMyDetails().subscribe(function (user) { return _this.currentUserDetails = user; }, function (err) { return _this.currentUserDetails = null; });
                 };
                 HomeComponent = __decorate([
                     core_1.Component({

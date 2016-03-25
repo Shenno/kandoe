@@ -45,7 +45,7 @@ public class ITtheme {
         element = driver.findElement(By.name("btn_login"));
         SeleniumHelper.clickOnElement(driver, element);
 
-        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Kandoe"));
+        (new WebDriverWait(driver, 10)).until((WebDriver d) -> d.getTitle().equals("Jouw sessies"));
 
         element = driver.findElement(By.id("a_organisations"));
         SeleniumHelper.clickOnElement(driver, element);
@@ -205,7 +205,7 @@ public class ITtheme {
         SeleniumHelper.clickOnElement(driver, element);
 
         element = driver.findElement(By.id("organisator0"));
-        assertEquals("p", element.getTagName());
+        assertEquals("li", element.getTagName());
         assertEquals("The right organisator must be shown", "clarence.ho@gmail.com", element.getText());
 
         element = driver.findElement(By.id("delete_organisator0"));
