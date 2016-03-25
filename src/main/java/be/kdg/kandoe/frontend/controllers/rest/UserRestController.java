@@ -50,7 +50,7 @@ public class UserRestController {
     @RequestMapping(value = "/users/me", method = RequestMethod.GET)
     public ResponseEntity<UserResource> getCurrentUser(@AuthenticationPrincipal User user) {
         //No need to check for user being null, API call is authenticated
-        logger.info("User " + user.getUsername() + " has been retrieved.");
+//        logger.info("User " + user.getUsername() + " has been retrieved.");
         return new ResponseEntity<UserResource>(mapperFacade.map(user, UserResource.class), HttpStatus.OK);
     }
 

@@ -1,2 +1,2 @@
 INSERT INTO Organisation (OrganisationName, user_id)
-VALUES ('Orga1', 2);
+VALUES ('Sport & Co.', 2);
