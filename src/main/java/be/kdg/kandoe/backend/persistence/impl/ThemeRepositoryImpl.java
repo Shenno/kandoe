@@ -44,7 +44,7 @@ public class ThemeRepositoryImpl implements ThemeRepositoryCustom {
 
     @Override
     public Theme updateTheme(Theme theme) {
-        validateTheme(theme);
+        //validateTheme(theme);
 
         final Session session = em.unwrap(Session.class);
         session.update(theme);

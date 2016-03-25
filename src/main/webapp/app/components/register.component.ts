@@ -12,6 +12,8 @@ import {RegisterUser} from "../entity/registerUser";
 @Component({
     selector: 'login',
     template: `
+    <div class="content-center">
+    <h1>Registeren</h1>
     <form (submit)="register($event, username.value, password.value, firstName.value, lastName.value)">
 
         <label for="username">Gebruikersnaam</label>
@@ -31,6 +33,7 @@ import {RegisterUser} from "../entity/registerUser";
         <br>
         <button class="btn btn-primary" type="submit">Registreren</button>
     </form>
+    </div>
     `,
     encapsulation: ViewEncapsulation.None
 })

@@ -1,7 +1,10 @@
+<div class="content-center">
 <h1>Maak een kaartje aan</h1>
 
 <form data-toggle="validator" role="form" #cardForm="ngForm">
-
+    <div class="alert alert-warning" role="alert" style="width: 30em">
+        <b>Opgepast!</b> Tekst & afbeelding zijn niet meer wijzigbaar.
+    </div>
     <div class="form-group">
         <label for="ib_text">Tekst <span style="color: red">*</span></label>
         <input id="ib_text" class="form-control"
@@ -25,9 +28,6 @@
         </div>
     </div>
     <br>
-    <div class="alert alert-warning" role="alert" style="width: 30em">
-        <b>Heads up!</b> Tekst & afbeelding zijn niet meer wijzigbaar.
-    </div>
     <button class="btn btn-primary" name="btn_save"
             (click)="onSubmit()"
             [disabled]="!cardForm.form.valid">
@@ -35,3 +35,4 @@
     </button>
     <button class="btn wide-btn-default" name="btn_cancel" (click)="onCancel($event)">Annuleren</button>
 </form>
+</div>

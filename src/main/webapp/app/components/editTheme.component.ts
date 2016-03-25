@@ -23,7 +23,6 @@ export class EditThemeComponent {
     private contentService: ContentService;
     private userService: UserService;
 
-    //private tag: Tag = Tag.createEmptyTag();
     private theme: Theme = Theme.createEmptyTheme();
     private newTag: string = "";
 

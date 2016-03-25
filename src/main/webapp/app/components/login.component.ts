@@ -13,6 +13,8 @@ import {User} from "../entity/user";
 @Component({
     selector: 'login',
     template: `
+    <div class="content-center">
+    <h1>Inloggen</h1>
     <div>
         <label for="ib_username">E-mailadres</label>
         <input class="form-control" id="ib_username" name="ib_username" [(ngModel)]="user.username"/>
@@ -23,8 +25,8 @@ import {User} from "../entity/user";
         <input class="form-control" type="password" id="ib_password" name="ib_password" [(ngModel)]="user.password"/>
     </div>
     <br>
-    <button class="btn btn-primary" name="btn_login" (click)="login()" >Login</button>
-
+    <button class="btn btn-primary" name="btn_login" (click)="login()" >Inloggen</button>
+    </div>
     `,
     encapsulation: ViewEncapsulation.None
 })

@@ -2,8 +2,7 @@
 
     <h1>Wijzig thema</h1>
 
-
-    <form class="form-horizontal">
+    <form>
         <div class="form-group">
             <label for="ib_themeName">Naam</label>
             <input id="ib_themeName" name="ib_themeName" [(ngModel)]="theme.themeName" ngValue="theme.themeName" (change)="onEditThemeName()"
@@ -23,17 +22,19 @@
 
         <div class="form-group">
             <div class="checkbox">
+                <label>
                 <input type="checkbox" id="cb_commentaryAllowed" name="cb_commentaryAllowed"
                        [(ngModel)]="theme.commentaryAllowed">
-                <label for="cb_commentaryAllowed">Commentaar op kaartjes toegelaten</label>
+                Commentaar op kaartjes toegelaten</label>
             </div>
         </div>
 
         <div class="form-group">
             <div class="checkbox">
+                <label>
                 <input type="checkbox" id="cb_addingAdmitted" name="cb_addingAdmitted"
                        [(ngModel)]="theme.addingAdmitted">
-                <label for="cb_addingAdmitted">Toevoegen van kaartjes toegelaten</label>
+               Toevoegen van kaartjes toegelaten</label>
             </div>
         </div>
 
